@@ -98,11 +98,6 @@ public abstract class Map {
             enhancedMapTile.setMap(this);
         }
 
-        this.npcs = loadNPCs();
-        for (NPC npc: this.npcs) {
-            npc.setMap(this);
-        }
-
         this.triggers = loadTriggers();
         for (Trigger trigger: this.triggers) {
             trigger.setMap(this);
@@ -156,6 +151,21 @@ public abstract class Map {
                     animatedMapTiles.add(tile);
                 }
             }
+        }
+
+        this.npcs = loadNPCs();
+        for (NPC npc: this.npcs) {
+            npc.setMap(this);
+        }
+        try {
+            for (int i = 0; i < this.npcs.size(); i++) {
+                NPC currentNpc = this.npcs.get(i);
+                currentNpc.setX(fileInput.nextFloat());
+                currentNpc.setY(fileInput.nextFloat());
+            }
+        }
+        catch(java.util.NoSuchElementException e) {
+            System.out.println("An NPC's position was not found");
         }
 
         fileInput.close();
