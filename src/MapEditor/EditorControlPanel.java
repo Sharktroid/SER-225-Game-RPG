@@ -2,6 +2,7 @@ package MapEditor;
 
 import Engine.Config;
 import Level.Map;
+import Level.MapEntity;
 import Level.MapTile;
 import Level.NPC;
 import Utils.Colors;
@@ -124,11 +125,8 @@ public class EditorControlPanel extends JPanel {
                     }
                 }
             }
-            for (int i = 0; i < map.getNPCs().size();i++) {
-                NPC currentNPC = map.getNPCs().get(i);
-                fileWriter.write(currentNPC.getX() + " " + currentNPC.getY() + " ");
-            }
-            fileWriter.write("|\n");
+            writeMapEntitiesPositions(map.getNPCs(), fileWriter);
+            writeMapEntitiesPositions(map.getEnhancedMapTiles(), fileWriter);
             fileWriter.close();
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -139,5 +137,13 @@ public class EditorControlPanel extends JPanel {
         selectedMap = EditorMaps.getMapByName(mapNamesComboBox.getSelectedItem().toString());
         tilePicker.setTileset(selectedMap, selectedMap.getTileset());
         mapBuilder.setMap(selectedMap);
+    }
+
+    private void writeMapEntitiesPositions(ArrayList iterator, FileWriter fileWriter) throws IOException {
+            for (int i = 0; i < iterator.size();i++) {
+                MapEntity currentEntity = (MapEntity) iterator.get(i);
+                fileWriter.write(currentEntity.getX() + " " + currentEntity.getY() + " ");
+            }
+            fileWriter.write("|\n");
     }
 }

@@ -93,11 +93,6 @@ public abstract class Map {
 
         loadMapFile();
 
-        this.enhancedMapTiles = loadEnhancedMapTiles();
-        for (EnhancedMapTile enhancedMapTile: this.enhancedMapTiles) {
-            enhancedMapTile.setMap(this);
-        }
-
         this.triggers = loadTriggers();
         for (Trigger trigger: this.triggers) {
             trigger.setMap(this);
@@ -153,19 +148,30 @@ public abstract class Map {
             }
         }
 
+        String baseExceptionString = "An %s's position was not found. Loading defaults...";
         this.npcs = loadNPCs();
         for (NPC npc: this.npcs) {
             npc.setMap(this);
         }
         try {
-            for (int i = 0; i < this.npcs.size(); i++) {
-                NPC currentNpc = this.npcs.get(i);
-                currentNpc.setX(fileInput.nextFloat());
-                currentNpc.setY(fileInput.nextFloat());
-            }
+            loadMapEntitiesPositions(this.npcs, fileInput);
         }
         catch(java.util.NoSuchElementException e) {
-            System.out.println("An NPC's position was not found");
+            System.out.println(String.format(baseExceptionString, "NPC"));
+        }
+        if (fileInput.hasNext()) {
+            fileInput.next();
+        }
+
+        this.enhancedMapTiles = loadEnhancedMapTiles();
+        for (EnhancedMapTile enhancedMapTile: this.enhancedMapTiles) {
+            enhancedMapTile.setMap(this);
+        }
+        try {
+            loadMapEntitiesPositions(this.enhancedMapTiles, fileInput);
+        }
+        catch(java.util.NoSuchElementException e) {
+            System.out.println(String.format(baseExceptionString, "Enhanced Map Tile"));
         }
 
         fileInput.close();
@@ -569,4 +575,12 @@ public abstract class Map {
 
     public int getEndBoundX() { return endBoundX; }
     public int getEndBoundY() { return endBoundY; }
+
+    private void loadMapEntitiesPositions(ArrayList iterator, Scanner scanner) throws java.util.NoSuchElementException {
+        for (int i = 0; i < iterator.size(); i++) {
+            MapEntity currentNpc = (MapEntity) iterator.get(i);
+            currentNpc.setX(scanner.nextFloat());
+            currentNpc.setY(scanner.nextFloat());
+        }
+    }
 }
