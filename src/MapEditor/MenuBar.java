@@ -12,7 +12,7 @@ public class MenuBar extends JMenuBar {
 
     public MenuBar(TileBuilder tileBuilder) {
         options = new JMenu("Options");
-        showNpcs = new JCheckBoxMenuItem("Show NPCs");
+        showNpcs = new JCheckBoxMenuItem("Show NPCs", true);
         showNpcs.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
