@@ -38,7 +38,7 @@ public class Textbox {
     private String[] responseText = new String[10];
     private KeyLocker keyLocker = new KeyLocker();
     private Map map;
-    private Key interactKey = Key.SPACE;
+    private Key interactKey = Key.ENTER;
     private int keyPressTimer;
 
     public Textbox(Map map) {
@@ -63,7 +63,7 @@ public class Textbox {
 
 
 
-    
+
     // adds text followed by selection options underneath (up to 10)
     public void addSelectableText(String textChat, String[] selectionText) {
         selectionQueue.clear();
