@@ -180,16 +180,12 @@ public class Textbox {
         }
 
         if (Keyboard.isKeyDown(Key.RIGHT) && (keyPressTimer == 0) && selectionText[0] != null) {
-            System.out.println("Right");
             keyPressTimer = 14;
             currentTextItemHovered++;
-            System.out.println(currentTextItemHovered);
 
         } else if (Keyboard.isKeyDown(Key.LEFT) && (keyPressTimer == 0) && selectionText[0] != null) {
-            System.out.println("Left");
             keyPressTimer = 14;
             currentTextItemHovered--;
-            System.out.println(currentTextItemHovered);
 
         } else {
             if (keyPressTimer > 0) {
