@@ -111,7 +111,7 @@ public abstract class Script<T extends MapEntity> {
     // adds text to be shown in textbox with the option for selectable text
     protected void addTextToTextboxQueue(String text, String[] selectableText, String[] responses) {
         map.getTextbox().setResponses(responses);
-        map.getTextbox().addSelectableText(text, selectableText);
+        map.getTextbox().addSelectableText(text, selectableText); //
     }
             
     // returns the value of the last choice made from a selectable textbox

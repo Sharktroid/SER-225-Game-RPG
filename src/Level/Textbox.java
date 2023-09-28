@@ -33,6 +33,7 @@ public class Textbox {
     private Queue<String> selectionQueue = new LinkedList<String>();
     private Queue<String> decideTurn = new LinkedList<String>();
     private SpriteFont text = null;
+    private int fontY;
     private SpriteFont[] selectionText = new SpriteFont[10];
     private String[] responseText = new String[10];
     private KeyLocker keyLocker = new KeyLocker();
@@ -84,12 +85,13 @@ public class Textbox {
             compiledCount++;
         }
         
-        int fontY;
+        // int fontY;
         if (!map.getCamera().isAtBottomOfMap()) {
-            fontY = fontBottomY;
+            fontY = fontBottomY - 30;
         } else {
-            fontY = fontTopY;
+            fontY = fontTopY + 30;
         }
+        
 
         for (int i = selectionText.length + 1; i < this.selectionText.length; i++) {
             this.selectionText[i] = new SpriteFont("", fontX, fontY, "Arial", 30, Color.black);
@@ -111,7 +113,7 @@ public class Textbox {
     
     // creates spriteFont for each string in a queue
     public SpriteFont spriteFontCompile(Queue<String> selectionQueue) {
-        int fontY;
+        // int fontY;
         
         if (!map.getCamera().isAtBottomOfMap()) {
             fontY = fontBottomY;
@@ -131,7 +133,6 @@ public class Textbox {
     public void setResponses(String[] responses) {
         for (int i = 0; i < responses.length; i++) {
             this.responseText[i] = responses[i];
-    
         }
     }
 
@@ -142,7 +143,7 @@ public class Textbox {
 
             // if camera is at bottom of screen, text is drawn at top of screen instead of the bottom like usual
             // to prevent it from covering the player
-            int fontY;
+            // int fontY;
             if (!map.getCamera().isAtBottomOfMap()) {
                 fontY = fontBottomY;
             }
@@ -150,8 +151,9 @@ public class Textbox {
                 fontY = fontTopY;
             }
             text = new SpriteFont(next, fontX, fontY, "Arial", 30, Color.black);
-
+            
         }
+
         // if interact key is pressed, remove the current text from the queue to prepare for the next text item to be displayed
         if (Keyboard.isKeyDown(interactKey) && !keyLocker.isKeyLocked(interactKey)) {
             keyLocker.lockKey(interactKey);
@@ -178,13 +180,13 @@ public class Textbox {
             System.out.println("Right");
             keyPressTimer = 14;
             currentTextItemHovered++;
-            System.out.println(currentTextItemHovered + " " + compiledCount);
+            System.out.println(currentTextItemHovered);
 
         } else if (Keyboard.isKeyDown(Key.LEFT) && (keyPressTimer == 0) && selectionText[0] != null) {
             System.out.println("Left");
             keyPressTimer = 14;
             currentTextItemHovered--;
-            System.out.println(currentTextItemHovered + " " + compiledCount);
+            System.out.println(currentTextItemHovered);
 
         } else {
             if (keyPressTimer > 0) {
@@ -212,6 +214,7 @@ public class Textbox {
         if (text != null) {
             text.drawWithParsedNewLines(graphicsHandler, 10);
         }
+    
 
         if (!decideTurn.isEmpty()) {
             if (selectionText[0] != null && decideTurn.peek().equals("1")) {
@@ -221,12 +224,13 @@ public class Textbox {
                 selectionText[currentTextItemHovered].setColor(Color.red);
 
                 selectionText[0].drawWithParsedNewLines(graphicsHandler, 10);
+                int y = fontY;
                 int x = fontX;
                 for (int i = 0; i < compiledCount; i++) {
                     if (selectionText[i + 1] != null) {
-                    selectionText[i + 1].setY(fontBottomY + 40);
+                    selectionText[i + 1].setY(y + 40);
                     selectionText[i + 1].setX(x);
-                    x += (selectionText[i + 1].getText().length() * 17 + 15);
+                    x += (selectionText[i + 1].getText().length() * 20 + 20);
                     selectionText[i + 1].drawWithParsedNewLines(graphicsHandler, 10);
                     }
                 }   

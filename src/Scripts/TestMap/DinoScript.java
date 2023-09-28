@@ -36,7 +36,7 @@ public class DinoScript extends Script<NPC> {
                 entity.facePlayer(player);
                 showTextbox();
                 addTextToTextboxQueue("Oh, you're still here...", selections, answers);
-                addTextToTextboxQueue("...You heard from Walrus that he saw me with your\nball?");
+                addTextToTextboxQueue("....You heard from Walrus that he saw me with your\nball?");
                 addTextToTextboxQueue("Well, I saw him playing with it and was worried it would\nroll into my garden.");
                 addTextToTextboxQueue("So I kicked it as far as I could into the forest to the left.");
                 addTextToTextboxQueue("Now, if you'll excuse me, I have to go.");
