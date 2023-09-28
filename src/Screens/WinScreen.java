@@ -20,22 +20,22 @@ public class WinScreen extends Screen {
     @Override
     public void initialize() {
         winMessage = new SpriteFont("You win!", 350, 239, "Comic Sans", 30, Color.white);
-        instructions = new SpriteFont("Press Space to play again or Escape to go back to the main menu", 120, 279,"Comic Sans", 20, Color.white);
-        keyLocker.lockKey(Key.SPACE);
+        instructions = new SpriteFont("Press Enter to play again or Escape to go back to the main menu", 120, 279,"Comic Sans", 20, Color.white);
+        keyLocker.lockKey(Key.ENTER);
         keyLocker.lockKey(Key.ESC);
     }
 
     @Override
     public void update() {
-        if (Keyboard.isKeyUp(Key.SPACE)) {
-            keyLocker.unlockKey(Key.SPACE);
+        if (Keyboard.isKeyUp(Key.ENTER)) {
+            keyLocker.unlockKey(Key.ENTER);
         }
         if (Keyboard.isKeyUp(Key.ESC)) {
             keyLocker.unlockKey(Key.ESC);
         }
 
         // if space is pressed, reset level. if escape is pressed, go back to main menu
-        if (Keyboard.isKeyDown(Key.SPACE) && !keyLocker.isKeyLocked(Key.SPACE)) {
+        if (Keyboard.isKeyDown(Key.ENTER) && !keyLocker.isKeyLocked(Key.ENTER)) {
             playLevelScreen.resetLevel();
         } else if (Keyboard.isKeyDown(Key.ESC) && !keyLocker.isKeyLocked(Key.ESC)) {
             playLevelScreen.goBackToMenu();

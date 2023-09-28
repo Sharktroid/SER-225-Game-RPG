@@ -24,12 +24,22 @@ public class Textbox {
     protected final int fontTopY = 34;
     protected final int width = 750;
     protected final int height = 100;
+    protected int currentTextItemHovered = 1;
+    protected int compiledCount = 0;
+    protected int choice = -1;
 
     private Queue<String> textQueue = new LinkedList<String>();
+    private Queue<String> textQueueFlip = new LinkedList<String>();
+    private Queue<String> selectionQueue = new LinkedList<String>();
+    private Queue<String> decideTurn = new LinkedList<String>();
     private SpriteFont text = null;
+    private int fontY;
+    private SpriteFont[] selectionText = new SpriteFont[10];
+    private String[] responseText = new String[10];
     private KeyLocker keyLocker = new KeyLocker();
     private Map map;
-    private Key interactKey = Key.SPACE;
+    private Key interactKey = Key.ENTER;
+    private int keyPressTimer;
 
     public Textbox(Map map) {
         this.map = map;
@@ -51,10 +61,82 @@ public class Textbox {
         }
     }
 
+
+
+
+    // adds text followed by selection options underneath (up to 10)
+    public void addSelectableText(String textChat, String[] selectionText) {
+        selectionQueue.clear();
+        compiledCount = 0;
+
+        if (textQueue.isEmpty()) {
+            keyLocker.lockKey(interactKey);
+        }
+        textQueue.add(textChat);
+
+        if (selectionQueue.isEmpty()) {
+            keyLocker.lockKey(interactKey);
+        }
+        selectionQueue.add(textChat);
+
+        for (int i = 0; i < selectionText.length; i++) {
+            selectionQueue.add(selectionText[i]);
+        }
+
+        for (int i = 0; i < selectionText.length + 1; i++) {
+            this.selectionText[compiledCount] = spriteFontCompile(selectionQueue);
+            compiledCount++;
+        }
+        
+        // int fontY;
+        if (!map.getCamera().isAtBottomOfMap()) {
+            fontY = fontBottomY - 30;
+        } else {
+            fontY = fontTopY + 30;
+        }
+        
+
+        for (int i = selectionText.length + 1; i < this.selectionText.length; i++) {
+            this.selectionText[i] = new SpriteFont("", fontX, fontY, "Arial", 30, Color.black);
+        }
+        
+        decideTurn.add("1");
+    }
+
     // returns whether the textQueue is out of items to display or not
     // useful for scripts to know when to complete
     public boolean isTextQueueEmpty() {
         return textQueue.isEmpty();
+    }
+
+    // returns whether the selectionQueue is empty
+    public boolean isSelectionQueueEmpty() {
+        return selectionQueue.isEmpty();
+    }
+    
+    // creates spriteFont for each string in a queue
+    public SpriteFont spriteFontCompile(Queue<String> selectionQueue) {
+        // int fontY;
+        
+        if (!map.getCamera().isAtBottomOfMap()) {
+            fontY = fontBottomY;
+        } else {
+            fontY = fontTopY;
+        }
+
+        if (!selectionQueue.isEmpty() && keyLocker.isKeyLocked(interactKey)) {
+            String next = selectionQueue.poll();
+            return new SpriteFont(next, fontX, fontY, "Arial", 30, Color.black);
+        } else if (selectionQueue.isEmpty() && keyLocker.isKeyLocked(interactKey)) {
+            return new SpriteFont("", fontX, fontY, "Arial", 30, Color.black);
+        }
+        return null;
+    }
+
+    public void setResponses(String[] responses) {
+        for (int i = 0; i < responses.length; i++) {
+            this.responseText[i] = responses[i];
+        }
     }
 
     public void update() {
@@ -64,7 +146,7 @@ public class Textbox {
 
             // if camera is at bottom of screen, text is drawn at top of screen instead of the bottom like usual
             // to prevent it from covering the player
-            int fontY;
+            // int fontY;
             if (!map.getCamera().isAtBottomOfMap()) {
                 fontY = fontBottomY;
             }
@@ -72,17 +154,55 @@ public class Textbox {
                 fontY = fontTopY;
             }
             text = new SpriteFont(next, fontX, fontY, "Arial", 30, Color.black);
-
+            
         }
+
         // if interact key is pressed, remove the current text from the queue to prepare for the next text item to be displayed
         if (Keyboard.isKeyDown(interactKey) && !keyLocker.isKeyLocked(interactKey)) {
             keyLocker.lockKey(interactKey);
             textQueue.poll();
-        }
-        else if (Keyboard.isKeyUp(interactKey)) {
+            if (!decideTurn.isEmpty()) {
+                if (decideTurn.peek().equals("1")) {
+                    while (!textQueue.isEmpty()) {
+                        textQueueFlip.add(textQueue.poll());
+                    }
+                    textQueue.add(responseText[currentTextItemHovered - 1]);
+                    choice = currentTextItemHovered - 1;
+                    currentTextItemHovered = 1;
+                    while (!textQueueFlip.isEmpty()) {
+                        textQueue.add(textQueueFlip.poll());
+                    }
+                }
+            }
+            decideTurn.poll();
+        } else if (Keyboard.isKeyUp(interactKey)) {
             keyLocker.unlockKey(interactKey);
         }
 
+        if (Keyboard.isKeyDown(Key.RIGHT) && (keyPressTimer == 0) && selectionText[0] != null) {
+            System.out.println("Right");
+            keyPressTimer = 14;
+            currentTextItemHovered++;
+            System.out.println(currentTextItemHovered);
+
+        } else if (Keyboard.isKeyDown(Key.LEFT) && (keyPressTimer == 0) && selectionText[0] != null) {
+            System.out.println("Left");
+            keyPressTimer = 14;
+            currentTextItemHovered--;
+            System.out.println(currentTextItemHovered);
+
+        } else {
+            if (keyPressTimer > 0) {
+                keyPressTimer--;
+            }
+        }
+
+        //if down is pressed on last item or up is pressed on first item, "loop" the selection back around to the beginning/end
+        if (currentTextItemHovered == compiledCount) {
+            currentTextItemHovered = 1;
+        } else if (currentTextItemHovered < 1) {
+            currentTextItemHovered = compiledCount-1;
+        }
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
@@ -97,6 +217,36 @@ public class Textbox {
         if (text != null) {
             text.drawWithParsedNewLines(graphicsHandler, 10);
         }
+    
+
+        if (!decideTurn.isEmpty()) {
+            if (selectionText[0] != null && decideTurn.peek().equals("1")) {
+                for (int i=1; i<selectionText.length; i++) {
+                    selectionText[i].setColor(Color.black);
+                }
+                selectionText[currentTextItemHovered].setColor(Color.red);
+
+                selectionText[0].drawWithParsedNewLines(graphicsHandler, 10);
+                int y = fontY;
+                int x = fontX;
+                for (int i = 0; i < compiledCount; i++) {
+                    if (selectionText[i + 1] != null) {
+                    selectionText[i + 1].setY(y + 40);
+                    selectionText[i + 1].setX(x);
+                    x += (selectionText[i + 1].getText().length() * 20 + 20);
+                    selectionText[i + 1].drawWithParsedNewLines(graphicsHandler, 10);
+                    }
+                }   
+            }
+        }
+    }
+
+    public int getChoice() {
+        return choice;
+    }
+    
+    public void setChoice(int choice) {
+        this.choice = choice;
     }
 
     public boolean isActive() {

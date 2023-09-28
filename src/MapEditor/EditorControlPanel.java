@@ -3,6 +3,7 @@ package MapEditor;
 import Engine.Config;
 import Level.Map;
 import Level.MapTile;
+import Level.NPC;
 import Utils.Colors;
 
 import javax.swing.*;
@@ -118,11 +119,16 @@ public class EditorControlPanel extends JPanel {
                     fileWriter.write(String.valueOf(mapTiles[j + map.getWidth() * i].getTileIndex()));
                     if (j < map.getWidth() - 1) {
                         fileWriter.write(" ");
-                    } else if (j >= map.getWidth() -1 && i < map.getHeight() - 1) {
+                    } else if (j >= map.getWidth() -1) {
                         fileWriter.write("\n");
                     }
                 }
             }
+            for (int i = 0; i < map.getNPCs().size();i++) {
+                NPC currentNPC = map.getNPCs().get(i);
+                fileWriter.write(currentNPC.getX() + " " + currentNPC.getY() + " ");
+            }
+            fileWriter.write("|\n");
             fileWriter.close();
         } catch (IOException ex) {
             ex.printStackTrace();

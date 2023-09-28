@@ -11,11 +11,14 @@ public class WalrusScript extends Script<NPC> {
     protected void setup() {
         lockPlayer();
         showTextbox();
+        setChoice(-1);
+        String[] selections = {"abc", "bcdefgh", "c"};
+        String[] answers = {"A", "B", "C"};
 
         // changes what walrus says when talking to him the first time (flag is not set) vs talking to him afterwards (flag is set)
         if (!isFlagSet("hasTalkedToWalrus")) {
-            addTextToTextboxQueue( "Hi Cat!");
-            addTextToTextboxQueue( "...oh, you lost your ball?");
+            addTextToTextboxQueue( "Hi Cat!!", selections, answers);
+            addTextToTextboxQueue( "....oh, you lost your ball?");
             addTextToTextboxQueue( "Hmmm...my walrus brain remembers seeing Dino with\nit last. Maybe you can check with him?");
         }
         else {

@@ -16,8 +16,8 @@ public class TileBuilder extends JPanel {
     private SelectedTileIndexHolder controlPanelHolder;
     private GraphicsHandler graphicsHandler = new GraphicsHandler();
     private JLabel hoveredTileIndexLabel;
-    private boolean showNPCs;
-    private boolean showEnhancedMapTiles;
+    private boolean showNPCs = true;
+    private boolean showEnhancedMapTiles = true;
     private boolean showTriggers;
     private NPC selectedNPC;
 
@@ -126,7 +126,11 @@ public class TileBuilder extends JPanel {
 
     public void tileSelected(Point selectedPoint) {
         NPC currentNPC = getHoveredNPC(selectedPoint);
-        if(currentNPC == null) {
+        if(currentNPC != null) {
+            selectedNPC = currentNPC;
+        }
+        else {
+            // EnhancedMapTile currentEnhancedMapTile = getHoveredMapTile
             int selectedTileIndex = getSelectedTileIndex(selectedPoint);
             if (selectedTileIndex != -1) {
                 MapTile oldMapTile = map.getMapTiles()[selectedTileIndex];
@@ -134,9 +138,6 @@ public class TileBuilder extends JPanel {
                 newMapTile.setMap(map);
                 map.getMapTiles()[selectedTileIndex] = newMapTile;
             }
-        }
-        else {
-            selectedNPC = currentNPC;
         }
         repaint();
     }
@@ -152,6 +153,23 @@ public class TileBuilder extends JPanel {
                         (point.getY() > currentNPC.getY() - map.getTileset().getScaledSpriteHeight())
                         && (point.getY() < currentNPC.getY() + currentNPC.getHeight())) {
                     return currentNPC;
+                }
+            }
+        }
+        return null;
+    }
+
+    private EnhancedMapTile getHoveredMapTile(Point point) {
+        point = new Point((int) (point.getX() - point.getX() % map.getTileset().getScaledSpriteWidth()),
+                (int) (point.getY() - point.getY() % map.getTileset().getScaledSpriteHeight()));
+        if (showEnhancedMapTiles) {
+            for (int index = 0; index < map.getNPCs().size(); index++) {
+                EnhancedMapTile currentEnhancedMapTile = map.getEnhancedMapTiles().get(index);
+                if ((point.getX() > currentEnhancedMapTile.getX() - map.getTileset().getScaledSpriteWidth())
+                        && (point.getX() < currentEnhancedMapTile.getX() + currentEnhancedMapTile.getWidth()) &&
+                        (point.getY() > currentEnhancedMapTile.getY() - map.getTileset().getScaledSpriteHeight())
+                        && (point.getY() < currentEnhancedMapTile.getY() + currentEnhancedMapTile.getHeight())) {
+                    return currentEnhancedMapTile;
                 }
             }
         }
