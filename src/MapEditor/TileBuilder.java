@@ -16,9 +16,10 @@ public class TileBuilder extends JPanel {
     private SelectedTileIndexHolder controlPanelHolder;
     private GraphicsHandler graphicsHandler = new GraphicsHandler();
     private JLabel hoveredTileIndexLabel;
-    private boolean showNPCs;
-    private boolean showEnhancedMapTiles;
+    private boolean showNPCs = true;
+    private boolean showEnhancedMapTiles = true;
     private boolean showTriggers;
+    private NPC selectedNPC;
 
     public TileBuilder(SelectedTileIndexHolder controlPanelHolder, JLabel hoveredTileIndexLabel) {
         setBackground(Colors.MAGENTA);
@@ -36,7 +37,12 @@ public class TileBuilder extends JPanel {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                tileSelected(e.getPoint());
+                if (selectedNPC == null) {
+                    tileSelected(e.getPoint());
+                }
+                else {
+                    selectedNPC = null;
+                }
             }
 
             @Override
@@ -53,6 +59,13 @@ public class TileBuilder extends JPanel {
             @Override
             public void mouseMoved(MouseEvent e) {
                 tileHovered(e.getPoint());
+                if (selectedNPC != null) {
+                    selectedNPC.setX(e.getX() - e.getX() % map.getTileset().getScaledSpriteWidth()
+                            + selectedNPC.getX() % map.getTileset().getScaledSpriteWidth());
+                    selectedNPC.setY(e.getY() - e.getY() % map.getTileset().getScaledSpriteHeight()
+                            + selectedNPC.getY() % map.getTileset().getScaledSpriteHeight());
+                    repaint();
+                }
             }
 
             @Override
@@ -112,15 +125,55 @@ public class TileBuilder extends JPanel {
     }
 
     public void tileSelected(Point selectedPoint) {
-        int selectedTileIndex = getSelectedTileIndex(selectedPoint);
-        if (selectedTileIndex != -1) {
-            MapTile oldMapTile = map.getMapTiles()[selectedTileIndex];
-            MapTile newMapTile =  map.getTileset().getTile(controlPanelHolder.getSelectedTileIndex()).build(oldMapTile.getX(), oldMapTile.getY());
-            newMapTile.setMap(map);
-            map.getMapTiles()[selectedTileIndex] = newMapTile;
-
+        NPC currentNPC = getHoveredNPC(selectedPoint);
+        if(currentNPC != null) {
+            selectedNPC = currentNPC;
+        }
+        else {
+            // EnhancedMapTile currentEnhancedMapTile = getHoveredMapTile
+            int selectedTileIndex = getSelectedTileIndex(selectedPoint);
+            if (selectedTileIndex != -1) {
+                MapTile oldMapTile = map.getMapTiles()[selectedTileIndex];
+                MapTile newMapTile =  map.getTileset().getTile(controlPanelHolder.getSelectedTileIndex()).build(oldMapTile.getX(), oldMapTile.getY());
+                newMapTile.setMap(map);
+                map.getMapTiles()[selectedTileIndex] = newMapTile;
+            }
         }
         repaint();
+    }
+
+    private NPC getHoveredNPC(Point point) {
+        point = new Point((int) (point.getX() - point.getX() % map.getTileset().getScaledSpriteWidth()),
+                (int) (point.getY() - point.getY() % map.getTileset().getScaledSpriteHeight()));
+        if (showNPCs) {
+            for (int index = 0; index < map.getNPCs().size(); index++) {
+                NPC currentNPC = map.getNPCs().get(index);
+                if ((point.getX() > currentNPC.getX() - map.getTileset().getScaledSpriteWidth())
+                        && (point.getX() < currentNPC.getX() + currentNPC.getWidth()) &&
+                        (point.getY() > currentNPC.getY() - map.getTileset().getScaledSpriteHeight())
+                        && (point.getY() < currentNPC.getY() + currentNPC.getHeight())) {
+                    return currentNPC;
+                }
+            }
+        }
+        return null;
+    }
+
+    private EnhancedMapTile getHoveredMapTile(Point point) {
+        point = new Point((int) (point.getX() - point.getX() % map.getTileset().getScaledSpriteWidth()),
+                (int) (point.getY() - point.getY() % map.getTileset().getScaledSpriteHeight()));
+        if (showEnhancedMapTiles) {
+            for (int index = 0; index < map.getNPCs().size(); index++) {
+                EnhancedMapTile currentEnhancedMapTile = map.getEnhancedMapTiles().get(index);
+                if ((point.getX() > currentEnhancedMapTile.getX() - map.getTileset().getScaledSpriteWidth())
+                        && (point.getX() < currentEnhancedMapTile.getX() + currentEnhancedMapTile.getWidth()) &&
+                        (point.getY() > currentEnhancedMapTile.getY() - map.getTileset().getScaledSpriteHeight())
+                        && (point.getY() < currentEnhancedMapTile.getY() + currentEnhancedMapTile.getHeight())) {
+                    return currentEnhancedMapTile;
+                }
+            }
+        }
+        return null;
     }
 
     public void tileHovered(Point hoveredPoint) {
