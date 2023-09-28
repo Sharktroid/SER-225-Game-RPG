@@ -17,7 +17,7 @@ public class DinoScript extends Script<NPC> {
     @Override
     protected void setup() {
         lockPlayer();
-        String[] selectios = {"a", "b", "c"};
+        String[] selections = {"a", "b", "c"};
         String[] answers = {"A", "B", "C"};
 
         if (!isFlagSet("hasTalkedToWalrus")) {
