@@ -87,19 +87,19 @@ public class Textbox {
             this.selectionText[compiledCount] = spriteFontCompile(selectionQueue);
             compiledCount++;
         }
-        
+
         // int fontY;
         if (!map.getCamera().isAtBottomOfMap()) {
             fontY = fontBottomY - 30;
         } else {
             fontY = fontTopY + 30;
         }
-        
+
 
         for (int i = selectionText.length + 1; i < this.selectionText.length; i++) {
             this.selectionText[i] = new SpriteFont("", fontX, fontY, "Arial", 30, Color.black);
         }
-        
+
         decideTurn.add("1");
     }
 
@@ -113,11 +113,11 @@ public class Textbox {
     public boolean isSelectionQueueEmpty() {
         return selectionQueue.isEmpty();
     }
-    
+
     // creates spriteFont for each string in a queue
     public SpriteFont spriteFontCompile(Queue<String> selectionQueue) {
         // int fontY;
-        
+
         if (!map.getCamera().isAtBottomOfMap()) {
             fontY = fontBottomY;
         } else {
@@ -154,7 +154,7 @@ public class Textbox {
                 fontY = fontTopY;
             }
             text = new SpriteFont(next, fontX, fontY, "Arial", 30, Color.black);
-            
+
         }
 
         // if interact key is pressed, remove the current text from the queue to prepare for the next text item to be displayed
@@ -213,7 +213,7 @@ public class Textbox {
         if (text != null) {
             text.drawWithParsedNewLines(graphicsHandler, 10);
         }
-    
+
 
         if (!decideTurn.isEmpty()) {
             if (selectionText[0] != null && decideTurn.peek().equals("1")) {
@@ -232,7 +232,7 @@ public class Textbox {
                     x += (selectionText[i + 1].getText().length() * 20 + 20);
                     selectionText[i + 1].drawWithParsedNewLines(graphicsHandler, 10);
                     }
-                }   
+                }
             }
         }
     }
@@ -240,7 +240,7 @@ public class Textbox {
     public int getChoice() {
         return choice;
     }
-    
+
     public void setChoice(int choice) {
         this.choice = choice;
     }
