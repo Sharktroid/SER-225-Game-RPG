@@ -8,6 +8,12 @@ public class MapCollisionCheckResult {
     private Point adjustedLocation;
     private MapEntity entityCollidedWith;
 
+
+    public MapCollisionCheckResult(Point adjustedLocationAfterCollisionCheck) {
+        this.adjustedLocation = adjustedLocationAfterCollisionCheck;
+    }
+
+
     public MapCollisionCheckResult(Point adjustedLocationAfterCollisionCheck, MapEntity entityCollidedWith) {
         this.adjustedLocation = adjustedLocationAfterCollisionCheck;
         this.entityCollidedWith = entityCollidedWith;
