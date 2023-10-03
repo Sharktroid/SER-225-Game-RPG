@@ -1,4 +1,4 @@
-package Scripts.TestMap;
+package Scripts.WorldOneMap;
 
 import Builders.FrameBuilder;
 import Builders.MapTileBuilder;

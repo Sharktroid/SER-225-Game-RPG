@@ -1,4 +1,4 @@
-package Scripts.TestMap;
+package Scripts.WorldOneMap;
 
 import Level.NPC;
 import Level.Script;
