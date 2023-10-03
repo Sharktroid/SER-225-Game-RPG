@@ -1,6 +1,8 @@
 package Screens;
 
 import Engine.GraphicsHandler;
+import Engine.Key;
+import Engine.Keyboard;
 import Engine.Screen;
 import Game.GameState;
 import Game.ScreenCoordinator;
@@ -19,6 +21,8 @@ public class PlayLevelScreen extends Screen {
     protected PlayLevelScreenState playLevelScreenState;
     protected WinScreen winScreen;
     protected FlagManager flagManager;
+    private InventoryScreen inventory;
+    private int keyPressTimer;
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -73,6 +77,9 @@ public class PlayLevelScreen extends Screen {
             }
         }
 
+        String[] items = {"Test A", "Test B"};
+        inventory = new InventoryScreen(items);
+
         winScreen = new WinScreen(this);
     }
 
@@ -81,8 +88,20 @@ public class PlayLevelScreen extends Screen {
         switch (playLevelScreenState) {
             // if level is "running" update player and map to keep game logic for the platformer level going
             case RUNNING:
-                player.update();
-                map.update(player);
+                if (Keyboard.isKeyDown(Key.E) && keyPressTimer == 0) {
+                    inventory.setActive(!inventory.isActive());
+                    keyPressTimer = 14;
+                }
+                if (keyPressTimer > 0) {
+                    keyPressTimer--;
+                }
+                if (inventory.isActive()) {
+                    inventory.update();
+                }
+                else {
+                    player.update();
+                    map.update(player);
+                }
                 break;
             // if level has been completed, bring up level cleared screen
             case LEVEL_COMPLETED:
@@ -101,6 +120,9 @@ public class PlayLevelScreen extends Screen {
         switch (playLevelScreenState) {
             case RUNNING:
                 map.draw(player, graphicsHandler);
+                if (inventory.isActive()) {
+                    inventory.draw(graphicsHandler);
+                }
                 break;
             case LEVEL_COMPLETED:
                 winScreen.draw(graphicsHandler);
