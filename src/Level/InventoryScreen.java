@@ -5,6 +5,7 @@ import java.awt.Color;
 import Engine.GraphicsHandler;
 import Engine.Key;
 import Engine.Keyboard;
+import GameObject.Item;
 import SpriteFont.SpriteFont;
 import Utils.Point;
 import Engine.Config;
@@ -26,8 +27,8 @@ public class InventoryScreen {
     private int currentTextItemHovered = 0;
     private int numItems;
 
-    public InventoryScreen(String[] items) {
         // this.map = map;
+    public InventoryScreen(Item[] items) {
         setItems(items);
     }
 
@@ -96,10 +97,10 @@ public class InventoryScreen {
         return new Point(width - border * 2, height - border * 2);
     }
 
-    public void setItems(String[] items) {
+    public void setItems(Item[] items) {
         numItems = items.length;
         for (int i = 0; i < numItems; i++) {
-            inventoryText[i] = new SpriteFont(items[i], 0, 0, "Arial", fontSize, Color.black);
+            inventoryText[i] = new SpriteFont(items[i].getName(), 0, 0, "Arial", fontSize, Color.black);
         }
     }
 }

@@ -6,6 +6,9 @@ import Engine.Keyboard;
 import Engine.Screen;
 import Game.GameState;
 import Game.ScreenCoordinator;
+import GameObject.Item;
+import Items.Grafcalibur;
+import Items.GutsyBat;
 import Level.*;
 import Maps.TestMap;
 import Maps.WorldOneMap;
@@ -77,7 +80,7 @@ public class PlayLevelScreen extends Screen {
             }
         }
 
-        String[] items = {"Test A", "Test B"};
+        Item[] items = {new Grafcalibur(), new GutsyBat()};
         inventory = new InventoryScreen(items);
 
         winScreen = new WinScreen(this);

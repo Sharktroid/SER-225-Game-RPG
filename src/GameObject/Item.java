@@ -2,10 +2,10 @@ package GameObject;
 
 public class Item {
     protected String name;
-    protected Boolean usable;
-    protected Boolean keyItem;
-    protected Boolean droppable;
     protected String description;
+    protected Boolean usable = false;
+    protected Boolean keyItem = false;
+    protected Boolean droppable = true;
 
     public String getName() {
         return name;
