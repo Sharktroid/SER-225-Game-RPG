@@ -13,6 +13,20 @@ public class MapCollisionHandler {
         float edgeBoundX = direction == Direction.LEFT ? gameObject.getBounds().getX1() : gameObject.getBounds().getX2();
         Point tileIndex = map.getTileIndexByPosition(edgeBoundX, gameObject.getBounds().getY1());
         MapEntity entityCollidedWith = null;
+
+        //checks to make sure the object is not moving OOB
+        if (edgeBoundX < 0 || edgeBoundX > map.getWidthPixels()) {
+            float adjustedPositionX = gameObject.getX();
+            if (direction == Direction.RIGHT) {
+                float boundsDifference = gameObject.getX2() - gameObject.getBoundsX2();
+                adjustedPositionX = map.getWidthPixels() - gameObject.getWidth() + boundsDifference;
+            } else if (direction == Direction.LEFT) {
+                float boundsDifference = gameObject.getBoundsX1() - gameObject.getX();
+                adjustedPositionX = (0 + 1) - boundsDifference;
+            }
+            return new MapCollisionCheckResult(new Point(adjustedPositionX, gameObject.getY()));
+        }
+
         for (int i = -1; i <= numberOfTilesToCheck + 1; i++) {
             MapTile mapTile = map.getMapTile(Math.round(tileIndex.x), Math.round(tileIndex.y + i));
             if (mapTile != null && hasCollidedWithMapEntity(gameObject, mapTile, direction)) {
@@ -85,6 +99,21 @@ public class MapCollisionHandler {
         float edgeBoundY = direction == Direction.UP ? gameObject.getBounds().getY() : gameObject.getBounds().getY2();
         Point tileIndex = map.getTileIndexByPosition(gameObject.getBounds().getX1(), edgeBoundY);
         MapEntity entityCollidedWith = null;
+
+        //checks to make sure the object is not moving OOB
+        int top = 22;
+        if (edgeBoundY < top || edgeBoundY > map.getHeightPixels()) {
+            float adjustedPositionY = gameObject.getY();
+            if (direction == Direction.DOWN) {
+                float boundsDifference = gameObject.getY2() - gameObject.getBoundsY2();
+                adjustedPositionY = map.getHeightPixels() - gameObject.getHeight() + boundsDifference;
+            } else if (direction == Direction.UP) {
+                float boundsDifference = gameObject.getBoundsY1() - gameObject.getY();
+                adjustedPositionY = top - boundsDifference;
+            }
+            return new MapCollisionCheckResult(new Point(gameObject.getX(), adjustedPositionY));
+        }
+
         for (int i = -1; i <= numberOfTilesToCheck + 1; i++) {
             MapTile mapTile = map.getMapTile(Math.round(tileIndex.x) + i, Math.round(tileIndex.y));
             if (mapTile != null && hasCollidedWithMapEntity(gameObject, mapTile, direction)) {
