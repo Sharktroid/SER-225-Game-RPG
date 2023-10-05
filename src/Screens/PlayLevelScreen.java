@@ -2,13 +2,16 @@ package Screens;
 
 import Engine.GraphicsHandler;
 import Engine.Key;
+import Engine.KeyLocker;
 import Engine.Keyboard;
 import Engine.Screen;
 import Game.GameState;
 import Game.ScreenCoordinator;
 import GameObject.Item;
+import Items.EraserEraser;
 import Items.Grafcalibur;
 import Items.GutsyBat;
+import Items.PencilEraser;
 import Items.VideoRelaxant;
 import Items.WhackaBump;
 import Level.*;
@@ -27,6 +30,7 @@ public class PlayLevelScreen extends Screen {
     protected FlagManager flagManager;
     private InventoryScreen inventory;
     private int keyPressTimer;
+    private KeyLocker keyLocker = new KeyLocker();
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -82,7 +86,9 @@ public class PlayLevelScreen extends Screen {
         }
 
         Item[] items = {new Grafcalibur(), new GutsyBat(), new VideoRelaxant(), new WhackaBump()};
-        inventory = new InventoryScreen(items);
+        Item[] keyItems = {new PencilEraser(), new EraserEraser()};
+
+        inventory = new InventoryScreen(items, keyItems);
 
         winScreen = new WinScreen(this);
     }
@@ -92,12 +98,13 @@ public class PlayLevelScreen extends Screen {
         switch (playLevelScreenState) {
             // if level is "running" update player and map to keep game logic for the platformer level going
             case RUNNING:
-                if (Keyboard.isKeyDown(Key.E) && keyPressTimer == 0) {
+                if (Keyboard.isKeyDown(Key.E) && !keyLocker.isKeyLocked(Key.E)) {
                     inventory.setActive(!inventory.isActive());
+                    keyLocker.lockKey(Key.E);
                     keyPressTimer = 14;
                 }
-                if (keyPressTimer > 0) {
-                    keyPressTimer--;
+                else if (Keyboard.isKeyUp(Key.E) && keyLocker.isKeyLocked(Key.E)) {
+                    keyLocker.unlockKey(Key.E);
                 }
                 if (inventory.isActive()) {
                     inventory.update();
