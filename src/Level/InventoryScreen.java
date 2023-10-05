@@ -16,9 +16,12 @@ public class InventoryScreen {
     private Boolean active = false;
     private final int left = 20;
     private final int top = left;
+    private final int spacer = left;
     private final int width = Config.GAME_WINDOW_WIDTH - (left * 2) - 16;
-    private final int height = Config.GAME_WINDOW_HEIGHT - (top * 2) - 39;
-    private final int border = 30;
+    private final int height = Config.GAME_WINDOW_HEIGHT - spacer - (left * 2) - 39;
+    private final int inventoryHeight = (int) (height * (0.75));
+    private final int descriptionHeight = (int) (height * (0.25));
+    private final int border = 25;
     private final int rows = 5;
     private final int fontSize = 30;
     private final int lineGap = (((int) getInternalSize().y - fontSize) / (rows - 1));
@@ -26,9 +29,10 @@ public class InventoryScreen {
     private int keyPressTimer;
     private int currentTextItemHovered = 0;
     private int numItems;
+    private Item[] items;
 
-        // this.map = map;
     public InventoryScreen(Item[] items) {
+        // this.map = map;
         setItems(items);
     }
 
@@ -36,7 +40,7 @@ public class InventoryScreen {
         // if camera is at bottom of screen, textbox is drawn at top of screen instead
         // of the bottom like usual
         // to prevent it from covering the player
-        graphicsHandler.drawFilledRectangleWithBorder(left, top, width, height, Color.white, Color.black, 2);
+        graphicsHandler.drawFilledRectangleWithBorder(left, top, width, inventoryHeight, Color.white, Color.black, 2);
 
         for (int i = 0; i < numItems; i++) {
             inventoryText[i].setColor(Color.black);
@@ -59,6 +63,13 @@ public class InventoryScreen {
                 y += lineGap;
             }
         }
+        int descriptionTop = top + inventoryHeight + spacer;
+        graphicsHandler.drawFilledRectangleWithBorder(left, descriptionTop, width, descriptionHeight, Color.white, Color.black, 2);
+
+        SpriteFont description = new SpriteFont(getCurrentItem().getDescription(), 0, 0, "Arial", fontSize, Color.black);
+        description.setX(left + border);
+        description.setY(descriptionTop + border);
+        description.drawWithParsedNewLines(graphicsHandler, 10);
     }
 
     public void update() {
@@ -98,9 +109,14 @@ public class InventoryScreen {
     }
 
     public void setItems(Item[] items) {
+        this.items = items;
         numItems = items.length;
         for (int i = 0; i < numItems; i++) {
             inventoryText[i] = new SpriteFont(items[i].getName(), 0, 0, "Arial", fontSize, Color.black);
         }
+    }
+
+    private Item getCurrentItem() {
+        return items[currentTextItemHovered];
     }
 }

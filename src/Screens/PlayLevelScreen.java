@@ -103,8 +103,8 @@ public class PlayLevelScreen extends Screen {
                 }
                 else {
                     player.update();
-                    map.update(player);
                 }
+                map.update(player);
                 break;
             // if level has been completed, bring up level cleared screen
             case LEVEL_COMPLETED:
