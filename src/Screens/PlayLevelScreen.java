@@ -9,8 +9,9 @@ import Game.ScreenCoordinator;
 import GameObject.Item;
 import Items.Grafcalibur;
 import Items.GutsyBat;
+import Items.VideoRelaxant;
+import Items.WhackaBump;
 import Level.*;
-import Maps.TestMap;
 import Maps.WorldOneMap;
 import Players.Cat;
 import Utils.Direction;
@@ -80,7 +81,7 @@ public class PlayLevelScreen extends Screen {
             }
         }
 
-        Item[] items = {new Grafcalibur(), new GutsyBat()};
+        Item[] items = {new Grafcalibur(), new GutsyBat(), new VideoRelaxant(), new WhackaBump()};
         inventory = new InventoryScreen(items);
 
         winScreen = new WinScreen(this);

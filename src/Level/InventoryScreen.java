@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import Engine.GraphicsHandler;
 import Engine.Key;
+import Engine.KeyLocker;
 import Engine.Keyboard;
 import GameObject.Item;
 import SpriteFont.SpriteFont;
@@ -12,7 +13,7 @@ import Engine.Config;
 
 public class InventoryScreen {
     // private Map map;
-    // private Textbox textbox;
+
     private Boolean active = false;
     private final int left = 20;
     private final int top = left;
@@ -25,11 +26,13 @@ public class InventoryScreen {
     private final int rows = 5;
     private final int fontSize = 30;
     private final int lineGap = (((int) getInternalSize().y - fontSize) / (rows - 1));
+
     private SpriteFont[] inventoryText = new SpriteFont[rows * 2];
     private int keyPressTimer;
     private int currentTextItemHovered = 0;
     private int numItems;
     private Item[] items;
+    private KeyLocker keyLocker = new KeyLocker();
 
     public InventoryScreen(Item[] items) {
         // this.map = map;
@@ -73,27 +76,52 @@ public class InventoryScreen {
     }
 
     public void update() {
-        if (Keyboard.isKeyDown(Key.RIGHT) && (keyPressTimer == 0)) {
-            keyPressTimer = 14;
-            currentTextItemHovered++;
+        if (lockKey(Key.RIGHT)) {
+            currentTextItemHovered = (currentTextItemHovered + 1) % numItems;
 
-        } else if (Keyboard.isKeyDown(Key.LEFT) && (keyPressTimer == 0)) {
-            keyPressTimer = 14;
+        } else if (lockKey(Key.LEFT)) {
             currentTextItemHovered--;
-
-        } else {
-            if (keyPressTimer > 0) {
-                keyPressTimer--;
+            if (currentTextItemHovered < 0) {
+                currentTextItemHovered = numItems - 1;
             }
-        }
 
-        // if down is pressed on last item or up is pressed on first item, "loop" the
-        // selection back around to the beginning/end
-        if (currentTextItemHovered == numItems) {
-            currentTextItemHovered = 0;
-        } else if (currentTextItemHovered < 0) {
-            currentTextItemHovered = numItems - 1;
+        } else if (lockKey(Key.UP)) {
+            currentTextItemHovered -= 2;
+            if (currentTextItemHovered < 0) {
+                if (numItems % 2 == 0) {
+                    currentTextItemHovered += numItems;
+                }
+                else {
+                    if (currentTextItemHovered == -1) {
+                        currentTextItemHovered = numItems - 2;
+                    }
+                    else {
+                        currentTextItemHovered = numItems - 1;
+                    }
+                }
+            }
+
+        } else if (lockKey(Key.DOWN)) {
+            currentTextItemHovered += 2;
+            if (currentTextItemHovered >= numItems) {
+                if (numItems % 2 == 0) {
+                    currentTextItemHovered -= numItems;
+                }
+                else {
+                    if (currentTextItemHovered == numItems) {
+                        currentTextItemHovered = 1;
+                    }
+                    else {
+                        currentTextItemHovered = 0;
+                    }
+                }
+            }
+
         }
+        unlockKey(Key.LEFT);
+        unlockKey(Key.UP);
+        unlockKey(Key.DOWN);
+        unlockKey(Key.RIGHT);
     }
 
     public Boolean isActive() {
@@ -118,5 +146,21 @@ public class InventoryScreen {
 
     private Item getCurrentItem() {
         return items[currentTextItemHovered];
+    }
+
+    private Boolean lockKey(Key key) {
+        if (Keyboard.isKeyDown(key) && !keyLocker.isKeyLocked(key)) {
+            keyLocker.lockKey(key);
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    private void unlockKey(Key key) {
+        if (keyLocker.isKeyLocked(key) && Keyboard.isKeyUp(key)) {
+            keyLocker.unlockKey(key);
+        }
     }
 }
