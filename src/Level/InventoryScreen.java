@@ -1,6 +1,8 @@
 package Level;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import Engine.GraphicsHandler;
 import Engine.Key;
@@ -12,8 +14,6 @@ import Utils.Point;
 import Engine.Config;
 
 public class InventoryScreen {
-    // private Map map;
-
     private Boolean active = false;
     private final int left = 20;
     private final int top = left;
@@ -30,28 +30,27 @@ public class InventoryScreen {
     private SpriteFont[] inventoryText = new SpriteFont[rows * 2];
     private int keyPressTimer;
     private int currentTextItemHovered = 0;
-    private int numItems;
-    private Item[] items;
+    private ArrayList<Item> items;
     private KeyLocker keyLocker = new KeyLocker();
 
     public InventoryScreen(Item[] items) {
-        // this.map = map;
+        this(new ArrayList<Item>(Arrays.asList(items)));
+    }
+
+    public InventoryScreen(ArrayList<Item> items) {
         setItems(items);
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
-        // if camera is at bottom of screen, textbox is drawn at top of screen instead
-        // of the bottom like usual
-        // to prevent it from covering the player
         graphicsHandler.drawFilledRectangleWithBorder(left, top, width, inventoryHeight, Color.white, Color.black, 2);
 
-        for (int i = 0; i < numItems; i++) {
+        for (int i = 0; i < items.size(); i++) {
             inventoryText[i].setColor(Color.black);
         }
         inventoryText[currentTextItemHovered].setColor(Color.red);
         int y = top + border;
         inventoryText[0].drawWithParsedNewLines(graphicsHandler, 10);
-        for (int i = 0; i < numItems; i++) {
+        for (int i = 0; i < items.size(); i++) {
             int x;
             if (i % 2 == 0) {
                 x = border + left;
@@ -77,38 +76,38 @@ public class InventoryScreen {
 
     public void update() {
         if (lockKey(Key.RIGHT)) {
-            currentTextItemHovered = (currentTextItemHovered + 1) % numItems;
+            currentTextItemHovered = (currentTextItemHovered + 1) % items.size();
 
         } else if (lockKey(Key.LEFT)) {
             currentTextItemHovered--;
             if (currentTextItemHovered < 0) {
-                currentTextItemHovered = numItems - 1;
+                currentTextItemHovered = items.size() - 1;
             }
 
         } else if (lockKey(Key.UP)) {
             currentTextItemHovered -= 2;
             if (currentTextItemHovered < 0) {
-                if (numItems % 2 == 0) {
-                    currentTextItemHovered += numItems;
+                if (items.size() % 2 == 0) {
+                    currentTextItemHovered += items.size();
                 }
                 else {
                     if (currentTextItemHovered == -1) {
-                        currentTextItemHovered = numItems - 2;
+                        currentTextItemHovered = items.size() - 2;
                     }
                     else {
-                        currentTextItemHovered = numItems - 1;
+                        currentTextItemHovered = items.size() - 1;
                     }
                 }
             }
 
         } else if (lockKey(Key.DOWN)) {
             currentTextItemHovered += 2;
-            if (currentTextItemHovered >= numItems) {
-                if (numItems % 2 == 0) {
-                    currentTextItemHovered -= numItems;
+            if (currentTextItemHovered >= items.size()) {
+                if (items.size() % 2 == 0) {
+                    currentTextItemHovered -= items.size();
                 }
                 else {
-                    if (currentTextItemHovered == numItems) {
+                    if (currentTextItemHovered == items.size()) {
                         currentTextItemHovered = 1;
                     }
                     else {
@@ -136,16 +135,15 @@ public class InventoryScreen {
         return new Point(width - border * 2, height - border * 2);
     }
 
-    public void setItems(Item[] items) {
+    public void setItems(ArrayList<Item> items) {
         this.items = items;
-        numItems = items.length;
-        for (int i = 0; i < numItems; i++) {
-            inventoryText[i] = new SpriteFont(items[i].getName(), 0, 0, "Arial", fontSize, Color.black);
+        for (int i = 0; i < items.size(); i++) {
+            inventoryText[i] = new SpriteFont(items.get(i).getName(), 0, 0, "Arial", fontSize, Color.black);
         }
     }
 
     private Item getCurrentItem() {
-        return items[currentTextItemHovered];
+        return items.get(currentTextItemHovered);
     }
 
     private Boolean lockKey(Key key) {
