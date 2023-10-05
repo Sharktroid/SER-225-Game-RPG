@@ -88,7 +88,7 @@ public class PlayLevelScreen extends Screen {
         winScreen = new WinScreen(this);
     }
 
-    public void initializeWorldZero() {
+    public void initializeTwo() {
         // setup state
 
 
@@ -168,7 +168,7 @@ public class PlayLevelScreen extends Screen {
                 }
 
                 if (Keyboard.isKeyDown(Key.L) && keyPressTimer == 0) {
-                    initializeWorldZero();
+                    initializeTwo();
                 }   
                 break;
             // if level has been completed, bring up level cleared screen
