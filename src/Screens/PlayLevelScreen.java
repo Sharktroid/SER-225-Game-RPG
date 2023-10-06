@@ -3,12 +3,19 @@ package Screens;
 import java.util.Scanner;
 import Engine.GraphicsHandler;
 import Engine.Key;
+import Engine.KeyLocker;
 import Engine.Keyboard;
 import Engine.Screen;
 import Game.GameState;
 import Game.ScreenCoordinator;
+import GameObject.Item;
+import Items.EraserEraser;
+import Items.Grafcalibur;
+import Items.GutsyBat;
+import Items.PencilEraser;
+import Items.VideoRelaxant;
+import Items.WhackaBump;
 import Level.*;
-import Maps.TestMap;
 import Maps.WorldOneMap;
 import Maps.WorldZeroMap;
 import Players.Cat;
@@ -25,6 +32,7 @@ public class PlayLevelScreen extends Screen {
     protected FlagManager flagManager;
     private InventoryScreen inventory;
     private int keyPressTimer;
+    private KeyLocker keyLocker = new KeyLocker();
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -82,8 +90,10 @@ public class PlayLevelScreen extends Screen {
             }
         }
 
-        String[] items = {"Test A", "Test B"};
-        inventory = new InventoryScreen(items);
+        Item[] items = {new Grafcalibur(), new GutsyBat(), new VideoRelaxant(), new WhackaBump()};
+        Item[] keyItems = {new PencilEraser(), new EraserEraser()};
+
+        inventory = new InventoryScreen(items, keyItems);
 
         winScreen = new WinScreen(this);
     }
@@ -151,12 +161,13 @@ public class PlayLevelScreen extends Screen {
         switch (playLevelScreenState) {
             // if level is "running" update player and map to keep game logic for the platformer level going
             case RUNNING:
-                if (Keyboard.isKeyDown(Key.E) && keyPressTimer == 0) {
+                if (Keyboard.isKeyDown(Key.E) && !keyLocker.isKeyLocked(Key.E)) {
                     inventory.setActive(!inventory.isActive());
+                    keyLocker.lockKey(Key.E);
                     keyPressTimer = 14;
                 }
-                if (keyPressTimer > 0) {
-                    keyPressTimer--;
+                else if (Keyboard.isKeyUp(Key.E) && keyLocker.isKeyLocked(Key.E)) {
+                    keyLocker.unlockKey(Key.E);
                 }
                 if (inventory.isActive()) {
                     inventory.update();
@@ -164,13 +175,15 @@ public class PlayLevelScreen extends Screen {
                 
                 else {
                     player.update();
-                    map.update(player);
                 }
 
                 if (Keyboard.isKeyDown(Key.L) && keyPressTimer == 0) {
                     initializeTwo();
                 }   
+            
+                map.update(player);
                 break;
+            
             // if level has been completed, bring up level cleared screen
             case LEVEL_COMPLETED:
                 winScreen.update();
