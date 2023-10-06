@@ -75,9 +75,13 @@ public class WorldOneMap extends Map {
         npcs.add(officeworker);
 
 
-        return npcs;
+        return npcs; 
+    }
 
-
-        
+    @Override
+    public ArrayList<Trigger> loadTriggers() {
+        ArrayList<Trigger> triggers = new ArrayList<>();
+        triggers.add(new Trigger(790, 1030, 100, 10, new LostBallScript(), "hasLostBall"));
+        return triggers;
     }
 }
