@@ -1,28 +1,35 @@
-package Scripts.WorldOneMap;
+package Scripts.HubMap;
 
 import Level.Script;
 import Level.ScriptState;
 
 // script for talking to tree with hole in it
-public class PortalScript extends Script {
+public class portalOneScript extends Script {
 
     @Override
     protected void setup() {
         lockPlayer();
         showTextbox();
-        addTextToTextboxQueue("Teleporting to World Zero");
+        addTextToTextboxQueue("Teleporting to world 1");
+
     }
 
     @Override
     protected void cleanup() {
-        setFlag("portalActivated");
-        
+        hideTextbox();
+        unlockPlayer();
+        setFlag("portalOneActivated");
     }
 
     @Override
     public ScriptState execute() {
-        if (!isFlagSet("portalActivated")) {
+
+        if (!isFlagSet("portalOneActivated")) {
+            start();
+            if (!isTextboxQueueEmpty()) {
                 return ScriptState.RUNNING;
+            }
+            end();
         }
         return ScriptState.COMPLETED;
     }
