@@ -150,10 +150,10 @@ public class PlayLevelScreen extends Screen {
             }
         }
 
-        String[] items = {"Test A", "Test B"};
-        inventory = new InventoryScreen(items);
+        //String[] items = {"Test A", "Test B"};
+        //inventory = new InventoryScreen(items);
 
-        winScreen = new WinScreen(this);
+        //winScreen = new WinScreen(this);
 
     }
     public void update() {
