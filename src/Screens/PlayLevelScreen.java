@@ -164,7 +164,7 @@ public class PlayLevelScreen extends Screen {
                 if (Keyboard.isKeyDown(Key.E) && !keyLocker.isKeyLocked(Key.E)) {
                     inventory.setActive(!inventory.isActive());
                     keyLocker.lockKey(Key.E);
-                    keyPressTimer = 14;
+                    //keyPressTimer = 14;
                 }
                 else if (Keyboard.isKeyUp(Key.E) && keyLocker.isKeyLocked(Key.E)) {
                     keyLocker.unlockKey(Key.E);
