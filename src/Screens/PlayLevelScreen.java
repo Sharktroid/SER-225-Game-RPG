@@ -31,7 +31,7 @@ public class PlayLevelScreen extends Screen {
     protected PlayLevelScreenState playLevelScreenState;
     protected WinScreen winScreen;
     protected FlagManager flagManager;
-    protected int worldNumber = 0;
+    protected int worldNum = 0;
     private InventoryScreen inventory;
     private int keyPressTimer;
     private KeyLocker keyLocker = new KeyLocker();
@@ -40,21 +40,19 @@ public class PlayLevelScreen extends Screen {
         this.screenCoordinator = screenCoordinator;
     }
 
-    public PlayLevelScreen(ScreenCoordinator screenCoordinator, int world) {
-        this.screenCoordinator = screenCoordinator;
-        this.worldNumber = world;
-
-    }
-
     public void initialize() {
         // setup state
 
         flagManager = new FlagManager();
 
-        if (Screens.MenuScreen.worldNumber == 0) {
+        // takes world number variable form menu screen to choose world
+
+        worldNum = Screens.MenuScreen.worldNumber;
+
+        if (worldNum == 0) {
             this.map = new WorldZeroMap();
 
-        } else if (Screens.MenuScreen.worldNumber == 1) {
+        } else if (worldNum == 1) {
             this.map = new WorldOneMap();
 
             flagManager.addFlag("hasLostBall", false);
@@ -63,13 +61,12 @@ public class PlayLevelScreen extends Screen {
             flagManager.addFlag("hasFoundBall", false);
             flagManager.addFlag("portalActive", false);
 
-        } else if (Screens.MenuScreen.worldNumber == 4){
+        } else if (worldNum == 4) {
             this.map = new HubMap();
         }
-        
+
         map.setFlagManager(flagManager);
 
-        
         // setup player
         this.player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
         this.player.setMap(map);
@@ -135,11 +132,7 @@ public class PlayLevelScreen extends Screen {
                 else {
                     player.update();
                 }
-
-                if (Keyboard.isKeyDown(Key.L) && keyPressTimer == 0) {
-                    initialize();
-                }
-
+                
                 map.update(player);
                 break;
 
