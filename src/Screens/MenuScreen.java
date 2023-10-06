@@ -113,7 +113,7 @@ public class MenuScreen extends Screen {
             pointerLocationY = 230;
         } else if (currentMenuItemHovered == 2) {
             playGame.setColor(new Color(49,207,240));
-            credits.setColor(new Color(49,207,240));
+            credits.setColor(new Color(49,207,0));
             worldZero.setColor(new Color(255,215,0));
             worldOne.setColor(new Color(49,207,240));
             worldTwo.setColor(new Color(49,207,240));
