@@ -113,7 +113,7 @@ public class MenuScreen extends Screen {
             pointerLocationY = 230;
         } else if (currentMenuItemHovered == 2) {
             playGame.setColor(new Color(49,207,240));
-            credits.setColor(new Color(49,207,0));
+            credits.setColor(new Color(49,207,240));
             worldZero.setColor(new Color(255,215,0));
             worldOne.setColor(new Color(49,207,240));
             worldTwo.setColor(new Color(49,207,240));
@@ -171,6 +171,7 @@ public class MenuScreen extends Screen {
         if (!keyLocker.isKeyLocked(Key.ENTER) && Keyboard.isKeyDown(Key.ENTER)) {
             menuItemSelected = currentMenuItemHovered;
             if (menuItemSelected == 0) {
+                worldNumber = 4;
                 screenCoordinator.setGameState(GameState.LEVEL);
             } else if (menuItemSelected == 1) {
                 screenCoordinator.setGameState(GameState.CREDITS);
@@ -179,6 +180,9 @@ public class MenuScreen extends Screen {
                 screenCoordinator.setGameState(GameState.LEVEL);
             } else if (menuItemSelected == 3) {
                 worldNumber = 1;
+                screenCoordinator.setGameState(GameState.LEVEL);
+            } else if (menuItemSelected == 6){
+                worldNumber = 4;
                 screenCoordinator.setGameState(GameState.LEVEL);
             }
         }

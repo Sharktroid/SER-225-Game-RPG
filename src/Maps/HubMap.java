@@ -15,7 +15,8 @@ public class HubMap extends Map {
 
     public HubMap() {
         super("hub_map.txt", new CommonTileset());
-        this.playerStartPosition = getMapTile(0, 0).getLocation();
+        this.playerStartPosition = getMapTile(8, 7).getLocation();
+        
     }
 
 }
