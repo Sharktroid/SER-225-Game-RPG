@@ -18,6 +18,7 @@ import Items.WhackaBump;
 import Level.*;
 import Maps.WorldOneMap;
 import Maps.WorldZeroMap;
+import Maps.HubMap;
 import Players.Cat;
 import Utils.Direction;
 import Utils.Point;
@@ -62,10 +63,13 @@ public class PlayLevelScreen extends Screen {
             flagManager.addFlag("hasFoundBall", false);
             flagManager.addFlag("portalActive", false);
 
+        } else if (Screens.MenuScreen.worldNumber == 4){
+            this.map = new HubMap();
         }
         
         map.setFlagManager(flagManager);
 
+        
         // setup player
         this.player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
         this.player.setMap(map);
