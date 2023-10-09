@@ -33,7 +33,6 @@ public class PlayLevelScreen extends Screen {
     protected FlagManager flagManager;
     protected int worldNum = -1;
     private InventoryScreen inventory;
-    private int keyPressTimer;
     private KeyLocker keyLocker = new KeyLocker();
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
@@ -49,7 +48,7 @@ public class PlayLevelScreen extends Screen {
         if (worldNum == -1){
             worldNum = Screens.MenuScreen.worldNumber;
         }
-        
+
 
         if (worldNum == 0) {
             this.map = new WorldZeroMap();
@@ -135,7 +134,7 @@ public class PlayLevelScreen extends Screen {
                 else {
                     player.update();
                 }
-                
+
                 map.update(player);
                 break;
 
