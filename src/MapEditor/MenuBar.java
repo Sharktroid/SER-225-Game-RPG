@@ -20,7 +20,7 @@ public class MenuBar extends JMenuBar {
             }
         });
         options.add(showNpcs);
-        showEnchancedMapTiles = new JCheckBoxMenuItem("Show Enhanced Map Tiles");
+        showEnchancedMapTiles = new JCheckBoxMenuItem("Show Enhanced Map Tiles", true);
         showEnchancedMapTiles.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
