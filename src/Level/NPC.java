@@ -8,9 +8,14 @@ import Utils.Direction;
 import java.util.HashMap;
 
 // This class is a base class for all npcs in the game -- all npcs should extend from it
-public class NPC extends MapEntity {
-    protected int id = 0;
+public class NPC extends MapEntity{
+    //private Rectangle rect;
 
+
+    protected int id = 0;
+    private Textbox textbox;
+
+ 
     public NPC(int id, float x, float y, SpriteSheet spriteSheet, String startingAnimation) {
         super(x, y, spriteSheet, startingAnimation);
         this.id = id;
@@ -87,6 +92,7 @@ public class NPC extends MapEntity {
 
     public void update(Player player) {
         super.update();
+    
     }
 
     @Override

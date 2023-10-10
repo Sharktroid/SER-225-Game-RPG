@@ -20,13 +20,18 @@ public class MenuScreen extends Screen {
     protected int keyPressTimer;
     protected int pointerLocationX, pointerLocationY;
     protected KeyLocker keyLocker = new KeyLocker();
+    
+
 
     public MenuScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
+
+
     }
 
     @Override
     public void initialize() {
+
         playGame = new SpriteFont("PLAY GAME", 200, 119, "Comic Sans", 30, new Color(49, 207, 240));
         playGame.setOutlineColor(Color.black);
         playGame.setOutlineThickness(3);
@@ -39,6 +44,7 @@ public class MenuScreen extends Screen {
         menuItemSelected = -1;
         keyLocker.lockKey(Key.ENTER);
     }
+
 
     public void update() {
         // update background map (to play tile animations)
@@ -84,7 +90,7 @@ public class MenuScreen extends Screen {
         if (!keyLocker.isKeyLocked(Key.ENTER) && Keyboard.isKeyDown(Key.ENTER)) {
             menuItemSelected = currentMenuItemHovered;
             if (menuItemSelected == 0) {
-                screenCoordinator.setGameState(GameState.LEVEL);
+                screenCoordinator.setGameState(GameState.SLIDESHOW);
             } else if (menuItemSelected == 1) {
                 screenCoordinator.setGameState(GameState.CREDITS);
             }
