@@ -29,7 +29,6 @@ public class Slideshow extends Screen
     protected KeyLocker keyLocker = new KeyLocker();
 
     protected Rectangle rect;
-    protected Textbox textbox;
     protected int counter = 1;
     protected int x,y;
     protected BufferedImage image = ImageLoader.load("RedPanda.png"); //first image played in slideshow
@@ -53,7 +52,6 @@ public class Slideshow extends Screen
 
         background = new TitleScreenMap();
         background.setAdjustCamera(false);
-        textbox = new Textbox(background);
 
     }
 
@@ -105,7 +103,6 @@ public class Slideshow extends Screen
     @Override
     public void draw(GraphicsHandler graphicsHandler) {
         //background.draw(graphicsHandler);
-        //textbox.draw(graphicsHandler);
         graphicsHandler.drawImage(image,0,0,300,300);
 
     }
