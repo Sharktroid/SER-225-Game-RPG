@@ -201,8 +201,8 @@ public class InventoryScreen {
         }
     }
 
-private void setViewingKeyItems(Boolean viewing) {
-        viewingKeyItems = viewing;
-        updateItemText();
-}
+    private void setViewingKeyItems(Boolean viewing) {
+            viewingKeyItems = viewing;
+            updateItemText();
+    }
 }
