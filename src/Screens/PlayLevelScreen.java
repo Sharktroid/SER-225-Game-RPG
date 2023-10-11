@@ -61,11 +61,14 @@ public class PlayLevelScreen extends Screen {
             flagManager.addFlag("hasTalkedToWalrus", false);
             flagManager.addFlag("hasTalkedToDinosaur", false);
             flagManager.addFlag("hasFoundBall", false);
+            flagManager.addFlag("sawHubMsg", false);
 
         } else if (worldNum == 4) {
             this.map = new HubMap();
 
             flagManager.addFlag("portalOneActivated", false);
+            flagManager.addFlag("sawHubMsg", false);
+
         }
 
         map.setFlagManager(flagManager);
@@ -179,10 +182,6 @@ public class PlayLevelScreen extends Screen {
 
     public void goBackToMenu() {
         screenCoordinator.setGameState(GameState.MENU);
-    }
-
-    public void changeMap() {
-
     }
 
     // This enum represents the different states this screen can be in
