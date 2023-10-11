@@ -9,31 +9,28 @@ import GameObject.Rectangle;
 import GameObject.SpriteSheet;
 import Level.NPC;
 import Level.Player;
-import Level.Textbox;
+
+import SpriteFont.SpriteFont;
 import Utils.Point;
+import java.awt.Color;
 
 import java.util.HashMap;
 
 // This class is for the walrus NPC
 public class Walrus extends NPC {
-    protected GraphicsHandler graphicsHandler;
     protected boolean isInteracting = false;
-    protected float walrusX,walrusY;
+    protected SpriteFont playGame;
+
 
     public Walrus(int id, Point location) {
         super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("Walrus.png"), 24, 24), "STAND_LEFT");
-        walrusX= location.x;
-        walrusY= location.y;
-
-
+        
     }
 
  
     public void update(Player player) {
         super.update();
-        graphicsHandler = new GraphicsHandler();
 
-    
         //if player can talk to npc, textbox pops up
         if (intersects(player.getInteractionRange()))
         {
@@ -65,12 +62,19 @@ public class Walrus extends NPC {
 
     @Override
     public void draw(GraphicsHandler graphicsHandler) {
+        
         super.draw(graphicsHandler);
+
         if (isInteracting == true)
         {
+            playGame = new SpriteFont("ENTER", getCalibratedXLocation()+2, getCalibratedYLocation()-12, "Comic Sans", 15, Color.black);
+            
+            
             //textbox.draw(graphicsHandler);
-            graphicsHandler.drawFilledRectangle(getCalibratedXLocation(), getCalibratedYLocation(),50,15, java.awt.Color.white);
+            graphicsHandler.drawFilledRectangle(getCalibratedXLocation(), getCalibratedYLocation()-10,50,15, java.awt.Color.white);
+            playGame.draw(graphicsHandler);
         }
+
     }
 
 

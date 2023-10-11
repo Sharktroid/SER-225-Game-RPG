@@ -32,6 +32,7 @@ public class Slideshow extends Screen
     protected int counter = 1;
     protected int x,y;
     protected BufferedImage image = ImageLoader.load("RedPanda.png"); //first image played in slideshow
+    protected SpriteFont spaceToContinue;
     
 
     //plays slideshow after pressing play
@@ -52,6 +53,8 @@ public class Slideshow extends Screen
 
         background = new TitleScreenMap();
         background.setAdjustCamera(false);
+
+        spaceToContinue = new SpriteFont("PRESS SPACE TO CONTINUE", 200, 519, "Comic Sans", 30, new Color(49, 207, 240));
 
     }
 
@@ -104,6 +107,7 @@ public class Slideshow extends Screen
     public void draw(GraphicsHandler graphicsHandler) {
         //background.draw(graphicsHandler);
         graphicsHandler.drawImage(image,0,0,300,300);
+        spaceToContinue.draw(graphicsHandler);
 
     }
 }
