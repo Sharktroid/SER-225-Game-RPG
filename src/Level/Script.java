@@ -119,9 +119,6 @@ public abstract class Script<T extends MapEntity> {
         return map.getTextbox().getChoice();
     }
         
-
-
-    
     // sets the value of the last choice made from a selectable textbox
     protected void setChoice(int choice) {
         map.getTextbox().setChoice(choice);
@@ -193,7 +190,7 @@ public abstract class Script<T extends MapEntity> {
         map.getFlagManager().setFlag(flagName);
     }
 
-    // sets a flag to falase
+    // sets a flag to false
     protected void unsetFlag(String flagName) {
         map.getFlagManager().unsetFlag(flagName);
     }

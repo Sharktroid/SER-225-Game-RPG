@@ -1,18 +1,24 @@
 package Screens;
 
+import java.util.Scanner;
 import Engine.GraphicsHandler;
 import Engine.Key;
+import Engine.KeyLocker;
 import Engine.Keyboard;
 import Engine.Screen;
 import Game.GameState;
 import Game.ScreenCoordinator;
 import GameObject.Item;
+import Items.EraserEraser;
 import Items.Grafcalibur;
 import Items.GutsyBat;
+import Items.PencilEraser;
 import Items.VideoRelaxant;
 import Items.WhackaBump;
 import Level.*;
 import Maps.WorldOneMap;
+import Maps.WorldZeroMap;
+import Maps.HubMap;
 import Players.Cat;
 import Utils.Direction;
 import Utils.Point;
@@ -25,8 +31,9 @@ public class PlayLevelScreen extends Screen {
     protected PlayLevelScreenState playLevelScreenState;
     protected WinScreen winScreen;
     protected FlagManager flagManager;
+    protected int worldNum = -1;
     private InventoryScreen inventory;
-    private int keyPressTimer;
+    private KeyLocker keyLocker = new KeyLocker();
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -34,14 +41,35 @@ public class PlayLevelScreen extends Screen {
 
     public void initialize() {
         // setup state
-        flagManager = new FlagManager();
-        flagManager.addFlag("hasLostBall", false);
-        flagManager.addFlag("hasTalkedToWalrus", false);
-        flagManager.addFlag("hasTalkedToDinosaur", false);
-        flagManager.addFlag("hasFoundBall", false);
 
-        // define/setup map
-        this.map = new WorldOneMap();
+        flagManager = new FlagManager();
+
+        // takes world number variable form menu screen to choose world
+        if (worldNum == -1){
+            worldNum = Screens.MenuScreen.worldNumber;
+        }
+
+
+        if (worldNum == 0) {
+            this.map = new WorldZeroMap();
+
+        } else if (worldNum == 1) {
+            this.map = new WorldOneMap();
+
+            flagManager.addFlag("hasLostBall", false);
+            flagManager.addFlag("hasTalkedToWalrus", false);
+            flagManager.addFlag("hasTalkedToDinosaur", false);
+            flagManager.addFlag("hasFoundBall", false);
+            flagManager.addFlag("sawHubMsg", false);
+
+        } else if (worldNum == 4) {
+            this.map = new HubMap();
+
+            flagManager.addFlag("portalOneActivated", false);
+            flagManager.addFlag("sawHubMsg", false);
+
+        }
+
         map.setFlagManager(flagManager);
 
         // setup player
@@ -81,8 +109,10 @@ public class PlayLevelScreen extends Screen {
             }
         }
 
-        Item[] items = {new Grafcalibur(), new GutsyBat(), new VideoRelaxant(), new WhackaBump()};
-        inventory = new InventoryScreen(items);
+        Item[] items = { new Grafcalibur(), new GutsyBat(), new VideoRelaxant(), new WhackaBump() };
+        Item[] keyItems = { new PencilEraser(), new EraserEraser() };
+
+        inventory = new InventoryScreen(items, keyItems);
 
         winScreen = new WinScreen(this);
     }
@@ -90,29 +120,36 @@ public class PlayLevelScreen extends Screen {
     public void update() {
         // based on screen state, perform specific actions
         switch (playLevelScreenState) {
-            // if level is "running" update player and map to keep game logic for the platformer level going
+            // if level is "running" update player and map to keep game logic for the
+            // platformer level going
             case RUNNING:
-                if (Keyboard.isKeyDown(Key.E) && keyPressTimer == 0) {
+                if (Keyboard.isKeyDown(Key.E) && !keyLocker.isKeyLocked(Key.E)) {
                     inventory.setActive(!inventory.isActive());
-                    keyPressTimer = 14;
-                }
-                if (keyPressTimer > 0) {
-                    keyPressTimer--;
+                    keyLocker.lockKey(Key.E);
+
+                } else if (Keyboard.isKeyUp(Key.E) && keyLocker.isKeyLocked(Key.E)) {
+                    keyLocker.unlockKey(Key.E);
                 }
                 if (inventory.isActive()) {
                     inventory.update();
                 }
+
                 else {
                     player.update();
                 }
+
                 map.update(player);
                 break;
+
             // if level has been completed, bring up level cleared screen
             case LEVEL_COMPLETED:
                 winScreen.update();
                 break;
         }
-
+        if (map.getFlagManager().isFlagSet("portalOneActivated")){
+            worldNum = 1;
+            initialize();
+        }
         // if flag is set at any point during gameplay, game is "won"
         if (map.getFlagManager().isFlagSet("hasFoundBall")) {
             playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
@@ -137,7 +174,6 @@ public class PlayLevelScreen extends Screen {
     public PlayLevelScreenState getPlayLevelScreenState() {
         return playLevelScreenState;
     }
-
 
     public void resetLevel() {
         initialize();

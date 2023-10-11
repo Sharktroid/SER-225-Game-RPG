@@ -22,7 +22,6 @@ public abstract class Player extends GameObject {
     protected Direction lastWalkingYDirection;
 
     private Boolean running = false;
-    private int keyPressTimer = 0;
 
     // values used to handle player movement
     protected float moveAmountX, moveAmountY;
@@ -114,12 +113,12 @@ public abstract class Player extends GameObject {
             map.entityInteract(this);
         }
 
-        if (Keyboard.isKeyDown(RUN_KEY) && keyPressTimer == 0) {
+        if (Keyboard.isKeyDown(RUN_KEY) && !keyLocker.isKeyLocked(RUN_KEY)) {
             running = !running;
-            keyPressTimer = 10;
+            keyLocker.lockKey(RUN_KEY);
         }
-        if (keyPressTimer > 0) {
-            keyPressTimer--;
+        else if (keyLocker.isKeyLocked(RUN_KEY) && Keyboard.isKeyUp(RUN_KEY)) {
+            keyLocker.unlockKey(RUN_KEY);
         }
 
         float runModifier = 1;
