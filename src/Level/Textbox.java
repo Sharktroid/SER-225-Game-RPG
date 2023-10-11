@@ -160,7 +160,6 @@ public class Textbox {
                     textQueueFlip.add(textQueue.poll());
                 }
                 choice = currentTextItemHovered-1;
-                System.out.println("choice: " + choice);
                 setChoice(choice);
                 textQueue.add(responseText[choice]);
                 currentTextItemHovered = 1;

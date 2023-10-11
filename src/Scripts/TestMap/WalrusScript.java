@@ -18,17 +18,11 @@ public class WalrusScript extends Script<NPC> {
         String[] answers = {"This is my response to A", "This is my response to B", "This is my response to C"};
 
         entity.facePlayer(player);
-        // changes what walrus says when talking to him the first time (flag is not set) vs talking to him afterwards (flag is set)
         if (!isFlagSet("hasTalkedToWalrus")) {
             if (sequence == 0) {
-                System.out.println("Sequence 0");
                 addTextToTextboxQueue( "Hi Cat!!", selections, answers);
                 responseNum = getChoice();
-                System.out.println("responseNum: " + responseNum);
-                // addTextToTextboxQueue( "....oh, you lost your ball?");
-                // addTextToTextboxQueue( "Hmmm...my walrus brain remembers seeing Dino with\nit last. Maybe you can check with him?");
             } else if (sequence == 1) {
-                System.out.println("Sequence 1");
                 if (responseNum == 0) {
                     addTextToTextboxQueue( "This is the branch of A.");
                     addTextToTextboxQueue( "What a wonderful branch.");
@@ -55,22 +49,13 @@ public class WalrusScript extends Script<NPC> {
             responseNum = getChoice();
             sequence++;
         } else if (sequence == 1) {
-            System.out.println("Sequence 1: Choice is: " + responseNum);
             setFlag("hasTalkedToWalrus");
             sequence++;
         }
-
-        // set flag so that if walrus is talked to again after the first time, what he says changes
     }
 
     @Override
     public ScriptState execute() {
-        // start();
-        // if (!isTextboxQueueEmpty()) {
-        //     return ScriptState.RUNNING;
-        // }
-        // end();
-        // return ScriptState.COMPLETED;
         if (!isFlagSet("hasTalkedToWalrus")) {
             if (sequence == 0) {
                 start();
@@ -81,11 +66,7 @@ public class WalrusScript extends Script<NPC> {
                 start();
                 if (isTextboxQueueEmpty()) {
                     end();
-                }
-            } else if (sequence == 2) {
-                start();
-                if (isTextboxQueueEmpty()) {
-                    end();
+                    return ScriptState.COMPLETED;
                 }
             }
             return ScriptState.RUNNING;
