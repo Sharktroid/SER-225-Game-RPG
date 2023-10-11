@@ -59,6 +59,13 @@ public class GraphicsHandler {
         g.setColor(color);
         g.fillRect(x, y, width, height);
     }
+    
+    public void drawFilledRectangle(float x, float y, int width, int height, Color color) {
+        g.setColor(color);
+        int xRounded = Math.round(x);
+        int yRounded= Math.round(y);
+        g.fillRect(xRounded, yRounded, width, height);
+    }
 
     public void drawFilledRectangleWithBorder(int x, int y, int width, int height, Color fillColor, Color borderColor, int borderThickness) {
         drawFilledRectangle(x, y, width, height, fillColor);

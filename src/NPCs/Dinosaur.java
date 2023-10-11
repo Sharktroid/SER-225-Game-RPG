@@ -7,12 +7,15 @@ import GameObject.Frame;
 import GameObject.ImageEffect;
 import GameObject.SpriteSheet;
 import Level.NPC;
+import SpriteFont.SpriteFont;
 import Utils.Point;
 
 import java.util.HashMap;
 
 // This class is for the dinosaur NPC
 public class Dinosaur extends NPC {
+        protected boolean isInteracting = false;
+        protected SpriteFont playGame;
 
     public Dinosaur(int id, Point location) {
         super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("Dinosaur.png"), 14, 17), "STAND_LEFT");

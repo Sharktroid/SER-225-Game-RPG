@@ -172,7 +172,7 @@ public class MenuScreen extends Screen {
             menuItemSelected = currentMenuItemHovered;
             if (menuItemSelected == 0) {
                 worldNumber = 4;
-                screenCoordinator.setGameState(GameState.LEVEL);
+                screenCoordinator.setGameState(GameState.SLIDESHOW);
             } else if (menuItemSelected == 1) {
                 screenCoordinator.setGameState(GameState.CREDITS);
             } else if (menuItemSelected == 2) {

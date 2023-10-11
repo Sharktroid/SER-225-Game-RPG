@@ -15,6 +15,8 @@ public class WalrusScript extends Script<NPC> {
         String[] selections = {"abc", "bcdefgh", "c"};
         String[] answers = {"A", "B", "C"};
 
+
+        
         // changes what walrus says when talking to him the first time (flag is not set) vs talking to him afterwards (flag is set)
         if (!isFlagSet("hasTalkedToWalrus")) {
             addTextToTextboxQueue( "Hi Cat!!", selections, answers);
@@ -25,6 +27,7 @@ public class WalrusScript extends Script<NPC> {
             addTextToTextboxQueue( "I sure love doing walrus things!");
         }
         entity.facePlayer(player);
+
     }
 
     @Override
@@ -45,4 +48,5 @@ public class WalrusScript extends Script<NPC> {
         end();
         return ScriptState.COMPLETED;
     }
+
 }
