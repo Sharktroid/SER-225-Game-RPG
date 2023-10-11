@@ -177,13 +177,13 @@ public class MenuScreen extends Screen {
                 screenCoordinator.setGameState(GameState.CREDITS);
             } else if (menuItemSelected == 2) {
                 worldNumber = 0;
-                screenCoordinator.setGameState(GameState.SLIDESHOW);
+                screenCoordinator.setGameState(GameState.LEVEL);
             } else if (menuItemSelected == 3) {
                 worldNumber = 1;
-                screenCoordinator.setGameState(GameState.SLIDESHOW);
+                screenCoordinator.setGameState(GameState.LEVEL);
             } else if (menuItemSelected == 6){
                 worldNumber = 4;
-                screenCoordinator.setGameState(GameState.SLIDESHOW);
+                screenCoordinator.setGameState(GameState.LEVEL);
             }
         }
     }
