@@ -26,7 +26,7 @@ public class HubMap extends Map {
     public ArrayList<Trigger> loadTriggers() {
         ArrayList<Trigger> triggers = new ArrayList<>();
         triggers.add(new Trigger(108, 60, 24, 24, new portalOneScript()));
-        //triggers.add(new Trigger(384, 336, 48, 48, new hubMsgScript()));
+        triggers.add(new Trigger(384, 336, 48, 48, new hubMsgScript(),"sawHubMsg"));
         return triggers;
     }
 
