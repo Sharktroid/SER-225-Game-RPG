@@ -1,5 +1,7 @@
 package Maps;
 
+import EnhancedMapTiles.Medkit;
+import EnhancedMapTiles.catFood;
 import EnhancedMapTiles.PushableRock;
 import Level.EnhancedMapTile;
 import Level.Map;
@@ -29,11 +31,20 @@ import Tilesets.CommonTileset;
 
 import java.util.ArrayList;
 
-
 public class WorldOneMap extends Map {
     public WorldOneMap() {
         super("world_one_map.txt", new CommonTileset());
         this.playerStartPosition = getMapTile(0, 14).getLocation();
+    }
+
+    @Override
+    public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
+        ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
+        Medkit medkit = new Medkit(getMapTile(16, 14).getLocation(), 25);
+        enhancedMapTiles.add(medkit);
+        catFood catFood = new catFood(getMapTile(5, 10).getLocation(), 2);
+        enhancedMapTiles.add(catFood);
+        return enhancedMapTiles;
     }
 
     @Override
@@ -52,7 +63,7 @@ public class WorldOneMap extends Map {
 
         Beaver beaver = new Beaver(3, getMapTile(10, 20).getLocation().subtractY(40));
         beaver.setInteractScript(new BeaverScript());
-        npcs.add(beaver); 
+        npcs.add(beaver);
 
         Giraffe giraffe = new Giraffe(4, getMapTile(11, 21).getLocation().subtractY(40));
         giraffe.setInteractScript(new GiraffeScript());
@@ -61,7 +72,7 @@ public class WorldOneMap extends Map {
         Redpanda redpanda = new Redpanda(5, getMapTile(17, 22).getLocation().subtractY(40));
         redpanda.setInteractScript(new RedpandaScript());
         npcs.add(redpanda);
-        
+
         Sloth sloth = new Sloth(6, getMapTile(9, 18).getLocation().subtractY(40));
         sloth.setInteractScript(new SlothScript());
         npcs.add(sloth);
@@ -69,13 +80,12 @@ public class WorldOneMap extends Map {
         Catsuit catsuit = new Catsuit(7, getMapTile(13, 20).getLocation().subtractY(40));
         catsuit.setInteractScript(new CatsuitScript());
         npcs.add(catsuit);
-        
+
         Officeworker officeworker = new Officeworker(8, getMapTile(11, 16).getLocation().subtractY(40));
         officeworker.setInteractScript(new OfficeworkerScript());
         npcs.add(officeworker);
 
-
-        return npcs; 
+        return npcs;
     }
 
     @Override
