@@ -4,6 +4,7 @@ import Engine.Key;
 import Engine.KeyLocker;
 import Engine.Keyboard;
 import GameObject.GameObject;
+import GameObject.Item;
 import GameObject.Rectangle;
 import GameObject.SpriteSheet;
 import Utils.Direction;
@@ -44,6 +45,9 @@ public abstract class Player extends GameObject {
     protected Key MOVE_DOWN_KEY = Key.DOWN;
     protected Key INTERACT_KEY = Key.ENTER;
     protected Key RUN_KEY = Key.SHIFT;
+
+    public ArrayList<Item> items = new ArrayList<Item>();
+    public ArrayList<Item> keyItems = new ArrayList<Item>();
 
     public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
         super(spriteSheet, x, y, startingAnimationName);
