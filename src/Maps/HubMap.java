@@ -11,7 +11,6 @@ import Level.Trigger;
 import Scripts.SimpleTextScript;
 import Scripts.HubMap.hubMsgScript;
 import Scripts.HubMap.portalOneScript;
-import Scripts.TestMap.LostBallScript;
 import Tilesets.CommonTileset;
 
 public class HubMap extends Map {

@@ -1,4 +1,4 @@
-package Scripts.TestMap;
+package Scripts.WorldOneMap;
 
 import Level.Script;
 import Level.ScriptState;
