@@ -1,5 +1,7 @@
 package Screens;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import Engine.GraphicsHandler;
 import Engine.Key;
@@ -109,10 +111,15 @@ public class PlayLevelScreen extends Screen {
             }
         }
 
-        Item[] items = { new Grafcalibur(), new GutsyBat(), new VideoRelaxant(), new WhackaBump() };
-        Item[] keyItems = { new PencilEraser(), new EraserEraser() };
+        // Debugging purposes; remove at a later date
+        player.items.add(new Grafcalibur());
+        player.items.add(new GutsyBat());
+        player.items.add(new VideoRelaxant());
+        player.items.add(new WhackaBump());
+        player.keyItems.add(new PencilEraser());
+        player.keyItems.add(new EraserEraser());
 
-        inventory = new InventoryScreen(items, keyItems);
+        inventory = new InventoryScreen(player);
 
         winScreen = new WinScreen(this);
     }

@@ -14,6 +14,7 @@ import Utils.Point;
 import Engine.Config;
 
 public class InventoryScreen {
+    private Player player;
     private Boolean active = false;
     private final int left = 20;
     protected final int top = left;
@@ -29,19 +30,12 @@ public class InventoryScreen {
 
     private SpriteFont[] spriteFonts = new SpriteFont[rows * 2];
     private int currentTextItemHovered = 0;
-    private ArrayList<Item> items;
-    private ArrayList<Item> keyItems;
     private Boolean viewingKeyItems = false;
     private KeyLocker keyLocker = new KeyLocker();
     protected InventoryScreenItemSelectionBox selectionBox;
 
-    public InventoryScreen(Item[] items, Item[] keyItems) {
-        this(new ArrayList<Item>(Arrays.asList(items)), new ArrayList<Item>(Arrays.asList(keyItems)));
-    }
-
-    public InventoryScreen(ArrayList<Item> items, ArrayList<Item> keyItems) {
-        this.items = items;
-        this.keyItems = keyItems;
+    public InventoryScreen(Player player) {
+        this.player = player;
         updateItemText();
     }
 
@@ -180,9 +174,9 @@ public class InventoryScreen {
 
     private ArrayList<Item> getCurrentItems() {
         if (viewingKeyItems) {
-            return keyItems;
+            return player.keyItems;
         } else {
-            return items;
+            return player.items;
         }
     }
 
