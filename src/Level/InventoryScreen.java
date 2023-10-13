@@ -2,7 +2,6 @@ package Level;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import Engine.GraphicsHandler;
 import Engine.Key;
@@ -36,28 +35,32 @@ public class InventoryScreen {
 
     public InventoryScreen(Player player) {
         this.player = player;
-        updateItemText();
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
+        updateItemText();
         graphicsHandler.drawFilledRectangleWithBorder(left, top, width, inventoryHeight, Color.white, Color.black, 2);
 
         for (int i = 0; i < getCurrentItems().size(); i++) {
             spriteFonts[i].setColor(Color.black);
         }
-        spriteFonts[currentTextItemHovered].setColor(Color.red);
+        if (getCurrentItems().size() > 0) {
+            spriteFonts[currentTextItemHovered].setColor(Color.red);
+        }
         for (int i = 0; i < getCurrentItems().size(); i++) {
             spriteFonts[i].drawWithParsedNewLines(graphicsHandler, 10);
         }
         int descriptionTop = top + inventoryHeight + spacer;
         graphicsHandler.drawFilledRectangleWithBorder(left, descriptionTop, width, descriptionHeight, Color.white,
                 Color.black, 2);
-
-        SpriteFont description = new SpriteFont(getCurrentItem().getDescription(), 0, 0, "Arial", fontSize,
-                Color.black);
-        description.setX(left + border);
-        description.setY(descriptionTop + border);
-        description.drawWithParsedNewLines(graphicsHandler, 10);
+        String description = "";
+        if (getCurrentItem() != null) {
+            description = getCurrentItem().getDescription();
+        }
+        SpriteFont descriptionSpriteFont = new SpriteFont(description, 0, 0, "Arial", fontSize, Color.black);
+        descriptionSpriteFont.setX(left + border);
+        descriptionSpriteFont.setY(descriptionTop + border);
+        descriptionSpriteFont.drawWithParsedNewLines(graphicsHandler, 10);
         if (selectionBox != null) {
             selectionBox.draw(graphicsHandler);
         }
@@ -105,7 +108,6 @@ public class InventoryScreen {
 
             } else if (lockKey(Key.SHIFT)) {
                 setViewingKeyItems(!viewingKeyItems);
-                updateItemText();
                 if (currentTextItemHovered >= getCurrentItems().size()) {
                     currentTextItemHovered = 0;
                 }
@@ -162,14 +164,18 @@ public class InventoryScreen {
 
     public void drop(Item item) {
         getCurrentItems().remove(item);
-        updateItemText();
         if (currentTextItemHovered >= getCurrentItems().size()) {
             currentTextItemHovered = getCurrentItems().size() - 1;
         }
     }
 
     private Item getCurrentItem() {
-        return getCurrentItems().get(currentTextItemHovered);
+        if (getCurrentItems().size() > 0) {
+            return getCurrentItems().get(currentTextItemHovered);
+        }
+        else {
+            return null;
+        }
     }
 
     private ArrayList<Item> getCurrentItems() {
@@ -197,6 +203,5 @@ public class InventoryScreen {
 
     private void setViewingKeyItems(Boolean viewing) {
             viewingKeyItems = viewing;
-            updateItemText();
     }
 }

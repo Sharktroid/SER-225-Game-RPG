@@ -130,7 +130,7 @@ public class PlayLevelScreen extends Screen {
             // if level is "running" update player and map to keep game logic for the
             // platformer level going
             case RUNNING:
-                if (Keyboard.isKeyDown(Key.E) && !keyLocker.isKeyLocked(Key.E)) {
+                if (Keyboard.isKeyDown(Key.E) && !keyLocker.isKeyLocked(Key.E) && !map.getTextbox().isActive()) {
                     inventory.setActive(!inventory.isActive());
                     keyLocker.lockKey(Key.E);
 
