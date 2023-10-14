@@ -5,6 +5,8 @@ import Maps.TitleScreenMap;
 import Maps.HubMap;
 import Maps.WorldZeroMap;
 import Maps.WorldOneMap;
+import Maps.WorldTwoMap;
+import Maps.WorldThreeMap;
 
 
 import java.util.ArrayList;
@@ -16,6 +18,8 @@ public class EditorMaps {
             add("TitleScreen");
             add("WorldZeroMap");
             add("WorldOneMap");
+            add("WorldTwoMap");
+            add("WorldThreeMap");
             add("HubMap");
         }};
     }
@@ -30,6 +34,10 @@ public class EditorMaps {
                 return new WorldZeroMap();
             case "WorldOneMap":
                 return new WorldOneMap();
+            case "WorldTwoMap":
+                return new WorldTwoMap();
+            case "WorldThreeMap":
+                return new WorldThreeMap();
             default:
                 throw new RuntimeException("Unrecognized map name");
         }

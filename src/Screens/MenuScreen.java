@@ -181,7 +181,14 @@ public class MenuScreen extends Screen {
             } else if (menuItemSelected == 3) {
                 worldNumber = 1;
                 screenCoordinator.setGameState(GameState.LEVEL);
-            } else if (menuItemSelected == 6){
+            } else if (menuItemSelected == 4){
+                worldNumber = 2;
+                screenCoordinator.setGameState(GameState.LEVEL);
+            } else if (menuItemSelected == 5){
+                worldNumber = 3;
+                screenCoordinator.setGameState(GameState.LEVEL);
+            }
+            else if (menuItemSelected == 6){
                 worldNumber = 4;
                 screenCoordinator.setGameState(GameState.LEVEL);
             }
