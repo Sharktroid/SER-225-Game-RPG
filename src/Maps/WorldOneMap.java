@@ -1,7 +1,7 @@
 package Maps;
 
-import EnhancedMapTiles.Medkit;
-import EnhancedMapTiles.CatFood;
+import EnhancedMapTiles.MedkitObject;
+import EnhancedMapTiles.CatFoodObject;
 import EnhancedMapTiles.PushableRock;
 import Level.EnhancedMapTile;
 import Level.Map;
@@ -25,7 +25,6 @@ import Scripts.WorldOneMap.LostBallScript;
 import Scripts.WorldOneMap.OfficeworkerScript;
 import Scripts.WorldOneMap.RedpandaScript;
 import Scripts.WorldOneMap.SlothScript;
-import Scripts.WorldOneMap.TreeScript;
 import Scripts.WorldOneMap.WalrusScript;
 import Tilesets.CommonTileset;
 
@@ -40,9 +39,9 @@ public class WorldOneMap extends Map {
     @Override
     public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
         ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
-        Medkit medkit = new Medkit(getMapTile(16, 14).getLocation(), 25);
+        MedkitObject medkit = new MedkitObject(getMapTile(16, 14).getLocation(), 25);
         enhancedMapTiles.add(medkit);
-        CatFood catFood = new CatFood(getMapTile(5, 10).getLocation(), 2);
+        CatFoodObject catFood = new CatFoodObject(getMapTile(5, 10).getLocation(), 2);
         enhancedMapTiles.add(catFood);
         return enhancedMapTiles;
     }

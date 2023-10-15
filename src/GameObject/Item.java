@@ -4,7 +4,7 @@ import java.lang.IllegalStateException;
 
 public abstract class Item {
     protected String name;
-    protected String description;
+    protected String description = "What the hey is this?";
     protected Boolean usable = false;
     protected Boolean keyItem = false;
     protected Boolean droppable = true;

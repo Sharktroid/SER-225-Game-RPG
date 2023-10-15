@@ -5,6 +5,7 @@ import Engine.ImageLoader;
 import GameObject.Frame;
 import GameObject.GameObject;
 import GameObject.SpriteSheet;
+import Items.CatFood;
 import Level.EnhancedMapTile;
 import Level.MapEntityStatus;
 import Level.Player;
@@ -12,32 +13,29 @@ import Level.PlayerState;
 import Level.TileType;
 import Utils.Point;
 
-public class CatFood extends EnhancedMapTile {
-    private int healingAmount;
-    private int speedAmount;
+public class CatFoodObject extends EnhancedMapTile {
+    // private int healingAmount;
+    // private int speedAmount;
 
-    public CatFood(Point location, int speedAmount) {
+    public CatFoodObject(Point location, int speedAmount) {
         super(location.x, location.y, new SpriteSheet(ImageLoader.load("CatFood.png"), 25, 25),
                 TileType.NOT_PASSABLE);
-        this.speedAmount = speedAmount;
+        // this.speedAmount = speedAmount;
     }
 
     @Override
-    public void update(Player cat) {
-        super.update(cat);
-        if (cat.overlaps(this) && cat.getPlayerState() == PlayerState.WALKING) {
-            // Update the player's speed by adding the hspeedAmount
-            cat.usecatFood(this, 2);
-            System.out.println("catFood Grabbed");
-            // Remove the catFood from the game or set its state to inactive
+    public void update(Player player) {
+        super.update(player);
+        if (player.overlaps(this) && player.getPlayerState() == PlayerState.WALKING) {
+            player.addItem(new CatFood());
             this.mapEntityStatus = MapEntityStatus.REMOVED;
         }
     }
 
     // increases speed amount by 2
-    public int getSpeedAmount() {
-        return 2;
-    }
+    // public int getSpeedAmount() {
+    //     return 2;
+    // }
 
     @Override
     protected GameObject loadBottomLayer(SpriteSheet spriteSheet) {

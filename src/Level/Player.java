@@ -3,8 +3,8 @@ package Level;
 import Engine.Key;
 import Engine.KeyLocker;
 import Engine.Keyboard;
-import EnhancedMapTiles.Medkit;
-import EnhancedMapTiles.CatFood;
+import EnhancedMapTiles.MedkitObject;
+import EnhancedMapTiles.CatFoodObject;
 import GameObject.GameObject;
 import GameObject.Item;
 import GameObject.Rectangle;
@@ -305,14 +305,14 @@ public abstract class Player extends GameObject {
         }
     }
 
-    public void useMedkit(Medkit medkit, int existenceFrames) {
+    public void useMedkit(MedkitObject medkit, int existenceFrames) {
         int healingAmount = medkit.getHealingAmount();
         addCurrentHealth(healingAmount);
         System.out.println("health increased");
     }
 
-    public void usecatFood(CatFood catFood, int i) {
-        int speedAmount = catFood.getSpeedAmount();
+    public void usecatFood(CatFoodObject catFood, int i) {
+        int speedAmount = 2;
         walkSpeed += speedAmount;
         runSpeed += speedAmount;
         System.out.println("speed increased");
@@ -348,6 +348,10 @@ public abstract class Player extends GameObject {
         // Sets both current and max health to value
         setMaxHealth(health);
         setCurrentHealth(health);
+    }
+
+    public void addItem(Item item) {
+        items.add(item);
     }
 
 }
