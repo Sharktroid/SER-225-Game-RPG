@@ -12,11 +12,11 @@ import Level.PlayerState;
 import Level.TileType;
 import Utils.Point;
 
-public class catFood extends EnhancedMapTile {
+public class CatFood extends EnhancedMapTile {
     private int healingAmount;
     private int speedAmount;
 
-    public catFood(Point location, int speedAmount) {
+    public CatFood(Point location, int speedAmount) {
         super(location.x, location.y, new SpriteSheet(ImageLoader.load("CatFood.png"), 25, 25),
                 TileType.NOT_PASSABLE);
         this.speedAmount = speedAmount;

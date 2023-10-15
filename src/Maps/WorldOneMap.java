@@ -1,7 +1,7 @@
 package Maps;
 
 import EnhancedMapTiles.Medkit;
-import EnhancedMapTiles.catFood;
+import EnhancedMapTiles.CatFood;
 import EnhancedMapTiles.PushableRock;
 import Level.EnhancedMapTile;
 import Level.Map;
@@ -42,7 +42,7 @@ public class WorldOneMap extends Map {
         ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
         Medkit medkit = new Medkit(getMapTile(16, 14).getLocation(), 25);
         enhancedMapTiles.add(medkit);
-        catFood catFood = new catFood(getMapTile(5, 10).getLocation(), 2);
+        CatFood catFood = new CatFood(getMapTile(5, 10).getLocation(), 2);
         enhancedMapTiles.add(catFood);
         return enhancedMapTiles;
     }

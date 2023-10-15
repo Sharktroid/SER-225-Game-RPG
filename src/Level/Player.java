@@ -4,7 +4,7 @@ import Engine.Key;
 import Engine.KeyLocker;
 import Engine.Keyboard;
 import EnhancedMapTiles.Medkit;
-import EnhancedMapTiles.catFood;
+import EnhancedMapTiles.CatFood;
 import GameObject.GameObject;
 import GameObject.Item;
 import GameObject.Rectangle;
@@ -18,7 +18,8 @@ public abstract class Player extends GameObject {
     // these should be set in a subclass
     protected float walkSpeed = 0;
     protected float runSpeed = 0;
-    protected float health = 100;
+    private float currentHealth;
+    private float maxHealth;
     protected int interactionRange = 5;
     protected Direction currentWalkingXDirection;
     protected Direction currentWalkingYDirection;
@@ -48,7 +49,6 @@ public abstract class Player extends GameObject {
     protected Key MOVE_DOWN_KEY = Key.DOWN;
     protected Key INTERACT_KEY = Key.ENTER;
     protected Key RUN_KEY = Key.SHIFT;
-    private Object existanceFrames;
 
     public ArrayList<Item> items = new ArrayList<Item>();
     public ArrayList<Item> keyItems = new ArrayList<Item>();
@@ -59,6 +59,7 @@ public abstract class Player extends GameObject {
         playerState = PlayerState.STANDING;
         previousPlayerState = playerState;
         this.affectedByTriggers = true;
+        setAllHealth(100);
     }
 
     public void update() {
@@ -306,18 +307,47 @@ public abstract class Player extends GameObject {
 
     public void useMedkit(Medkit medkit, int existenceFrames) {
         int healingAmount = medkit.getHealingAmount();
-        health += healingAmount;
+        addCurrentHealth(healingAmount);
         System.out.println("health increased");
-        if (health > 100) { // checks if health ever exceeds max and returns it to 100
-            health = 100;
-        }
     }
 
-    public void usecatFood(catFood catFood, int i) {
+    public void usecatFood(CatFood catFood, int i) {
         int speedAmount = catFood.getSpeedAmount();
         walkSpeed += speedAmount;
         runSpeed += speedAmount;
         System.out.println("speed increased");
+    }
+
+    public void setCurrentHealth(float health) {
+        currentHealth = health;
+        if (currentHealth < 0) {
+            currentHealth = 0;
+        }
+        else if (currentHealth > maxHealth) {
+            currentHealth = maxHealth;
+        }
+    }
+
+    public void addCurrentHealth(float add) {
+        setCurrentHealth(getCurrentHealth() + add);
+    }
+
+    public float getCurrentHealth() {
+        return currentHealth;
+    }
+
+    public void setMaxHealth(float health) {
+        maxHealth = health;
+    }
+
+    public float getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void setAllHealth(float health) {
+        // Sets both current and max health to value
+        setMaxHealth(health);
+        setCurrentHealth(health);
     }
 
 }
