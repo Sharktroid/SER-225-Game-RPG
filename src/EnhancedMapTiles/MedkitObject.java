@@ -5,38 +5,29 @@ import Engine.ImageLoader;
 import GameObject.Frame;
 import GameObject.GameObject;
 import GameObject.SpriteSheet;
+import Items.Medkit;
 import Level.EnhancedMapTile;
 import Level.MapEntityStatus;
 import Level.Player;
 import Level.PlayerState;
 import Level.TileType;
-import Utils.Direction;
 import Utils.Point;
 
-public class Medkit extends EnhancedMapTile {
-    private int healingAmount;
+public class MedkitObject extends EnhancedMapTile {
 
-    public Medkit(Point location, int healingAmount) {
+    public MedkitObject(Point location, int healingAmount) {
         super(location.x, location.y, new SpriteSheet(ImageLoader.load("Apple.png"), 45, 43),
                 TileType.NOT_PASSABLE);
-        this.healingAmount = healingAmount;
     }
 
     @Override
-    public void update(Player cat) {
-        super.update(cat);
-        if (cat.overlaps(this) && cat.getPlayerState() == PlayerState.WALKING) {
+    public void update(Player player) {
+        super.update(player);
+        if (player.overlaps(this) && player.getPlayerState() == PlayerState.WALKING) {
             // Update the player's health by adding the healingAmount
-            cat.useMedkit(this, 31);
-            System.out.println("Apple Grabbed");
-            // Remove the medkit from the game or set its state to inactive
+            player.addItem(new Medkit(player));
             this.mapEntityStatus = MapEntityStatus.REMOVED;
         }
-    }
-
-    // sets healing amount of apple/medkit to 25
-    public int getHealingAmount() {
-        return 25;
     }
 
     @Override
