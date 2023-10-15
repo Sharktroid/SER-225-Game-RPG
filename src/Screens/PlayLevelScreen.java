@@ -1,8 +1,5 @@
 package Screens;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
 import Engine.GraphicsHandler;
 import Engine.Key;
 import Engine.KeyLocker;
@@ -10,13 +7,6 @@ import Engine.Keyboard;
 import Engine.Screen;
 import Game.GameState;
 import Game.ScreenCoordinator;
-import GameObject.Item;
-import Items.EraserEraser;
-import Items.Grafcalibur;
-import Items.GutsyBat;
-import Items.PencilEraser;
-import Items.VideoRelaxant;
-import Items.WhackaBump;
 import Level.*;
 import Maps.WorldOneMap;
 import Maps.WorldTwoMap;
@@ -70,7 +60,7 @@ public class PlayLevelScreen extends Screen {
 
         } else if (worldNum == 3){
             this.map = new WorldThreeMap();
-            
+
         } else if (worldNum == 4) {
             this.map = new HubMap();
 
@@ -119,14 +109,6 @@ public class PlayLevelScreen extends Screen {
                 trigger.getTriggerScript().setPlayer(player);
             }
         }
-
-        // Debugging purposes; remove at a later date
-        player.items.add(new Grafcalibur());
-        player.items.add(new GutsyBat());
-        player.items.add(new VideoRelaxant());
-        player.items.add(new WhackaBump());
-        player.keyItems.add(new PencilEraser());
-        player.keyItems.add(new EraserEraser());
 
         inventory = new InventoryScreen(player);
 
