@@ -2,6 +2,8 @@ package GameObject;
 
 import java.lang.IllegalStateException;
 
+import Level.Player;
+
 public abstract class Item {
     protected String name;
     protected String description = "What the hey is this?";
@@ -9,7 +11,11 @@ public abstract class Item {
     protected Boolean keyItem = false;
     protected Boolean droppable = true;
     protected Boolean consumable = true;
+    protected Player player;
 
+    public Item(Player player) {
+        this.player = player;
+    }
 
     public String getName() {
         return name;

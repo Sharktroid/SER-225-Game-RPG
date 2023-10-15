@@ -21,11 +21,11 @@ public class MedkitObject extends EnhancedMapTile {
     }
 
     @Override
-    public void update(Player cat) {
-        super.update(cat);
-        if (cat.overlaps(this) && cat.getPlayerState() == PlayerState.WALKING) {
+    public void update(Player player) {
+        super.update(player);
+        if (player.overlaps(this) && player.getPlayerState() == PlayerState.WALKING) {
             // Update the player's health by adding the healingAmount
-            cat.addItem(new Medkit());
+            player.addItem(new Medkit(player));
             this.mapEntityStatus = MapEntityStatus.REMOVED;
         }
     }

@@ -27,7 +27,7 @@ public class CatFoodObject extends EnhancedMapTile {
     public void update(Player player) {
         super.update(player);
         if (player.overlaps(this) && player.getPlayerState() == PlayerState.WALKING) {
-            player.addItem(new CatFood());
+            player.addItem(new CatFood(player));
             this.mapEntityStatus = MapEntityStatus.REMOVED;
         }
     }

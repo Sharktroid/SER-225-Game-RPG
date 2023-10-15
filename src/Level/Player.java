@@ -3,8 +3,6 @@ package Level;
 import Engine.Key;
 import Engine.KeyLocker;
 import Engine.Keyboard;
-import EnhancedMapTiles.MedkitObject;
-import EnhancedMapTiles.CatFoodObject;
 import GameObject.GameObject;
 import GameObject.Item;
 import GameObject.Rectangle;
@@ -18,6 +16,9 @@ public abstract class Player extends GameObject {
     // these should be set in a subclass
     protected float walkSpeed = 0;
     protected float runSpeed = 0;
+    private float speedModifier = 1;
+    private float speedModifierDuration = 0;
+
     private float currentHealth;
     private float maxHealth;
     protected int interactionRange = 5;
@@ -133,14 +134,9 @@ public abstract class Player extends GameObject {
             keyLocker.unlockKey(RUN_KEY);
         }
 
-        float runModifier = 1;
-        if (running) {
-            runModifier = (runSpeed / walkSpeed);
-        }
-
         // if walk left key is pressed, move player to the left
         if (Keyboard.isKeyDown(MOVE_LEFT_KEY)) {
-            moveAmountX -= walkSpeed * runModifier;
+            moveAmountX -= getCurrentSpeed();
             facingDirection = Direction.LEFT;
             currentWalkingXDirection = Direction.LEFT;
             lastWalkingXDirection = Direction.LEFT;
@@ -148,7 +144,7 @@ public abstract class Player extends GameObject {
 
         // if walk right key is pressed, move player to the right
         else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY)) {
-            moveAmountX += walkSpeed * runModifier;
+            moveAmountX += getCurrentSpeed();
             facingDirection = Direction.RIGHT;
             currentWalkingXDirection = Direction.RIGHT;
             lastWalkingXDirection = Direction.RIGHT;
@@ -157,11 +153,11 @@ public abstract class Player extends GameObject {
         }
 
         if (Keyboard.isKeyDown(MOVE_UP_KEY)) {
-            moveAmountY -= walkSpeed * runModifier;
+            moveAmountY -= getCurrentSpeed();
             currentWalkingYDirection = Direction.UP;
             lastWalkingYDirection = Direction.UP;
         } else if (Keyboard.isKeyDown(MOVE_DOWN_KEY)) {
-            moveAmountY += walkSpeed * runModifier;
+            moveAmountY += getCurrentSpeed();
             currentWalkingYDirection = Direction.DOWN;
             lastWalkingYDirection = Direction.DOWN;
         } else {
@@ -181,6 +177,13 @@ public abstract class Player extends GameObject {
         if (Keyboard.isKeyUp(MOVE_LEFT_KEY) && Keyboard.isKeyUp(MOVE_RIGHT_KEY) && Keyboard.isKeyUp(MOVE_UP_KEY)
                 && Keyboard.isKeyUp(MOVE_DOWN_KEY)) {
             playerState = PlayerState.STANDING;
+        }
+
+        if (speedModifierDuration > 0) {
+            speedModifierDuration--;
+        }
+        else {
+            speedModifier = 1;
         }
     }
 
@@ -305,19 +308,6 @@ public abstract class Player extends GameObject {
         }
     }
 
-    public void useMedkit(MedkitObject medkit, int existenceFrames) {
-        int healingAmount = medkit.getHealingAmount();
-        addCurrentHealth(healingAmount);
-        System.out.println("health increased");
-    }
-
-    public void usecatFood(CatFoodObject catFood, int i) {
-        int speedAmount = 2;
-        walkSpeed += speedAmount;
-        runSpeed += speedAmount;
-        System.out.println("speed increased");
-    }
-
     public void setCurrentHealth(float health) {
         currentHealth = health;
         if (currentHealth < 0) {
@@ -352,6 +342,20 @@ public abstract class Player extends GameObject {
 
     public void addItem(Item item) {
         items.add(item);
+    }
+
+    public void modifySpeed(float multiplier, int duration) {
+        // Increases/decreases the player's speed by the multiplier for the given duration
+        speedModifier = multiplier;
+        speedModifierDuration = duration;
+    }
+
+    public float getCurrentSpeed() {
+        float runModifier = 1;
+        if (running) {
+            runModifier = (runSpeed / walkSpeed);
+        }
+        return walkSpeed * runModifier * speedModifier;
     }
 
 }
