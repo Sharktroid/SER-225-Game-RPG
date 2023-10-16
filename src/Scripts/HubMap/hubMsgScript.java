@@ -12,8 +12,8 @@ public class hubMsgScript extends Script {
         showTextbox();
         addTextToTextboxQueue("portal hub world");
         addTextToTextboxQueue("walk to the left square for world one");
-        addTextToTextboxQueue("middle square for world two [not implemented]");
-        addTextToTextboxQueue("or the right square for world three [not implemented]");
+        addTextToTextboxQueue("middle square for world two");
+        addTextToTextboxQueue("or the right square for world three");
 
     }
 
