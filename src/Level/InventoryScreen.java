@@ -69,54 +69,64 @@ public class InventoryScreen {
 
     public void update() {
         if (selectionBox == null) {
-            if (lockKey(Key.RIGHT)) {
-                currentTextItemHovered = (currentTextItemHovered + 1) % getCurrentItems().size();
+            if (getCurrentItems().size() <= 0) {
+                currentTextItemHovered = 0;
+            }
+            else {
+                if (lockKey(Key.RIGHT)) {
+                    currentTextItemHovered = (currentTextItemHovered + 1) % getCurrentItems().size();
 
-            } else if (lockKey(Key.LEFT)) {
-                currentTextItemHovered--;
-                if (currentTextItemHovered < 0) {
-                    currentTextItemHovered = getCurrentItems().size() - 1;
                 }
+                else if (lockKey(Key.LEFT)) {
+                    currentTextItemHovered--;
+                    if (currentTextItemHovered < 0) {
+                        currentTextItemHovered = getCurrentItems().size() - 1;
+                    }
 
-            } else if (lockKey(Key.UP)) {
-                currentTextItemHovered -= 2;
-                if (currentTextItemHovered < 0) {
-                    if (getCurrentItems().size() % 2 == 0) {
-                        currentTextItemHovered += getCurrentItems().size();
-                    } else {
-                        if (currentTextItemHovered == -1) {
-                            currentTextItemHovered = getCurrentItems().size() - 2;
+                }
+                else if (lockKey(Key.UP)) {
+                    currentTextItemHovered -= 2;
+                    if (currentTextItemHovered < 0) {
+                        if (getCurrentItems().size() % 2 == 0) {
+                            currentTextItemHovered += getCurrentItems().size();
                         } else {
-                            currentTextItemHovered = getCurrentItems().size() - 1;
+                            if (currentTextItemHovered == -1) {
+                                currentTextItemHovered = getCurrentItems().size() - 2;
+                            } else {
+                                currentTextItemHovered = getCurrentItems().size() - 1;
+                            }
+                        }
+                    }
+
+                }
+                else if (lockKey(Key.DOWN)) {
+                    currentTextItemHovered += 2;
+                    if (currentTextItemHovered >= getCurrentItems().size()) {
+                        if (getCurrentItems().size() % 2 == 0) {
+                            currentTextItemHovered -= getCurrentItems().size();
+                        } else {
+                            if (currentTextItemHovered == getCurrentItems().size()) {
+                                currentTextItemHovered = 1;
+                            } else {
+                                currentTextItemHovered = 0;
+                            }
                         }
                     }
                 }
 
-            } else if (lockKey(Key.DOWN)) {
-                currentTextItemHovered += 2;
-                if (currentTextItemHovered >= getCurrentItems().size()) {
-                    if (getCurrentItems().size() % 2 == 0) {
-                        currentTextItemHovered -= getCurrentItems().size();
-                    } else {
-                        if (currentTextItemHovered == getCurrentItems().size()) {
-                            currentTextItemHovered = 1;
-                        } else {
-                            currentTextItemHovered = 0;
-                        }
+                else if (lockKey(Key.ENTER)) {
+                    SpriteFont currSpriteFont = spriteFonts[currentTextItemHovered];
+                    selectionBox = new InventoryScreenItemSelectionBox(this, getCurrentItem(),
+                            new Point(currSpriteFont.getX(), currSpriteFont.getY() + fontSize + 5));
+                    if (selectionBox.choices.size() <= 1) {
+                        selectionBox = null;
                     }
                 }
-
-            } else if (lockKey(Key.SHIFT)) {
+            }
+            if (lockKey(Key.SHIFT)) {
                 setViewingKeyItems(!viewingKeyItems);
                 if (currentTextItemHovered >= getCurrentItems().size()) {
                     currentTextItemHovered = 0;
-                }
-            } else if (lockKey(Key.ENTER)) {
-                SpriteFont currSpriteFont = spriteFonts[currentTextItemHovered];
-                selectionBox = new InventoryScreenItemSelectionBox(this, getCurrentItem(),
-                        new Point(currSpriteFont.getX(), currSpriteFont.getY() + fontSize + 5));
-                if (selectionBox.choices.size() <= 1) {
-                    selectionBox = null;
                 }
             }
             unlockKey(Key.LEFT);
