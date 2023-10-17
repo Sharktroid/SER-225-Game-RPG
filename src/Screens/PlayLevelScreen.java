@@ -1,8 +1,5 @@
 package Screens;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
 import Engine.GraphicsHandler;
 import Engine.Key;
 import Engine.KeyLocker;
@@ -10,15 +7,10 @@ import Engine.Keyboard;
 import Engine.Screen;
 import Game.GameState;
 import Game.ScreenCoordinator;
-import GameObject.Item;
-import Items.EraserEraser;
-import Items.Grafcalibur;
-import Items.GutsyBat;
-import Items.PencilEraser;
-import Items.VideoRelaxant;
-import Items.WhackaBump;
 import Level.*;
 import Maps.WorldOneMap;
+import Maps.WorldTwoMap;
+import Maps.WorldThreeMap;
 import Maps.WorldZeroMap;
 import Maps.HubMap;
 import Players.Cat;
@@ -47,10 +39,9 @@ public class PlayLevelScreen extends Screen {
         flagManager = new FlagManager();
 
         // takes world number variable form menu screen to choose world
-        if (worldNum == -1){
+        if (worldNum == -1) {
             worldNum = Screens.MenuScreen.worldNumber;
         }
-
 
         if (worldNum == 0) {
             this.map = new WorldZeroMap();
@@ -64,10 +55,18 @@ public class PlayLevelScreen extends Screen {
             flagManager.addFlag("hasFoundBall", false);
             flagManager.addFlag("sawHubMsg", false);
 
+        } else if (worldNum == 2) {
+            this.map = new WorldTwoMap();
+
+        } else if (worldNum == 3){
+            this.map = new WorldThreeMap();
+
         } else if (worldNum == 4) {
             this.map = new HubMap();
 
             flagManager.addFlag("portalOneActivated", false);
+            flagManager.addFlag("portalTwoActivated", false);
+            flagManager.addFlag("portalThreeActivated", false);
             flagManager.addFlag("sawHubMsg", false);
 
         }
@@ -111,14 +110,6 @@ public class PlayLevelScreen extends Screen {
             }
         }
 
-        // Debugging purposes; remove at a later date
-        player.items.add(new Grafcalibur());
-        player.items.add(new GutsyBat());
-        player.items.add(new VideoRelaxant());
-        player.items.add(new WhackaBump());
-        player.keyItems.add(new PencilEraser());
-        player.keyItems.add(new EraserEraser());
-
         inventory = new InventoryScreen(player);
 
         winScreen = new WinScreen(this);
@@ -130,7 +121,7 @@ public class PlayLevelScreen extends Screen {
             // if level is "running" update player and map to keep game logic for the
             // platformer level going
             case RUNNING:
-                if (Keyboard.isKeyDown(Key.E) && !keyLocker.isKeyLocked(Key.E)) {
+                if (Keyboard.isKeyDown(Key.E) && !keyLocker.isKeyLocked(Key.E) && !map.getTextbox().isActive()) {
                     inventory.setActive(!inventory.isActive());
                     keyLocker.lockKey(Key.E);
 
@@ -153,8 +144,14 @@ public class PlayLevelScreen extends Screen {
                 winScreen.update();
                 break;
         }
-        if (map.getFlagManager().isFlagSet("portalOneActivated")){
+        if (map.getFlagManager().isFlagSet("portalOneActivated")) {
             worldNum = 1;
+            initialize();
+        } else if (map.getFlagManager().isFlagSet("portalTwoActivated")) {
+            worldNum = 2;
+            initialize();
+        } else if (map.getFlagManager().isFlagSet("portalThreeActivated")){
+            worldNum = 3;
             initialize();
         }
         // if flag is set at any point during gameplay, game is "won"

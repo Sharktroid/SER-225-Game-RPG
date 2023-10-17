@@ -2,31 +2,29 @@ package Scripts.HubMap;
 
 import Level.Script;
 import Level.ScriptState;
-import Maps.HubMap;
 
-// trigger script at beginning of game to set that heavy emotional plot
-public class hubMsgScript extends Script {
+// script for talking to tree with hole in it
+public class portalTwoScript extends Script {
+
     @Override
     protected void setup() {
         lockPlayer();
         showTextbox();
-        addTextToTextboxQueue("portal hub world");
-        addTextToTextboxQueue("walk to the left square for world one");
-        addTextToTextboxQueue("middle square for world two");
-        addTextToTextboxQueue("or the right square for world three");
+        addTextToTextboxQueue("Teleporting to world 2");
 
     }
 
     @Override
     protected void cleanup() {
-        setFlag("sawHubMsg");
         hideTextbox();
         unlockPlayer();
+        setFlag("portalTwoActivated");
     }
 
     @Override
     public ScriptState execute() {
-        if (!isFlagSet("sawHubMsg")) {
+
+        if (!isFlagSet("portalTwoActivated")) {
             start();
             if (!isTextboxQueueEmpty()) {
                 return ScriptState.RUNNING;
