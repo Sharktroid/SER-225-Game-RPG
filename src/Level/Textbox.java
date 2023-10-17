@@ -29,6 +29,8 @@ public class Textbox {
     protected int currentTextItemHovered = 1;
     protected int compiledCount = 0;
     protected int choice = -1;
+    protected Color fillColor = Color.BLUE;
+    protected Color borderColor = Color.MAGENTA;
 
     private Queue<String> textQueue = new LinkedList<String>();
     private Queue<String> textQueueFlip = new LinkedList<String>();
@@ -202,7 +204,7 @@ public class Textbox {
         // if camera is at bottom of screen, textbox is drawn at top of screen instead of the bottom like usual
         // to prevent it from covering the player
         if (!map.getCamera().isAtBottomOfMap()) {
-            graphicsHandler.drawFilledRoundedRectangleWithBorder(x, bottomY, width, height, arcWidth, arcHeight, Color.white, Color.black, 2);
+            graphicsHandler.drawFilledRoundedRectangleWithBorder(x, bottomY, width, height, arcWidth, arcHeight, fillColor, borderColor, 2);
             //graphicsHandler.drawFilledRectangleWithBorder(x, bottomY, width, height, Color.white, Color.black, 2);
         }
         else {
@@ -241,6 +243,22 @@ public class Textbox {
 
     public void setChoice(int choice) {
         this.choice = choice;
+    }
+
+    public Color getFillColor() {
+        return fillColor;
+    }
+
+    public void setFillColor(Color fillColor) {
+        this.fillColor = fillColor;
+    }
+
+    public Color getBorderColor() {
+        return borderColor;
+    }
+
+    public void setBorderColor(Color borderColor) {
+        this.borderColor = borderColor;
     }
 
     public boolean isActive() {
