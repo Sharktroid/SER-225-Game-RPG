@@ -20,7 +20,10 @@ public class WalrusScript extends Script<NPC> {
         entity.facePlayer(player);
         if (!isFlagSet("hasTalkedToWalrus")) {
             if (sequence == 0) {
-                addTextToTextboxQueue( "Hi Cat!!", selections, answers);
+                showTextboxSmall();
+                addTextToTextboxQueue( "Hi Cat!");
+                // addTextToTextboxQueue( "Hi Cat!!", selections, answers);
+                addTextToSmallTextboxQueue(selections, answers);
                 responseNum = getChoice();
             } else if (sequence == 1) {
                 if (responseNum == 0) {
@@ -44,9 +47,10 @@ public class WalrusScript extends Script<NPC> {
     protected void cleanup() {
         unlockPlayer();
         hideTextbox();
+        hideTextboxSmall();
 
         if (sequence == 0) {
-            responseNum = getChoice();
+            responseNum = getChoiceSmall();
             sequence++;
         } else if (sequence == 1) {
             setFlag("hasTalkedToWalrus");

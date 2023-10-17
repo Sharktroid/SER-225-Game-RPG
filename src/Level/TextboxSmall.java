@@ -10,23 +10,19 @@ import java.awt.*;
 import java.util.LinkedList;
 import java.util.Queue;
 
-// Represents the game's textbox
-// will display the text it is given to its textQueue
-// each String in the textQueue will be displayed in the textbox, and hitting the interact key will cycle between additional Strings in the queue
-// use the newline character in a String in the textQueue to break the text up into a second line if needed
-public class Textbox {
+public class TextboxSmall {
     protected boolean isActive;
-    protected final int x = 22;
-    protected final int bottomY = 460;
-    protected final int topY = 22;
-    protected final int fontX = 35;
-    protected final int fontBottomY = 472;
-    protected final int fontTopY = 34;
-    protected final int width = 750;
-    protected final int height = 100;
+    protected final int x = 542;
+    protected final int bottomY = 258;
+    protected final int topY = 122;
+    protected final int fontX = 548;
+    protected final int fontBottomY = 266;
+    protected final int fontTopY = 542;
+    protected final int width = 230;
+    protected final int height = 200;
     protected final int arcWidth = 50;
     protected final int arcHeight = 50;
-    protected int currentTextItemHovered = 1;
+    protected int currentTextItemHovered = 0;
     protected int compiledCount = 0;
     protected int choice = -1;
 
@@ -43,7 +39,7 @@ public class Textbox {
     private Key interactKey = Key.ENTER;
     private int keyPressTimer;
 
-    public Textbox(Map map) {
+    public TextboxSmall(Map map) {
         this.map = map;
     }
 
@@ -64,19 +60,19 @@ public class Textbox {
     }
 
     // adds text followed by selection options underneath (up to 10)
-    public void addSelectableText(String textChat, String[] selectionText) {
+    public void addSelectableText(String[] selectionText) {
         selectionQueue.clear();
         compiledCount = 0;
 
-        if (textQueue.isEmpty()) {
-            keyLocker.lockKey(interactKey);
-        }
-        textQueue.add(textChat);
+        // if (textQueue.isEmpty()) {
+        //     keyLocker.lockKey(interactKey);
+        // }
+        // textQueue.add(textChat);
 
-        if (selectionQueue.isEmpty()) {
-            keyLocker.lockKey(interactKey);
-        }
-        selectionQueue.add(textChat);
+        // if (selectionQueue.isEmpty()) {
+        //     keyLocker.lockKey(interactKey);
+        // }
+        // selectionQueue.add(textChat);
 
         for (int i = 0; i < selectionText.length; i++) {
             selectionQueue.add(selectionText[i]);
@@ -149,7 +145,7 @@ public class Textbox {
             else {
                 fontY = fontTopY;
             }
-            text = new SpriteFont(next, fontX, fontY, "Arial", 30, Color.black);
+            text = new SpriteFont(next, fontX, fontY, "Arial", 20, Color.black);
 
         }
 
@@ -161,10 +157,10 @@ public class Textbox {
                 while (!textQueue.isEmpty()) {
                     textQueueFlip.add(textQueue.poll());
                 }
-                choice = currentTextItemHovered-1;
+                choice = currentTextItemHovered;
                 setChoice(choice);
                 textQueue.add(responseText[choice]);
-                currentTextItemHovered = 1;
+                currentTextItemHovered = 0;
                 while (!textQueueFlip.isEmpty()) {
                     textQueue.add(textQueueFlip.poll());
                 }
@@ -192,8 +188,8 @@ public class Textbox {
 
         //if down is pressed on last item or up is pressed on first item, "loop" the selection back around to the beginning/end
         if (currentTextItemHovered == compiledCount) {
-            currentTextItemHovered = 1;
-        } else if (currentTextItemHovered < 1) {
+            currentTextItemHovered = 0;
+        } else if (currentTextItemHovered < 0) {
             currentTextItemHovered = compiledCount-1;
         }
     }
@@ -202,12 +198,10 @@ public class Textbox {
         // if camera is at bottom of screen, textbox is drawn at top of screen instead of the bottom like usual
         // to prevent it from covering the player
         if (!map.getCamera().isAtBottomOfMap()) {
-            graphicsHandler.drawFilledRoundedRectangleWithBorder(x, bottomY, width, height, arcWidth, arcHeight, Color.white, Color.black, 2);
-            //graphicsHandler.drawFilledRectangleWithBorder(x, bottomY, width, height, Color.white, Color.black, 2);
+            graphicsHandler.drawFilledRectangleWithBorder(x, bottomY, width, height, Color.white, Color.black, 2);
         }
         else {
-            graphicsHandler.drawFilledRoundedRectangleWithBorder(x, topY, width, height, arcWidth, arcHeight, Color.white, Color.black, 2);
-            // graphicsHandler.drawFilledRectangleWithBorder(x, topY, width, height, Color.white, Color.black, 2);
+            graphicsHandler.drawFilledRectangleWithBorder(x, topY, width, height, Color.white, Color.black, 2);
         }
         if (text != null) {
             text.drawWithParsedNewLines(graphicsHandler, 10);
