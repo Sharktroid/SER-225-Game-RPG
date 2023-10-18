@@ -1,5 +1,6 @@
 package Level;
 import GameObject.Rectangle;
+import SpriteFont.SpriteFont;
 import Utils.Direction;
 
 // This class is a base class for all scripts in the game -- all scripts should extend from it
@@ -97,11 +98,6 @@ public abstract class Script<T extends MapEntity> {
     protected void showTextbox() {
         map.getTextbox().setIsActive(true);
     }
-    
-    // small textbox is shown on screen
-    protected void showTextboxSmall() {
-        map.getTextboxSmall().setIsActive(true);
-    }
 
     // adds text to be shown in textbox
     protected void addTextToTextboxQueue(String text) {
@@ -119,12 +115,6 @@ public abstract class Script<T extends MapEntity> {
         map.getTextbox().addSelectableText(text, selectableText);
     }
 
-    // adds text to be shown in small textbox with the option for selectable text
-    protected void addTextToSmallTextboxQueue(String[] selectableText, String[] responses) {
-        map.getTextboxSmall().setResponses(responses);
-        map.getTextboxSmall().addSelectableText(selectableText);
-    }
-
     // returns the value of the last choice made from a selectable textbox
     protected int getChoice() {
         return map.getTextbox().getChoice();
@@ -134,31 +124,23 @@ public abstract class Script<T extends MapEntity> {
         map.getTextbox().setChoice(choice);
     }
 
-    // returns the value of the last choice made from a selectable textbox
-    protected int getChoiceSmall() {
-        return map.getTextboxSmall().getChoice();
-    }
-    // sets the value of the last choice made from a selectable textbox
-    protected void setChoiceSmall(int choice) {
-        map.getTextboxSmall().setChoice(choice);
+    // returns the npc name
+    protected SpriteFont getNPCName() {
+        return map.getTextbox().getNPCName();
+    } 
+    // sets the npc name
+    protected void setNPCName(String npcName) {
+        map.getTextbox().setNPCName(npcName);
     }
 
     // checks if textbox has already shown all text in its queue
     protected boolean isTextboxQueueEmpty() {
         return map.getTextbox().isTextQueueEmpty();
     }
-    // checks if textbox has already shown all text in its queue
-    protected boolean isSmallTextboxQueueEmpty() {
-        return map.getTextboxSmall().isTextQueueEmpty();
-    }
 
     // remove textbox from screen
     protected void hideTextbox() {
         map.getTextbox().setIsActive(false);
-    }
-    // remove small textbox from screen
-    protected void hideTextboxSmall() {
-        map.getTextboxSmall().setIsActive(false);
     }
 
     // gets an npc instance by its id value

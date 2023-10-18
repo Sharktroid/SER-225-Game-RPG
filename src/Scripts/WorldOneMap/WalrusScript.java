@@ -12,18 +12,16 @@ public class WalrusScript extends Script<NPC> {
 
     @Override
     protected void setup() {
+        setNPCName("Walrus");
         lockPlayer();
         showTextbox();
-        String[] selections = {"A", "B", "C"};
+        String[] selections = {"What is this place?", "Who are you?", "What are you doing?"};
         String[] answers = {"This is my response to A", "This is my response to B", "This is my response to C"};
 
         entity.facePlayer(player);
         if (!isFlagSet("hasTalkedToWalrus")) {
             if (sequence == 0) {
-                showTextboxSmall();
-                addTextToTextboxQueue( "Hi Cat!");
-                // addTextToTextboxQueue( "Hi Cat!!", selections, answers);
-                addTextToSmallTextboxQueue(selections, answers);
+                addTextToTextboxQueue( "Hi Cat! How can I help you today?", selections, answers);
                 responseNum = getChoice();
             } else if (sequence == 1) {
                 if (responseNum == 0) {
@@ -47,10 +45,9 @@ public class WalrusScript extends Script<NPC> {
     protected void cleanup() {
         unlockPlayer();
         hideTextbox();
-        hideTextboxSmall();
 
         if (sequence == 0) {
-            responseNum = getChoiceSmall();
+            responseNum = getChoice();
             sequence++;
         } else if (sequence == 1) {
             setFlag("hasTalkedToWalrus");

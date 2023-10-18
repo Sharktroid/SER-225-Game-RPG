@@ -7,6 +7,8 @@ import Engine.Keyboard;
 import SpriteFont.SpriteFont;
 
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -16,37 +18,63 @@ import java.util.Queue;
 // use the newline character in a String in the textQueue to break the text up into a second line if needed
 public class Textbox {
     protected boolean isActive;
-    protected final int x = 22;
-    protected final int bottomY = 460;
-    protected final int topY = 22;
-    protected final int fontX = 35;
-    protected final int fontBottomY = 472;
-    protected final int fontTopY = 34;
-    protected final int width = 750;
-    protected final int height = 100;
-    protected final int arcWidth = 50;
-    protected final int arcHeight = 50;
-    protected int currentTextItemHovered = 1;
+    //big box
+    protected int x = 100;
+    protected int bottomY = 460;
+    protected int topY = 47;
+    protected int fontX = 115;
+    protected int fontBottomY = 472;
+    protected int fontTopY = 55;
+    protected int width = 520;
+    protected int height = 100;
+    //small box
+    protected final int xSmall = 542;
+    protected final int bottomYSmall = 258;
+    protected final int topYSmall = 122;
+    protected final int fontXSmall = 548;
+    protected final int fontBottomYSmall = 266;
+    protected final int fontTopYSmall = 132;
+    protected final int widthSmall = 230;
+    protected final int heightSmall = 200;
+
+    protected String fontTahoma = "Tahoma";
+    protected static Font tahoma;
+    protected static Font tahomaSmall;
+    protected int arcWidth = 0;
+    protected int arcHeight = 0;
+    protected int borderThickness = 3;
+    protected Color fillColor = new Color(239,235,222);
+    protected Color borderColor = new Color(10,85,233);
+    protected int currentTextItemHovered = 0;
     protected int compiledCount = 0;
     protected int choice = -1;
-    protected Color fillColor = Color.BLUE;
-    protected Color borderColor = Color.MAGENTA;
 
     private Queue<String> textQueue = new LinkedList<String>();
-    private Queue<String> textQueueFlip = new LinkedList<String>();
+    private Queue<String> textQueueOnHold = new LinkedList<String>();
     private Queue<String> selectionQueue = new LinkedList<String>();
     private SpriteFont[] selectionText = new SpriteFont[10];
     private String[] responseText = new String[10];
     private int selectablesPresent;
     private SpriteFont text = null;
     private int fontY;
+    private int fontYSmall;
     private KeyLocker keyLocker = new KeyLocker();
     private Map map;
     private Key interactKey = Key.ENTER;
     private int keyPressTimer;
+    private SpriteFont npcName;
 
     public Textbox(Map map) {
         this.map = map;
+        try {
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            tahoma = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/tahoma.ttf")).deriveFont(30f);
+            ge.registerFont(tahoma);
+            tahomaSmall = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/tahoma.ttf")).deriveFont(30f);
+            ge.registerFont(tahomaSmall);
+        } catch (IOException | FontFormatException e) {
+            e.printStackTrace();
+        }
     }
 
     public void addText(String text) {
@@ -65,7 +93,7 @@ public class Textbox {
         }
     }
 
-    // adds text followed by selection options underneath (up to 10)
+    // adds text followed by selection options underneath
     public void addSelectableText(String textChat, String[] selectionText) {
         selectionQueue.clear();
         compiledCount = 0;
@@ -75,30 +103,17 @@ public class Textbox {
         }
         textQueue.add(textChat);
 
-        if (selectionQueue.isEmpty()) {
-            keyLocker.lockKey(interactKey);
-        }
-        selectionQueue.add(textChat);
-
         for (int i = 0; i < selectionText.length; i++) {
             selectionQueue.add(selectionText[i]);
         }
 
-        for (int i = 0; i < selectionText.length + 1; i++) {
+        for (int i = 0; i < selectionText.length; i++) {
             this.selectionText[compiledCount] = spriteFontCompile(selectionQueue);
             compiledCount++;
         }
 
-        // int fontY;
-        if (!map.getCamera().isAtBottomOfMap()) {
-            fontY = fontBottomY - 30;
-        } else {
-            fontY = fontTopY + 30;
-        }
-
-
-        for (int i = selectionText.length + 1; i < this.selectionText.length; i++) {
-            this.selectionText[i] = new SpriteFont("", fontX, fontY, "Arial", 30, Color.black);
+        for (int i = selectionText.length; i < this.selectionText.length; i++) {
+            this.selectionText[i] = new SpriteFont("", fontX, fontY, tahomaSmall, Color.black);
         }
         
         selectablesPresent = 1;
@@ -117,17 +132,11 @@ public class Textbox {
 
     // creates spriteFont for each string in a queue
     public SpriteFont spriteFontCompile(Queue<String> selectionQueue) {
-        if (!map.getCamera().isAtBottomOfMap()) {
-            fontY = fontBottomY;
-        } else {
-            fontY = fontTopY;
-        }
-
         if (!selectionQueue.isEmpty() && keyLocker.isKeyLocked(interactKey)) {
             String next = selectionQueue.poll();
-            return new SpriteFont(next, fontX, fontY, "Arial", 30, Color.black);
+            return new SpriteFont(next, fontX, fontY, tahomaSmall, Color.black);
         } else if (selectionQueue.isEmpty() && keyLocker.isKeyLocked(interactKey)) {
-            return new SpriteFont("", fontX, fontY, "Arial", 30, Color.black);
+            return new SpriteFont("", fontX, fontY, tahomaSmall, Color.black);
         }
         return null;
     }
@@ -147,11 +156,13 @@ public class Textbox {
             // to prevent it from covering the player
             if (!map.getCamera().isAtBottomOfMap()) {
                 fontY = fontBottomY;
+                fontYSmall = fontBottomYSmall;
             }
             else {
                 fontY = fontTopY;
+                fontYSmall = fontTopYSmall;
             }
-            text = new SpriteFont(next, fontX, fontY, "Arial", 30, Color.black);
+            text = new SpriteFont(next, fontX, fontY, tahoma, Color.black);
 
         }
 
@@ -161,14 +172,13 @@ public class Textbox {
             textQueue.poll();
             if (selectablesPresent == 1) {
                 while (!textQueue.isEmpty()) {
-                    textQueueFlip.add(textQueue.poll());
+                    textQueueOnHold.add(textQueue.poll());
                 }
-                choice = currentTextItemHovered-1;
-                setChoice(choice);
+                setChoice(currentTextItemHovered);
                 textQueue.add(responseText[choice]);
-                currentTextItemHovered = 1;
-                while (!textQueueFlip.isEmpty()) {
-                    textQueue.add(textQueueFlip.poll());
+                currentTextItemHovered = 0;
+                while (!textQueueOnHold.isEmpty()) {
+                    textQueue.add(textQueueOnHold.poll());
                 }
             }
             selectablesPresent = 0;
@@ -176,13 +186,13 @@ public class Textbox {
             keyLocker.unlockKey(interactKey);
         }
 
-        setChoice(choice);
+        // setChoice(choice);
 
-        if (Keyboard.isKeyDown(Key.RIGHT) && (keyPressTimer == 0) && selectionText[0] != null) {
+        if (Keyboard.isKeyDown(Key.DOWN) && (keyPressTimer == 0) && (selectablesPresent == 1)) {
             keyPressTimer = 14;
             currentTextItemHovered++;
 
-        } else if (Keyboard.isKeyDown(Key.LEFT) && (keyPressTimer == 0) && selectionText[0] != null) {
+        } else if (Keyboard.isKeyDown(Key.UP) && (keyPressTimer == 0) && (selectablesPresent == 1)) {
             keyPressTimer = 14;
             currentTextItemHovered--;
 
@@ -194,8 +204,8 @@ public class Textbox {
 
         //if down is pressed on last item or up is pressed on first item, "loop" the selection back around to the beginning/end
         if (currentTextItemHovered == compiledCount) {
-            currentTextItemHovered = 1;
-        } else if (currentTextItemHovered < 1) {
+            currentTextItemHovered = 0;
+        } else if (currentTextItemHovered < 0) {
             currentTextItemHovered = compiledCount-1;
         }
     }
@@ -204,37 +214,62 @@ public class Textbox {
         // if camera is at bottom of screen, textbox is drawn at top of screen instead of the bottom like usual
         // to prevent it from covering the player
         if (!map.getCamera().isAtBottomOfMap()) {
-            graphicsHandler.drawFilledRoundedRectangleWithBorder(x, bottomY, width, height, arcWidth, arcHeight, fillColor, borderColor, 2);
-            //graphicsHandler.drawFilledRectangleWithBorder(x, bottomY, width, height, Color.white, Color.black, 2);
-        }
-        else {
-            graphicsHandler.drawFilledRoundedRectangleWithBorder(x, topY, width, height, arcWidth, arcHeight, Color.white, Color.black, 2);
-            // graphicsHandler.drawFilledRectangleWithBorder(x, topY, width, height, Color.white, Color.black, 2);
-        }
-        if (text != null) {
-            text.drawWithParsedNewLines(graphicsHandler, 10);
-        }
-    
-        if (selectablesPresent == 1) {
-            if (selectionText[0] != null) {
-                for (int i=1; i<selectionText.length; i++) {
-                    selectionText[i].setColor(Color.black);
-                }
-                selectionText[currentTextItemHovered].setColor(Color.red);
-
-                selectionText[0].drawWithParsedNewLines(graphicsHandler, 10);
-                int y = fontY;
-                int x = fontX;
-                for (int i = 0; i < compiledCount; i++) {
-                    if (selectionText[i + 1] != null) {
-                    selectionText[i + 1].setY(y + 40);
-                    selectionText[i + 1].setX(x);
-                    x += (selectionText[i + 1].getText().length() * 20 + 20);
-                    selectionText[i + 1].drawWithParsedNewLines(graphicsHandler, 10);
-                    }
-                }
+            //upper box
+            graphicsHandler.drawFilledRectangleWithBorder(x, bottomY-25, width, 25, arcWidth, arcHeight, borderColor, borderColor, borderThickness);
+            //lower box
+            graphicsHandler.drawFilledRectangleWithBorder(x, bottomY, width, height, arcWidth, arcHeight, fillColor, borderColor, borderThickness);
+            if (selectablesPresent == 1) {
+                //upper box
+                graphicsHandler.drawFilledRectangleWithBorder(xSmall, bottomYSmall-25, widthSmall, 25, arcWidth, arcHeight, borderColor, borderColor, borderThickness);
+                //lower box
+                graphicsHandler.drawFilledRectangleWithBorder(xSmall, bottomYSmall, widthSmall, heightSmall, arcWidth, arcHeight, fillColor, borderColor, borderThickness);
+            }
+        } else {
+            //upper box
+            graphicsHandler.drawFilledRectangleWithBorder(x, topY-25, width, 25, arcWidth, arcHeight, borderColor, borderColor, borderThickness);
+            //lower box
+            graphicsHandler.drawFilledRectangleWithBorder(x, topY, width, height, arcWidth, arcHeight, fillColor, borderColor, borderThickness);
+            if (selectablesPresent == 1) {
+                //upper box
+                graphicsHandler.drawFilledRectangleWithBorder(xSmall, topYSmall-25, widthSmall, 25, arcWidth, arcHeight, borderColor, borderColor, borderThickness);
+                //lower box
+                graphicsHandler.drawFilledRectangleWithBorder(xSmall, topYSmall, widthSmall, heightSmall, arcWidth, arcHeight, fillColor, borderColor, borderThickness);
             }
         }
+
+        if (text != null) {
+            text.drawWithParsedNewLines(graphicsHandler, 10);
+            npcName.drawWithParsedNewLines(graphicsHandler, 10);
+        }
+        if (selectablesPresent == 1) {
+            for (int i=0; i<selectionText.length; i++) {
+                selectionText[i].setColor(Color.black);
+            }
+            selectionText[currentTextItemHovered].setColor(Color.red);
+
+            selectionText[0].drawWithParsedNewLines(graphicsHandler, 10);
+            int y = fontYSmall;
+            int x = fontXSmall;
+            for (int i = 0; i < compiledCount; i++) {
+                selectionText[i].setY(y);
+                selectionText[i].setX(x+10);
+                y += 30;
+                selectionText[i].drawWithParsedNewLines(graphicsHandler, 10);
+            }
+        }
+    }
+
+    public SpriteFont getNPCName() {
+        return npcName;
+    }
+
+    public void setNPCName(String npcName) {
+        if (!map.getCamera().isAtBottomOfMap()) {
+            fontY = fontBottomY;
+        } else {
+            fontY = fontTopY;
+        }
+        this.npcName = new SpriteFont(npcName, fontX, topY - 22, "Trebuchet MS", 18, Color.WHITE);
     }
 
     public int getChoice() {

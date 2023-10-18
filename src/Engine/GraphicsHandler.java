@@ -44,38 +44,40 @@ public class GraphicsHandler {
         }
     }
 
+    public void drawRectangle(int x, int y, int width, int height, int arcWidth, int arcHeight, Color color) {
+        g.setColor(color);
+        g.drawRoundRect(x, y, width, height, arcWidth, arcHeight);
+    }
     public void drawRectangle(int x, int y, int width, int height, Color color) {
         g.setColor(color);
         g.drawRect(x, y, width, height);
     }
 
-    public void drawRoundedRectangle(int x, int y, int width, int height, int arcWidth, int arcHeight, Color color) {
+    public void drawRectangle(int x, int y, int width, int height, int arcWidth, int arcHeight, Color color, int borderThickness) {
+        g.setStroke(new BasicStroke(borderThickness));
         g.setColor(color);
         g.drawRoundRect(x, y, width, height, arcWidth, arcHeight);
     }
-
     public void drawRectangle(int x, int y, int width, int height, Color color, int borderThickness) {
         g.setStroke(new BasicStroke(borderThickness));
         g.setColor(color);
         g.drawRect(x, y, width, height);
     }
 
-    public void drawRoundedRectangle(int x, int y, int width, int height, int arcWidth, int arcHeight, Color color, int borderThickness) {
-        g.setStroke(new BasicStroke(borderThickness));
+    public void drawFilledRectangle(int x, int y, int width, int height, int arcWidth, int arcHeight, Color color) {
         g.setColor(color);
-        g.drawRoundRect(x, y, width, height, arcWidth, arcHeight);
+        g.fillRoundRect(x, y, width, height, arcWidth, arcHeight);
     }
-
     public void drawFilledRectangle(int x, int y, int width, int height, Color color) {
         g.setColor(color);
         g.fillRect(x, y, width, height);
     }
-
-    public void drawFilledRoundedRectangle(int x, int y, int width, int height, int arcWidth, int arcHeight, Color color) {
+    public void drawFilledRectangle(float x, float y, int width, int height, int arcWidth, int arcHeight, Color color) {
         g.setColor(color);
-        g.fillRoundRect(x, y, width, height, arcWidth, arcHeight);
+        int xRounded = Math.round(x);
+        int yRounded= Math.round(y);
+        g.fillRoundRect(xRounded, yRounded, width, height, arcWidth, arcHeight);
     }
-    
     public void drawFilledRectangle(float x, float y, int width, int height, Color color) {
         g.setColor(color);
         int xRounded = Math.round(x);
@@ -83,21 +85,13 @@ public class GraphicsHandler {
         g.fillRect(xRounded, yRounded, width, height);
     }
 
-    public void drawFilledRoundedRectangle(float x, float y, int width, int height, int arcWidth, int arcHeight, Color color) {
-        g.setColor(color);
-        int xRounded = Math.round(x);
-        int yRounded= Math.round(y);
-        g.fillRoundRect(xRounded, yRounded, width, height, arcWidth, arcHeight);
+    public void drawFilledRectangleWithBorder(int x, int y, int width, int height, int arcWidth, int arcHeight, Color fillColor, Color borderColor, int borderThickness) {
+        drawFilledRectangle(x, y, width, height, arcWidth, arcHeight, fillColor);
+        drawRectangle(x, y, width, height, arcWidth, arcHeight, borderColor, borderThickness);
     }
-
     public void drawFilledRectangleWithBorder(int x, int y, int width, int height, Color fillColor, Color borderColor, int borderThickness) {
         drawFilledRectangle(x, y, width, height, fillColor);
         drawRectangle(x, y, width, height, borderColor, borderThickness);
-    }
-
-    public void drawFilledRoundedRectangleWithBorder(int x, int y, int width, int height, int arcWidth, int arcHeight, Color fillColor, Color borderColor, int borderThickness) {
-        drawFilledRoundedRectangle(x, y, width, height, arcWidth, arcHeight, fillColor);
-        drawRoundedRectangle(x, y, width, height, arcWidth, arcHeight, borderColor, borderThickness);
     }
 
     public void drawString(String text, int x, int y, Font font, Color color) {
