@@ -115,6 +115,15 @@ public abstract class Script<T extends MapEntity> {
         map.getTextbox().addSelectableText(text, selectableText);
     }
 
+    protected TextboxStyle getTextboxStyle() {
+        return map.getTextbox().getTextboxStyle();
+    }
+
+    protected void setTextboxStyle(TextboxStyle textboxStyle) {
+        map.getTextbox().getTextboxStyle();
+        System.out.println("SCRIPT.JAVA CALLED");
+    }
+
     // returns the value of the last choice made from a selectable textbox
     protected int getChoice() {
         return map.getTextbox().getChoice();

@@ -3,6 +3,7 @@ package Scripts.WorldOneMap;
 import Level.NPC;
 import Level.Script;
 import Level.ScriptState;
+import Level.TextboxStyle;
 
 // script for talking to walrus npc
 public class WalrusScript extends Script<NPC> {
@@ -12,6 +13,7 @@ public class WalrusScript extends Script<NPC> {
 
     @Override
     protected void setup() {
+        setTextboxStyle(TextboxStyle.WORLDONE);
         setNPCName("Walrus");
         lockPlayer();
         showTextbox();

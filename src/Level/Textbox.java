@@ -1,12 +1,14 @@
 package Level;
 
 import Engine.GraphicsHandler;
+import Engine.ImageLoader;
 import Engine.Key;
 import Engine.KeyLocker;
 import Engine.Keyboard;
 import SpriteFont.SpriteFont;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -37,14 +39,17 @@ public class Textbox {
     protected final int widthSmall = 230;
     protected final int heightSmall = 200;
 
-    protected String fontTahoma = "Tahoma";
-    protected static Font tahoma;
-    protected static Font tahomaSmall;
-    protected int arcWidth = 0;
-    protected int arcHeight = 0;
-    protected int borderThickness = 3;
-    protected Color fillColor = new Color(239,235,222);
-    protected Color borderColor = new Color(10,85,233);
+    protected static Font font;
+    protected static Font fontSmall;
+    // protected static Font tahoma;
+    // protected static Font tahomaSmall;
+    protected BufferedImage logo;
+    // protected BufferedImage logo = ImageLoader.load("src/Level/windowsxplogo.png");
+    protected int arcWidth;
+    protected int arcHeight;
+    protected int borderThickness;
+    protected Color fillColor;
+    protected Color borderColor;
     protected int currentTextItemHovered = 0;
     protected int compiledCount = 0;
     protected int choice = -1;
@@ -52,8 +57,8 @@ public class Textbox {
     private Queue<String> textQueue = new LinkedList<String>();
     private Queue<String> textQueueOnHold = new LinkedList<String>();
     private Queue<String> selectionQueue = new LinkedList<String>();
-    private SpriteFont[] selectionText = new SpriteFont[10];
-    private String[] responseText = new String[10];
+    private SpriteFont[] selectionText = new SpriteFont[3];
+    private String[] responseText = new String[3];
     private int selectablesPresent;
     private SpriteFont text = null;
     private int fontY;
@@ -63,15 +68,69 @@ public class Textbox {
     private Key interactKey = Key.ENTER;
     private int keyPressTimer;
     private SpriteFont npcName;
+    
+    protected TextboxStyle textboxStyle;
+
+    protected void handleTextboxStyle() {
+        System.out.println(getTextboxStyle());
+        System.out.println(textboxStyle);
+        switch (textboxStyle) {
+            case WORLDONE:
+                worldOneTextbox();
+                break;
+            case WORLDTWO:
+                worldTwoTextbox();
+                break;
+            case WORLDTHREE:
+                worldThreeTextbox();
+                break;
+        }
+    }
+
+    protected void worldOneTextbox() {
+        try {
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            font = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/tahoma.ttf")).deriveFont(30f);
+            ge.registerFont(font);
+            fontSmall = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/tahoma.ttf")).deriveFont(30f);
+            ge.registerFont(fontSmall);
+        } catch (IOException | FontFormatException e) {
+            e.printStackTrace();
+        }
+        logo = ImageLoader.load("src/Level/windowsxplogo.png");
+        arcWidth = 0;
+        arcHeight = 0;
+        borderThickness = 3;
+        fillColor = new Color(239,235,222);
+        borderColor = new Color(10,85,233);
+    }
+
+    protected void worldTwoTextbox() {
+
+    }
+
+    protected void worldThreeTextbox() {
+
+    }
+
+    public TextboxStyle getTextboxStyle() {
+        return textboxStyle;
+    }
+
+    public void setTextboxStyle(TextboxStyle textboxStyle) {
+        handleTextboxStyle();
+        this.textboxStyle = textboxStyle;
+        System.out.println("TEXTBOX.JAVA CALLED");
+    }
 
     public Textbox(Map map) {
         this.map = map;
         try {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            tahoma = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/tahoma.ttf")).deriveFont(30f);
-            ge.registerFont(tahoma);
-            tahomaSmall = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/tahoma.ttf")).deriveFont(30f);
-            ge.registerFont(tahomaSmall);
+            font = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/arial.ttf")).deriveFont(30f);
+            ge.registerFont(font);
+            fontSmall = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/arial.ttf")).deriveFont(30f);
+            ge.registerFont(fontSmall);
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
@@ -113,7 +172,7 @@ public class Textbox {
         }
 
         for (int i = selectionText.length; i < this.selectionText.length; i++) {
-            this.selectionText[i] = new SpriteFont("", fontX, fontY, tahomaSmall, Color.black);
+            this.selectionText[i] = new SpriteFont("", fontX, fontY, font, Color.black);
         }
         
         selectablesPresent = 1;
@@ -134,9 +193,9 @@ public class Textbox {
     public SpriteFont spriteFontCompile(Queue<String> selectionQueue) {
         if (!selectionQueue.isEmpty() && keyLocker.isKeyLocked(interactKey)) {
             String next = selectionQueue.poll();
-            return new SpriteFont(next, fontX, fontY, tahomaSmall, Color.black);
+            return new SpriteFont(next, fontX, fontY, fontSmall, Color.black);
         } else if (selectionQueue.isEmpty() && keyLocker.isKeyLocked(interactKey)) {
-            return new SpriteFont("", fontX, fontY, tahomaSmall, Color.black);
+            return new SpriteFont("", fontX, fontY, fontSmall, Color.black);
         }
         return null;
     }
@@ -162,7 +221,7 @@ public class Textbox {
                 fontY = fontTopY;
                 fontYSmall = fontTopYSmall;
             }
-            text = new SpriteFont(next, fontX, fontY, tahoma, Color.black);
+            text = new SpriteFont(next, fontX, fontY, fontSmall, Color.black);
 
         }
 
@@ -185,8 +244,6 @@ public class Textbox {
         } else if (Keyboard.isKeyUp(interactKey)) {
             keyLocker.unlockKey(interactKey);
         }
-
-        // setChoice(choice);
 
         if (Keyboard.isKeyDown(Key.DOWN) && (keyPressTimer == 0) && (selectablesPresent == 1)) {
             keyPressTimer = 14;
@@ -227,6 +284,10 @@ public class Textbox {
         } else {
             //upper box
             graphicsHandler.drawFilledRectangleWithBorder(x, topY-25, width, 25, arcWidth, arcHeight, borderColor, borderColor, borderThickness);
+            //logo
+            graphicsHandler.drawImage(logo, x, topY-22, 19, 19);
+            //x
+            graphicsHandler.drawFilledRectangleWithBorder(598, topY-22, 19, 19, 5, 5, new Color(218,74,34), new Color(217,210,226), 1);
             //lower box
             graphicsHandler.drawFilledRectangleWithBorder(x, topY, width, height, arcWidth, arcHeight, fillColor, borderColor, borderThickness);
             if (selectablesPresent == 1) {
@@ -239,6 +300,8 @@ public class Textbox {
 
         if (text != null) {
             text.drawWithParsedNewLines(graphicsHandler, 10);
+        }
+        if (npcName != null) {
             npcName.drawWithParsedNewLines(graphicsHandler, 10);
         }
         if (selectablesPresent == 1) {

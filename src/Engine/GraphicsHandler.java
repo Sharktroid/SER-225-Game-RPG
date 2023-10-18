@@ -44,6 +44,7 @@ public class GraphicsHandler {
         }
     }
 
+    //draw rectangle (just outline)
     public void drawRectangle(int x, int y, int width, int height, int arcWidth, int arcHeight, Color color) {
         g.setColor(color);
         g.drawRoundRect(x, y, width, height, arcWidth, arcHeight);
@@ -53,6 +54,7 @@ public class GraphicsHandler {
         g.drawRect(x, y, width, height);
     }
 
+    //draw rectangle with border
     public void drawRectangle(int x, int y, int width, int height, int arcWidth, int arcHeight, Color color, int borderThickness) {
         g.setStroke(new BasicStroke(borderThickness));
         g.setColor(color);
@@ -64,6 +66,7 @@ public class GraphicsHandler {
         g.drawRect(x, y, width, height);
     }
 
+    //draw filled rectangle
     public void drawFilledRectangle(int x, int y, int width, int height, int arcWidth, int arcHeight, Color color) {
         g.setColor(color);
         g.fillRoundRect(x, y, width, height, arcWidth, arcHeight);
