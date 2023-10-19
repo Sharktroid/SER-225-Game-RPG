@@ -28,7 +28,8 @@ public class PlayLevelScreen extends Screen {
     protected int worldNum = -1;
     protected int floorNum = 0;
     private InventoryScreen inventory;
-    protected int waitTimer = 0;
+    
+    protected boolean flagStates[];
     private KeyLocker keyLocker = new KeyLocker();
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
@@ -70,10 +71,14 @@ public class PlayLevelScreen extends Screen {
         
         //setup world three map
         else if (worldNum == 3) {
-            this.map = new WorldThreeFloors(floorNum);
 
+            
+            this.map = new WorldThreeFloors(floorNum);
+            
+        
             flagManager.addFlag("wentUpLevel", false);
             flagManager.addFlag("wentDownLevel", false);
+            flagManager.addFlag("hasTalkedToRedPanda", WorldThreeFloors.redPandaFlagState());
         } 
 
         //setup hub world map
@@ -226,6 +231,20 @@ public class PlayLevelScreen extends Screen {
 
     public void goBackToMenu() {
         screenCoordinator.setGameState(GameState.MENU);
+    }
+
+    public boolean getFlagState(boolean flagState){
+
+        return flagState;
+    }
+
+    public boolean setFlagState(boolean flagState){
+        if (flagState == true){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     // This enum represents the different states this screen can be in
