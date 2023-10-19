@@ -41,8 +41,10 @@ public class WorldThreeFloors extends Map {
     public ArrayList<Trigger> loadTriggers() {
         ArrayList<Trigger> triggers = new ArrayList<>();
         
-        //front door enter trigger
-        triggers.add(new Trigger(328, 338, 160, 24, new upLevelScript()));
+        if (currentFloorNumber == 0){
+            triggers.add(new Trigger(328, 338, 160, 24, new upLevelScript()));
+        }
+        
 
         //front door leave trigger
         triggers.add(new Trigger(328, 796, 160, 24, new downLevelScript()));
