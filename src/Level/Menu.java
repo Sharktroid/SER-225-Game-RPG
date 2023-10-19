@@ -25,6 +25,7 @@ public abstract class Menu {
     protected ArrayList<SpriteFont> spriteFonts = new ArrayList<SpriteFont>();
     protected int currentTextItemHovered = 0;
     private KeyLocker keyLocker = new KeyLocker();
+    private int currentRow;
 
     public void draw(GraphicsHandler graphicsHandler) {
         graphicsHandler.drawFilledRectangleWithBorder(left, top, width, height, Color.white, Color.black, 2);
@@ -35,8 +36,15 @@ public abstract class Menu {
         if (spriteFonts.size() > 0) {
             spriteFonts.get(currentTextItemHovered).setColor(Color.red);
         }
-        for (int i = 0; i < spriteFonts.size(); i++) {
-            spriteFonts.get(i).drawWithParsedNewLines(graphicsHandler, 10);
+        for (int i = 0; i < rows * columns; i++) {
+            int currentIndex = i + currentRow * columns;
+            if (currentIndex < spriteFonts.size()) {
+                int x = (int) (i % columns * (getInternalSize().x) / columns) + left + border;
+                int y = top + border + getLineGap() * (i / columns);
+                spriteFonts.get(currentIndex).setX(x);
+                spriteFonts.get(currentIndex).setY(y);
+                spriteFonts.get(currentIndex).drawWithParsedNewLines(graphicsHandler, 10);
+            }
         }
     }
 
@@ -66,6 +74,13 @@ public abstract class Menu {
 
         else if (lockKey(Key.ENTER)) {
             optionSelected();
+        }
+
+        while (currentTextItemHovered < currentRow * columns) {
+            currentRow--;
+        }
+        while (currentTextItemHovered >= (rows + currentRow) * columns) {
+            currentRow++;
         }
 
         unlockKey(Key.LEFT);
@@ -112,16 +127,8 @@ public abstract class Menu {
 
     protected void setText(String[] stringArray) {
         spriteFonts.clear();
-        int y = top + border;
         for (int i = 0; i < stringArray.length; i++) {
             spriteFonts.add(new SpriteFont(stringArray[i], 0, 0, "Arial", fontSize, Color.black));
-            int x;
-            x = (int) (i % columns * (getInternalSize().x) / columns) + left + border;
-            spriteFonts.get(i).setY(y);
-            spriteFonts.get(i).setX(x);
-            if ((i + 1) % columns == 0) {
-                y += getLineGap();
-            }
         }
     }
 

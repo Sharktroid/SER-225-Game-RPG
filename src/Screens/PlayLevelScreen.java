@@ -7,7 +7,6 @@ import Engine.Keyboard;
 import Engine.Screen;
 import Game.GameState;
 import Game.ScreenCoordinator;
-import Items.Medkit;
 import Level.*;
 import Maps.WorldOneMap;
 import Maps.WorldTwoMap;
