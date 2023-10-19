@@ -7,11 +7,13 @@ import Engine.Keyboard;
 import Engine.Screen;
 import Game.GameState;
 import Game.ScreenCoordinator;
+import Items.Medkit;
 import Level.*;
 import Maps.WorldOneMap;
 import Maps.WorldTwoMap;
 import Maps.WorldThreeMap;
 import Maps.WorldZeroMap;
+import Menus.InventoryMenu;
 import Maps.HubMap;
 import Players.Cat;
 import Utils.Direction;
@@ -26,7 +28,7 @@ public class PlayLevelScreen extends Screen {
     protected WinScreen winScreen;
     protected FlagManager flagManager;
     protected int worldNum = -1;
-    private InventoryScreen inventory;
+    private InventoryMenu inventory;
     private KeyLocker keyLocker = new KeyLocker();
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
@@ -110,7 +112,7 @@ public class PlayLevelScreen extends Screen {
             }
         }
 
-        inventory = new InventoryScreen(player);
+        inventory = new InventoryMenu(player);
 
         winScreen = new WinScreen(this);
     }
