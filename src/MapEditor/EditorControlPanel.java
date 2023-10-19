@@ -4,7 +4,6 @@ import Engine.Config;
 import Level.Map;
 import Level.MapEntity;
 import Level.MapTile;
-import Level.NPC;
 import Utils.Colors;
 
 import javax.swing.*;

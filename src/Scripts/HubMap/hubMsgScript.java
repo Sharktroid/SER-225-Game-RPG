@@ -2,7 +2,6 @@ package Scripts.HubMap;
 
 import Level.Script;
 import Level.ScriptState;
-import Maps.HubMap;
 
 public class hubMsgScript extends Script {
     @Override
