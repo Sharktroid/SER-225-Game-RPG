@@ -72,10 +72,8 @@ public class PlayLevelScreen extends Screen {
         //setup world three map
         else if (worldNum == 3) {
 
-            
             this.map = new WorldThreeFloors(floorNum);
             
-        
             flagManager.addFlag("wentUpLevel", false);
             flagManager.addFlag("wentDownLevel", false);
             flagManager.addFlag("hasTalkedToRedPanda", WorldThreeFloors.redPandaFlagState());

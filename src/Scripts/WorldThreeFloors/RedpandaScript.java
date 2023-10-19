@@ -22,7 +22,6 @@ public class RedpandaScript extends Script<NPC> {
             addTextToTextboxQueue("Hi Cat!");
             addTextToTextboxQueue("I found some glowing orb today");
             addTextToTextboxQueue("I can show you it another time soon");
-
         }
 
         if (isFlagSet("hasTalkedToRedPanda")){
