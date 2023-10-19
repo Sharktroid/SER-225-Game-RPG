@@ -1,5 +1,5 @@
 package Level;
 
 public enum TextboxStyle {
-    WORLDONE, WORLDTWO, WORLDTHREE
+    HUBWORLD, WORLDONE, WORLDTWO, WORLDTHREE
 }

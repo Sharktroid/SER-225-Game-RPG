@@ -13,10 +13,12 @@ public class WalrusScript extends Script<NPC> {
 
     @Override
     protected void setup() {
-        setTextboxStyle(TextboxStyle.WORLDONE);
-        setNPCName("Walrus");
         lockPlayer();
+
+        setNPCName("Walrus");
         showTextbox();
+        setTextboxStyle(TextboxStyle.WORLDONE);
+
         String[] selections = {"What is this place?", "Who are you?", "What are you doing?"};
         String[] answers = {"This is my response to A", "This is my response to B", "This is my response to C"};
 
@@ -59,6 +61,7 @@ public class WalrusScript extends Script<NPC> {
 
     @Override
     public ScriptState execute() {
+        setTextboxStyle(TextboxStyle.WORLDONE);
         if (!isFlagSet("hasTalkedToWalrus")) {
             if (sequence == 0) {
                 start();

@@ -2,12 +2,14 @@ package Scripts.HubMap;
 
 import Level.Script;
 import Level.ScriptState;
+import Level.TextboxStyle;
 
 public class portalThreeScript extends Script {
 
     @Override
     protected void setup() {
         lockPlayer();
+        setTextboxStyle(TextboxStyle.HUBWORLD);
         showTextbox();
         addTextToTextboxQueue("Teleporting to world 3");
 

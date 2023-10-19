@@ -22,6 +22,7 @@ public class Textbox {
     protected boolean isActive;
     //big box
     protected int x = 100;
+    protected int y = 0;
     protected int bottomY = 460;
     protected int topY = 47;
     protected int fontX = 115;
@@ -30,14 +31,15 @@ public class Textbox {
     protected int width = 520;
     protected int height = 100;
     //small box
-    protected final int xSmall = 542;
-    protected final int bottomYSmall = 258;
-    protected final int topYSmall = 122;
-    protected final int fontXSmall = 548;
-    protected final int fontBottomYSmall = 266;
-    protected final int fontTopYSmall = 132;
-    protected final int widthSmall = 230;
-    protected final int heightSmall = 200;
+    protected int xSmall = 542;
+    protected int ySmall = 0;
+    protected int bottomYSmall = 308;
+    protected int topYSmall = 122;
+    protected int fontXSmall = 548;
+    protected int fontBottomYSmall = 316;
+    protected int fontTopYSmall = 132;
+    protected int widthSmall = 230;
+    protected int heightSmall = 150;
 
     protected static Font font;
     protected static Font fontSmall;
@@ -75,6 +77,9 @@ public class Textbox {
         System.out.println(getTextboxStyle());
         System.out.println(textboxStyle);
         switch (textboxStyle) {
+            case HUBWORLD:
+                hubWorldTextbox();
+                break;
             case WORLDONE:
                 worldOneTextbox();
                 break;
@@ -87,6 +92,24 @@ public class Textbox {
         }
     }
 
+    protected void hubWorldTextbox() {
+        try {
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            font = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/arial.ttf")).deriveFont(30f);
+            ge.registerFont(font);
+            fontSmall = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/arial.ttf")).deriveFont(30f);
+            ge.registerFont(fontSmall);
+        } catch (IOException | FontFormatException e) {
+            e.printStackTrace();
+        }
+        arcWidth = 0;
+        arcHeight = 0;
+        borderThickness = 3;
+        fillColor = new Color(242,244,248);
+        //238,240,243
+        borderColor = new Color(242,244,248);
+    }
+
     protected void worldOneTextbox() {
         try {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -97,7 +120,7 @@ public class Textbox {
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
-        logo = ImageLoader.load("src/Level/windowsxplogo.png");
+        logo = ImageLoader.load("windowsxplogo2.png");
         arcWidth = 0;
         arcHeight = 0;
         borderThickness = 3;
@@ -120,11 +143,11 @@ public class Textbox {
     public void setTextboxStyle(TextboxStyle textboxStyle) {
         handleTextboxStyle();
         this.textboxStyle = textboxStyle;
-        System.out.println("TEXTBOX.JAVA CALLED");
     }
 
     public Textbox(Map map) {
         this.map = map;
+        textboxStyle = TextboxStyle.HUBWORLD;
         try {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             font = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/arial.ttf")).deriveFont(30f);
@@ -271,31 +294,37 @@ public class Textbox {
         // if camera is at bottom of screen, textbox is drawn at top of screen instead of the bottom like usual
         // to prevent it from covering the player
         if (!map.getCamera().isAtBottomOfMap()) {
-            //upper box
-            graphicsHandler.drawFilledRectangleWithBorder(x, bottomY-25, width, 25, arcWidth, arcHeight, borderColor, borderColor, borderThickness);
-            //lower box
-            graphicsHandler.drawFilledRectangleWithBorder(x, bottomY, width, height, arcWidth, arcHeight, fillColor, borderColor, borderThickness);
-            if (selectablesPresent == 1) {
-                //upper box
-                graphicsHandler.drawFilledRectangleWithBorder(xSmall, bottomYSmall-25, widthSmall, 25, arcWidth, arcHeight, borderColor, borderColor, borderThickness);
-                //lower box
-                graphicsHandler.drawFilledRectangleWithBorder(xSmall, bottomYSmall, widthSmall, heightSmall, arcWidth, arcHeight, fillColor, borderColor, borderThickness);
-            }
+            y = bottomY;
+            ySmall = bottomYSmall;
         } else {
+            y = topY;
+            ySmall = topYSmall;
+        }
+
+        // ----- big textbox ----- //
+        //upper box
+        graphicsHandler.drawFilledRectangleWithBorder(x, y-25, width, 25, arcWidth, arcHeight, borderColor, borderColor, borderThickness);
+        //upper box details
+        if (textboxStyle.equals(TextboxStyle.WORLDONE)) {
+            graphicsHandler.drawFilledRectangleWithBorder(x+width-22, y-22, 19, 19, 5, 5, new Color(218,74,34), new Color(217,210,226), 1);
+            // SpriteFont X = new SpriteFont("X", x+width-22, y-22, font, new Color(217,210,226));
+            // X.drawWithParsedNewLines(graphicsHandler, 10);
+            graphicsHandler.drawImage(logo, x+2, y-22, 19, 19);
+        }
+        //bottom box
+        graphicsHandler.drawFilledRectangleWithBorder(x, y, width, height, arcWidth, arcHeight, fillColor, borderColor, borderThickness);
+        
+        // ----- small textbox ----- //
+        if (selectablesPresent == 1) {
             //upper box
-            graphicsHandler.drawFilledRectangleWithBorder(x, topY-25, width, 25, arcWidth, arcHeight, borderColor, borderColor, borderThickness);
-            //logo
-            graphicsHandler.drawImage(logo, x, topY-22, 19, 19);
-            //x
-            graphicsHandler.drawFilledRectangleWithBorder(598, topY-22, 19, 19, 5, 5, new Color(218,74,34), new Color(217,210,226), 1);
-            //lower box
-            graphicsHandler.drawFilledRectangleWithBorder(x, topY, width, height, arcWidth, arcHeight, fillColor, borderColor, borderThickness);
-            if (selectablesPresent == 1) {
-                //upper box
-                graphicsHandler.drawFilledRectangleWithBorder(xSmall, topYSmall-25, widthSmall, 25, arcWidth, arcHeight, borderColor, borderColor, borderThickness);
-                //lower box
-                graphicsHandler.drawFilledRectangleWithBorder(xSmall, topYSmall, widthSmall, heightSmall, arcWidth, arcHeight, fillColor, borderColor, borderThickness);
+            graphicsHandler.drawFilledRectangleWithBorder(xSmall, ySmall-25, widthSmall, 25, arcWidth, arcHeight, borderColor, borderColor, borderThickness);
+            //upper box details
+            if (textboxStyle.equals(TextboxStyle.WORLDONE)) {
+                graphicsHandler.drawFilledRectangleWithBorder(xSmall+widthSmall-22, ySmall-22, 19, 19, 5, 5, new Color(218,74,34), new Color(217,210,226), 1);
+                graphicsHandler.drawImage(logo, xSmall+2, ySmall-22, 19, 19);
             }
+            //lower box
+            graphicsHandler.drawFilledRectangleWithBorder(xSmall, ySmall, widthSmall, heightSmall, arcWidth, arcHeight, fillColor, borderColor, borderThickness);
         }
 
         if (text != null) {
@@ -316,7 +345,7 @@ public class Textbox {
             for (int i = 0; i < compiledCount; i++) {
                 selectionText[i].setY(y);
                 selectionText[i].setX(x+10);
-                y += 30;
+                y += 35;
                 selectionText[i].drawWithParsedNewLines(graphicsHandler, 10);
             }
         }
@@ -332,7 +361,7 @@ public class Textbox {
         } else {
             fontY = fontTopY;
         }
-        this.npcName = new SpriteFont(npcName, fontX, topY - 22, "Trebuchet MS", 18, Color.WHITE);
+        this.npcName = new SpriteFont(npcName, fontX+10, fontY - 34, "Trebuchet MS", 18, Color.WHITE);
     }
 
     public int getChoice() {
