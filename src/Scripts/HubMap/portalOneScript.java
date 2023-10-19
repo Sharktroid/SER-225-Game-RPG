@@ -3,7 +3,6 @@ package Scripts.HubMap;
 import Level.Script;
 import Level.ScriptState;
 
-// script for talking to tree with hole in it
 public class portalOneScript extends Script {
 
     @Override
