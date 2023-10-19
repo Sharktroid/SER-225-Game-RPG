@@ -1,75 +1,98 @@
 package Maps;
 
 import Level.Map;
-import Level.NPC;
-import Level.Script;
 import Level.Trigger;
-import NPCs.Walrus;
-import Scripts.SimpleTextScript;
-import Scripts.WorldOneMap.WalrusScript;
 import Scripts.WorldThreeFloors.upLevelScript;
 import Scripts.WorldThreeFloors.downLevelScript;
 import Tilesets.CommonTileset;
 
 import java.util.ArrayList;
 
+//all 5 world three maps are created using this class
 public class WorldThreeFloors extends Map {
-    public WorldThreeFloors(int floorNum) {
-        super("world_three_" + floorNum + "_map.txt", new CommonTileset());
-        if (floorNum == 0){
-            this.playerStartPosition = getMapTile(8,11).getLocation();
-        }
-        else{
-            this.playerStartPosition = getMapTile(8, 15).getLocation();
-        }
-        
 
-    }
-
+    // current floor number int
     public static int currentFloorNumber = 0;
-
-    public static int getCurrentFloorNumber(){
+    public static boolean downFromFloor;
+    // current floor number getter
+    public static int getCurrentFloorNumber() {
         return currentFloorNumber;
     }
 
-    public static void setCurrentFloorNumber(int newFloorNumber){
+    // current floor number setter
+    public static void setCurrentFloorNumber(int newFloorNumber) {
         currentFloorNumber = newFloorNumber;
     }
 
+    public static void setDownFromFloorTrue(){
+        downFromFloor = true;
+    }
+
+
+    // setup maps
+    public WorldThreeFloors(int floorNum) {
+        super("world_three_" + floorNum + "_map.txt", new CommonTileset());
+
+        // player starting position floor 0
+        if (floorNum == 0) {
+            if (downFromFloor == false){
+                //starting positon when teleported to world three
+                this.playerStartPosition = getMapTile(8, 11).getLocation();
+            }
+            else{
+                //starting position when exited building in world three
+                this.playerStartPosition = getMapTile(8, 8).getLocation();
+            }
+
+                
+        }
+
+        // player starting position floors 1-4
+        else {
+            this.playerStartPosition = getMapTile(8, 15).getLocation();
+        }
+    }
 
     @Override
     public ArrayList<Trigger> loadTriggers() {
         ArrayList<Trigger> triggers = new ArrayList<>();
-        
-        if (currentFloorNumber == 0){
+
+        // floor zero triggers
+        if (currentFloorNumber == 0) {
+            // front door entrance trigger
             triggers.add(new Trigger(328, 338, 160, 24, new upLevelScript()));
         }
-        
 
-        //front door leave trigger
-        triggers.add(new Trigger(328, 796, 160, 24, new downLevelScript()));
-        
-        
-        //up level trigger
-        triggers.add(new Trigger(512, 670, 40, 100, new upLevelScript()));
-        
-        //down level trigger
-        triggers.add(new Trigger(268, 670, 40, 100, new downLevelScript()));
-    
-        return triggers;
-    }
-
-    /*@Override
-    public ArrayList<NPC> loadNPCs() {
-        ArrayList<NPC> npcs = new ArrayList<>();
-        // remember to import NPC and Scripts for new NPC
-
-        if (floorNumber == 0) {
-            Walrus walrus = new Walrus(1, getMapTile(4, 28).getLocation().subtractY(40));
-            walrus.setInteractScript(new WalrusScript());
-            npcs.add(walrus);
+        // floor one triggers
+        if (currentFloorNumber == 1) {
+            // front door exit trigger
+            triggers.add(new Trigger(328, 796, 160, 24, new downLevelScript()));
+            // stairs up trigger
+            triggers.add(new Trigger(512, 670, 40, 100, new upLevelScript()));
         }
 
-        return npcs;
-    }*/
+        // floor two triggers
+        if (currentFloorNumber == 2) {
+            // stairs up trigger
+            triggers.add(new Trigger(512, 670, 40, 100, new upLevelScript()));
+            // stairs down trigger
+            triggers.add(new Trigger(268, 670, 40, 100, new downLevelScript()));
+        }
+
+        // floor three triggers
+        if (currentFloorNumber == 3) {
+            // stairs up trigger
+            triggers.add(new Trigger(512, 670, 40, 100, new upLevelScript()));
+            // stairs down trigger
+            triggers.add(new Trigger(268, 670, 40, 100, new downLevelScript()));
+        }
+
+        // floor four triggers
+        if (currentFloorNumber == 4) {
+            // stairs down trigger
+            triggers.add(new Trigger(268, 670, 40, 100, new downLevelScript()));
+        }
+
+        return triggers;
+    }
 }
