@@ -1,10 +1,14 @@
 package Maps;
 
 import Level.Map;
+import Level.NPC;
 import Level.Trigger;
 import Scripts.WorldThreeFloors.upLevelScript;
 import Scripts.WorldThreeFloors.downLevelScript;
 import Tilesets.CommonTileset;
+
+import NPCs.Redpanda;
+import Scripts.WorldThreeFloors.RedpandaScript;
 
 import java.util.ArrayList;
 
@@ -14,6 +18,11 @@ public class WorldThreeFloors extends Map {
     // current floor number int
     public static int currentFloorNumber = 0;
     public static boolean downFromFloor;
+
+    public static boolean redPandaFlagState(){
+        return RedpandaScript.setRedPandaFlagState;
+    }
+
     // current floor number getter
     public static int getCurrentFloorNumber() {
         return currentFloorNumber;
@@ -94,5 +103,19 @@ public class WorldThreeFloors extends Map {
         }
 
         return triggers;
+    }
+
+    @Override
+    public ArrayList<NPC> loadNPCs() {
+        ArrayList<NPC> npcs = new ArrayList<>();
+
+        // floor zero npcs
+        if (currentFloorNumber == 0) {
+            Redpanda redpanda = new Redpanda(5, getMapTile(1, 11).getLocation().subtractY(40));
+            redpanda.setInteractScript(new RedpandaScript());
+            npcs.add(redpanda);
+        }
+
+        return npcs;
     }
 }
