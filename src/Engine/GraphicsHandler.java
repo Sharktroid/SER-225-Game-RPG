@@ -97,6 +97,23 @@ public class GraphicsHandler {
         drawRectangle(x, y, width, height, borderColor, borderThickness);
     }
 
+    //gradient
+    public void drawRectangleGradient(int x, int y, int width, int height, int arcWidth, int arcHeight, Color color1, Color color2, int borderThickness) {
+        g.setStroke(new BasicStroke(borderThickness));
+        GradientPaint gradient = new GradientPaint(x, y, color1, x + width, y + height, color2);
+        g.setPaint(gradient);
+        g.drawRoundRect(x, y, width, height, arcWidth, arcHeight);
+    }
+    public void drawFilledRectangleGradient(int x, int y, int width, int height, int arcWidth, int arcHeight, Color color1, Color color2) {
+        GradientPaint gradient = new GradientPaint(x, y, color1, x, y + height, color2);
+        g.setPaint(gradient);
+        g.fillRoundRect(x, y, width, height, arcWidth, arcHeight);
+    }
+    public void drawFilledRectangleGradientWithBorder(int x, int y, int width, int height, int arcWidth, int arcHeight, Color fillColor1, Color fillColor2, Color borderColor, int borderThickness) {
+        drawFilledRectangleGradient(x, y, width, height, arcWidth, arcHeight, fillColor1, fillColor2);
+        drawRectangleGradient(x, y, width, height, arcWidth, arcHeight, fillColor1, fillColor2, borderThickness);
+    }
+
     public void drawString(String text, int x, int y, Font font, Color color) {
         g.setFont(font);
         g.setColor(color);

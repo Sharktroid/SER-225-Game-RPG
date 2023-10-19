@@ -39,6 +39,7 @@ public class SlothScript extends Script<NPC> {
 
     @Override
     public ScriptState execute() {
+        // setTextboxStyle(TextboxStyle.WORLDTWO);
         start();
         if (!isTextboxQueueEmpty()) {
             return ScriptState.RUNNING;

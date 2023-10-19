@@ -92,12 +92,16 @@ public abstract class Script<T extends MapEntity> {
     // typically used right before script is finished to give control back to the player
     protected void unlockPlayer() {
         player.setPlayerState(PlayerState.STANDING);
-        System.out.println("SCRIPT.JAVA CALLED");
     }
 
     // textbox is shown on screen
     protected void showTextbox() {
         map.getTextbox().setIsActive(true);
+    }
+
+    protected void showTextbox(TextboxStyle textboxStyle) {
+        map.getTextbox().setIsActive(true);
+        setTextboxStyle(textboxStyle);
     }
 
     // adds text to be shown in textbox
@@ -122,6 +126,7 @@ public abstract class Script<T extends MapEntity> {
 
     protected void setTextboxStyle(TextboxStyle textboxStyle) {
         map.getTextbox().setTextboxStyle(textboxStyle);
+        System.out.println("SCRIPT.JAVA CALLED");
     }
 
     // returns the value of the last choice made from a selectable textbox

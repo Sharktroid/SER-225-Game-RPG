@@ -30,28 +30,27 @@ public class Textbox {
     protected int fontTopY = 55;
     protected int width = 520;
     protected int height = 100;
-    //small box
-    protected int xSmall = 542;
-    protected int ySmall = 0;
-    protected int bottomYSmall = 308;
-    protected int topYSmall = 122;
-    protected int fontXSmall = 548;
-    protected int fontBottomYSmall = 316;
-    protected int fontTopYSmall = 132;
-    protected int widthSmall = 230;
-    protected int heightSmall = 150;
+    //select box
+    protected int xSelect = 542;
+    protected int ySelect = 0;
+    protected int bottomYSelect = 308;
+    protected int topYSelect = 122;
+    protected int fontXSelect = 548;
+    protected int fontBottomYSelect = 316;
+    protected int fontTopYSelect = 132;
+    protected int widthSelect = 230;
+    protected int heightSelect = 150;
 
     protected static Font font;
-    protected static Font fontSmall;
-    // protected static Font tahoma;
-    // protected static Font tahomaSmall;
+    protected static Font fontSelect;
     protected BufferedImage logo;
-    // protected BufferedImage logo = ImageLoader.load("src/Level/windowsxplogo.png");
     protected int arcWidth;
     protected int arcHeight;
     protected int borderThickness;
-    protected Color fillColor;
-    protected Color borderColor;
+    protected Color bigFillColor;
+    protected Color bigBorderColor;
+    protected Color smallFillColor;
+    protected Color smallBorderColor;
     protected int currentTextItemHovered = 0;
     protected int compiledCount = 0;
     protected int choice = -1;
@@ -64,7 +63,7 @@ public class Textbox {
     private int selectablesPresent;
     private SpriteFont text = null;
     private int fontY;
-    private int fontYSmall;
+    private int fontYSelect;
     private KeyLocker keyLocker = new KeyLocker();
     private Map map;
     private Key interactKey = Key.ENTER;
@@ -72,9 +71,9 @@ public class Textbox {
     private SpriteFont npcName;
     
     protected TextboxStyle textboxStyle;
+    protected TextboxStyle prevTextboxStyle;
 
     protected void handleTextboxStyle() {
-        System.out.println(getTextboxStyle());
         System.out.println(textboxStyle);
         switch (textboxStyle) {
             case HUBWORLD:
@@ -90,6 +89,7 @@ public class Textbox {
                 worldThreeTextbox();
                 break;
         }
+        System.out.println(textboxStyle);
     }
 
     protected void hubWorldTextbox() {
@@ -97,17 +97,18 @@ public class Textbox {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             font = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/arial.ttf")).deriveFont(30f);
             ge.registerFont(font);
-            fontSmall = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/arial.ttf")).deriveFont(30f);
-            ge.registerFont(fontSmall);
+            fontSelect = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/arial.ttf")).deriveFont(30f);
+            ge.registerFont(fontSelect);
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
         arcWidth = 0;
         arcHeight = 0;
         borderThickness = 3;
-        fillColor = new Color(242,244,248);
-        //238,240,243
-        borderColor = new Color(242,244,248);
+        bigFillColor = Color.RED;
+        bigBorderColor = Color.BLUE;
+        smallFillColor = Color.YELLOW;
+        smallBorderColor = Color.DARK_GRAY;
     }
 
     protected void worldOneTextbox() {
@@ -115,8 +116,8 @@ public class Textbox {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             font = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/tahoma.ttf")).deriveFont(30f);
             ge.registerFont(font);
-            fontSmall = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/tahoma.ttf")).deriveFont(30f);
-            ge.registerFont(fontSmall);
+            fontSelect = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/tahoma.ttf")).deriveFont(30f);
+            ge.registerFont(fontSelect);
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
@@ -124,12 +125,31 @@ public class Textbox {
         arcWidth = 0;
         arcHeight = 0;
         borderThickness = 3;
-        fillColor = new Color(239,235,222);
-        borderColor = new Color(10,85,233);
+        bigFillColor = new Color(239,235,222);
+        bigBorderColor = new Color(10,85,233);
+        smallFillColor = new Color(10,85,233);
+        smallBorderColor = new Color(10,85,233);
+
     }
 
     protected void worldTwoTextbox() {
-
+        try {
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            font = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/tahoma.ttf")).deriveFont(30f);
+            ge.registerFont(font);
+            fontSelect = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/tahoma.ttf")).deriveFont(30f);
+            ge.registerFont(fontSelect);
+        } catch (IOException | FontFormatException e) {
+            e.printStackTrace();
+        }
+        logo = ImageLoader.load("windowsxplogo2.png");
+        arcWidth = 0;
+        arcHeight = 0;
+        borderThickness = 3;
+        bigFillColor = new Color(238,240,243);
+        bigBorderColor = new Color(238,240,243);
+        smallFillColor = new Color(242,244,248);
+        smallBorderColor = new Color(242,244,248);
     }
 
     protected void worldThreeTextbox() {
@@ -141,6 +161,7 @@ public class Textbox {
     }
 
     public void setTextboxStyle(TextboxStyle textboxStyle) {
+        System.out.println("SET TEXTBOX STYLE");
         handleTextboxStyle();
         this.textboxStyle = textboxStyle;
     }
@@ -148,12 +169,13 @@ public class Textbox {
     public Textbox(Map map) {
         this.map = map;
         textboxStyle = TextboxStyle.HUBWORLD;
+        prevTextboxStyle = textboxStyle;
         try {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             font = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/arial.ttf")).deriveFont(30f);
             ge.registerFont(font);
-            fontSmall = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/arial.ttf")).deriveFont(30f);
-            ge.registerFont(fontSmall);
+            fontSelect = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/arial.ttf")).deriveFont(30f);
+            ge.registerFont(fontSelect);
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
@@ -216,9 +238,9 @@ public class Textbox {
     public SpriteFont spriteFontCompile(Queue<String> selectionQueue) {
         if (!selectionQueue.isEmpty() && keyLocker.isKeyLocked(interactKey)) {
             String next = selectionQueue.poll();
-            return new SpriteFont(next, fontX, fontY, fontSmall, Color.black);
+            return new SpriteFont(next, fontX, fontY, fontSelect, Color.black);
         } else if (selectionQueue.isEmpty() && keyLocker.isKeyLocked(interactKey)) {
-            return new SpriteFont("", fontX, fontY, fontSmall, Color.black);
+            return new SpriteFont("", fontX, fontY, fontSelect, Color.black);
         }
         return null;
     }
@@ -230,6 +252,12 @@ public class Textbox {
     }
 
     public void update() {
+        do {
+            prevTextboxStyle = textboxStyle;
+            handleTextboxStyle();
+        } while (prevTextboxStyle != textboxStyle);
+        // handleTextboxStyle();
+
         // if textQueue has more text to display and the interact key button was pressed previously, display new text
         if (!textQueue.isEmpty() && keyLocker.isKeyLocked(interactKey)) {
             String next = textQueue.peek();
@@ -238,13 +266,13 @@ public class Textbox {
             // to prevent it from covering the player
             if (!map.getCamera().isAtBottomOfMap()) {
                 fontY = fontBottomY;
-                fontYSmall = fontBottomYSmall;
+                fontYSelect = fontBottomYSelect;
             }
             else {
                 fontY = fontTopY;
-                fontYSmall = fontTopYSmall;
+                fontYSelect = fontTopYSelect;
             }
-            text = new SpriteFont(next, fontX, fontY, fontSmall, Color.black);
+            text = new SpriteFont(next, fontX, fontY, fontSelect, Color.black);
 
         }
 
@@ -295,36 +323,46 @@ public class Textbox {
         // to prevent it from covering the player
         if (!map.getCamera().isAtBottomOfMap()) {
             y = bottomY;
-            ySmall = bottomYSmall;
+            ySelect = bottomYSelect;
         } else {
             y = topY;
-            ySmall = topYSmall;
+            ySelect = topYSelect;
         }
 
         // ----- big textbox ----- //
+        //lower box
+        graphicsHandler.drawFilledRectangleWithBorder(x, y, width, height, arcWidth, arcHeight, bigFillColor, bigBorderColor, borderThickness);
         //upper box
-        graphicsHandler.drawFilledRectangleWithBorder(x, y-25, width, 25, arcWidth, arcHeight, borderColor, borderColor, borderThickness);
+        if (textboxStyle.equals(TextboxStyle.WORLDONE)) {
+            graphicsHandler.drawFilledRectangleGradientWithBorder(x, y-25, width, 25, arcWidth, arcHeight, new Color(57,147,255), new Color(10,85,234), smallBorderColor, borderThickness);
+        } else {
+            graphicsHandler.drawFilledRectangleWithBorder(x, y-25, width, 25, arcWidth, arcHeight, smallFillColor, smallBorderColor, borderThickness);
+        }
         //upper box details
         if (textboxStyle.equals(TextboxStyle.WORLDONE)) {
-            graphicsHandler.drawFilledRectangleWithBorder(x+width-22, y-22, 19, 19, 5, 5, new Color(218,74,34), new Color(217,210,226), 1);
+            // graphicsHandler.drawFilledRectangleWithBorder(x+width-22, y-22, 19, 19, 5, 5, new Color(218,74,34), new Color(217,210,226), 1);
+            graphicsHandler.drawFilledRectangleGradientWithBorder(x+width-22, y-22, 19, 19, 5, 5, new Color(240,162,141), new Color(194,48,8), new Color(217,210,226), 1);
             // SpriteFont X = new SpriteFont("X", x+width-22, y-22, font, new Color(217,210,226));
             // X.drawWithParsedNewLines(graphicsHandler, 10);
             graphicsHandler.drawImage(logo, x+2, y-22, 19, 19);
         }
-        //bottom box
-        graphicsHandler.drawFilledRectangleWithBorder(x, y, width, height, arcWidth, arcHeight, fillColor, borderColor, borderThickness);
         
-        // ----- small textbox ----- //
+        // ----- select textbox ----- //
         if (selectablesPresent == 1) {
+            //lower box
+            graphicsHandler.drawFilledRectangleWithBorder(xSelect, ySelect, widthSelect, heightSelect, arcWidth, arcHeight, bigFillColor, bigBorderColor, borderThickness);
             //upper box
-            graphicsHandler.drawFilledRectangleWithBorder(xSmall, ySmall-25, widthSmall, 25, arcWidth, arcHeight, borderColor, borderColor, borderThickness);
+            if (textboxStyle.equals(TextboxStyle.WORLDONE)) {
+                graphicsHandler.drawFilledRectangleGradientWithBorder(xSelect, ySelect-25, widthSelect, 25, arcWidth, arcHeight, new Color(57,147,255), new Color(10,85,234), smallBorderColor, borderThickness);
+            } else {
+                graphicsHandler.drawFilledRectangleWithBorder(xSelect, ySelect-25, widthSelect, 25, arcWidth, arcHeight, smallFillColor, smallBorderColor, borderThickness);
+            }
             //upper box details
             if (textboxStyle.equals(TextboxStyle.WORLDONE)) {
-                graphicsHandler.drawFilledRectangleWithBorder(xSmall+widthSmall-22, ySmall-22, 19, 19, 5, 5, new Color(218,74,34), new Color(217,210,226), 1);
-                graphicsHandler.drawImage(logo, xSmall+2, ySmall-22, 19, 19);
+                // graphicsHandler.drawFilledRectangleWithBorder(xSelect+widthSelect-22, ySelect-22, 19, 19, 5, 5, new Color(218,74,34), new Color(217,210,226), 1);
+                graphicsHandler.drawFilledRectangleGradientWithBorder(xSelect+widthSelect-22, ySelect-22, 19, 19, 5, 5, new Color(240,162,141), new Color(194,48,8), new Color(217,210,226), 1);
+                graphicsHandler.drawImage(logo, xSelect+2, ySelect-22, 19, 19);
             }
-            //lower box
-            graphicsHandler.drawFilledRectangleWithBorder(xSmall, ySmall, widthSmall, heightSmall, arcWidth, arcHeight, fillColor, borderColor, borderThickness);
         }
 
         if (text != null) {
@@ -340,8 +378,8 @@ public class Textbox {
             selectionText[currentTextItemHovered].setColor(Color.red);
 
             selectionText[0].drawWithParsedNewLines(graphicsHandler, 10);
-            int y = fontYSmall;
-            int x = fontXSmall;
+            int y = fontYSelect;
+            int x = fontXSelect;
             for (int i = 0; i < compiledCount; i++) {
                 selectionText[i].setY(y);
                 selectionText[i].setX(x+10);
@@ -372,21 +410,21 @@ public class Textbox {
         this.choice = choice;
     }
 
-    public Color getFillColor() {
-        return fillColor;
-    }
+    // public Color getBigFillColor() {
+    //     return fillColor;
+    // }
 
-    public void setFillColor(Color fillColor) {
-        this.fillColor = fillColor;
-    }
+    // public void setBigFillColor(Color fillColor) {
+    //     this.fillColor = fillColor;
+    // }
 
-    public Color getBorderColor() {
-        return borderColor;
-    }
+    // public Color getBigBorderColor() {
+    //     return borderColor;
+    // }
 
-    public void setBorderColor(Color borderColor) {
-        this.borderColor = borderColor;
-    }
+    // public void setBorderColor(Color borderColor) {
+    //     this.borderColor = borderColor;
+    // }
 
     public boolean isActive() {
         return isActive;

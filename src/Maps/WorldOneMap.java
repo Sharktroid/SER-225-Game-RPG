@@ -7,6 +7,7 @@ import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
 import Level.Script;
+import Level.TextboxStyle;
 import Level.Trigger;
 import NPCs.Beaver;
 import NPCs.Catsuit;
