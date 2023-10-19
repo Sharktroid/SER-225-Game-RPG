@@ -18,6 +18,7 @@ public class portalThreeScript extends Script {
         hideTextbox();
         unlockPlayer();
         setFlag("portalThreeActivated");
+        setFlag("startWorldThree");
     }
 
     @Override

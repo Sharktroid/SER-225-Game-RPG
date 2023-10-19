@@ -4,7 +4,6 @@ import Level.Script;
 import Level.ScriptState;
 import Maps.HubMap;
 
-// trigger script at beginning of game to set that heavy emotional plot
 public class hubMsgScript extends Script {
     @Override
     protected void setup() {
