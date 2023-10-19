@@ -101,7 +101,6 @@ public abstract class Script<T extends MapEntity> {
 
     protected void showTextbox(TextboxStyle textboxStyle) {
         map.getTextbox().setIsActive(true);
-        setTextboxStyle(textboxStyle);
     }
 
     // adds text to be shown in textbox

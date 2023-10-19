@@ -14,6 +14,7 @@ public class WalrusScript extends Script<NPC> {
     @Override
     protected void setup() {
         lockPlayer();
+        
         setTextboxStyle(TextboxStyle.WORLDONE);
         setNPCName("Walrus");
         showTextbox();

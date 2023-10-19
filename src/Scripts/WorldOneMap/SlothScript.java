@@ -12,8 +12,8 @@ public class SlothScript extends Script<NPC> {
     protected void setup() {
         lockPlayer();
 
-        setNPCName("Sloth");
         setTextboxStyle(TextboxStyle.WORLDTWO);
+        setNPCName("Sloth");
         showTextbox();
 
         // changes what Sloth says when talking to him the first time (flag is not set) vs talking to him afterwards (flag is set)

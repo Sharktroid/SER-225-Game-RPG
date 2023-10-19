@@ -45,6 +45,7 @@ public class Textbox {
     protected static Font fontSelect;
     protected static Font fontSmall;
     protected BufferedImage logo;
+    protected int fontSmallX;
     protected int arcWidth;
     protected int arcHeight;
     protected int borderThickness;
@@ -92,17 +93,16 @@ public class Textbox {
                 worldThreeTextbox();
                 break;
         }
-        System.out.println(textboxStyle);
     }
 
     protected void hubWorldTextbox() {
         try {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            font = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/arial.ttf")).deriveFont(30f);
+            font = Font.createFont(Font.TRUETYPE_FONT, new File("Resources/fonts/arial.ttf")).deriveFont(10f);
             ge.registerFont(font);
-            fontSelect = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/arial.ttf")).deriveFont(30f);
+            fontSelect = Font.createFont(Font.TRUETYPE_FONT, new File("Resources/fonts/arial.ttf")).deriveFont(10f);
             ge.registerFont(fontSelect);
-            fontSmall = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/arial.ttf")).deriveFont(30f);
+            fontSmall = Font.createFont(Font.TRUETYPE_FONT, new File("Resources/fonts/arial.ttf")).deriveFont(10f);
             ge.registerFont(fontSmall);
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
@@ -110,6 +110,7 @@ public class Textbox {
         arcWidth = 0;
         arcHeight = 0;
         borderThickness = 3;
+        fontSmallX = fontX+10; 
         bigFillColor = Color.RED;
         bigBorderColor = Color.BLUE;
         smallFillColor = Color.YELLOW;
@@ -121,19 +122,20 @@ public class Textbox {
     protected void worldOneTextbox() {
         try {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            font = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/tahoma.ttf")).deriveFont(30f);
+            font = Font.createFont(Font.TRUETYPE_FONT, new File("Resources/fonts/tahoma.ttf")).deriveFont(30f);
             ge.registerFont(font);
-            fontSelect = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/tahoma.ttf")).deriveFont(30f);
+            fontSelect = Font.createFont(Font.TRUETYPE_FONT, new File("Resources/fonts/tahoma.ttf")).deriveFont(30f);
             ge.registerFont(fontSelect);
-            fontSmall = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/trebuchetms.ttf")).deriveFont(30f);
+            fontSmall = Font.createFont(Font.TRUETYPE_FONT, new File("Resources/fonts/trebuchetms.ttf")).deriveFont(20f);
             ge.registerFont(fontSmall);
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
-        logo = ImageLoader.load("windowsxplogo2.png");
+        logo = ImageLoader.load("windowsxplogo.png", Color.MAGENTA);
         arcWidth = 0;
         arcHeight = 0;
         borderThickness = 3;
+        fontSmallX = fontX+10;
         bigFillColor = new Color(239,235,222);
         bigBorderColor = new Color(10,85,233);
         smallFillColor = new Color(10,85,233);
@@ -145,19 +147,19 @@ public class Textbox {
     protected void worldTwoTextbox() {
         try {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            font = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/sfpro.ttf")).deriveFont(30f);
+            font = Font.createFont(Font.TRUETYPE_FONT, new File("Resources/fonts/sfpro.ttf")).deriveFont(20f);
             ge.registerFont(font);
-            fontSelect = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/sfpro.ttf")).deriveFont(30f);
+            fontSelect = Font.createFont(Font.TRUETYPE_FONT, new File("Resources/fonts/sfpro.ttf")).deriveFont(30f);
             ge.registerFont(fontSelect);
-            fontSmall = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/sfpro.ttf")).deriveFont(30f);
+            fontSmall = Font.createFont(Font.TRUETYPE_FONT, new File("Resources/fonts/sfpro.ttf")).deriveFont(16f);
             ge.registerFont(fontSmall);
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
-        logo = ImageLoader.load("windowsxplogo2.png");
         arcWidth = 0;
         arcHeight = 0;
         borderThickness = 1;
+        fontSmallX = x+242;
         bigFillColor = new Color(238,240,243);
         bigBorderColor = new Color(220,222,224);
         smallFillColor = new Color(242,244,248);
@@ -167,7 +169,27 @@ public class Textbox {
     }
 
     protected void worldThreeTextbox() {
-
+        try {
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            font = Font.createFont(Font.TRUETYPE_FONT, new File("Resources/fonts/opensans.ttf")).deriveFont(20f);
+            ge.registerFont(font);
+            fontSelect = Font.createFont(Font.TRUETYPE_FONT, new File("Resources/fonts/opensans.ttf")).deriveFont(30f);
+            ge.registerFont(fontSelect);
+            fontSmall = Font.createFont(Font.TRUETYPE_FONT, new File("Resources/fonts/opensans.ttf")).deriveFont(16f);
+            ge.registerFont(fontSmall);
+        } catch (IOException | FontFormatException e) {
+            e.printStackTrace();
+        }
+        arcWidth = 0;
+        arcHeight = 0;
+        borderThickness = 1;
+        fontSmallX = x+242;
+        bigFillColor = new Color(248,249,251);
+        bigBorderColor = new Color(248,249,251);
+        smallFillColor = new Color(51,104,213);
+        smallBorderColor = new Color(51,104,213);
+        bigFontColor = new Color(93,98,104);
+        smallFontColor = new Color(248,249,251);
     }
 
     public TextboxStyle getTextboxStyle() {
@@ -176,8 +198,8 @@ public class Textbox {
 
     public void setTextboxStyle(TextboxStyle textboxStyle) {
         System.out.println("SET TEXTBOX STYLE");
-        handleTextboxStyle();
         this.textboxStyle = textboxStyle;
+        handleTextboxStyle();
     }
 
     public Textbox(Map map) {
@@ -186,11 +208,11 @@ public class Textbox {
         prevTextboxStyle = textboxStyle;
         try {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            font = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/arial.ttf")).deriveFont(30f);
+            font = Font.createFont(Font.TRUETYPE_FONT, new File("Resources/fonts/arial.ttf")).deriveFont(30f);
             ge.registerFont(font);
-            fontSelect = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/arial.ttf")).deriveFont(30f);
+            fontSelect = Font.createFont(Font.TRUETYPE_FONT, new File("Resources/fonts/arial.ttf")).deriveFont(30f);
             ge.registerFont(fontSelect);
-            fontSmall = Font.createFont(Font.TRUETYPE_FONT, new File("src/Level/arial.ttf")).deriveFont(30f);
+            fontSmall = Font.createFont(Font.TRUETYPE_FONT, new File("Resources/fonts/arial.ttf")).deriveFont(20f);
             ge.registerFont(fontSmall);
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
@@ -233,7 +255,7 @@ public class Textbox {
         }
 
         for (int i = selectionText.length; i < this.selectionText.length; i++) {
-            this.selectionText[i] = new SpriteFont("", fontX, fontY, font, bigFontColor);
+            this.selectionText[i] = new SpriteFont("", fontX, fontY, fontSelect, bigFontColor);
         }
         
         selectablesPresent = 1;
@@ -268,11 +290,6 @@ public class Textbox {
     }
 
     public void update() {
-        do {
-            prevTextboxStyle = textboxStyle;
-            handleTextboxStyle();
-        } while (prevTextboxStyle != textboxStyle);
-        // handleTextboxStyle();
 
         // if textQueue has more text to display and the interact key button was pressed previously, display new text
         if (!textQueue.isEmpty() && keyLocker.isKeyLocked(interactKey)) {
@@ -288,7 +305,7 @@ public class Textbox {
                 fontY = fontTopY;
                 fontYSelect = fontTopYSelect;
             }
-            text = new SpriteFont(next, fontX, fontY, fontSelect, bigFontColor);
+            text = new SpriteFont(next, fontX, fontY, font, bigFontColor);
 
         }
 
@@ -351,16 +368,21 @@ public class Textbox {
         //upper box
         if (textboxStyle.equals(TextboxStyle.WORLDONE)) {
             graphicsHandler.drawFilledRectangleGradientWithBorder(x, y-25, width, 25, arcWidth, arcHeight, new Color(57,147,255), new Color(10,85,234), smallBorderColor, borderThickness);
+        } else if (textboxStyle.equals(TextboxStyle.WORLDTHREE)) {
+            graphicsHandler.drawFilledRectangleWithBorder(x, y-25, width, 25, arcWidth, arcHeight, smallFillColor, smallBorderColor, borderThickness);
         } else {
             graphicsHandler.drawFilledRectangleWithBorder(x, y-25, width, 25, arcWidth, arcHeight, smallFillColor, smallBorderColor, borderThickness);
         }
         //upper box details
         if (textboxStyle.equals(TextboxStyle.WORLDONE)) {
-            // graphicsHandler.drawFilledRectangleWithBorder(x+width-22, y-22, 19, 19, 5, 5, new Color(218,74,34), new Color(217,210,226), 1);
             graphicsHandler.drawFilledRectangleGradientWithBorder(x+width-22, y-22, 19, 19, 5, 5, new Color(240,162,141), new Color(194,48,8), new Color(217,210,226), 1);
             // SpriteFont X = new SpriteFont("X", x+width-22, y-22, font, new Color(217,210,226));
             // X.drawWithParsedNewLines(graphicsHandler, 10);
             graphicsHandler.drawImage(logo, x+2, y-22, 19, 19);
+        } else if (textboxStyle.equals(TextboxStyle.WORLDTWO)) {
+            graphicsHandler.drawFilledRectangleWithBorder(x+8, y-18, 11, 11, 11, 11, new Color(253,95,86), new Color(241,93,84), 1);
+            graphicsHandler.drawFilledRectangleWithBorder(x+27, y-18, 11, 11, 11, 11, new Color(254,189,47), new Color(241,180,51), 1);
+            graphicsHandler.drawFilledRectangleWithBorder(x+46, y-18, 11, 11, 11, 11, new Color(40,200,64), new Color(77,189,84), 1);
         }
         
         // ----- select textbox ----- //
@@ -415,7 +437,7 @@ public class Textbox {
         } else {
             fontY = fontTopY;
         }
-        this.npcName = new SpriteFont(npcName, fontX+10, fontY - 34, "Trebuchet MS", 18, smallFontColor);
+        this.npcName = new SpriteFont(npcName, fontSmallX, fontY - 34, fontSmall, smallFontColor);
     }
 
     public int getChoice() {
