@@ -14,6 +14,7 @@ public class RedpandaScript extends Script<NPC> {
 
         setTextboxStyle(TextboxStyle.WORLDTHREE);
         setNPCName("Red Panda");
+        int fontSmallX = getNPCName().getText().length();
         showTextbox();
 
         // changes what Redpanda says when talking to him the first time (flag is not set) vs talking to him afterwards (flag is set)
