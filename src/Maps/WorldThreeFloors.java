@@ -8,7 +8,9 @@ import Scripts.WorldThreeFloors.downLevelScript;
 import Tilesets.CommonTileset;
 
 import NPCs.Redpanda;
+import NPCs.Dinosaur;
 import Scripts.WorldThreeFloors.RedpandaScript;
+import Scripts.WorldThreeFloors.DinoScript;
 
 import java.util.ArrayList;
 
@@ -19,9 +21,8 @@ public class WorldThreeFloors extends Map {
     public static int currentFloorNumber = 0;
     public static boolean downFromFloor;
 
-    public static boolean redPandaFlagState(){
-        return RedpandaScript.setRedPandaFlagState;
-    }
+    
+
 
     // current floor number getter
     public static int getCurrentFloorNumber() {
@@ -116,6 +117,20 @@ public class WorldThreeFloors extends Map {
             npcs.add(redpanda);
         }
 
+        if (currentFloorNumber == 4) {
+            Dinosaur dino = new Dinosaur(5, getMapTile(1, 11).getLocation().subtractY(40));
+            dino.setInteractScript(new DinoScript());
+            npcs.add(dino);
+        }
+
         return npcs;
+    }
+
+    public static boolean redPandaFlagState(){
+        return RedpandaScript.setRedPandaFlagState;
+    }
+
+    public static boolean DinoFlagState(){
+        return DinoScript.setDinoFlagState;
     }
 }

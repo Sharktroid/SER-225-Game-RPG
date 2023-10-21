@@ -77,6 +77,7 @@ public class PlayLevelScreen extends Screen {
             flagManager.addFlag("wentUpLevel", false);
             flagManager.addFlag("wentDownLevel", false);
             flagManager.addFlag("hasTalkedToRedPanda", WorldThreeFloors.redPandaFlagState());
+            flagManager.addFlag("hasTalkedToDino", WorldThreeFloors.DinoFlagState());
         } 
 
         //setup hub world map
