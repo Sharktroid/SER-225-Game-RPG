@@ -2,21 +2,19 @@ package Maps;
 
 import EnhancedMapTiles.MedkitObject;
 import EnhancedMapTiles.CatFoodObject;
-import EnhancedMapTiles.PushableRock;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
-import Level.Script;
 import Level.Trigger;
 import NPCs.Beaver;
 import NPCs.Catsuit;
 import NPCs.Dinosaur;
 import NPCs.Giraffe;
 import NPCs.Officeworker;
+import NPCs.PsychicPsycho;
 import NPCs.Redpanda;
 import NPCs.Sloth;
 import NPCs.Walrus;
-import Scripts.SimpleTextScript;
 import Scripts.WorldOneMap.BeaverScript;
 import Scripts.WorldOneMap.CatsuitScript;
 import Scripts.WorldOneMap.DinoScript;
@@ -83,6 +81,10 @@ public class WorldOneMap extends Map {
         Officeworker officeworker = new Officeworker(8, getMapTile(11, 16).getLocation().subtractY(40));
         officeworker.setInteractScript(new OfficeworkerScript());
         npcs.add(officeworker);
+
+        PsychicPsycho psychicPsycho = new PsychicPsycho(8, getMapTile(11, 16).getLocation().subtractY(40));
+        // psychicPsycho.setInteractScript(new OfficeworkerScript());
+        npcs.add(psychicPsycho);
 
         return npcs;
     }

@@ -1,5 +1,9 @@
 package Screens;
 
+import java.util.ArrayList;
+
+import Combatants.PlayerCombatant;
+import Combatants.PsychicPsycho;
 import Engine.GraphicsHandler;
 import Engine.Key;
 import Engine.KeyLocker;
@@ -114,6 +118,11 @@ public class PlayLevelScreen extends Screen {
         inventory = new InventoryMenu(player);
 
         winScreen = new WinScreen(this);
+
+        ArrayList<Combatant> combatants = new ArrayList<Combatant>();
+        combatants.add(new PlayerCombatant(player, Combatant.ControlType.HUMAN));
+        combatants.add(new PsychicPsycho(player));
+        map.initiateCombat(new ArrayList<Combatant>(combatants));
     }
 
     public void update() {

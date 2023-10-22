@@ -4,6 +4,7 @@ import Engine.Config;
 import Engine.GraphicsHandler;
 import Engine.ScreenManager;
 import GameObject.Rectangle;
+import Level.BattleSystem.BattleSystem;
 import Utils.Direction;
 import Utils.Point;
 
@@ -13,6 +14,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import Combatants.PlayerCombatant;
 
 /*
     This class is for defining a map that is used for a specific level
@@ -73,6 +76,8 @@ public abstract class Map {
     protected Textbox textbox;
     // map's small textbox instance
     protected TextboxSmall textboxSmall;
+
+    private BattleSystem currentBattleSystem;
 
     public Map(String mapFileName, Tileset tileset) {
         this.mapFileName = mapFileName;
@@ -489,16 +494,21 @@ public abstract class Map {
     }
 
     public void update(Player player) {
-        if (adjustCamera) {
-            adjustMovementY(player);
-            adjustMovementX(player);
+        if (currentBattleSystem == null) {
+            if (adjustCamera) {
+                adjustMovementY(player);
+                adjustMovementX(player);
+            }
+            camera.update(player);
+            if (textbox.isActive()) {
+                textbox.update();
+            }
+            if (textboxSmall.isActive()) {
+                textboxSmall.update();
+            }
         }
-        camera.update(player);
-        if (textbox.isActive()) {
-            textbox.update();
-        }
-        if (textboxSmall.isActive()) {
-            textboxSmall.update();
+        else{
+            currentBattleSystem.update();
         }
     }
 
@@ -572,6 +582,9 @@ public abstract class Map {
         if (textboxSmall.isActive()) {
             textboxSmall.draw(graphicsHandler);
         }
+        if (currentBattleSystem != null) {
+            currentBattleSystem.draw(graphicsHandler);
+        }
     }
 
     public FlagManager getFlagManager() { return flagManager; }
@@ -592,5 +605,15 @@ public abstract class Map {
             currentNpc.setX(scanner.nextFloat());
             currentNpc.setY(scanner.nextFloat());
         }
+    }
+
+    public void initiateCombat(ArrayList<Combatant> combatants) {
+        currentBattleSystem = new BattleSystem(this, combatants);
+    }
+
+    public void endCombat() {
+        currentBattleSystem = null;
+        getTextbox().addText("You Win!!");
+        getTextbox().setIsActive(true);
     }
 }
