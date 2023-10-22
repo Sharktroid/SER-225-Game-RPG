@@ -4,7 +4,6 @@ import Level.Script;
 import Level.ScriptState;
 import Level.TextboxStyle;
 
-// script for talking to tree with hole in it
 public class portalOneScript extends Script {
 
     @Override

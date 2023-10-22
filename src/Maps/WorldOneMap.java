@@ -2,7 +2,6 @@ package Maps;
 
 import EnhancedMapTiles.MedkitObject;
 import EnhancedMapTiles.CatFoodObject;
-import EnhancedMapTiles.PushableRock;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
@@ -17,7 +16,6 @@ import NPCs.Officeworker;
 import NPCs.Redpanda;
 import NPCs.Sloth;
 import NPCs.Walrus;
-import Scripts.SimpleTextScript;
 import Scripts.WorldOneMap.BeaverScript;
 import Scripts.WorldOneMap.CatsuitScript;
 import Scripts.WorldOneMap.DinoScript;
