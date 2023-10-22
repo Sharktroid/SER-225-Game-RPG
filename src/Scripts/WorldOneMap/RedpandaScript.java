@@ -12,7 +12,7 @@ public class RedpandaScript extends Script<NPC> {
     protected void setup() {
         lockPlayer();
 
-        setTextboxStyle(TextboxStyle.WORLDTHREE);
+        setTextboxStyle(TextboxStyle.WORLDONE);
         setNPCName("Red Panda");
         showTextbox();
 

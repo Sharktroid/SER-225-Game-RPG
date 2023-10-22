@@ -12,7 +12,7 @@ public class SlothScript extends Script<NPC> {
     protected void setup() {
         lockPlayer();
 
-        setTextboxStyle(TextboxStyle.WORLDTWO);
+        setTextboxStyle(TextboxStyle.WORLDONE);
         setNPCName("Sloth");
         showTextbox();
 
