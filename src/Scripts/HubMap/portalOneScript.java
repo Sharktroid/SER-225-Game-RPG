@@ -9,8 +9,10 @@ public class portalOneScript extends Script {
     @Override
     protected void setup() {
         lockPlayer();
+
         setTextboxStyle(TextboxStyle.HUBWORLD);
         showTextbox();
+        
         addTextToTextboxQueue("Teleporting to world 1");
 
     }

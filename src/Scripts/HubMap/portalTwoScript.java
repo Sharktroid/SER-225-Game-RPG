@@ -9,8 +9,10 @@ public class portalTwoScript extends Script {
     @Override
     protected void setup() {
         lockPlayer();
+
         setTextboxStyle(TextboxStyle.HUBWORLD);
         showTextbox();
+        
         addTextToTextboxQueue("Teleporting to world 2");
 
     }

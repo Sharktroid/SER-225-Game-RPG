@@ -3,6 +3,7 @@ package Scripts.WorldThreeFloors;
 import Level.NPC;
 import Level.Script;
 import Level.ScriptState;
+import Level.TextboxStyle;
 
 // script for talking to redpanda npc
 
@@ -13,6 +14,9 @@ public class DinoScript extends Script<NPC> {
     @Override
     protected void setup() {
         lockPlayer();
+
+        setTextboxStyle(TextboxStyle.WORLDTHREE);
+        setNPCName("Dino");
         showTextbox();
 
         //entity.facePlayer(player);

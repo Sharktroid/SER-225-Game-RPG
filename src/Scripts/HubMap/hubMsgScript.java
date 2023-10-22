@@ -9,8 +9,10 @@ public class hubMsgScript extends Script {
     @Override
     protected void setup() {
         lockPlayer();
+        
         setTextboxStyle(TextboxStyle.HUBWORLD);
         showTextbox();
+
         addTextToTextboxQueue("portal hub world");
         addTextToTextboxQueue("walk to the left square for world one");
         addTextToTextboxQueue("middle square for world two");
