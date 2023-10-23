@@ -293,8 +293,10 @@ public class Textbox {
             } else if (textboxStyle.equals(TextboxStyle.WORLDTWO)) {
                 graphicsHandler.drawFilledRectangleWithBorder(xSelect, ySelect-25, widthSelect, 25, arcWidth, arcHeight, smallFillColor, smallBorderColor, borderThickness);
                 graphicsHandler.drawFilledRectangleWithBorder(xSelect, ySelect-15, widthSelect, 15, 0, 0, smallFillColor, smallFillColor, borderThickness);
-            } else {
-                graphicsHandler.drawFilledRectangleWithBorder(xSelect, ySelect-25, widthSelect, 25, arcWidth, arcHeight, smallFillColor, smallBorderColor, borderThickness);
+            } else if (textboxStyle.equals(TextboxStyle.WORLDTHREE)) {
+                graphicsHandler.drawFilledRectangleWithBorder(xSelect, ySelect-30, widthSelect, 30, arcWidth, arcHeight, smallFillColor, smallBorderColor, borderThickness);
+            } else { //hubworld
+                graphicsHandler.drawFilledRectangleWithBorder(xSelect, ySelect-30, widthSelect, 30, arcWidth, arcHeight, smallFillColor, smallBorderColor, borderThickness);
             }
             //upper box details
             if (textboxStyle.equals(TextboxStyle.WORLDONE)) {
@@ -314,8 +316,12 @@ public class Textbox {
                 graphicsHandler.drawFilledRectangleWithBorder(xSelect+27, ySelect-18, 11, 11, 11, 11, new Color(254,189,47), new Color(241,180,51), 1);
                 //green
                 graphicsHandler.drawFilledRectangleWithBorder(xSelect+46, ySelect-18, 11, 11, 11, 11, new Color(40,200,64), new Color(77,189,84), 1);
-            } else {
+            } else if (textboxStyle.equals(TextboxStyle.WORLDTHREE)) {
                 SpriteFont X = new SpriteFont("X", xSelect+widthSelect-19, ySelect-21, "Arial", 15, new Color(54,68,85));
+                X.drawWithParsedNewLines(graphicsHandler, 10);
+            } else {
+                graphicsHandler.drawImage(logo, xSelect+8, ySelect-22, 14, 14);
+                SpriteFont X = new SpriteFont("X", xSelect+widthSelect-19, y-22, "Arial", 13, bigFontColor);
                 X.drawWithParsedNewLines(graphicsHandler, 10);
             }
             //lower box
