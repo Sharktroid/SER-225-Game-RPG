@@ -67,6 +67,8 @@ public class PlayLevelScreen extends Screen {
         //setup world two map
         else if (worldNum == 2) {
             this.map = new WorldTwoMap();
+
+            flagManager.addFlag("hasTalkedToBeaver", false);
         } 
         
         //setup world three map
