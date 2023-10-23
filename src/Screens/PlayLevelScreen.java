@@ -170,18 +170,20 @@ public class PlayLevelScreen extends Screen {
                 break;
         }
 
-        //hub world teleportation
-        if (map.getFlagManager().isFlagSet("portalOneActivated")) {
+        //hub world teleportation **(temporary quick world swap keys)
+        if (map.getFlagManager().isFlagSet("portalOneActivated") || Keyboard.isKeyDown(Key.ONE) && !keyLocker.isKeyLocked(Key.ONE)) {
             worldNum = 1;
             initialize();
-        } else if (map.getFlagManager().isFlagSet("portalTwoActivated")) {
+        } else if (map.getFlagManager().isFlagSet("portalTwoActivated")||Keyboard.isKeyDown(Key.TWO) && !keyLocker.isKeyLocked(Key.TWO)) {
             worldNum = 2;
             initialize();
-        } else if (map.getFlagManager().isFlagSet("portalThreeActivated")) {
+        } else if (map.getFlagManager().isFlagSet("portalThreeActivated") || Keyboard.isKeyDown(Key.THREE) && !keyLocker.isKeyLocked(Key.THREE)) {
             worldNum = 3;
             initialize();
-        }
-
+        }else if (Keyboard.isKeyDown(Key.FOUR) && !keyLocker.isKeyLocked(Key.FOUR)) {
+            worldNum = 4;
+            initialize();
+        }    
         //world three floor traversal
         if (worldNum == 3) {
             if (map.getFlagManager().isFlagSet("enteredBuilding")) {
