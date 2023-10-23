@@ -3,14 +3,13 @@ package Level.BattleSystem;
 import java.util.ArrayList;
 
 import Combatants.PlayerCombatant;
+import Engine.Config;
 import Level.Combatant;
 import Level.Menu;
-import Menus.InventoryMenuItemSelectionBox;
 
 public class BattleMenu extends Menu {
-    protected InventoryMenuItemSelectionBox selectionBox;
     private State currentState = State.SELECTINGATTACK;
-    public Combatant combatant;
+    Combatant combatant;
     private BattleSystem battleSystem;
     private ArrayList<Combatant> enemyCombatants;
 
@@ -21,8 +20,9 @@ public class BattleMenu extends Menu {
 
     public BattleMenu(BattleSystem battleSystem) {
         this.battleSystem = battleSystem;
-        width = 500;
-        height = 500;
+        top = 400;
+        width = Config.GAME_WINDOW_WIDTH - left * 2 - 16;
+        height = Config.GAME_WINDOW_HEIGHT - top - 25 - 39;
         rows = 1;
         columns = 1;
         reset();
@@ -58,6 +58,9 @@ public class BattleMenu extends Menu {
             currentState = State.SELECTINGATTACK;
             reset();
 
+        }
+        else {
+            battleSystem.map.getTextbox().setIsActive(true);
         }
         super.setActive(active);
     }

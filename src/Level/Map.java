@@ -500,15 +500,15 @@ public abstract class Map {
                 adjustMovementX(player);
             }
             camera.update(player);
-            if (textbox.isActive()) {
-                textbox.update();
-            }
-            if (textboxSmall.isActive()) {
-                textboxSmall.update();
-            }
         }
         else{
             currentBattleSystem.update();
+        }
+        if (textbox.isActive()) {
+            textbox.update();
+        }
+        if (textboxSmall.isActive()) {
+            textboxSmall.update();
         }
     }
 
@@ -607,13 +607,11 @@ public abstract class Map {
         }
     }
 
-    public void initiateCombat(ArrayList<Combatant> combatants) {
+    public void initiateCombat(Player player, ArrayList<Combatant> combatants) {
         currentBattleSystem = new BattleSystem(this, combatants);
     }
 
     public void endCombat() {
         currentBattleSystem = null;
-        getTextbox().addText("You Win!!");
-        getTextbox().setIsActive(true);
     }
 }

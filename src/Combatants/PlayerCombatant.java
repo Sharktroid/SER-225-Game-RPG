@@ -2,14 +2,15 @@ package Combatants;
 
 import GameObject.GameObject;
 import Level.Combatant;
+import Level.Map;
 import Level.Player;
 
 public class PlayerCombatant extends Combatant {
 
-    public PlayerCombatant(Player player, ControlType controlType) {
-        super((GameObject) player, controlType);
+    public PlayerCombatant(Player player, Map map, ControlType controlType) {
+        super((GameObject) player, map, controlType);
         hitPoints = (int) player.getCurrentHealth();
-        name = "Player";
+        name = player.getName();
     }
 
     @Override
@@ -19,6 +20,17 @@ public class PlayerCombatant extends Combatant {
 
     public void bash(Combatant target) {
         target.dealDamage(20);
+        map.getTextbox().addText(String.format("The %s attacks.\n20 damage.", name));
+    }
+
+    @Override
+    public String getIntroMessage() {
+        return null;
+    }
+
+    @Override
+    public String getDeathMessage() {
+        return "You lost the battle!";
     }
 
 }

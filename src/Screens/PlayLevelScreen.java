@@ -120,9 +120,9 @@ public class PlayLevelScreen extends Screen {
         winScreen = new WinScreen(this);
 
         ArrayList<Combatant> combatants = new ArrayList<Combatant>();
-        combatants.add(new PlayerCombatant(player, Combatant.ControlType.HUMAN));
-        combatants.add(new PsychicPsycho(player));
-        map.initiateCombat(new ArrayList<Combatant>(combatants));
+        combatants.add(new PlayerCombatant(player, map, Combatant.ControlType.HUMAN));
+        combatants.add(new PsychicPsycho(player, map));
+        map.initiateCombat(player, new ArrayList<Combatant>(combatants));
     }
 
     public void update() {
