@@ -32,7 +32,7 @@ public class PlayLevelScreen extends Screen {
     protected int worldNum = -1;
     protected int floorNum = 0;
     private InventoryMenu inventory;
-    
+
     protected boolean flagStates[];
     private KeyLocker keyLocker = new KeyLocker();
 
@@ -54,8 +54,8 @@ public class PlayLevelScreen extends Screen {
         if (worldNum == 0) {
             this.map = new WorldZeroMap();
 
-        
-        } 
+
+        }
         //set world one map
         else if (worldNum == 1) {
             this.map = new WorldOneMap();
@@ -66,25 +66,25 @@ public class PlayLevelScreen extends Screen {
             flagManager.addFlag("hasFoundBall", false);
             flagManager.addFlag("sawHubMsg", false);
 
-        
-        } 
+
+        }
         //setup world two map
         else if (worldNum == 2) {
             this.map = new WorldTwoMap();
 
             flagManager.addFlag("hasTalkedToBeaver", false);
-        } 
-        
+        }
+
         //setup world three map
         else if (worldNum == 3) {
 
             this.map = new WorldThreeFloors(floorNum);
-            
+
             flagManager.addFlag("wentUpLevel", false);
             flagManager.addFlag("wentDownLevel", false);
             flagManager.addFlag("hasTalkedToRedPanda", WorldThreeFloors.redPandaFlagState());
             flagManager.addFlag("hasTalkedToDino", WorldThreeFloors.DinoFlagState());
-        } 
+        }
 
         //setup hub world map
         else if (worldNum == 4) {
@@ -138,12 +138,11 @@ public class PlayLevelScreen extends Screen {
 
         //setup inventory menu
         inventory = new InventoryMenu(player);
-        inventory = new InventoryScreen(player);
 
         //setup win screen (**from old test map)
         winScreen = new WinScreen(this);
     }
-    
+
     public void update() {
 
         // based on screen state, perform specific actions
@@ -188,7 +187,7 @@ public class PlayLevelScreen extends Screen {
         }else if (Keyboard.isKeyDown(Key.FOUR) && !keyLocker.isKeyLocked(Key.FOUR)) {
             worldNum = 4;
             initialize();
-        }    
+        }
         //world three floor traversal
         if (worldNum == 3) {
             if (map.getFlagManager().isFlagSet("enteredBuilding")) {

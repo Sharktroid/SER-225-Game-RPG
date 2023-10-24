@@ -13,7 +13,7 @@ import NPCs.Catsuit;
 import NPCs.Dinosaur;
 import NPCs.Giraffe;
 import NPCs.Officeworker;
-import NPCs.SoulConsumingFlame;
+import NPCs.SoulConsumingFlameNPC;
 import NPCs.Redpanda;
 import NPCs.Sloth;
 import NPCs.Walrus;
@@ -25,7 +25,7 @@ import Scripts.WorldOneMap.LostBallScript;
 import Scripts.WorldOneMap.OfficeworkerScript;
 import Scripts.WorldOneMap.RedpandaScript;
 import Scripts.WorldOneMap.SlothScript;
-import Scripts.WorldOneMap.SoulConsumingFlameScript;
+import Scripts.WorldOneMap.SoulConsumingFlameNPCScript;
 import Scripts.WorldOneMap.WalrusScript;
 import Tilesets.CommonTileset;
 
@@ -85,8 +85,8 @@ public class WorldOneMap extends Map {
         officeworker.setInteractScript(new OfficeworkerScript());
         npcs.add(officeworker);
 
-        SoulConsumingFlame soulConsumingFlame = new SoulConsumingFlame(8, getMapTile(11, 16).getLocation().subtractY(40));
-        soulConsumingFlame.setInteractScript(new SoulConsumingFlameScript());
+        SoulConsumingFlameNPC soulConsumingFlame = new SoulConsumingFlameNPC(8, getMapTile(11, 16).getLocation().subtractY(40));
+        soulConsumingFlame.setInteractScript(new SoulConsumingFlameNPCScript());
         npcs.add(soulConsumingFlame);
 
         return npcs;

@@ -14,11 +14,11 @@ import Utils.Point;
 import java.util.HashMap;
 
 // This class is for the Officeworker NPC
-public class SoulConsumingFlame extends NPC {
+public class SoulConsumingFlameNPC extends NPC {
     protected boolean isInteracting = false;
     protected SpriteFont playGame;
 
-    public SoulConsumingFlame(int id, Point location) {
+    public SoulConsumingFlameNPC(int id, Point location) {
         super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("SoulConsumingFlame.png"), 16, 16), "STAND_RIGHT");
     }
 
