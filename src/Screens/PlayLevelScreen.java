@@ -1,5 +1,9 @@
 package Screens;
 
+import java.util.ArrayList;
+
+import Combatants.PlayerCombatant;
+import Combatants.PsychicPsycho;
 import Engine.GraphicsHandler;
 import Engine.Key;
 import Engine.KeyLocker;
@@ -12,6 +16,7 @@ import Maps.WorldOneMap;
 import Maps.WorldTwoMap;
 import Maps.WorldThreeFloors;
 import Maps.WorldZeroMap;
+import Menus.InventoryMenu;
 import Maps.HubMap;
 import Players.Cat;
 import Utils.Direction;
@@ -27,7 +32,7 @@ public class PlayLevelScreen extends Screen {
     protected FlagManager flagManager;
     protected int worldNum = -1;
     protected int floorNum = 0;
-    private InventoryScreen inventory;
+    private InventoryMenu inventory;
     
     protected boolean flagStates[];
     private KeyLocker keyLocker = new KeyLocker();
@@ -132,11 +137,17 @@ public class PlayLevelScreen extends Screen {
             }
         }
 
-        //setup inventory screen
+        //setup inventory menu
+        inventory = new InventoryMenu(player);
         inventory = new InventoryScreen(player);
 
-        //setup win scree (**from old test map)
+        //setup win screen (**from old test map)
         winScreen = new WinScreen(this);
+
+        ArrayList<Combatant> combatants = new ArrayList<Combatant>();
+        combatants.add(new PlayerCombatant(player, map, Combatant.ControlType.HUMAN));
+        combatants.add(new PsychicPsycho(player, map));
+        map.initiateCombat(player, new ArrayList<Combatant>(combatants));
     }
     
     public void update() {

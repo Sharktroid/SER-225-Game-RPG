@@ -13,6 +13,7 @@ import NPCs.Catsuit;
 import NPCs.Dinosaur;
 import NPCs.Giraffe;
 import NPCs.Officeworker;
+import NPCs.PsychicPsycho;
 import NPCs.Redpanda;
 import NPCs.Sloth;
 import NPCs.Walrus;
@@ -82,6 +83,10 @@ public class WorldOneMap extends Map {
         Officeworker officeworker = new Officeworker(8, getMapTile(11, 16).getLocation().subtractY(40));
         officeworker.setInteractScript(new OfficeworkerScript());
         npcs.add(officeworker);
+
+        PsychicPsycho psychicPsycho = new PsychicPsycho(8, getMapTile(11, 16).getLocation().subtractY(40));
+        // psychicPsycho.setInteractScript(new OfficeworkerScript());
+        npcs.add(psychicPsycho);
 
         return npcs;
     }
