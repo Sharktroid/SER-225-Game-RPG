@@ -5,7 +5,6 @@ import Engine.GraphicsHandler;
 import Engine.ImageLoader;
 import GameObject.Frame;
 import GameObject.ImageEffect;
-import GameObject.Rectangle;
 import GameObject.SpriteSheet;
 import Level.NPC;
 import Level.Player;
@@ -24,10 +23,10 @@ public class Walrus extends NPC {
 
     public Walrus(int id, Point location) {
         super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("Walrus.png"), 24, 24), "STAND_LEFT");
-        
+
     }
 
- 
+
     public void update(Player player) {
         super.update();
 
@@ -62,14 +61,14 @@ public class Walrus extends NPC {
 
     @Override
     public void draw(GraphicsHandler graphicsHandler) {
-        
+
         super.draw(graphicsHandler);
 
         if (isInteracting == true)
         {
             playGame = new SpriteFont("ENTER", getCalibratedXLocation()+2, getCalibratedYLocation()-12, "Comic Sans", 15, Color.black);
-            
-            
+
+
             //textbox.draw(graphicsHandler);
             graphicsHandler.drawFilledRectangle(getCalibratedXLocation(), getCalibratedYLocation()-10,50,15, java.awt.Color.white);
             playGame.draw(graphicsHandler);

@@ -3,6 +3,7 @@ package Scripts.WorldOneMap;
 import Level.NPC;
 import Level.Script;
 import Level.ScriptState;
+import Level.TextboxStyle;
 
 // script for talking to catsuit npc
 public class CatsuitScript extends Script<NPC> {
@@ -10,6 +11,9 @@ public class CatsuitScript extends Script<NPC> {
     @Override
     protected void setup() {
         lockPlayer();
+
+        setTextboxStyle(TextboxStyle.WORLDONE);
+        setNPCName("Catsuit");
         showTextbox();
 
         // changes what catsuit says when talking to him the first time (flag is not set) vs talking to him afterwards (flag is set)

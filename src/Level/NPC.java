@@ -13,9 +13,8 @@ public class NPC extends MapEntity{
 
 
     protected int id = 0;
-    private Textbox textbox;
 
- 
+
     public NPC(int id, float x, float y, SpriteSheet spriteSheet, String startingAnimation) {
         super(x, y, spriteSheet, startingAnimation);
         this.id = id;
@@ -92,7 +91,7 @@ public class NPC extends MapEntity{
 
     public void update(Player player) {
         super.update();
-    
+
     }
 
     @Override

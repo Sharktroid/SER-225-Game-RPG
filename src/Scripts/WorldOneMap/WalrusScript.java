@@ -3,6 +3,7 @@ package Scripts.WorldOneMap;
 import Level.NPC;
 import Level.Script;
 import Level.ScriptState;
+import Level.TextboxStyle;
 
 // script for talking to walrus npc
 public class WalrusScript extends Script<NPC> {
@@ -13,17 +14,18 @@ public class WalrusScript extends Script<NPC> {
     @Override
     protected void setup() {
         lockPlayer();
+        
+        setTextboxStyle(TextboxStyle.WORLDONE);
+        setNPCName("Walrus");
         showTextbox();
-        String[] selections = {"A", "B", "C"};
+
+        String[] selections = {"What is this place?", "Who are you?", "What are you doing?"};
         String[] answers = {"This is my response to A", "This is my response to B", "This is my response to C"};
 
         entity.facePlayer(player);
         if (!isFlagSet("hasTalkedToWalrus")) {
             if (sequence == 0) {
-                showTextboxSmall();
-                addTextToTextboxQueue( "Hi Cat!");
-                // addTextToTextboxQueue( "Hi Cat!!", selections, answers);
-                addTextToSmallTextboxQueue(selections, answers);
+                addTextToTextboxQueue( "Hi Cat! How can I help you today?", selections, answers);
                 responseNum = getChoice();
             } else if (sequence == 1) {
                 if (responseNum == 0) {
@@ -47,10 +49,9 @@ public class WalrusScript extends Script<NPC> {
     protected void cleanup() {
         unlockPlayer();
         hideTextbox();
-        hideTextboxSmall();
 
         if (sequence == 0) {
-            responseNum = getChoiceSmall();
+            responseNum = getChoice();
             sequence++;
         } else if (sequence == 1) {
             setFlag("hasTalkedToWalrus");
@@ -60,6 +61,7 @@ public class WalrusScript extends Script<NPC> {
 
     @Override
     public ScriptState execute() {
+        // setTextboxStyle(TextboxStyle.WORLDONE);
         if (!isFlagSet("hasTalkedToWalrus")) {
             if (sequence == 0) {
                 start();

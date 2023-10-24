@@ -38,4 +38,14 @@ public class FlagManager {
         }
         return false;
     }
+
+    public boolean getFlagState(String flagname) {
+        if (isFlagSet(flagname)){
+            return true;
+        }
+        else{
+            return false;
+        }
+        
+    } 
 }
