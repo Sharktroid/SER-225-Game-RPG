@@ -2,14 +2,17 @@ package Scripts.HubMap;
 
 import Level.Script;
 import Level.ScriptState;
-import Maps.HubMap;
+import Level.TextboxStyle;
 
-// trigger script at beginning of game to set that heavy emotional plot
 public class hubMsgScript extends Script {
     @Override
     protected void setup() {
         lockPlayer();
+        
+        setTextboxStyle(TextboxStyle.HUBWORLD);
+        setNPCName("Tutorial");
         showTextbox();
+
         addTextToTextboxQueue("portal hub world");
         addTextToTextboxQueue("walk to the left square for world one");
         addTextToTextboxQueue("middle square for world two");

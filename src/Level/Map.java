@@ -75,7 +75,7 @@ public abstract class Map {
     // map's textbox instance
     protected Textbox textbox;
     // map's small textbox instance
-    protected TextboxSmall textboxSmall;
+    // protected TextboxSmall textboxSmall;
 
     private BattleSystem currentBattleSystem;
 
@@ -109,7 +109,7 @@ public abstract class Map {
 
         this.camera = new Camera(0, 0, tileset.getScaledSpriteWidth(), tileset.getScaledSpriteHeight(), this);
         this.textbox = new Textbox(this);
-        this.textboxSmall = new TextboxSmall(this);
+        // this.textboxSmall = new TextboxSmall(this);
     }
 
     // reads in a map file to create the map's tilemap
@@ -507,9 +507,9 @@ public abstract class Map {
         if (textbox.isActive()) {
             textbox.update();
         }
-        if (textboxSmall.isActive()) {
-            textboxSmall.update();
-        }
+        // if (textboxSmall.isActive()) {
+        //     textboxSmall.update();
+        // }
     }
 
     // based on the player's current X position (which in a level can potentially be updated each frame),
@@ -579,9 +579,6 @@ public abstract class Map {
         if (textbox.isActive()) {
             textbox.draw(graphicsHandler);
         }
-        if (textboxSmall.isActive()) {
-            textboxSmall.draw(graphicsHandler);
-        }
         if (currentBattleSystem != null) {
             currentBattleSystem.draw(graphicsHandler);
         }
@@ -594,7 +591,7 @@ public abstract class Map {
     }
 
     public Textbox getTextbox() { return textbox; }
-    public TextboxSmall getTextboxSmall() { return textboxSmall; }
+    // public TextboxSmall getTextboxSmall() { return textboxSmall; }
 
     public int getEndBoundX() { return endBoundX; }
     public int getEndBoundY() { return endBoundY; }
