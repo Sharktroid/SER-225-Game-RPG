@@ -71,7 +71,7 @@ public class InternetExplorerTileset extends Tileset {
                 .build();
 
         MapTileBuilder treeLeavesTile = new MapTileBuilder(treeLeavesFrame)
-                .withTileType(TileType.NOT_PASSABLE);
+                .withTileType(TileType.PASSABLE);
 
         mapTiles.add(treeLeavesTile);
 
@@ -114,11 +114,11 @@ public class InternetExplorerTileset extends Tileset {
 
         MapTileBuilder signTile = new MapTileBuilder(grassFrame)
                 .withTopLayer(signFrame)
-                .withTileType(TileType.NOT_PASSABLE);
+                .withTileType(TileType.PASSABLE);
 
         mapTiles.add(signTile);
 
-        // sign block
+        // righ roof block
         Frame rightRoofFrame = new FrameBuilder(getSubImage(1, 1))
                 .withScale(tileScale)
                 .build();
@@ -129,7 +129,7 @@ public class InternetExplorerTileset extends Tileset {
 
         mapTiles.add(rightRoofTile);
 
-        // sign block
+        // left roof block
         Frame leftRoofFrame = new FrameBuilder(getSubImage(1, 1))
                 .withScale(tileScale)
                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
@@ -219,6 +219,20 @@ public class InternetExplorerTileset extends Tileset {
         MapTileBuilder folderLeftTile = new MapTileBuilder(folderLeftFrame);
 
         mapTiles.add (folderLeftTile);
+
+
+        // trash 
+        Frame trashFrame= new FrameBuilder(getSubImage(2, 6))
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder trashTile = new MapTileBuilder(grassFrame)
+                .withTopLayer(trashFrame)
+                .withTileType(TileType.NOT_PASSABLE);
+
+        mapTiles.add(trashTile);
+
+
 
 
 
