@@ -336,6 +336,7 @@ public class Textbox {
         if (text != null) {
             text.drawWithParsedNewLines(graphicsHandler, 10);
         }
+        
         if (npcName != null) {
             npcName.drawWithParsedNewLines(graphicsHandler, 10);
         }
