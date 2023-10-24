@@ -3,7 +3,6 @@ package Screens;
 import java.util.ArrayList;
 
 import Combatants.PlayerCombatant;
-import Combatants.PsychicPsycho;
 import Engine.GraphicsHandler;
 import Engine.Key;
 import Engine.KeyLocker;

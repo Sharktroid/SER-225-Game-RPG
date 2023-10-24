@@ -4,12 +4,12 @@ import Level.Combatant;
 import Level.Map;
 import Level.NPC;
 
-public class PsychicPsycho extends Combatant {
+public class SoulConsumingFlame extends Combatant {
 
-    public PsychicPsycho(NPC npc, Map map) {
+    public SoulConsumingFlame(NPC npc, Map map) {
         super(npc, map);
         hitPoints = 50;
-        name = "Psychic Psycho";
+        name = "Soul Consuming Flame";
     }
 
     @Override
