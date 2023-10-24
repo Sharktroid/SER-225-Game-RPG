@@ -14,12 +14,12 @@ import Utils.Point;
 import java.util.HashMap;
 
 // This class is for the Officeworker NPC
-public class PsychicPsycho extends NPC {
+public class SoulConsumingFlame extends NPC {
     protected boolean isInteracting = false;
     protected SpriteFont playGame;
 
-    public PsychicPsycho(int id, Point location) {
-        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("PsychicPsycho.png"), 16, 16), "STAND_RIGHT");
+    public SoulConsumingFlame(int id, Point location) {
+        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("SoulConsumingFlame.png"), 16, 16), "STAND_RIGHT");
     }
 
 
@@ -42,14 +42,14 @@ public class PsychicPsycho extends NPC {
             put("STAND_LEFT", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(0, 0))
                             .withScale(3)
-                            .withBounds(7, 13, 11, 7)
+                            .withBounds(0, 0, 16, 16)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                             .build()
             });
             put("STAND_RIGHT", new Frame[] {
                    new FrameBuilder(spriteSheet.getSprite(0, 0))
                            .withScale(3)
-                           .withBounds(7, 13, 11, 7)
+                           .withBounds(0, 0, 16, 16)
                            .build()
            });
         }};

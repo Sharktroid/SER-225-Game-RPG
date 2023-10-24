@@ -1,9 +1,7 @@
 package Level;
 
-import GameObject.GameObject;
-
 public abstract class Combatant {
-    protected GameObject object;
+    protected NPC npc;
     protected int hitPoints;
     private ControlType controlType;
     protected String name;
@@ -14,12 +12,12 @@ public abstract class Combatant {
         COMPUTER
     }
 
-    public Combatant(GameObject object, Map map) {
-        this(object, map, ControlType.COMPUTER);
+    public Combatant(NPC npc, Map map) {
+        this(npc, map, ControlType.COMPUTER);
     }
 
-    public Combatant(GameObject object, Map map, ControlType controlType) {
-        this.object = object;
+    public Combatant(NPC npc, Map map, ControlType controlType) {
+        this.npc = npc;
         this.controlType = controlType;
         this.map = map;
     }
@@ -46,4 +44,9 @@ public abstract class Combatant {
     public abstract String getIntroMessage();
 
     public abstract String getDeathMessage();
+
+    public void kill() {
+        npc.setMapEntityStatus(MapEntityStatus.REMOVED);
+        map.getTextbox().addText(getDeathMessage());
+    }
 }

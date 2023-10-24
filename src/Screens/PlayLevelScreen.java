@@ -3,7 +3,6 @@ package Screens;
 import java.util.ArrayList;
 
 import Combatants.PlayerCombatant;
-import Combatants.PsychicPsycho;
 import Engine.GraphicsHandler;
 import Engine.Key;
 import Engine.KeyLocker;
@@ -143,11 +142,6 @@ public class PlayLevelScreen extends Screen {
 
         //setup win screen (**from old test map)
         winScreen = new WinScreen(this);
-
-        ArrayList<Combatant> combatants = new ArrayList<Combatant>();
-        combatants.add(new PlayerCombatant(player, map, Combatant.ControlType.HUMAN));
-        combatants.add(new PsychicPsycho(player, map));
-        map.initiateCombat(player, new ArrayList<Combatant>(combatants));
     }
     
     public void update() {
