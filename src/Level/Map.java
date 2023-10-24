@@ -614,4 +614,8 @@ public abstract class Map {
     public void endCombat() {
         currentBattleSystem = null;
     }
+
+    public Boolean inCombat() {
+        return currentBattleSystem != null;
+    }
 }

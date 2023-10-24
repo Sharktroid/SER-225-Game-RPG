@@ -97,7 +97,7 @@ public abstract class Script<T extends MapEntity> {
     protected void showTextbox() {
         map.getTextbox().setIsActive(true);
     }
-    
+
     // small textbox is shown on screen
     protected void showTextboxSmall() {
         map.getTextboxSmall().setIsActive(true);
@@ -128,7 +128,7 @@ public abstract class Script<T extends MapEntity> {
     // returns the value of the last choice made from a selectable textbox
     protected int getChoice() {
         return map.getTextbox().getChoice();
-    } 
+    }
     // sets the value of the last choice made from a selectable textbox
     protected void setChoice(int choice) {
         map.getTextbox().setChoice(choice);

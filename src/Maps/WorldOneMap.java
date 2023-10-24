@@ -21,6 +21,7 @@ import Scripts.WorldOneMap.DinoScript;
 import Scripts.WorldOneMap.GiraffeScript;
 import Scripts.WorldOneMap.LostBallScript;
 import Scripts.WorldOneMap.OfficeworkerScript;
+import Scripts.WorldOneMap.PsychicPsychoScript;
 import Scripts.WorldOneMap.RedpandaScript;
 import Scripts.WorldOneMap.SlothScript;
 import Scripts.WorldOneMap.WalrusScript;
@@ -83,7 +84,7 @@ public class WorldOneMap extends Map {
         npcs.add(officeworker);
 
         PsychicPsycho psychicPsycho = new PsychicPsycho(8, getMapTile(11, 16).getLocation().subtractY(40));
-        // psychicPsycho.setInteractScript(new OfficeworkerScript());
+        psychicPsycho.setInteractScript(new PsychicPsychoScript());
         npcs.add(psychicPsycho);
 
         return npcs;

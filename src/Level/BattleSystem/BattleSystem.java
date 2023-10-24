@@ -52,7 +52,7 @@ public class BattleSystem {
     private void advance() {
         for (int i = 0; i < combatants.size(); i++) {
             if (combatants.get(i).getHitPoints() <= 0) {
-                map.getTextbox().addText(combatants.get(i).getDeathMessage());
+                combatants.get(i).kill();
                 combatants.remove(combatants.get(i));
             }
         }

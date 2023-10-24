@@ -118,11 +118,6 @@ public class PlayLevelScreen extends Screen {
         inventory = new InventoryMenu(player);
 
         winScreen = new WinScreen(this);
-
-        ArrayList<Combatant> combatants = new ArrayList<Combatant>();
-        combatants.add(new PlayerCombatant(player, map, Combatant.ControlType.HUMAN));
-        combatants.add(new PsychicPsycho(player, map));
-        map.initiateCombat(player, new ArrayList<Combatant>(combatants));
     }
 
     public void update() {
