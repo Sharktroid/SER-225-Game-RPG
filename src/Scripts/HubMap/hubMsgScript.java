@@ -3,7 +3,6 @@ package Scripts.HubMap;
 import Level.Script;
 import Level.ScriptState;
 import Level.TextboxStyle;
-import Maps.HubMap;
 
 public class hubMsgScript extends Script {
     @Override
@@ -11,6 +10,7 @@ public class hubMsgScript extends Script {
         lockPlayer();
         
         setTextboxStyle(TextboxStyle.HUBWORLD);
+        setNPCName("Tutorial");
         showTextbox();
 
         addTextToTextboxQueue("portal hub world");
