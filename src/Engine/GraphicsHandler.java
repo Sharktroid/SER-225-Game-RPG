@@ -44,38 +44,43 @@ public class GraphicsHandler {
         }
     }
 
+    //draw rectangle (just outline)
+    public void drawRectangle(int x, int y, int width, int height, int arcWidth, int arcHeight, Color color) {
+        g.setColor(color);
+        g.drawRoundRect(x, y, width, height, arcWidth, arcHeight);
+    }
     public void drawRectangle(int x, int y, int width, int height, Color color) {
         g.setColor(color);
         g.drawRect(x, y, width, height);
     }
 
-    public void drawRoundedRectangle(int x, int y, int width, int height, int arcWidth, int arcHeight, Color color) {
+    //draw rectangle with border
+    public void drawRectangle(int x, int y, int width, int height, int arcWidth, int arcHeight, Color color, int borderThickness) {
+        g.setStroke(new BasicStroke(borderThickness));
         g.setColor(color);
         g.drawRoundRect(x, y, width, height, arcWidth, arcHeight);
     }
-
     public void drawRectangle(int x, int y, int width, int height, Color color, int borderThickness) {
         g.setStroke(new BasicStroke(borderThickness));
         g.setColor(color);
         g.drawRect(x, y, width, height);
     }
 
-    public void drawRoundedRectangle(int x, int y, int width, int height, int arcWidth, int arcHeight, Color color, int borderThickness) {
-        g.setStroke(new BasicStroke(borderThickness));
+    //draw filled rectangle
+    public void drawFilledRectangle(int x, int y, int width, int height, int arcWidth, int arcHeight, Color color) {
         g.setColor(color);
-        g.drawRoundRect(x, y, width, height, arcWidth, arcHeight);
+        g.fillRoundRect(x, y, width, height, arcWidth, arcHeight);
     }
-
     public void drawFilledRectangle(int x, int y, int width, int height, Color color) {
         g.setColor(color);
         g.fillRect(x, y, width, height);
     }
-
-    public void drawFilledRoundedRectangle(int x, int y, int width, int height, int arcWidth, int arcHeight, Color color) {
+    public void drawFilledRectangle(float x, float y, int width, int height, int arcWidth, int arcHeight, Color color) {
         g.setColor(color);
-        g.fillRoundRect(x, y, width, height, arcWidth, arcHeight);
+        int xRounded = Math.round(x);
+        int yRounded= Math.round(y);
+        g.fillRoundRect(xRounded, yRounded, width, height, arcWidth, arcHeight);
     }
-    
     public void drawFilledRectangle(float x, float y, int width, int height, Color color) {
         g.setColor(color);
         int xRounded = Math.round(x);
@@ -83,21 +88,31 @@ public class GraphicsHandler {
         g.fillRect(xRounded, yRounded, width, height);
     }
 
-    public void drawFilledRoundedRectangle(float x, float y, int width, int height, int arcWidth, int arcHeight, Color color) {
-        g.setColor(color);
-        int xRounded = Math.round(x);
-        int yRounded= Math.round(y);
-        g.fillRoundRect(xRounded, yRounded, width, height, arcWidth, arcHeight);
+    public void drawFilledRectangleWithBorder(int x, int y, int width, int height, int arcWidth, int arcHeight, Color fillColor, Color borderColor, int borderThickness) {
+        drawFilledRectangle(x, y, width, height, arcWidth, arcHeight, fillColor);
+        drawRectangle(x, y, width, height, arcWidth, arcHeight, borderColor, borderThickness);
     }
-
     public void drawFilledRectangleWithBorder(int x, int y, int width, int height, Color fillColor, Color borderColor, int borderThickness) {
         drawFilledRectangle(x, y, width, height, fillColor);
         drawRectangle(x, y, width, height, borderColor, borderThickness);
     }
 
-    public void drawFilledRoundedRectangleWithBorder(int x, int y, int width, int height, int arcWidth, int arcHeight, Color fillColor, Color borderColor, int borderThickness) {
-        drawFilledRoundedRectangle(x, y, width, height, arcWidth, arcHeight, fillColor);
-        drawRoundedRectangle(x, y, width, height, arcWidth, arcHeight, borderColor, borderThickness);
+    //gradient
+    public void drawRectangleGradient(int x, int y, int width, int height, int arcWidth, int arcHeight, Color color1, Color color2, Color borderColor, int borderThickness) {
+        g.setStroke(new BasicStroke(borderThickness));
+        g.setColor(borderColor);
+        GradientPaint gradient = new GradientPaint(x, y, color1, x, y + height, color2);
+        g.setPaint(gradient);
+        g.drawRoundRect(x, y, width, height, arcWidth, arcHeight);
+    }
+    public void drawFilledRectangleGradient(int x, int y, int width, int height, int arcWidth, int arcHeight, Color color1, Color color2) {
+        GradientPaint gradient = new GradientPaint(x, y, color1, x, y + height, color2);
+        g.setPaint(gradient);
+        g.fillRoundRect(x, y, width, height, arcWidth, arcHeight);
+    }
+    public void drawFilledRectangleGradientWithBorder(int x, int y, int width, int height, int arcWidth, int arcHeight, Color fillColor1, Color fillColor2, Color borderColor, int borderThickness) {
+        drawFilledRectangleGradient(x, y, width, height, arcWidth, arcHeight, fillColor1, fillColor2);
+        drawRectangleGradient(x, y, width, height, arcWidth, arcHeight, fillColor1, fillColor2, borderColor, borderThickness);
     }
 
     public void drawString(String text, int x, int y, Font font, Color color) {

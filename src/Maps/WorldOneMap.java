@@ -2,21 +2,21 @@ package Maps;
 
 import EnhancedMapTiles.MedkitObject;
 import EnhancedMapTiles.CatFoodObject;
-import EnhancedMapTiles.PushableRock;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
 import Level.Script;
+import Level.TextboxStyle;
 import Level.Trigger;
 import NPCs.Beaver;
 import NPCs.Catsuit;
 import NPCs.Dinosaur;
 import NPCs.Giraffe;
 import NPCs.Officeworker;
+import NPCs.SoulConsumingFlameNPC;
 import NPCs.Redpanda;
 import NPCs.Sloth;
 import NPCs.Walrus;
-import Scripts.SimpleTextScript;
 import Scripts.WorldOneMap.BeaverScript;
 import Scripts.WorldOneMap.CatsuitScript;
 import Scripts.WorldOneMap.DinoScript;
@@ -25,15 +25,16 @@ import Scripts.WorldOneMap.LostBallScript;
 import Scripts.WorldOneMap.OfficeworkerScript;
 import Scripts.WorldOneMap.RedpandaScript;
 import Scripts.WorldOneMap.SlothScript;
+import Scripts.WorldOneMap.SoulConsumingFlameNPCScript;
 import Scripts.WorldOneMap.WalrusScript;
 import Tilesets.CommonTileset;
-//import Tilesets.InternetExplorerTileset;
+import Tilesets.InternetExplorerTileset;
 
 import java.util.ArrayList;
 
 public class WorldOneMap extends Map {
     public WorldOneMap() {
-        super("world_one_map.txt", new CommonTileset());
+        super("world_one_map.txt", new InternetExplorerTileset());
         this.playerStartPosition = getMapTile(0, 14).getLocation();
     }
 
@@ -85,13 +86,17 @@ public class WorldOneMap extends Map {
         officeworker.setInteractScript(new OfficeworkerScript());
         npcs.add(officeworker);
 
+        SoulConsumingFlameNPC soulConsumingFlame = new SoulConsumingFlameNPC(8, getMapTile(11, 16).getLocation().subtractY(40));
+        soulConsumingFlame.setInteractScript(new SoulConsumingFlameNPCScript());
+        npcs.add(soulConsumingFlame);
+
         return npcs;
     }
 
     @Override
     public ArrayList<Trigger> loadTriggers() {
         ArrayList<Trigger> triggers = new ArrayList<>();
-        triggers.add(new Trigger(790, 1030, 100, 10, new LostBallScript(), "hasLostBall"));
+        //triggers.add(new Trigger(790, 1030, 100, 10, new LostBallScript(), "hasLostBall"));
         return triggers;
     }
 }

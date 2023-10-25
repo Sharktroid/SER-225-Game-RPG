@@ -2,6 +2,7 @@ package Scripts.WorldOneMap;
 
 import Level.Script;
 import Level.ScriptState;
+import Level.TextboxStyle;
 
 // script for talking to tree with hole in it
 public class TreeScript extends Script {
@@ -9,7 +10,11 @@ public class TreeScript extends Script {
     @Override
     protected void setup() {
         lockPlayer();
+
+        setTextboxStyle(TextboxStyle.WORLDONE);
+        setNPCName("Cat");
         showTextbox();
+
         addTextToTextboxQueue("...");
         addTextToTextboxQueue("I found my ball inside of the tree!\nYippee!");
     }
