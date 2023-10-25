@@ -27,6 +27,7 @@ import Scripts.WorldOneMap.RedpandaScript;
 import Scripts.WorldOneMap.SlothScript;
 import Scripts.WorldOneMap.WalrusScript;
 import Tilesets.CommonTileset;
+//import Tilesets.InternetExplorerTileset;
 
 import java.util.ArrayList;
 
