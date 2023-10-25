@@ -2,21 +2,21 @@ package Maps;
 
 import EnhancedMapTiles.MedkitObject;
 import EnhancedMapTiles.CatFoodObject;
-import EnhancedMapTiles.PushableRock;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
 import Level.Script;
+import Level.TextboxStyle;
 import Level.Trigger;
 import NPCs.Beaver;
 import NPCs.Catsuit;
 import NPCs.Dinosaur;
 import NPCs.Giraffe;
 import NPCs.Officeworker;
+import NPCs.SoulConsumingFlameNPC;
 import NPCs.Redpanda;
 import NPCs.Sloth;
 import NPCs.Walrus;
-import Scripts.SimpleTextScript;
 import Scripts.WorldOneMap.BeaverScript;
 import Scripts.WorldOneMap.CatsuitScript;
 import Scripts.WorldOneMap.DinoScript;
@@ -25,6 +25,7 @@ import Scripts.WorldOneMap.LostBallScript;
 import Scripts.WorldOneMap.OfficeworkerScript;
 import Scripts.WorldOneMap.RedpandaScript;
 import Scripts.WorldOneMap.SlothScript;
+import Scripts.WorldOneMap.SoulConsumingFlameNPCScript;
 import Scripts.WorldOneMap.WalrusScript;
 import Tilesets.InternetExplorerTileset;
 
@@ -83,6 +84,10 @@ public class WorldOneMap extends Map {
         Officeworker officeworker = new Officeworker(8, getMapTile(11, 16).getLocation().subtractY(40));
         officeworker.setInteractScript(new OfficeworkerScript());
         npcs.add(officeworker);
+
+        SoulConsumingFlameNPC soulConsumingFlame = new SoulConsumingFlameNPC(8, getMapTile(11, 16).getLocation().subtractY(40));
+        soulConsumingFlame.setInteractScript(new SoulConsumingFlameNPCScript());
+        npcs.add(soulConsumingFlame);
 
         return npcs;
     }

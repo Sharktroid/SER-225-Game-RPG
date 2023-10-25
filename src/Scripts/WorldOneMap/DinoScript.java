@@ -20,6 +20,9 @@ public class DinoScript extends Script<NPC> {
         String[] selections = {"a", "b", "c"};
         String[] answers = {"A", "B", "C"};
 
+        setTextboxStyle(TextboxStyle.WORLDONE);
+        setNPCName("Dino");
+
         if (!isFlagSet("hasTalkedToWalrus")) {
             showTextbox();
             addTextToTextboxQueue("Isn't my garden so lovely?");

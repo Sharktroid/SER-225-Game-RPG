@@ -4,6 +4,7 @@ import Engine.Config;
 import Engine.GraphicsHandler;
 import Engine.ScreenManager;
 import GameObject.Rectangle;
+import Level.BattleSystem.BattleSystem;
 import Utils.Direction;
 import Utils.Point;
 
@@ -13,6 +14,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import Combatants.PlayerCombatant;
 
 /*
     This class is for defining a map that is used for a specific level
@@ -72,7 +75,9 @@ public abstract class Map {
     // map's textbox instance
     protected Textbox textbox;
     // map's small textbox instance
-    protected TextboxSmall textboxSmall;
+    // protected TextboxSmall textboxSmall;
+
+    private BattleSystem currentBattleSystem;
 
     public Map(String mapFileName, Tileset tileset) {
         this.mapFileName = mapFileName;
@@ -104,7 +109,7 @@ public abstract class Map {
 
         this.camera = new Camera(0, 0, tileset.getScaledSpriteWidth(), tileset.getScaledSpriteHeight(), this);
         this.textbox = new Textbox(this);
-        this.textboxSmall = new TextboxSmall(this);
+        // this.textboxSmall = new TextboxSmall(this);
     }
 
     // reads in a map file to create the map's tilemap
@@ -489,17 +494,22 @@ public abstract class Map {
     }
 
     public void update(Player player) {
-        if (adjustCamera) {
-            adjustMovementY(player);
-            adjustMovementX(player);
+        if (currentBattleSystem == null) {
+            if (adjustCamera) {
+                adjustMovementY(player);
+                adjustMovementX(player);
+            }
+            camera.update(player);
         }
-        camera.update(player);
+        else{
+            currentBattleSystem.update();
+        }
         if (textbox.isActive()) {
             textbox.update();
         }
-        if (textboxSmall.isActive()) {
-            textboxSmall.update();
-        }
+        // if (textboxSmall.isActive()) {
+        //     textboxSmall.update();
+        // }
     }
 
     // based on the player's current X position (which in a level can potentially be updated each frame),
@@ -569,8 +579,8 @@ public abstract class Map {
         if (textbox.isActive()) {
             textbox.draw(graphicsHandler);
         }
-        if (textboxSmall.isActive()) {
-            textboxSmall.draw(graphicsHandler);
+        if (currentBattleSystem != null) {
+            currentBattleSystem.draw(graphicsHandler);
         }
     }
 
@@ -581,7 +591,7 @@ public abstract class Map {
     }
 
     public Textbox getTextbox() { return textbox; }
-    public TextboxSmall getTextboxSmall() { return textboxSmall; }
+    // public TextboxSmall getTextboxSmall() { return textboxSmall; }
 
     public int getEndBoundX() { return endBoundX; }
     public int getEndBoundY() { return endBoundY; }
@@ -592,5 +602,17 @@ public abstract class Map {
             currentNpc.setX(scanner.nextFloat());
             currentNpc.setY(scanner.nextFloat());
         }
+    }
+
+    public void initiateCombat(Player player, ArrayList<Combatant> combatants) {
+        currentBattleSystem = new BattleSystem(this, combatants);
+    }
+
+    public void endCombat() {
+        currentBattleSystem = null;
+    }
+
+    public Boolean inCombat() {
+        return currentBattleSystem != null;
     }
 }

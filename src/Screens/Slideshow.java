@@ -4,14 +4,11 @@ import Engine.*;
 import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.Map;
-import Level.Textbox;
 import Maps.TitleScreenMap;
 import SpriteFont.SpriteFont;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-
-import org.w3c.dom.css.Rect;
 
 public class Slideshow extends Screen
 {
@@ -33,7 +30,7 @@ public class Slideshow extends Screen
     protected int x,y;
     protected BufferedImage image = ImageLoader.load("RedPanda.png"); //first image played in slideshow
     protected SpriteFont spaceToContinue;
-    
+
 
     //plays slideshow after pressing play
     public Slideshow(ScreenCoordinator screenCoordinator)
@@ -42,7 +39,7 @@ public class Slideshow extends Screen
         this.screenCoordinator = screenCoordinator;
         screenCoordinator.setGameState(GameState.MENU);
         gameState = GameState.MENU;
-        
+
 
     }
 
@@ -67,10 +64,10 @@ public class Slideshow extends Screen
     if (Keyboard.isKeyUp(Key.SPACE)) {
         keyLocker.unlockKey(Key.SPACE);
     }
-    
+
     // if space is pressed and space is not locked
     if (Keyboard.isKeyDown(Key.SPACE) && !keyLocker.isKeyLocked(Key.SPACE)) {
-        
+
         if(counter == 1)
         {
             x=300;
@@ -96,9 +93,9 @@ public class Slideshow extends Screen
             screenCoordinator.setGameState(GameState.LEVEL);
         }
 
-        
-       
-        
+
+
+
         // lock space key
         keyLocker.lockKey(Key.SPACE);
     }
@@ -115,5 +112,5 @@ public class Slideshow extends Screen
 
 
 
-    
+
 

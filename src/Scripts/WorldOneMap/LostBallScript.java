@@ -2,13 +2,18 @@ package Scripts.WorldOneMap;
 
 import Level.Script;
 import Level.ScriptState;
+import Level.TextboxStyle;
 
 // trigger script at beginning of game to set that heavy emotional plot
 public class LostBallScript extends Script {
     @Override
     protected void setup() {
         lockPlayer();
+
+        setTextboxStyle(TextboxStyle.WORLDONE);
+        setNPCName("Cat");
         showTextbox();
+
         addTextToTextboxQueue("Where am I!?");
         addTextToTextboxQueue("I was just at the firefox building trying to fix the servers.");
         addTextToTextboxQueue("How do I get back??");

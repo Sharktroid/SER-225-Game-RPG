@@ -1,5 +1,8 @@
 package Screens;
 
+import java.util.ArrayList;
+
+import Combatants.PlayerCombatant;
 import Engine.GraphicsHandler;
 import Engine.Key;
 import Engine.KeyLocker;
@@ -10,8 +13,9 @@ import Game.ScreenCoordinator;
 import Level.*;
 import Maps.WorldOneMap;
 import Maps.WorldTwoMap;
-import Maps.WorldThreeMap;
+import Maps.WorldThreeFloors;
 import Maps.WorldZeroMap;
+import Menus.InventoryMenu;
 import Maps.HubMap;
 import Players.Cat;
 import Utils.Direction;
@@ -26,7 +30,10 @@ public class PlayLevelScreen extends Screen {
     protected WinScreen winScreen;
     protected FlagManager flagManager;
     protected int worldNum = -1;
-    private InventoryScreen inventory;
+    protected int floorNum = 0;
+    private InventoryMenu inventory;
+
+    protected boolean flagStates[];
     private KeyLocker keyLocker = new KeyLocker();
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
@@ -34,8 +41,8 @@ public class PlayLevelScreen extends Screen {
     }
 
     public void initialize() {
-        // setup state
 
+        // setup state
         flagManager = new FlagManager();
 
         // takes world number variable form menu screen to choose world
@@ -43,10 +50,14 @@ public class PlayLevelScreen extends Screen {
             worldNum = Screens.MenuScreen.worldNumber;
         }
 
+        //setup world zero map
         if (worldNum == 0) {
             this.map = new WorldZeroMap();
 
-        } else if (worldNum == 1) {
+
+        }
+        //set world one map
+        else if (worldNum == 1) {
             this.map = new WorldOneMap();
 
             flagManager.addFlag("hasLostBall", false);
@@ -55,20 +66,35 @@ public class PlayLevelScreen extends Screen {
             flagManager.addFlag("hasFoundBall", false);
             flagManager.addFlag("sawHubMsg", false);
 
-        } else if (worldNum == 2) {
+
+        }
+        //setup world two map
+        else if (worldNum == 2) {
             this.map = new WorldTwoMap();
 
-        } else if (worldNum == 3){
-            this.map = new WorldThreeMap();
+            flagManager.addFlag("hasTalkedToBeaver", false);
+        }
 
-        } else if (worldNum == 4) {
+        //setup world three map
+        else if (worldNum == 3) {
+
+            this.map = new WorldThreeFloors(floorNum);
+
+            flagManager.addFlag("wentUpLevel", false);
+            flagManager.addFlag("wentDownLevel", false);
+            flagManager.addFlag("hasTalkedToRedPanda", WorldThreeFloors.redPandaFlagState());
+            flagManager.addFlag("hasTalkedToDino", WorldThreeFloors.DinoFlagState());
+        }
+
+        //setup hub world map
+        else if (worldNum == 4) {
             this.map = new HubMap();
 
             flagManager.addFlag("portalOneActivated", false);
             flagManager.addFlag("portalTwoActivated", false);
             flagManager.addFlag("portalThreeActivated", false);
+            flagManager.addFlag("startWorldThree", false);
             flagManager.addFlag("sawHubMsg", false);
-
         }
 
         map.setFlagManager(flagManager);
@@ -110,16 +136,19 @@ public class PlayLevelScreen extends Screen {
             }
         }
 
-        inventory = new InventoryScreen(player);
+        //setup inventory menu
+        inventory = new InventoryMenu(player);
 
+        //setup win screen (**from old test map)
         winScreen = new WinScreen(this);
     }
 
     public void update() {
+
         // based on screen state, perform specific actions
         switch (playLevelScreenState) {
-            // if level is "running" update player and map to keep game logic for the
-            // platformer level going
+
+            // if level is "running" update player and map to keep game logic for the level going
             case RUNNING:
                 if (Keyboard.isKeyDown(Key.E) && !keyLocker.isKeyLocked(Key.E) && !map.getTextbox().isActive()) {
                     inventory.setActive(!inventory.isActive());
@@ -139,22 +168,46 @@ public class PlayLevelScreen extends Screen {
                 map.update(player);
                 break;
 
-            // if level has been completed, bring up level cleared screen
+            // if level has been completed, bring up level cleared screen (**from old test map)
             case LEVEL_COMPLETED:
                 winScreen.update();
                 break;
         }
-        if (map.getFlagManager().isFlagSet("portalOneActivated")) {
+
+        //hub world teleportation **(temporary quick world swap keys)
+        if (map.getFlagManager().isFlagSet("portalOneActivated") || Keyboard.isKeyDown(Key.ONE) && !keyLocker.isKeyLocked(Key.ONE)) {
             worldNum = 1;
             initialize();
-        } else if (map.getFlagManager().isFlagSet("portalTwoActivated")) {
+        } else if (map.getFlagManager().isFlagSet("portalTwoActivated")||Keyboard.isKeyDown(Key.TWO) && !keyLocker.isKeyLocked(Key.TWO)) {
             worldNum = 2;
             initialize();
-        } else if (map.getFlagManager().isFlagSet("portalThreeActivated")){
+        } else if (map.getFlagManager().isFlagSet("portalThreeActivated") || Keyboard.isKeyDown(Key.THREE) && !keyLocker.isKeyLocked(Key.THREE)) {
             worldNum = 3;
             initialize();
+        }else if (Keyboard.isKeyDown(Key.FOUR) && !keyLocker.isKeyLocked(Key.FOUR)) {
+            worldNum = 4;
+            initialize();
         }
-        // if flag is set at any point during gameplay, game is "won"
+        //world three floor traversal
+        if (worldNum == 3) {
+            if (map.getFlagManager().isFlagSet("enteredBuilding")) {
+                flagManager.unsetFlag("enteredBuilding");
+                initialize();
+            }
+
+            if (map.getFlagManager().isFlagSet("wentUpLevel")) {
+                floorNum = WorldThreeFloors.getCurrentFloorNumber();
+                initialize();
+            }
+
+            if (map.getFlagManager().isFlagSet("wentDownLevel")) {
+                floorNum = WorldThreeFloors.getCurrentFloorNumber();
+                WorldThreeFloors.setDownFromFloorTrue();
+                initialize();
+            }
+        }
+
+        // if flag is set at any point during gameplay, game is "won" (**from old test map)
         if (map.getFlagManager().isFlagSet("hasFoundBall")) {
             playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
         }
@@ -185,6 +238,20 @@ public class PlayLevelScreen extends Screen {
 
     public void goBackToMenu() {
         screenCoordinator.setGameState(GameState.MENU);
+    }
+
+    public boolean getFlagState(boolean flagState){
+
+        return flagState;
+    }
+
+    public boolean setFlagState(boolean flagState){
+        if (flagState == true){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     // This enum represents the different states this screen can be in

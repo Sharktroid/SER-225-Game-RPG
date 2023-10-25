@@ -54,6 +54,8 @@ public abstract class Player extends GameObject {
     public ArrayList<Item> items = new ArrayList<Item>();
     public ArrayList<Item> keyItems = new ArrayList<Item>();
 
+    protected String name = "Player";
+
     public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
         super(spriteSheet, x, y, startingAnimationName);
         facingDirection = Direction.RIGHT;
@@ -356,6 +358,10 @@ public abstract class Player extends GameObject {
             runModifier = (runSpeed / walkSpeed);
         }
         return walkSpeed * runModifier * speedModifier;
+    }
+
+    public String getName() {
+        return name;
     }
 
 }
