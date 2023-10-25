@@ -70,7 +70,8 @@ public class InternetExplorerTileset extends Tileset {
                 .withScale(tileScale)
                 .build();
 
-        MapTileBuilder treeLeavesTile = new MapTileBuilder(treeLeavesFrame)
+        MapTileBuilder treeLeavesTile = new MapTileBuilder(grassFrame)
+                .withTopLayer(treeLeavesFrame)
                 .withTileType(TileType.PASSABLE);
 
         mapTiles.add(treeLeavesTile);
