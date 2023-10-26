@@ -11,9 +11,11 @@ public class Medkit extends Item {
         name = "Medkit";
         usable = true;
     }
+    
 
     @Override
     public void use() {
         player.addCurrentHealth(healingAmount);
+        
     }
 }

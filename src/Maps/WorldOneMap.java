@@ -2,15 +2,16 @@ package Maps;
 
 import EnhancedMapTiles.MedkitObject;
 import EnhancedMapTiles.CatFoodObject;
+import EnhancedMapTiles.FetchObject;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
-import Level.Script;
-import Level.TextboxStyle;
 import Level.Trigger;
 import NPCs.Beaver;
 import NPCs.Catsuit;
 import NPCs.Dinosaur;
+import NPCs.Elder;
+import NPCs.Garfunkle;
 import NPCs.Giraffe;
 import NPCs.Officeworker;
 import NPCs.Redpanda;
@@ -19,12 +20,16 @@ import NPCs.Walrus;
 import Scripts.WorldOneMap.BeaverScript;
 import Scripts.WorldOneMap.CatsuitScript;
 import Scripts.WorldOneMap.DinoScript;
+import Scripts.WorldOneMap.ElderScript;
+import Scripts.WorldOneMap.GarfunkleScript;
 import Scripts.WorldOneMap.GiraffeScript;
 import Scripts.WorldOneMap.LostBallScript;
 import Scripts.WorldOneMap.OfficeworkerScript;
 import Scripts.WorldOneMap.RedpandaScript;
 import Scripts.WorldOneMap.SlothScript;
+import Scripts.WorldOneMap.ElderScript;
 import Scripts.WorldOneMap.WalrusScript;
+
 import Tilesets.CommonTileset;
 
 import java.util.ArrayList;
@@ -38,10 +43,18 @@ public class WorldOneMap extends Map {
     @Override
     public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
         ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
+
         MedkitObject medkit = new MedkitObject(getMapTile(16, 14).getLocation(), 25);
         enhancedMapTiles.add(medkit);
+
         CatFoodObject catFood = new CatFoodObject(getMapTile(5, 10).getLocation(), 2);
         enhancedMapTiles.add(catFood);
+
+        FetchObject fetch = new FetchObject(getMapTile(5, 14).getLocation(), 1);
+        enhancedMapTiles.add(fetch);
+
+        
+
         return enhancedMapTiles;
     }
 
@@ -83,8 +96,19 @@ public class WorldOneMap extends Map {
         officeworker.setInteractScript(new OfficeworkerScript());
         npcs.add(officeworker);
 
+        Elder elder = new Elder(9, getMapTile(14, 20).getLocation().subtractY(40));
+        elder.setInteractScript(new ElderScript());
+        npcs.add(elder);
+
+        Garfunkle garfunkle = new Garfunkle(10, getMapTile(13, 20).getLocation().subtractY(40));
+        garfunkle.setInteractScript(new GarfunkleScript());
+        npcs.add(garfunkle);
+
+    
+
         return npcs;
     }
+
 
     @Override
     public ArrayList<Trigger> loadTriggers() {
