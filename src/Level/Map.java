@@ -4,6 +4,7 @@ import Engine.Config;
 import Engine.GraphicsHandler;
 import Engine.ScreenManager;
 import GameObject.Rectangle;
+import Level.BattleSystem.BattleSystem;
 import Utils.Direction;
 import Utils.Point;
 
@@ -13,6 +14,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import Combatants.PlayerCombatant;
 
 /*
     This class is for defining a map that is used for a specific level
@@ -73,6 +76,8 @@ public abstract class Map {
     protected Textbox textbox;
     // map's small textbox instance
     // protected TextboxSmall textboxSmall;
+
+    private BattleSystem currentBattleSystem;
 
     public Map(String mapFileName, Tileset tileset) {
         this.mapFileName = mapFileName;
@@ -489,11 +494,16 @@ public abstract class Map {
     }
 
     public void update(Player player) {
-        if (adjustCamera) {
-            adjustMovementY(player);
-            adjustMovementX(player);
+        if (currentBattleSystem == null) {
+            if (adjustCamera) {
+                adjustMovementY(player);
+                adjustMovementX(player);
+            }
+            camera.update(player);
         }
-        camera.update(player);
+        else{
+            currentBattleSystem.update();
+        }
         if (textbox.isActive()) {
             textbox.update();
         }
@@ -569,9 +579,9 @@ public abstract class Map {
         if (textbox.isActive()) {
             textbox.draw(graphicsHandler);
         }
-        // if (textboxSmall.isActive()) {
-        //     textboxSmall.draw(graphicsHandler);
-        // }
+        if (currentBattleSystem != null) {
+            currentBattleSystem.draw(graphicsHandler);
+        }
     }
 
     public FlagManager getFlagManager() { return flagManager; }
@@ -592,5 +602,17 @@ public abstract class Map {
             currentNpc.setX(scanner.nextFloat());
             currentNpc.setY(scanner.nextFloat());
         }
+    }
+
+    public void initiateCombat(Player player, ArrayList<Combatant> combatants) {
+        currentBattleSystem = new BattleSystem(this, combatants);
+    }
+
+    public void endCombat() {
+        currentBattleSystem = null;
+    }
+
+    public Boolean inCombat() {
+        return currentBattleSystem != null;
     }
 }

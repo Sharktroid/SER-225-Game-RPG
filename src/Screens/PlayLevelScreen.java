@@ -1,5 +1,8 @@
 package Screens;
 
+import java.util.ArrayList;
+
+import Combatants.PlayerCombatant;
 import Engine.GraphicsHandler;
 import Engine.Key;
 import Engine.KeyLocker;
@@ -12,6 +15,7 @@ import Maps.WorldOneMap;
 import Maps.WorldTwoMap;
 import Maps.WorldThreeFloors;
 import Maps.WorldZeroMap;
+import Menus.InventoryMenu;
 import Maps.HubMap;
 import Players.Cat;
 import Utils.Direction;
@@ -27,8 +31,8 @@ public class PlayLevelScreen extends Screen {
     protected FlagManager flagManager;
     protected int worldNum = -1;
     protected int floorNum = 0;
-    private InventoryScreen inventory;
-    
+    private InventoryMenu inventory;
+
     protected boolean flagStates[];
     private KeyLocker keyLocker = new KeyLocker();
 
@@ -50,8 +54,8 @@ public class PlayLevelScreen extends Screen {
         if (worldNum == 0) {
             this.map = new WorldZeroMap();
 
-        
-        } 
+
+        }
         //set world one map
         else if (worldNum == 1) {
             this.map = new WorldOneMap();
@@ -74,23 +78,25 @@ public class PlayLevelScreen extends Screen {
             
 
 
-        
-        } 
+
+        }
         //setup world two map
         else if (worldNum == 2) {
             this.map = new WorldTwoMap();
-        } 
-        
+
+            flagManager.addFlag("hasTalkedToBeaver", false);
+        }
+
         //setup world three map
         else if (worldNum == 3) {
 
             this.map = new WorldThreeFloors(floorNum);
-            
+
             flagManager.addFlag("wentUpLevel", false);
             flagManager.addFlag("wentDownLevel", false);
             flagManager.addFlag("hasTalkedToRedPanda", WorldThreeFloors.redPandaFlagState());
             flagManager.addFlag("hasTalkedToDino", WorldThreeFloors.DinoFlagState());
-        } 
+        }
 
         //setup hub world map
         else if (worldNum == 4) {
@@ -142,13 +148,13 @@ public class PlayLevelScreen extends Screen {
             }
         }
 
-        //setup inventory screen
-        inventory = new InventoryScreen(player);
+        //setup inventory menu
+        inventory = new InventoryMenu(player);
 
-        //setup win scree (**from old test map)
+        //setup win screen (**from old test map)
         winScreen = new WinScreen(this);
     }
-    
+
     public void update() {
 
         // based on screen state, perform specific actions
@@ -180,18 +186,20 @@ public class PlayLevelScreen extends Screen {
                 break;
         }
 
-        //hub world teleportation
-        if (map.getFlagManager().isFlagSet("portalOneActivated")) {
+        //hub world teleportation **(temporary quick world swap keys)
+        if (map.getFlagManager().isFlagSet("portalOneActivated") || Keyboard.isKeyDown(Key.ONE) && !keyLocker.isKeyLocked(Key.ONE)) {
             worldNum = 1;
             initialize();
-        } else if (map.getFlagManager().isFlagSet("portalTwoActivated")) {
+        } else if (map.getFlagManager().isFlagSet("portalTwoActivated")||Keyboard.isKeyDown(Key.TWO) && !keyLocker.isKeyLocked(Key.TWO)) {
             worldNum = 2;
             initialize();
-        } else if (map.getFlagManager().isFlagSet("portalThreeActivated")) {
+        } else if (map.getFlagManager().isFlagSet("portalThreeActivated") || Keyboard.isKeyDown(Key.THREE) && !keyLocker.isKeyLocked(Key.THREE)) {
             worldNum = 3;
             initialize();
+        }else if (Keyboard.isKeyDown(Key.FOUR) && !keyLocker.isKeyLocked(Key.FOUR)) {
+            worldNum = 4;
+            initialize();
         }
-
         //world three floor traversal
         if (worldNum == 3) {
             if (map.getFlagManager().isFlagSet("enteredBuilding")) {

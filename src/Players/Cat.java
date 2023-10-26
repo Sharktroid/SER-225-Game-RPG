@@ -19,8 +19,7 @@ public class Cat extends Player {
         walkSpeed = 2.3f;
         runSpeed = 7.8f;
         fetchCount = 1;
-
-       
+        setAllHealth(100);
     }
 
     public void update() {
