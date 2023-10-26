@@ -18,12 +18,19 @@ public class Cat extends Player {
         super(new SpriteSheet(ImageLoader.load("Cat.png"), 24, 24), x, y, "STAND_RIGHT");
         walkSpeed = 2.3f;
         runSpeed = 7.8f;
+        fetchCount = 1;
         setAllHealth(100);
     }
 
     public void update() {
         super.update();
     }
+
+    public int getCurrentFetch() {
+        
+        return (int) fetchCount;
+    }
+
 
     public void draw(GraphicsHandler graphicsHandler) {
         super.draw(graphicsHandler);

@@ -65,6 +65,18 @@ public class PlayLevelScreen extends Screen {
             flagManager.addFlag("hasTalkedToDinosaur", false);
             flagManager.addFlag("hasFoundBall", false);
             flagManager.addFlag("sawHubMsg", false);
+            flagManager.addFlag("hasTalkedToElder", false);
+            flagManager.addFlag("findCat", false);
+            flagManager.addFlag("foundCat", false);
+            flagManager.addFlag("foundCat2", false);
+            flagManager.addFlag("hasTalkedToGarfunkle", false);
+            flagManager.addFlag("finishedElder", false);
+            flagManager.addFlag("hasTalkedToElder2", false);
+            flagManager.addFlag("findFetch", false);
+            flagManager.addFlag("foundFetch", false);
+            
+            
+
 
 
         }
