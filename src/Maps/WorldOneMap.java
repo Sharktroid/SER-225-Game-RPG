@@ -31,13 +31,14 @@ import Scripts.WorldOneMap.SlothScript;
 import Scripts.WorldOneMap.ElderScript;
 import Scripts.WorldOneMap.SoulConsumingFlameNPCScript;
 import Scripts.WorldOneMap.WalrusScript;
+import Tilesets.CommonTileset;
 import Tilesets.InternetExplorerTileset;
 
 import java.util.ArrayList;
 
 public class WorldOneMap extends Map {
     public WorldOneMap() {
-        super("world_one_map.txt", new InternetExplorerTileset());
+        super("world_one_map.txt", new CommonTileset());
         this.playerStartPosition = getMapTile(0, 14).getLocation();
     }
 
