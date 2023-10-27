@@ -199,6 +199,10 @@ public class PlayLevelScreen extends Screen {
         }else if (Keyboard.isKeyDown(Key.FOUR) && !keyLocker.isKeyLocked(Key.FOUR)) {
             worldNum = 4;
             initialize();
+            
+        }else if (Keyboard.isKeyDown(Key.ZERO) && !keyLocker.isKeyLocked(Key.ZERO)) {
+            worldNum = 0;
+            initialize();
         }
         //world three floor traversal
         if (worldNum == 3) {
