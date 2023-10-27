@@ -38,7 +38,7 @@ public abstract class Menu {
         }
         for (int i = 0; i < rows * columns; i++) {
             int currentIndex = i + currentRow * columns;
-            if (currentIndex < spriteFonts.size()) {
+            if (currentIndex < spriteFonts.size() && currentIndex >= 0) {
                 int x = (int) (i % columns * (getInternalSize().x) / columns) + left + border;
                 int y = top + border + getLineGap() * (i / columns);
                 spriteFonts.get(currentIndex).setX(x);
@@ -49,31 +49,36 @@ public abstract class Menu {
     }
 
     public void update() {
-        if (lockKey(Key.RIGHT) && columns > 1) {
-            currentTextItemHovered = (currentTextItemHovered + 1) % spriteFonts.size();
-        }
-        else if (lockKey(Key.LEFT) && columns > 1) {
-            currentTextItemHovered--;
-            if (currentTextItemHovered < 0) {
-                currentTextItemHovered = spriteFonts.size() - 1;
+        if (spriteFonts.size() > 0) {
+            if (lockKey(Key.RIGHT) && columns > 1) {
+                currentTextItemHovered = (currentTextItemHovered + 1) % spriteFonts.size();
+            }
+            else if (lockKey(Key.LEFT) && columns > 1) {
+                currentTextItemHovered--;
+                if (currentTextItemHovered < 0) {
+                    currentTextItemHovered = spriteFonts.size() - 1;
+                }
+
+            }
+            else if (lockKey(Key.UP) && rows > 1) {
+                currentTextItemHovered -= columns;
+                if (currentTextItemHovered < 0) {
+                    currentTextItemHovered = spriteFonts.size() - (currentTextItemHovered + 1 + columns);
+                }
+            }
+            else if (lockKey(Key.DOWN) && rows > 1) {
+                currentTextItemHovered += columns;
+                if (currentTextItemHovered >= spriteFonts.size()) {
+                    currentTextItemHovered %= columns;
+                }
             }
 
-        }
-        else if (lockKey(Key.UP) && rows > 1) {
-            currentTextItemHovered -= columns;
-            if (currentTextItemHovered < 0) {
-                currentTextItemHovered = spriteFonts.size() - (currentTextItemHovered + 1 + columns);
+            else if (lockKey(Key.ENTER)) {
+                optionSelected();
             }
         }
-        else if (lockKey(Key.DOWN) && rows > 1) {
-            currentTextItemHovered += columns;
-            if (currentTextItemHovered >= spriteFonts.size()) {
-                currentTextItemHovered %= columns;
-            }
-        }
-
-        else if (lockKey(Key.ENTER)) {
-            optionSelected();
+        else {
+            currentTextItemHovered = 0;
         }
 
         while (currentTextItemHovered < currentRow * columns) {
