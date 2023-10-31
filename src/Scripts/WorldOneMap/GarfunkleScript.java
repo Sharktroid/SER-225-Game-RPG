@@ -2,11 +2,7 @@
 
 package Scripts.WorldOneMap;
 
-import Builders.FrameBuilder;
-import Builders.MapTileBuilder;
-import GameObject.Frame;
 import Level.*;
-import Utils.Point;
 
 // script for talking to Garfunkle npc
 // the script is segmented -- it has multiple setups, cleanups, and executions based on its current action

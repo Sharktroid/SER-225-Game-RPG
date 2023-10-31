@@ -6,7 +6,6 @@ import GameObject.Frame;
 import GameObject.GameObject;
 import GameObject.SpriteSheet;
 import Items.Fetch;
-import Items.Medkit;
 import Level.EnhancedMapTile;
 import Level.MapEntityStatus;
 import Level.Player;

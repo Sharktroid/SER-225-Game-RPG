@@ -1,8 +1,5 @@
 package Screens;
 
-import java.util.ArrayList;
-
-import Combatants.PlayerCombatant;
 import Engine.GraphicsHandler;
 import Engine.Key;
 import Engine.KeyLocker;
@@ -74,8 +71,8 @@ public class PlayLevelScreen extends Screen {
             flagManager.addFlag("hasTalkedToElder2", false);
             flagManager.addFlag("findFetch", false);
             flagManager.addFlag("foundFetch", false);
-            
-            
+
+
 
 
 
@@ -199,7 +196,7 @@ public class PlayLevelScreen extends Screen {
         }else if (Keyboard.isKeyDown(Key.FOUR) && !keyLocker.isKeyLocked(Key.FOUR)) {
             worldNum = 4;
             initialize();
-            
+
         }else if (Keyboard.isKeyDown(Key.ZERO) && !keyLocker.isKeyLocked(Key.ZERO)) {
             worldNum = 0;
             initialize();
