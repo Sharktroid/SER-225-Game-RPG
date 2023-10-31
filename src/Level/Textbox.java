@@ -73,13 +73,17 @@ public class Textbox {
     private int keyPressTimer;
     private SpriteFont npcName;
     private SpriteFont playerName;
-    
-    protected TextboxStyle textboxStyle;
-    protected TextboxStyle prevTextboxStyle;
+
+    protected Style textboxStyle;
+    protected Style prevTextboxStyle;
+
+    public enum Style {
+        HUBWORLD, WORLDONE, WORLDTWO, WORLDTHREE
+    }
 
     public Textbox(Map map) {
         this.map = map;
-        textboxStyle = TextboxStyle.HUBWORLD;
+        textboxStyle = Style.HUBWORLD;
         prevTextboxStyle = textboxStyle;
         try {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -130,7 +134,7 @@ public class Textbox {
         for (int i = selectionText.length; i < this.selectionText.length; i++) {
             this.selectionText[i] = new SpriteFont("", fontX, fontY, font, bigFontColor);
         }
-        
+
         selectablesPresent = 1;
     }
 
@@ -237,14 +241,14 @@ public class Textbox {
 
         // ----- big textbox ----- //
         //upper box
-        if (textboxStyle.equals(TextboxStyle.WORLDONE)) {
+        if (textboxStyle.equals(Style.WORLDONE)) {
             graphicsHandler.drawFilledRectangleGradientWithBorder(x, y-25, width, 25, arcWidth, arcHeight, new Color(57,147,255), new Color(10,85,234), smallBorderColor, borderThickness);
             graphicsHandler.drawFilledRectangleWithBorder(x+30, y-23, 150, 21, arcWidth, arcHeight, new Color(26,79,188), new Color(17,69,169), 2);
-        } else if (textboxStyle.equals(TextboxStyle.WORLDTWO)) {
+        } else if (textboxStyle.equals(Style.WORLDTWO)) {
             graphicsHandler.drawFilledRectangleWithBorder(x, y-25, width, 25, arcWidth, arcHeight, smallFillColor, smallBorderColor, borderThickness);
             graphicsHandler.drawFilledRectangleWithBorder(x, y-15, width, 15, 0, 0, smallFillColor, smallFillColor, borderThickness);
             graphicsHandler.drawFilledRectangleWithBorder((x+(width/2))-(100), y-21, 200, 17, 10, 10, smallFillColor, new Color(73,73,73), borderThickness);
-        } else if (textboxStyle.equals(TextboxStyle.WORLDTHREE)) {
+        } else if (textboxStyle.equals(Style.WORLDTHREE)) {
             graphicsHandler.drawFilledRectangleWithBorder(x, y-30, width, 30, arcWidth, arcHeight, smallFillColor, smallBorderColor, borderThickness);
             graphicsHandler.drawFilledRectangleWithBorder(x+5, y-25, 100, 35, 15, 15, bigFillColor, bigBorderColor, borderThickness);
         } else { //hubworld
@@ -252,7 +256,7 @@ public class Textbox {
             graphicsHandler.drawFilledRectangleWithBorder(x+30, y-27, 150, 24, 5, 5, new Color(255,255,255), new Color(210,210,214), 1);
         }
         //upper box details
-        if (textboxStyle.equals(TextboxStyle.WORLDONE)) {
+        if (textboxStyle.equals(Style.WORLDONE)) {
             //white background
             graphicsHandler.drawFilledRectangle(x+width-23, y-23, 21, 21, 5, 5, new Color(217,210,226));
             //red box
@@ -262,14 +266,14 @@ public class Textbox {
             X.drawWithParsedNewLines(graphicsHandler, 10);
             //logo
             graphicsHandler.drawImage(logo, x+5, y-20, 15, 15);
-        } else if (textboxStyle.equals(TextboxStyle.WORLDTWO)) {
+        } else if (textboxStyle.equals(Style.WORLDTWO)) {
             //red
             graphicsHandler.drawFilledRectangleWithBorder(x+8, y-18, 11, 11, 11, 11, new Color(253,95,86), new Color(241,93,84), 1);
             //yellow
             graphicsHandler.drawFilledRectangleWithBorder(x+27, y-18, 11, 11, 11, 11, new Color(254,189,47), new Color(241,180,51), 1);
             //green
             graphicsHandler.drawFilledRectangleWithBorder(x+46, y-18, 11, 11, 11, 11, new Color(40,200,64), new Color(77,189,84), 1);
-        } else if (textboxStyle.equals(TextboxStyle.WORLDTHREE)) {
+        } else if (textboxStyle.equals(Style.WORLDTHREE)) {
             SpriteFont X = new SpriteFont("X", x+width-19, y-21, "Arial", 15, new Color(54,68,85));
             X.drawWithParsedNewLines(graphicsHandler, 10);
         } else { //hubworld
@@ -278,28 +282,28 @@ public class Textbox {
             X.drawWithParsedNewLines(graphicsHandler, 10);
         }
         //lower box
-        if (textboxStyle.equals(TextboxStyle.WORLDTWO)) {
+        if (textboxStyle.equals(Style.WORLDTWO)) {
             graphicsHandler.drawFilledRectangleWithBorder(x, y, width, height, arcWidth, arcHeight, bigFillColor, bigBorderColor, borderThickness);
             graphicsHandler.drawFilledRectangleWithBorder(x, y, width, height-10, 0, 0, bigFillColor, bigFillColor, borderThickness);
         } else {
             graphicsHandler.drawFilledRectangleWithBorder(x, y, width, height, arcWidth, arcHeight, bigFillColor, bigBorderColor, borderThickness);
         }
-        
+
         // ----- select textbox ----- //
         if (selectablesPresent == 1) {
             //upper box
-            if (textboxStyle.equals(TextboxStyle.WORLDONE)) {
+            if (textboxStyle.equals(Style.WORLDONE)) {
                 graphicsHandler.drawFilledRectangleGradientWithBorder(xSelect, ySelect-25, widthSelect, 25, arcWidth, arcHeight, new Color(57,147,255), new Color(10,85,234), smallBorderColor, borderThickness);
-            } else if (textboxStyle.equals(TextboxStyle.WORLDTWO)) {
+            } else if (textboxStyle.equals(Style.WORLDTWO)) {
                 graphicsHandler.drawFilledRectangleWithBorder(xSelect, ySelect-25, widthSelect, 25, arcWidth, arcHeight, smallFillColor, smallBorderColor, borderThickness);
                 graphicsHandler.drawFilledRectangleWithBorder(xSelect, ySelect-15, widthSelect, 15, 0, 0, smallFillColor, smallFillColor, borderThickness);
-            } else if (textboxStyle.equals(TextboxStyle.WORLDTHREE)) {
+            } else if (textboxStyle.equals(Style.WORLDTHREE)) {
                 graphicsHandler.drawFilledRectangleWithBorder(xSelect, ySelect-30, widthSelect, 30, arcWidth, arcHeight, smallFillColor, smallBorderColor, borderThickness);
             } else { //hubworld
                 graphicsHandler.drawFilledRectangleWithBorder(xSelect, ySelect-30, widthSelect, 30, arcWidth, arcHeight, smallFillColor, smallBorderColor, borderThickness);
             }
             //upper box details
-            if (textboxStyle.equals(TextboxStyle.WORLDONE)) {
+            if (textboxStyle.equals(Style.WORLDONE)) {
                 //white background
                 graphicsHandler.drawFilledRectangle(xSelect+widthSelect-23, ySelect-23, 21, 21, 5, 5, new Color(217,210,226));
                 //red box
@@ -309,14 +313,14 @@ public class Textbox {
                 X.drawWithParsedNewLines(graphicsHandler, 10);
                 //logo
                 graphicsHandler.drawImage(logo, xSelect+5, ySelect-20, 15, 15);
-            } else if (textboxStyle.equals(TextboxStyle.WORLDTWO)) {
+            } else if (textboxStyle.equals(Style.WORLDTWO)) {
                 //red
                 graphicsHandler.drawFilledRectangleWithBorder(xSelect+8, ySelect-18, 11, 11, 11, 11, new Color(253,95,86), new Color(241,93,84), 1);
                 //yellow
                 graphicsHandler.drawFilledRectangleWithBorder(xSelect+27, ySelect-18, 11, 11, 11, 11, new Color(254,189,47), new Color(241,180,51), 1);
                 //green
                 graphicsHandler.drawFilledRectangleWithBorder(xSelect+46, ySelect-18, 11, 11, 11, 11, new Color(40,200,64), new Color(77,189,84), 1);
-            } else if (textboxStyle.equals(TextboxStyle.WORLDTHREE)) {
+            } else if (textboxStyle.equals(Style.WORLDTHREE)) {
                 SpriteFont X = new SpriteFont("X", xSelect+widthSelect-19, ySelect-21, "Arial", 15, new Color(54,68,85));
                 X.drawWithParsedNewLines(graphicsHandler, 10);
             } else {
@@ -325,7 +329,7 @@ public class Textbox {
                 X.drawWithParsedNewLines(graphicsHandler, 10);
             }
             //lower box
-            if (textboxStyle.equals(TextboxStyle.WORLDTWO)) {
+            if (textboxStyle.equals(Style.WORLDTWO)) {
                 graphicsHandler.drawFilledRectangleWithBorder(xSelect, ySelect, widthSelect, heightSelect, arcWidth, arcHeight, bigFillColor, bigBorderColor, borderThickness);
                 graphicsHandler.drawFilledRectangleWithBorder(xSelect, ySelect, widthSelect, heightSelect-10, 0, 0, bigFillColor, bigFillColor, borderThickness);
             } else {
@@ -336,7 +340,7 @@ public class Textbox {
         if (text != null) {
             text.drawWithParsedNewLines(graphicsHandler, 10);
         }
-        
+
         if (npcName != null) {
             npcName.drawWithParsedNewLines(graphicsHandler, 10);
         }
@@ -391,7 +395,7 @@ public class Textbox {
         arcWidth = 0;
         arcHeight = 0;
         borderThickness = 1;
-        fontSmallX = fontX+25; 
+        fontSmallX = fontX+25;
         bigFillColor = new Color(249,249,251);
         bigBorderColor = new Color(249,249,251);
         smallFillColor = new Color(240,240,245);
@@ -467,11 +471,11 @@ public class Textbox {
         smallFontColor = new Color(54,68,85);
     }
 
-    public TextboxStyle getTextboxStyle() {
+    public Style getTextboxStyle() {
         return textboxStyle;
     }
 
-    public void setTextboxStyle(TextboxStyle textboxStyle) {
+    public void setTextboxStyle(Style textboxStyle) {
         System.out.println("SET TEXTBOX STYLE");
         this.textboxStyle = textboxStyle;
         handleTextboxStyle();

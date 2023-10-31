@@ -3,19 +3,19 @@ package Scripts.WorldThreeFloors;
 import Level.NPC;
 import Level.Script;
 import Level.ScriptState;
-import Level.TextboxStyle;
+import Level.Textbox.Style;
 
 // script for talking to redpanda npc
 
 public class DinoScript extends Script<NPC> {
 
     public static boolean setDinoFlagState = false;
-    
+
     @Override
     protected void setup() {
         lockPlayer();
 
-        setTextboxStyle(TextboxStyle.WORLDTHREE);
+        setTextboxStyle(Style.WORLDTHREE);
         setNPCName("Dino");
         showTextbox();
 
@@ -29,7 +29,7 @@ public class DinoScript extends Script<NPC> {
         }
 
         if (isFlagSet("hasTalkedToDino")){
-            
+
             addTextToTextboxQueue("Heading back down?");
         }
     }
@@ -42,7 +42,7 @@ public class DinoScript extends Script<NPC> {
         setDinoFlagState = isFlagSet("hasTalkedToDino");
     }
 
-    
+
     @Override
     public ScriptState execute() {
         if (!isFlagSet("hasTalkedToDino")){
@@ -52,7 +52,7 @@ public class DinoScript extends Script<NPC> {
             if (!isTextboxQueueEmpty()) {
                 return ScriptState.RUNNING;
 
-            } 
+            }
             end();
             return ScriptState.COMPLETED;
 
@@ -65,7 +65,7 @@ public class DinoScript extends Script<NPC> {
             return ScriptState.COMPLETED;
         }
         return ScriptState.COMPLETED;
-    }  
+    }
 
 }
 

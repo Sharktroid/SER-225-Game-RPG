@@ -3,7 +3,7 @@ package Scripts.WorldOneMap;
 import Level.NPC;
 import Level.Script;
 import Level.ScriptState;
-import Level.TextboxStyle;
+import Level.Textbox.Style;
 
 // script for talking to walrus npc
 public class WalrusScript extends Script<NPC> {
@@ -14,8 +14,8 @@ public class WalrusScript extends Script<NPC> {
     @Override
     protected void setup() {
         lockPlayer();
-        
-        setTextboxStyle(TextboxStyle.WORLDONE);
+
+        setTextboxStyle(Style.WORLDONE);
         setNPCName("Walrus");
         showTextbox();
 
@@ -43,7 +43,7 @@ public class WalrusScript extends Script<NPC> {
             addTextToTextboxQueue( "I sure love doing walrus things!");
         }
     }
-    
+
 
     @Override
     protected void cleanup() {
@@ -61,13 +61,13 @@ public class WalrusScript extends Script<NPC> {
 
     @Override
     public ScriptState execute() {
-        // setTextboxStyle(TextboxStyle.WORLDONE);
+        // setTextboxStyle(Textbox.Style.WORLDONE);
         if (!isFlagSet("hasTalkedToWalrus")) {
             if (sequence == 0) {
                 start();
                 if (isTextboxQueueEmpty()) {
                     end();
-                }  
+                }
             } else if (sequence == 1) {
                 start();
                 if (isTextboxQueueEmpty()) {
@@ -85,5 +85,5 @@ public class WalrusScript extends Script<NPC> {
             return ScriptState.COMPLETED;
         }
         return ScriptState.COMPLETED;
-    }   
+    }
 }

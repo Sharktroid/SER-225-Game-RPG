@@ -100,7 +100,7 @@ public abstract class Script<T extends MapEntity> {
     }
 
 
-    protected void showTextbox(TextboxStyle textboxStyle) {
+    protected void showTextbox(Textbox.Style textboxStyle) {
         map.getTextbox().setIsActive(true);
     }
 
@@ -120,11 +120,11 @@ public abstract class Script<T extends MapEntity> {
         map.getTextbox().addSelectableText(text, selectableText);
     }
 
-    protected TextboxStyle getTextboxStyle() {
+    protected Textbox.Style getTextboxStyle() {
         return map.getTextbox().getTextboxStyle();
     }
 
-    protected void setTextboxStyle(TextboxStyle textboxStyle) {
+    protected void setTextboxStyle(Textbox.Style textboxStyle) {
         map.getTextbox().setTextboxStyle(textboxStyle);
         System.out.println("SCRIPT.JAVA CALLED");
     }
@@ -141,7 +141,7 @@ public abstract class Script<T extends MapEntity> {
     // returns the npc name
     protected SpriteFont getNPCName() {
         return map.getTextbox().getNPCName();
-    } 
+    }
     // sets the npc name
     protected void setNPCName(String npcName) {
         map.getTextbox().setNPCName(npcName);

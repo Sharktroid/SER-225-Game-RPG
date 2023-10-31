@@ -3,7 +3,7 @@ package Scripts.WorldOneMap;
 import Level.NPC;
 import Level.Script;
 import Level.ScriptState;
-import Level.TextboxStyle;
+import Level.Textbox.Style;
 
 // script for talking to catsuit npc
 public class CatsuitScript extends Script<NPC> {
@@ -12,7 +12,7 @@ public class CatsuitScript extends Script<NPC> {
     protected void setup() {
         lockPlayer();
 
-        setTextboxStyle(TextboxStyle.WORLDONE);
+        setTextboxStyle(Style.WORLDONE);
         setNPCName("Catsuit");
         showTextbox();
 

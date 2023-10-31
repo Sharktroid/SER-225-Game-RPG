@@ -3,7 +3,7 @@ package Scripts.WorldOneMap;
 import Level.NPC;
 import Level.Script;
 import Level.ScriptState;
-import Level.TextboxStyle;
+import Level.Textbox.Style;
 
 // script for talking to officeworker npc
 public class OfficeworkerScript extends Script<NPC> {
@@ -12,7 +12,7 @@ public class OfficeworkerScript extends Script<NPC> {
     protected void setup() {
         lockPlayer();
 
-        setTextboxStyle(TextboxStyle.WORLDONE);
+        setTextboxStyle(Style.WORLDONE);
         setNPCName("Office Worker");
         showTextbox();
 
@@ -20,7 +20,7 @@ public class OfficeworkerScript extends Script<NPC> {
         if (!isFlagSet("hasTalkedToOfficeworker")) {
             addTextToTextboxQueue( "Where am I??!!");
             addTextToTextboxQueue( "At least I'm still on the clock");
-            
+
         }
         else {
             addTextToTextboxQueue( "At least I'm still on the clock");
