@@ -7,6 +7,11 @@ import Maps.WorldZeroMap;
 import Maps.WorldOneMap;
 import Maps.WorldTwoMap;
 import Maps.WorldThreeFloors;
+import Maps.EvanTestMap;
+import Maps.CalvinTestMap;
+import Maps.ShannonTestMap;
+import Maps.JulietTestMap;
+import Maps.AaronTestMap;
 
 import java.util.ArrayList;
 
@@ -23,6 +28,11 @@ public class EditorMaps {
             add("WorldThreeTwoMap");
             add("WorldThreeThreeMap");
             add("WorldThreeFourMap");
+            add("EvanTestMap");
+            add("CalvinTestMap");
+            add("ShannonTestMap");
+            add("JulietTestMap");
+            add("AaronTestMap");
             add("HubMap");
         }};
     }
@@ -49,6 +59,16 @@ public class EditorMaps {
                 return new WorldThreeFloors(3);
             case "WorldThreeFourMap":
                 return new WorldThreeFloors(4);
+            case "EvanTestMap":
+                return new EvanTestMap();
+            case "CalvinTestMap":
+                return new CalvinTestMap();
+            case "ShannonTestMap":
+                return new ShannonTestMap();
+            case "JulietTestMap":
+                return new JulietTestMap();
+            case "AaronTestMap":
+                return new AaronTestMap();
             default:
                 throw new RuntimeException("Unrecognized map name");
         }
