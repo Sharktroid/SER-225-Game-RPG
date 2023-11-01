@@ -43,16 +43,8 @@ public class Textbox {
 
     protected static Font font;
     protected static Font fontSmall;
-    protected BufferedImage logo;
     protected int fontSmallX;
-    protected int arcWidth;
-    protected int arcHeight;
-    protected int borderThickness;
-    protected Color bigFillColor;
-    protected Color bigBorderColor;
     protected Color bigFontColor;
-    protected Color smallFillColor;
-    protected Color smallBorderColor;
     protected Color smallFontColor;
     protected int currentTextItemHovered = 0;
     protected int compiledCount = 0;
@@ -241,14 +233,12 @@ public class Textbox {
 
         // ----- big textbox ----- //
         //upper box
-        Panel panel = new Panel(textboxStyle, smallFillColor, smallBorderColor, bigFillColor, bigBorderColor, bigFontColor, logo, x, y, width, height, arcWidth, arcHeight,
-                borderThickness, true);
+        Panel panel = new Panel(textboxStyle, bigFontColor, x, y, width, height, true);
         panel.draw(graphicsHandler);
 
         // ----- select textbox ----- //
         if (selectablesPresent == 1) {
-            Panel selectPanel = new Panel(textboxStyle, smallFillColor, smallBorderColor, bigFillColor, bigBorderColor, bigFontColor, logo, xSelect, ySelect, widthSelect, heightSelect,
-             arcWidth, arcHeight, borderThickness, false);
+            Panel selectPanel = new Panel(textboxStyle, bigFontColor, xSelect, ySelect, widthSelect, heightSelect, false);
             selectPanel.draw(graphicsHandler);
         }
 
@@ -278,8 +268,7 @@ public class Textbox {
         }
     }
 
-    protected void handleTextboxStyle() {
-        System.out.println(textboxStyle);
+    private void handleTextboxStyle() {
         switch (textboxStyle) {
             case HUBWORLD:
                 hubWorldTextbox();
@@ -296,7 +285,7 @@ public class Textbox {
         }
     }
 
-    protected void hubWorldTextbox() {
+    private void hubWorldTextbox() {
         try {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             font = Font.createFont(Font.TRUETYPE_FONT, new File("Resources/fonts/inter.ttf")).deriveFont(20f);
@@ -306,20 +295,12 @@ public class Textbox {
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
-        logo = ImageLoader.load("firefoxlogo.png", Color.MAGENTA);
-        arcWidth = 0;
-        arcHeight = 0;
-        borderThickness = 1;
         fontSmallX = fontX+25;
-        bigFillColor = new Color(249,249,251);
-        bigBorderColor = new Color(249,249,251);
-        smallFillColor = new Color(240,240,245);
-        smallBorderColor = new Color(240,240,245);
         bigFontColor = new Color(29,28,34);
         smallFontColor = new Color(29,28,34);
     }
 
-    protected void worldOneTextbox() {
+    private void worldOneTextbox() {
         try {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             font = Font.createFont(Font.TRUETYPE_FONT, new File("Resources/fonts/tahoma.ttf")).deriveFont(30f);
@@ -329,20 +310,12 @@ public class Textbox {
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
-        logo = ImageLoader.load("windowsxplogo.png", Color.MAGENTA);
-        arcWidth = 0;
-        arcHeight = 0;
-        borderThickness = 3;
         fontSmallX = fontX+20;
-        bigFillColor = new Color(239,235,222);
-        bigBorderColor = new Color(10,85,233);
-        smallFillColor = new Color(10,85,233);
-        smallBorderColor = new Color(10,85,233);
         bigFontColor = Color.BLACK;
         smallFontColor = Color.WHITE;
     }
 
-    protected void worldTwoTextbox() {
+    private void worldTwoTextbox() {
         try {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             font = Font.createFont(Font.TRUETYPE_FONT, new File("Resources/fonts/sfpro.ttf")).deriveFont(18f);
@@ -352,19 +325,12 @@ public class Textbox {
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
-        arcWidth = 15;
-        arcHeight = 15;
-        borderThickness = 1;
         fontSmallX = x+242;
-        bigFillColor = new Color(27,27,27);
-        bigBorderColor = new Color(27,27,27);
-        smallFillColor = new Color(50,50,50);
-        smallBorderColor = new Color(50,50,50);
         bigFontColor = new Color (225,225,225);
         smallFontColor = new Color(225,225,225);
     }
 
-    protected void worldThreeTextbox() {
+    private void worldThreeTextbox() {
         try {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             font = Font.createFont(Font.TRUETYPE_FONT, new File("Resources/fonts/opensans.ttf")).deriveFont(20f);
@@ -374,14 +340,7 @@ public class Textbox {
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
-        arcWidth = 0;
-        arcHeight = 0;
-        borderThickness = 1;
         fontSmallX = fontX;
-        bigFillColor = new Color(255,255,255);
-        bigBorderColor = new Color(255,255,255);
-        smallFillColor = new Color(223,225,231);
-        smallBorderColor = new Color(223,225,231);
         bigFontColor = new Color(54,68,85);
         smallFontColor = new Color(54,68,85);
     }

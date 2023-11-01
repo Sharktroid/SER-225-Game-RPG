@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 import Engine.GraphicsHandler;
+import Engine.ImageLoader;
 import SpriteFont.SpriteFont;
 
 public class Panel {
@@ -26,23 +27,15 @@ public class Panel {
     private int arcHeight;
     private int borderThickness;
 
-    public Panel(Textbox.Style textboxStyle, Color smallFillColor, Color smallBorderColor, Color bigFillColor, Color bigBorderColor, Color bigFontColor, BufferedImage logo,
-            int x, int y, int width, int height, int arcWidth, int arcHeight, int borderThickness, boolean displayWindowName) {
+    public Panel(Textbox.Style textboxStyle, Color bigFontColor, int x, int y, int width, int height, boolean displayWindowName) {
         this.textboxStyle = textboxStyle;
-        this.smallFillColor = smallFillColor;
-        this.bigFillColor = bigFillColor;
-        this.bigBorderColor = bigBorderColor;
         this.bigFontColor = bigFontColor;
-        this.logo = logo;
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
-        this.arcWidth = arcWidth;
-        this.arcHeight = arcHeight;
-        this.borderThickness = borderThickness;
         this. displayWindowName = displayWindowName;
-
+        handleTextboxStyle();
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
@@ -101,5 +94,68 @@ public class Panel {
             } else {
                 graphicsHandler.drawFilledRectangleWithBorder(x, y, width, height, arcWidth, arcHeight, bigFillColor, bigBorderColor, borderThickness);
             }
+    }
+
+    private void handleTextboxStyle() {
+        switch (textboxStyle) {
+            case HUBWORLD:
+                hubWorldTextbox();
+                break;
+            case WORLDONE:
+                worldOneTextbox();
+                break;
+            case WORLDTWO:
+                worldTwoTextbox();
+                break;
+            case WORLDTHREE:
+                worldThreeTextbox();
+                break;
+        }
+    }
+
+    private void hubWorldTextbox() {
+        logo = ImageLoader.load("firefoxlogo.png", Color.MAGENTA);
+        arcWidth = 0;
+        arcHeight = 0;
+        borderThickness = 1;
+        bigFillColor = new Color(249,249,251);
+        bigBorderColor = new Color(249,249,251);
+        smallFillColor = new Color(240,240,245);
+        smallBorderColor = new Color(240,240,245);
+        bigFontColor = new Color(29,28,34);
+    }
+
+    private void worldOneTextbox() {
+        logo = ImageLoader.load("windowsxplogo.png", Color.MAGENTA);
+        arcWidth = 0;
+        arcHeight = 0;
+        borderThickness = 3;
+        bigFillColor = new Color(239,235,222);
+        bigBorderColor = new Color(10,85,233);
+        smallFillColor = new Color(10,85,233);
+        smallBorderColor = new Color(10,85,233);
+        bigFontColor = Color.BLACK;
+    }
+
+    private void worldTwoTextbox() {
+        arcWidth = 15;
+        arcHeight = 15;
+        borderThickness = 1;
+        bigFillColor = new Color(27,27,27);
+        bigBorderColor = new Color(27,27,27);
+        smallFillColor = new Color(50,50,50);
+        smallBorderColor = new Color(50,50,50);
+        bigFontColor = new Color (225,225,225);
+    }
+
+    private void worldThreeTextbox() {
+        arcWidth = 0;
+        arcHeight = 0;
+        borderThickness = 1;
+        bigFillColor = new Color(255,255,255);
+        bigBorderColor = new Color(255,255,255);
+        smallFillColor = new Color(223,225,231);
+        smallBorderColor = new Color(223,225,231);
+        bigFontColor = new Color(54,68,85);
     }
 }
