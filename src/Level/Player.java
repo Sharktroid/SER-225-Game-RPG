@@ -16,10 +16,12 @@ public abstract class Player extends GameObject {
     // these should be set in a subclass
     protected float walkSpeed = 0;
     protected float runSpeed = 0;
+    protected static float fetchCount = 1;
     private float speedModifier = 1;
     private float speedModifierDuration = 0;
 
     private float currentHealth;
+    private float currentFetch;
     private float maxHealth;
     protected int interactionRange = 5;
     protected Direction currentWalkingXDirection;
@@ -94,6 +96,7 @@ public abstract class Player extends GameObject {
 
     // based on player's current state, call appropriate player state handling
     // method
+    
     protected void handlePlayerState() {
         switch (playerState) {
             case STANDING:
@@ -328,6 +331,21 @@ public abstract class Player extends GameObject {
         return currentHealth;
     }
 
+    public void setCurrentFetch(float fetchCount) {
+        currentFetch = currentFetch + fetchCount;
+        
+
+    }
+
+    public void addCurrentFetch(float add) {
+        setCurrentFetch(getCurrentFetch() + add);
+    }
+
+    public int getCurrentFetch() {
+        
+        return (int) fetchCount;
+    }
+
     public void setMaxHealth(float health) {
         maxHealth = health;
     }
@@ -359,7 +377,7 @@ public abstract class Player extends GameObject {
         }
         return walkSpeed * runModifier * speedModifier;
     }
-
+  
     public String getName() {
         return name;
     }
