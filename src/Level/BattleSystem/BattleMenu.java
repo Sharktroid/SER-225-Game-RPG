@@ -26,6 +26,7 @@ public class BattleMenu extends Menu {
         rows = 1;
         columns = 1;
         reset();
+        updatePanel();
     }
 
     public State getCurrentState() {
