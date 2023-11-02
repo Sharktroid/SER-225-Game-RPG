@@ -9,16 +9,20 @@ import Engine.Key;
 import GameObject.Item;
 import Level.Menu;
 import Level.Player;
+import Level.Textbox;
 import SpriteFont.SpriteFont;
 import Utils.Point;
+import Level.Panel;
 
 public class InventoryMenu extends Menu {
     private Player player;
-    private final int totalHeight = Config.GAME_WINDOW_HEIGHT - spacer - (left * 2) - 39;
+    private final int totalHeight = Config.GAME_WINDOW_HEIGHT - spacer - (top * 2 ) - 39;
     private int descriptionHeight;
+    private int descriptionTop;
 
     private Boolean viewingKeyItems = false;
     protected InventoryMenuItemSelectionBox selectionBox;
+    private Panel descriptionPanel;
 
     public InventoryMenu(Player player) {
         super();
@@ -28,20 +32,20 @@ public class InventoryMenu extends Menu {
         this.player = player;
         columns = 2;
         rows = 5;
+        descriptionTop = top + height + spacer;
+        updatePanel();
     }
 
     @Override
     public void draw(GraphicsHandler graphicsHandler) {
         updateItemText();
         super.draw(graphicsHandler);
-        int descriptionTop = top + height + spacer;
-        graphicsHandler.drawFilledRectangleWithBorder(left, descriptionTop, width, descriptionHeight, Color.white,
-                Color.black, 2);
+        descriptionPanel.draw(graphicsHandler);
         String description = "";
         if (getCurrentItem() != null) {
             description = getCurrentItem().getDescription();
         }
-        SpriteFont descriptionSpriteFont = new SpriteFont(description, 0, 0, "Arial", fontSize, Color.black);
+        SpriteFont descriptionSpriteFont = new SpriteFont(description, 0, 0, Textbox.getFont(), Color.black);
         descriptionSpriteFont.setX(left + border);
         descriptionSpriteFont.setY(descriptionTop + border);
         descriptionSpriteFont.drawWithParsedNewLines(graphicsHandler, 10);
@@ -115,5 +119,11 @@ public class InventoryMenu extends Menu {
         if (selectionBox.choices.size() <= 1) {
             selectionBox = null;
         }
+    }
+
+    @Override
+    protected void updatePanel() {
+        super.updatePanel();
+        descriptionPanel = new Panel(left, descriptionTop, width, descriptionHeight, false);
     }
 }

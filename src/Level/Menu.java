@@ -12,7 +12,7 @@ import Utils.Point;
 
 public abstract class Menu {
     protected int left = 20;
-    protected int top = left;
+    protected int top = left + 20;
     protected int spacer = left;
     protected int border = 25;
     protected int rows = 1;
@@ -26,9 +26,14 @@ public abstract class Menu {
     protected int currentTextItemHovered = 0;
     private KeyLocker keyLocker = new KeyLocker();
     private int currentRow;
+    private Panel panel;
+
+    public Menu() {
+        updatePanel();
+    }
 
     public void draw(GraphicsHandler graphicsHandler) {
-        graphicsHandler.drawFilledRectangleWithBorder(left, top, width, height, Color.white, Color.black, 2);
+        panel.draw(graphicsHandler);
 
         for (int i = 0; i < spriteFonts.size(); i++) {
             spriteFonts.get(i).setColor(Color.black);
@@ -133,7 +138,7 @@ public abstract class Menu {
     protected void setText(String[] stringArray) {
         spriteFonts.clear();
         for (int i = 0; i < stringArray.length; i++) {
-            spriteFonts.add(new SpriteFont(stringArray[i], 0, 0, "Arial", fontSize, Color.black));
+            spriteFonts.add(new SpriteFont(stringArray[i], 0, 0, Textbox.getFont(), Color.black));
         }
     }
 
@@ -146,5 +151,9 @@ public abstract class Menu {
         else {
             return 0;
         }
+    }
+
+    protected void updatePanel() {
+        panel = new Panel(left, top, width, height, false);
     }
 }

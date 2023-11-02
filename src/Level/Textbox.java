@@ -1,14 +1,12 @@
 package Level;
 
 import Engine.GraphicsHandler;
-import Engine.ImageLoader;
 import Engine.Key;
 import Engine.KeyLocker;
 import Engine.Keyboard;
 import SpriteFont.SpriteFont;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -22,7 +20,7 @@ public class Textbox {
     protected boolean isActive;
     //big box
     protected int x = 100;
-    protected int y = 0;
+    protected int y;
     protected int bottomY = 460;
     protected int topY = 47;
     protected int fontX = 115;
@@ -44,7 +42,6 @@ public class Textbox {
     protected static Font font;
     protected static Font fontSmall;
     protected int fontSmallX;
-    protected Color bigFontColor;
     protected Color smallFontColor;
     protected int currentTextItemHovered = 0;
     protected int compiledCount = 0;
@@ -65,8 +62,10 @@ public class Textbox {
     private int keyPressTimer;
     private SpriteFont npcName;
     private SpriteFont playerName;
+    private Panel panel;
+    private Panel selectPanel;
 
-    protected Style textboxStyle;
+    static private Style style;
     protected Style prevTextboxStyle;
 
     public enum Style {
@@ -75,8 +74,8 @@ public class Textbox {
 
     public Textbox(Map map) {
         this.map = map;
-        textboxStyle = Style.HUBWORLD;
-        prevTextboxStyle = textboxStyle;
+        style = Style.HUBWORLD;
+        prevTextboxStyle = style;
         try {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             font = Font.createFont(Font.TRUETYPE_FONT, new File("Resources/fonts/arial.ttf")).deriveFont(30f);
@@ -86,6 +85,8 @@ public class Textbox {
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
+        panel = new Panel(x, y, width, height, true);
+        selectPanel = new Panel(xSelect, ySelect, widthSelect, heightSelect, false);
     }
 
     public void addText(String text) {
@@ -124,7 +125,7 @@ public class Textbox {
         }
 
         for (int i = selectionText.length; i < this.selectionText.length; i++) {
-            this.selectionText[i] = new SpriteFont("", fontX, fontY, font, bigFontColor);
+            this.selectionText[i] = new SpriteFont("", fontX, fontY, font, getFontColor());
         }
 
         selectablesPresent = 1;
@@ -145,9 +146,9 @@ public class Textbox {
     public SpriteFont spriteFontCompile(Queue<String> selectionQueue) {
         if (!selectionQueue.isEmpty() && keyLocker.isKeyLocked(interactKey)) {
             String next = selectionQueue.poll();
-            return new SpriteFont(next, fontX, fontY, font, bigFontColor);
+            return new SpriteFont(next, fontX, fontY, font, getFontColor());
         } else if (selectionQueue.isEmpty() && keyLocker.isKeyLocked(interactKey)) {
-            return new SpriteFont("", fontX, fontY, font, bigFontColor);
+            return new SpriteFont("", fontX, fontY, font, getFontColor());
         }
         return null;
     }
@@ -174,7 +175,7 @@ public class Textbox {
                 fontY = fontTopY;
                 fontYSelect = fontTopYSelect;
             }
-            text = new SpriteFont(next, fontX, fontY, font, bigFontColor);
+            text = new SpriteFont(next, fontX, fontY, font, getFontColor());
 
         }
 
@@ -224,21 +225,19 @@ public class Textbox {
         // if camera is at bottom of screen, textbox is drawn at top of screen instead of the bottom like usual
         // to prevent it from covering the player
         if (!map.getCamera().isAtBottomOfMap()) {
-            y = bottomY;
-            ySelect = bottomYSelect;
+            panel.setY(bottomY);
+            selectPanel.setY(bottomYSelect);
         } else {
-            y = topY;
-            ySelect = topYSelect;
+            panel.setY(topY);
+            selectPanel.setY(topYSelect);
         }
 
         // ----- big textbox ----- //
         //upper box
-        Panel panel = new Panel(textboxStyle, bigFontColor, x, y, width, height, true);
         panel.draw(graphicsHandler);
 
         // ----- select textbox ----- //
         if (selectablesPresent == 1) {
-            Panel selectPanel = new Panel(textboxStyle, bigFontColor, xSelect, ySelect, widthSelect, heightSelect, false);
             selectPanel.draw(graphicsHandler);
         }
 
@@ -252,7 +251,7 @@ public class Textbox {
 
         if (selectablesPresent == 1) {
             for (int i=0; i<selectionText.length; i++) {
-                selectionText[i].setColor(bigFontColor);
+                selectionText[i].setColor(getFontColor());
             }
             selectionText[currentTextItemHovered].setColor(Color.red);
 
@@ -269,7 +268,7 @@ public class Textbox {
     }
 
     private void handleTextboxStyle() {
-        switch (textboxStyle) {
+        switch (style) {
             case HUBWORLD:
                 hubWorldTextbox();
                 break;
@@ -296,7 +295,6 @@ public class Textbox {
             e.printStackTrace();
         }
         fontSmallX = fontX+25;
-        bigFontColor = new Color(29,28,34);
         smallFontColor = new Color(29,28,34);
     }
 
@@ -311,7 +309,6 @@ public class Textbox {
             e.printStackTrace();
         }
         fontSmallX = fontX+20;
-        bigFontColor = Color.BLACK;
         smallFontColor = Color.WHITE;
     }
 
@@ -326,7 +323,6 @@ public class Textbox {
             e.printStackTrace();
         }
         fontSmallX = x+242;
-        bigFontColor = new Color (225,225,225);
         smallFontColor = new Color(225,225,225);
     }
 
@@ -341,18 +337,20 @@ public class Textbox {
             e.printStackTrace();
         }
         fontSmallX = fontX;
-        bigFontColor = new Color(54,68,85);
         smallFontColor = new Color(54,68,85);
     }
 
-    public Style getTextboxStyle() {
-        return textboxStyle;
+    public static Style getStyle() {
+        return style;
     }
 
-    public void setTextboxStyle(Style textboxStyle) {
-        System.out.println("SET TEXTBOX STYLE");
-        this.textboxStyle = textboxStyle;
+    public void setStyle(Style textboxStyle) {
+        Textbox.style = textboxStyle;
         handleTextboxStyle();
+    }
+
+    public static Font getFont() {
+        return font;
     }
 
     public SpriteFont getNPCName() {
@@ -389,22 +387,6 @@ public class Textbox {
         this.choice = choice;
     }
 
-    // public Color getBigFillColor() {
-    //     return fillColor;
-    // }
-
-    // public void setBigFillColor(Color fillColor) {
-    //     this.fillColor = fillColor;
-    // }
-
-    // public Color getBigBorderColor() {
-    //     return borderColor;
-    // }
-
-    // public void setBorderColor(Color borderColor) {
-    //     this.borderColor = borderColor;
-    // }
-
     public boolean isActive() {
         return isActive;
     }
@@ -415,6 +397,19 @@ public class Textbox {
 
     public void setInteractKey(Key interactKey) {
         this.interactKey = interactKey;
+    }
+
+    static public Color getFontColor() {
+        switch (style) {
+            case HUBWORLD:
+                return new Color(29,28,34);
+            case WORLDTWO:
+                return Color.WHITE;
+            case WORLDTHREE:
+                new Color(54,68,85);
+            default:
+                return Color.BLACK;
+        }
     }
 
 }
