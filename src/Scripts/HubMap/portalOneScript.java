@@ -9,19 +9,26 @@ public class portalOneScript extends Script {
     @Override
     protected void setup() {
         lockPlayer();
-
         setTextboxStyle(Style.HUBWORLD);
         showTextbox();
 
-        addTextToTextboxQueue("Teleporting to world 1");
-
+        if (!isFlagSet("portalOneUnlocked")) {
+            addTextToTextboxQueue("Talk to the Firefox (**trigger*)");
+        } else {
+            addTextToTextboxQueue("Teleporting to world 1");
+        }
     }
 
     @Override
     protected void cleanup() {
         hideTextbox();
         unlockPlayer();
-        setFlag("portalOneActivated");
+
+        if (!isFlagSet("portalOneUnlocked")) {
+            player.moveY(10);
+        } else {
+            setFlag("portalOneActivated");
+        }
     }
 
     @Override

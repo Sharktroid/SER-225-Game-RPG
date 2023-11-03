@@ -9,20 +9,26 @@ public class portalThreeScript extends Script {
     @Override
     protected void setup() {
         lockPlayer();
-
         setTextboxStyle(Style.HUBWORLD);
         showTextbox();
 
-        addTextToTextboxQueue("Teleporting to world 3");
-
+        if (!isFlagSet("portalThreeUnlocked")) {
+            addTextToTextboxQueue("Talk to the Firefox (**trigger*)");
+        } else {
+            addTextToTextboxQueue("Teleporting to world 3");
+        }
     }
 
     @Override
     protected void cleanup() {
         hideTextbox();
         unlockPlayer();
-        setFlag("portalThreeActivated");
-        setFlag("startWorldThree");
+
+        if (!isFlagSet("portalThreeUnlocked")) {
+            player.moveY(10);
+        } else {
+            setFlag("portalThreeActivated");
+        }
     }
 
     @Override
