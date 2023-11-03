@@ -8,6 +8,7 @@ import Engine.Screen;
 import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.*;
+import Level.Textbox.Style;
 import Maps.WorldOneMap;
 import Maps.WorldTwoMap;
 import Maps.WorldThreeFloors;
@@ -22,6 +23,7 @@ import Maps.HubMap;
 import Players.Cat;
 import Utils.Direction;
 import Utils.Point;
+import Level.Script;
 
 // This class is for when the platformer game is actually being played
 public class PlayLevelScreen extends Screen {
@@ -105,8 +107,20 @@ public class PlayLevelScreen extends Screen {
             flagManager.addFlag("portalOneActivated", false);
             flagManager.addFlag("portalTwoActivated", false);
             flagManager.addFlag("portalThreeActivated", false);
+
             flagManager.addFlag("startWorldThree", false);
             flagManager.addFlag("sawHubMsg", false);
+
+            flagManager.addFlag("portalOneUnlocked", HubMap.unlockPortalOneFlagState());
+            flagManager.addFlag("portalTwoUnlocked", HubMap.unlockPortalTwoFlagState());
+            flagManager.addFlag("portalThreeUnlocked", HubMap.unlockPortalThreeFlagState());
+            
+
+            flagManager.addFlag("worldOneComplete", false);
+            flagManager.addFlag("worldTwoComplete", false);
+            flagManager.addFlag("worldThreeComplete", false);
+
+            
         }
 
         else if (worldNum == 5){
@@ -202,8 +216,9 @@ public class PlayLevelScreen extends Screen {
                 break;
         }
 
+
         //hub world teleportation **(temporary quick world swap keys)
-        if (map.getFlagManager().isFlagSet("portalOneActivated") || Keyboard.isKeyDown(Key.ONE) && !keyLocker.isKeyLocked(Key.ONE)) {
+        if (map.getFlagManager().isFlagSet("portalOneActivated")|| Keyboard.isKeyDown(Key.ONE) && !keyLocker.isKeyLocked(Key.ONE)) {
             worldNum = 1;
             initialize();
         } else if (map.getFlagManager().isFlagSet("portalTwoActivated")||Keyboard.isKeyDown(Key.TWO) && !keyLocker.isKeyLocked(Key.TWO)) {
@@ -212,7 +227,10 @@ public class PlayLevelScreen extends Screen {
         } else if (map.getFlagManager().isFlagSet("portalThreeActivated") || Keyboard.isKeyDown(Key.THREE) && !keyLocker.isKeyLocked(Key.THREE)) {
             worldNum = 3;
             initialize();
-        }else if (Keyboard.isKeyDown(Key.FOUR) && !keyLocker.isKeyLocked(Key.FOUR)) {
+        }
+        
+        //other worlds initialization        
+        else if (Keyboard.isKeyDown(Key.FOUR) && !keyLocker.isKeyLocked(Key.FOUR)) {
             worldNum = 4;
             initialize();
 
@@ -254,6 +272,7 @@ public class PlayLevelScreen extends Screen {
                 initialize();
             }
         }
+
 
         // if flag is set at any point during gameplay, game is "won" (**from old test map)
         if (map.getFlagManager().isFlagSet("hasFoundBall")) {
