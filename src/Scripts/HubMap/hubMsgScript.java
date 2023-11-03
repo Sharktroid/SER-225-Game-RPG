@@ -2,14 +2,14 @@ package Scripts.HubMap;
 
 import Level.Script;
 import Level.ScriptState;
-import Level.TextboxStyle;
+import Level.Textbox.Style;
 
 public class hubMsgScript extends Script {
     @Override
     protected void setup() {
         lockPlayer();
-        
-        setTextboxStyle(TextboxStyle.HUBWORLD);
+
+        setTextboxStyle(Style.HUBWORLD);
         setNPCName("Tutorial");
         showTextbox();
 

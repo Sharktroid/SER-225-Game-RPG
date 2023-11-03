@@ -24,16 +24,12 @@ import Scripts.WorldOneMap.DinoScript;
 import Scripts.WorldOneMap.ElderScript;
 import Scripts.WorldOneMap.GarfunkleScript;
 import Scripts.WorldOneMap.GiraffeScript;
-import Scripts.WorldOneMap.LostBallScript;
 import Scripts.WorldOneMap.OfficeworkerScript;
 import Scripts.WorldOneMap.RedpandaScript;
 import Scripts.WorldOneMap.SlothScript;
-import Scripts.WorldOneMap.ElderScript;
 import Scripts.WorldOneMap.SoulConsumingFlameNPCScript;
 import Scripts.WorldOneMap.WalrusScript;
 import Tilesets.CommonTileset;
-import Tilesets.InternetExplorerTileset;
-
 import java.util.ArrayList;
 
 public class WorldOneMap extends Map {
@@ -55,7 +51,7 @@ public class WorldOneMap extends Map {
         FetchObject fetch = new FetchObject(getMapTile(5, 14).getLocation(), 1);
         enhancedMapTiles.add(fetch);
 
-        
+
 
         return enhancedMapTiles;
     }

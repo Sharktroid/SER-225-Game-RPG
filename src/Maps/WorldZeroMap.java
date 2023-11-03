@@ -1,7 +1,6 @@
 package Maps;
 
 import Level.Map;
-import Tilesets.CommonTileset;
 import Tilesets.InternetExplorerTileset;
 
 public class WorldZeroMap extends Map {

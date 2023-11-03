@@ -46,8 +46,6 @@ public class Slideshow extends Screen
     @Override
     public void initialize() {
         System.out.println("slideshow");
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'initialize'");
 
         background = new TitleScreenMap();
         background.setAdjustCamera(false);

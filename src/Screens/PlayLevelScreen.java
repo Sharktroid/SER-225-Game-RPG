@@ -1,8 +1,5 @@
 package Screens;
 
-import java.util.ArrayList;
-
-import Combatants.PlayerCombatant;
 import Engine.GraphicsHandler;
 import Engine.Key;
 import Engine.KeyLocker;
@@ -15,6 +12,11 @@ import Maps.WorldOneMap;
 import Maps.WorldTwoMap;
 import Maps.WorldThreeFloors;
 import Maps.WorldZeroMap;
+//import Maps.CalvinTestMap;
+//import Maps.EvanTestMap;
+//import Maps.ShannonTestMap;
+//import Maps.JulietTestMap;
+//import Maps.AaronTestMap;
 import Menus.InventoryMenu;
 import Maps.HubMap;
 import Players.Cat;
@@ -53,8 +55,6 @@ public class PlayLevelScreen extends Screen {
         //setup world zero map
         if (worldNum == 0) {
             this.map = new WorldZeroMap();
-
-
         }
         //set world one map
         else if (worldNum == 1) {
@@ -74,8 +74,8 @@ public class PlayLevelScreen extends Screen {
             flagManager.addFlag("hasTalkedToElder2", false);
             flagManager.addFlag("findFetch", false);
             flagManager.addFlag("foundFetch", false);
-            
-            
+
+
 
 
 
@@ -108,7 +108,23 @@ public class PlayLevelScreen extends Screen {
             flagManager.addFlag("startWorldThree", false);
             flagManager.addFlag("sawHubMsg", false);
         }
-
+/* 
+        else if (worldNum == 5){
+            this.map = new EvanTestMap();
+        }
+        else if (worldNum == 6){
+            this.map = new CalvinTestMap();
+        }
+        else if (worldNum == 7){
+            this.map = new ShannonTestMap();
+        }
+        else if (worldNum == 8){
+            this.map = new JulietTestMap();
+        }
+        else if (worldNum == 9){
+            this.map = new AaronTestMap();
+        }
+*/
         map.setFlagManager(flagManager);
 
         // setup player
@@ -199,7 +215,27 @@ public class PlayLevelScreen extends Screen {
         }else if (Keyboard.isKeyDown(Key.FOUR) && !keyLocker.isKeyLocked(Key.FOUR)) {
             worldNum = 4;
             initialize();
+
+        }else if (Keyboard.isKeyDown(Key.ZERO) && !keyLocker.isKeyLocked(Key.ZERO)) {
+            worldNum = 0;
+            initialize();
+        }else if (Keyboard.isKeyDown(Key.FIVE) && !keyLocker.isKeyLocked(Key.FIVE)) { //Evan
+            worldNum = 5;
+            initialize();
+        }else if (Keyboard.isKeyDown(Key.SIX) && !keyLocker.isKeyLocked(Key.SIX)) { //Calvin
+            worldNum = 6;
+            initialize();
+        }else if (Keyboard.isKeyDown(Key.SEVEN) && !keyLocker.isKeyLocked(Key.SEVEN)) { //Shannon
+            worldNum = 7;
+            initialize();
+        }else if (Keyboard.isKeyDown(Key.EIGHT) && !keyLocker.isKeyLocked(Key.EIGHT)) { //Juliet
+            worldNum = 8;
+            initialize();
+        }else if (Keyboard.isKeyDown(Key.NINE) && !keyLocker.isKeyLocked(Key.NINE)) { //Aaron
+            worldNum = 9;
+            initialize();
         }
+        
         //world three floor traversal
         if (worldNum == 3) {
             if (map.getFlagManager().isFlagSet("enteredBuilding")) {

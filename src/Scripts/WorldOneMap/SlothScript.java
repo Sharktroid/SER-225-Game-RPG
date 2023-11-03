@@ -3,7 +3,7 @@ package Scripts.WorldOneMap;
 import Level.NPC;
 import Level.Script;
 import Level.ScriptState;
-import Level.TextboxStyle;
+import Level.Textbox.Style;
 
 // script for talking to sloth npc
 public class SlothScript extends Script<NPC> {
@@ -12,7 +12,7 @@ public class SlothScript extends Script<NPC> {
     protected void setup() {
         lockPlayer();
 
-        setTextboxStyle(TextboxStyle.WORLDONE);
+        setTextboxStyle(Style.WORLDONE);
         setNPCName("Sloth");
         showTextbox();
 
@@ -39,7 +39,7 @@ public class SlothScript extends Script<NPC> {
 
     @Override
     public ScriptState execute() {
-        // setTextboxStyle(TextboxStyle.WORLDTWO);
+        // setTextboxStyle(Textbox.Style.WORLDTWO);
         start();
         if (!isTextboxQueueEmpty()) {
             return ScriptState.RUNNING;

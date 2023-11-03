@@ -12,7 +12,7 @@ import Utils.Point;
 
 public abstract class Menu {
     protected int left = 20;
-    protected int top = left;
+    protected int top = left + 20;
     protected int spacer = left;
     protected int border = 25;
     protected int rows = 1;
@@ -26,9 +26,14 @@ public abstract class Menu {
     protected int currentTextItemHovered = 0;
     private KeyLocker keyLocker = new KeyLocker();
     private int currentRow;
+    private Panel panel;
+
+    public Menu() {
+        updatePanel();
+    }
 
     public void draw(GraphicsHandler graphicsHandler) {
-        graphicsHandler.drawFilledRectangleWithBorder(left, top, width, height, Color.white, Color.black, 2);
+        //panel.draw(graphicsHandler);
 
         for (int i = 0; i < spriteFonts.size(); i++) {
             spriteFonts.get(i).setColor(Color.black);
@@ -38,7 +43,7 @@ public abstract class Menu {
         }
         for (int i = 0; i < rows * columns; i++) {
             int currentIndex = i + currentRow * columns;
-            if (currentIndex < spriteFonts.size()) {
+            if (currentIndex < spriteFonts.size() && currentIndex >= 0) {
                 int x = (int) (i % columns * (getInternalSize().x) / columns) + left + border;
                 int y = top + border + getLineGap() * (i / columns);
                 spriteFonts.get(currentIndex).setX(x);
@@ -49,31 +54,36 @@ public abstract class Menu {
     }
 
     public void update() {
-        if (lockKey(Key.RIGHT) && columns > 1) {
-            currentTextItemHovered = (currentTextItemHovered + 1) % spriteFonts.size();
-        }
-        else if (lockKey(Key.LEFT) && columns > 1) {
-            currentTextItemHovered--;
-            if (currentTextItemHovered < 0) {
-                currentTextItemHovered = spriteFonts.size() - 1;
+        if (spriteFonts.size() > 0) {
+            if (lockKey(Key.RIGHT) && columns > 1) {
+                currentTextItemHovered = (currentTextItemHovered + 1) % spriteFonts.size();
+            }
+            else if (lockKey(Key.LEFT) && columns > 1) {
+                currentTextItemHovered--;
+                if (currentTextItemHovered < 0) {
+                    currentTextItemHovered = spriteFonts.size() - 1;
+                }
+
+            }
+            else if (lockKey(Key.UP) && rows > 1) {
+                currentTextItemHovered -= columns;
+                if (currentTextItemHovered < 0) {
+                    currentTextItemHovered = spriteFonts.size() - (currentTextItemHovered + 1 + columns);
+                }
+            }
+            else if (lockKey(Key.DOWN) && rows > 1) {
+                currentTextItemHovered += columns;
+                if (currentTextItemHovered >= spriteFonts.size()) {
+                    currentTextItemHovered %= columns;
+                }
             }
 
-        }
-        else if (lockKey(Key.UP) && rows > 1) {
-            currentTextItemHovered -= columns;
-            if (currentTextItemHovered < 0) {
-                currentTextItemHovered = spriteFonts.size() - (currentTextItemHovered + 1 + columns);
+            else if (lockKey(Key.ENTER)) {
+                optionSelected();
             }
         }
-        else if (lockKey(Key.DOWN) && rows > 1) {
-            currentTextItemHovered += columns;
-            if (currentTextItemHovered >= spriteFonts.size()) {
-                currentTextItemHovered %= columns;
-            }
-        }
-
-        else if (lockKey(Key.ENTER)) {
-            optionSelected();
+        else {
+            currentTextItemHovered = 0;
         }
 
         while (currentTextItemHovered < currentRow * columns) {
@@ -128,7 +138,7 @@ public abstract class Menu {
     protected void setText(String[] stringArray) {
         spriteFonts.clear();
         for (int i = 0; i < stringArray.length; i++) {
-            spriteFonts.add(new SpriteFont(stringArray[i], 0, 0, "Arial", fontSize, Color.black));
+            spriteFonts.add(new SpriteFont(stringArray[i], 0, 0, Textbox.getFont(), Color.black));
         }
     }
 
@@ -141,5 +151,9 @@ public abstract class Menu {
         else {
             return 0;
         }
+    }
+
+    protected void updatePanel() {
+        //panel = new Panel(left, top, width, height, false);
     }
 }

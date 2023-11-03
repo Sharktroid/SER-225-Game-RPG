@@ -2,7 +2,7 @@ package Scripts.WorldOneMap;
 
 import Level.Script;
 import Level.ScriptState;
-import Level.TextboxStyle;
+import Level.Textbox.Style;
 
 // trigger script at beginning of game to set that heavy emotional plot
 public class LostBallScript extends Script {
@@ -10,7 +10,7 @@ public class LostBallScript extends Script {
     protected void setup() {
         lockPlayer();
 
-        setTextboxStyle(TextboxStyle.WORLDONE);
+        setTextboxStyle(Style.WORLDONE);
         setNPCName("Cat");
         showTextbox();
 

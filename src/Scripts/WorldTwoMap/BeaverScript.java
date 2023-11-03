@@ -3,19 +3,19 @@ package Scripts.WorldTwoMap;
 import Level.NPC;
 import Level.Script;
 import Level.ScriptState;
-import Level.TextboxStyle;
+import Level.Textbox.Style;
 
 // script for talking to redpanda npc
 
 public class BeaverScript extends Script<NPC> {
 
     public static boolean setRedPandaFlagState = false;
-    
+
     @Override
     protected void setup() {
         lockPlayer();
-        
-        setTextboxStyle(TextboxStyle.WORLDTWO);
+
+        setTextboxStyle(Style.WORLDTWO);
         setNPCName("Beaver");
         showTextbox();
 
@@ -29,7 +29,7 @@ public class BeaverScript extends Script<NPC> {
         }
 
         if (isFlagSet("hasTalkedToBeaver")){
-            
+
             addTextToTextboxQueue("Hello again.");
         }
     }
@@ -42,7 +42,7 @@ public class BeaverScript extends Script<NPC> {
         setRedPandaFlagState = isFlagSet("hasTalkedToBeaver");
     }
 
-    
+
     @Override
     public ScriptState execute() {
         if (!isFlagSet("hasTalkedToBeaver")){
@@ -52,7 +52,7 @@ public class BeaverScript extends Script<NPC> {
             if (!isTextboxQueueEmpty()) {
                 return ScriptState.RUNNING;
 
-            } 
+            }
             end();
             return ScriptState.COMPLETED;
 
@@ -65,7 +65,7 @@ public class BeaverScript extends Script<NPC> {
             return ScriptState.COMPLETED;
         }
         return ScriptState.COMPLETED;
-    }  
+    }
 
 }
 

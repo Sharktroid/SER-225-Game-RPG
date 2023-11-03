@@ -2,7 +2,7 @@ package Scripts.WorldOneMap;
 
 import Level.Script;
 import Level.ScriptState;
-import Level.TextboxStyle;
+import Level.Textbox.Style;
 
 // script for talking to tree with hole in it
 public class TreeScript extends Script {
@@ -11,7 +11,7 @@ public class TreeScript extends Script {
     protected void setup() {
         lockPlayer();
 
-        setTextboxStyle(TextboxStyle.WORLDONE);
+        setTextboxStyle(Style.WORLDONE);
         setNPCName("Cat");
         showTextbox();
 

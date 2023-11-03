@@ -8,7 +8,7 @@ import Level.Combatant;
 import Level.NPC;
 import Level.Script;
 import Level.ScriptState;
-import Level.TextboxStyle;
+import Level.Textbox.Style;
 
 // script for talking to redpanda npc
 public class SoulConsumingFlameNPCScript extends Script<NPC> {
@@ -16,7 +16,7 @@ public class SoulConsumingFlameNPCScript extends Script<NPC> {
     @Override
     protected void setup() {
         lockPlayer();
-        setTextboxStyle(TextboxStyle.WORLDONE);
+        setTextboxStyle(Style.WORLDONE);
         ArrayList<Combatant> combatants = new ArrayList<Combatant>();
         combatants.add(new PlayerCombatant(player, map, Combatant.ControlType.HUMAN));
         combatants.add(new SoulConsumingFlame(entity, map));

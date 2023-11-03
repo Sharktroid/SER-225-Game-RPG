@@ -3,7 +3,7 @@ package Scripts.WorldOneMap;
 import Level.NPC;
 import Level.Script;
 import Level.ScriptState;
-import Level.TextboxStyle;
+import Level.Textbox.Style;
 
 // script for talking to elder npc
 public class ElderScript extends Script<NPC> {
@@ -14,8 +14,8 @@ public class ElderScript extends Script<NPC> {
     @Override
     protected void setup() {
         lockPlayer();
-        
-        setTextboxStyle(TextboxStyle.WORLDONE);
+
+        setTextboxStyle(Style.WORLDONE);
         setNPCName("Granny");
         showTextbox();
 
@@ -32,7 +32,7 @@ public class ElderScript extends Script<NPC> {
                 responseNum = getChoice();
             } else if (sequence == 1) {
                 if (responseNum == 0) {
-                    
+
                     addTextToTextboxQueue( "He hates being alone on mondays");
                     addTextToTextboxQueue( "If you can find him for me \n I can help you with whatever you need");
                     setFlag("hasTalkedToElder");
@@ -41,9 +41,9 @@ public class ElderScript extends Script<NPC> {
                     addTextToTextboxQueue( "Please help me find him");
                     addTextToTextboxQueue( "If you do ill be forever in your debt");
                     setFlag("hasTalkedToElder");
-                } 
+                }
             }
-        } 
+        }
         if (isFlagSet("foundCat") && !isFlagSet("foundCat2")){
             showTextbox();
             addTextToTextboxQueue("Please tell me you found him...", selections2, answers2);
@@ -62,7 +62,7 @@ public class ElderScript extends Script<NPC> {
             addTextToTextboxQueue( "I hope I can find him soon");
         }
     }
-    
+
 
     @Override
     protected void cleanup() {
@@ -80,13 +80,13 @@ public class ElderScript extends Script<NPC> {
 
     @Override
     public ScriptState execute() {
-        // setTextboxStyle(TextboxStyle.WORLDONE);
+        // setTextboxStyle(Textbox.Style.WORLDONE);
         if (!isFlagSet("hasTalkedToElder")) {
             if (sequence == 0) {
                 start();
                 if (isTextboxQueueEmpty()) {
                     end();
-                }  
+                }
             } else if (sequence == 1) {
                 start();
                 if (isTextboxQueueEmpty()) {
@@ -104,5 +104,5 @@ public class ElderScript extends Script<NPC> {
             return ScriptState.COMPLETED;
         }
         return ScriptState.COMPLETED;
-    }   
+    }
 }
