@@ -40,7 +40,7 @@ public class ShannonTestMap extends Map {
         ArrayList<NPC> npcs = new ArrayList<>();
         // remember to import NPC and Scripts for new NPC
 
-        Walrus walrus = new Walrus(1, getMapTile(4, 28).getLocation().subtractY(40));
+        Walrus walrus = new Walrus(1, getMapTile(4, 20).getLocation());
         walrus.setInteractScript(new WalrusScript());
         npcs.add(walrus);
 
@@ -49,39 +49,39 @@ public class ShannonTestMap extends Map {
         dinosaur.setInteractScript(new DinoScript());
         npcs.add(dinosaur);
 
-        Beaver beaver = new Beaver(3, getMapTile(10, 20).getLocation().subtractY(40));
+        Beaver beaver = new Beaver(3, getMapTile(10, 20).getLocation());
         beaver.setInteractScript(new BeaverScript());
         npcs.add(beaver);
 
-        Giraffe giraffe = new Giraffe(4, getMapTile(11, 21).getLocation().subtractY(40));
+        Giraffe giraffe = new Giraffe(4, getMapTile(11, 21).getLocation());
         giraffe.setInteractScript(new GiraffeScript());
         npcs.add(giraffe);
 
-        Redpanda redpanda = new Redpanda(5, getMapTile(17, 22).getLocation().subtractY(40));
+        Redpanda redpanda = new Redpanda(5, getMapTile(17, 22).getLocation());
         redpanda.setInteractScript(new RedpandaScript());
         npcs.add(redpanda);
 
-        Sloth sloth = new Sloth(6, getMapTile(9, 18).getLocation().subtractY(40));
+        Sloth sloth = new Sloth(6, getMapTile(9, 18).getLocation());
         sloth.setInteractScript(new SlothScript());
         npcs.add(sloth);
 
-        Catsuit catsuit = new Catsuit(7, getMapTile(13, 20).getLocation().subtractY(40));
+        Catsuit catsuit = new Catsuit(7, getMapTile(13, 20).getLocation());
         catsuit.setInteractScript(new CatsuitScript());
         npcs.add(catsuit);
 
-        Officeworker officeworker = new Officeworker(8, getMapTile(11, 16).getLocation().subtractY(40));
+        Officeworker officeworker = new Officeworker(8, getMapTile(11, 16).getLocation());
         officeworker.setInteractScript(new OfficeworkerScript());
         npcs.add(officeworker);
 
-        Elder elder = new Elder(9, getMapTile(14, 20).getLocation().subtractY(40));
+        Elder elder = new Elder(9, getMapTile(14, 20).getLocation());
         elder.setInteractScript(new ElderScript());
         npcs.add(elder);
 
-        Garfunkle garfunkle = new Garfunkle(10, getMapTile(13, 20).getLocation().subtractY(40));
+        Garfunkle garfunkle = new Garfunkle(10, getMapTile(13, 20).getLocation());
         garfunkle.setInteractScript(new GarfunkleScript());
         npcs.add(garfunkle);
 
-        SoulConsumingFlameNPC soulConsumingFlame = new SoulConsumingFlameNPC(8, getMapTile(11, 16).getLocation().subtractY(40));
+        SoulConsumingFlameNPC soulConsumingFlame = new SoulConsumingFlameNPC(8, getMapTile(11, 16).getLocation());
         soulConsumingFlame.setInteractScript(new SoulConsumingFlameNPCScript());
         npcs.add(soulConsumingFlame);
 
