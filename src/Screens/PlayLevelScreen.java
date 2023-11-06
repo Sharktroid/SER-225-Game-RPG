@@ -102,6 +102,12 @@ public class PlayLevelScreen extends Screen {
         else if (worldNum == 4) {
             this.map = new HubMap();
 
+            flagManager.addFlag("beenToWorldOne", false);
+            flagManager.addFlag("beenToWorldTwo", false);
+            flagManager.addFlag("beenToWorldThree", false);
+
+            flagManager.addFlag("hasTalkedToFirefox", false);
+
             flagManager.addFlag("portalOneActivated", false);
             flagManager.addFlag("portalTwoActivated", false);
             flagManager.addFlag("portalThreeActivated", false);
