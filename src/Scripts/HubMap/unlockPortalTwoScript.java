@@ -14,8 +14,11 @@ public class unlockPortalTwoScript extends Script {
         setTextboxStyle(Style.HUBWORLD);
         showTextbox();
 
-        addTextToTextboxQueue("(**unlocked portal two**)");
-       
+        if (!isFlagSet("worldOneComplete")){
+            addTextToTextboxQueue("clear world one then come back");
+        }else{
+            addTextToTextboxQueue("(**unlocked portal two**)");
+        }
 
     }
 
@@ -24,13 +27,21 @@ public class unlockPortalTwoScript extends Script {
         hideTextbox();
         unlockPlayer();
         player.moveY(-10);
-        setFlag("portalTwoUnlocked");
-        setUnlockPortalTwoFlagState = isFlagSet("portalTwoUnlocked");
+        
+        
+
+        if (!isFlagSet("worldOneComplete")) {
+            player.moveY(-10);
+        } else {
+            setFlag("portalTwoUnlocked");
+            setUnlockPortalTwoFlagState = isFlagSet("portalTwoUnlocked");
+        }
 
     }
 
     @Override
     public ScriptState execute() {
+
 
         if (!isFlagSet("portalTwoUnlocked")) {
             start();

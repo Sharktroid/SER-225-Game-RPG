@@ -29,6 +29,7 @@ import Scripts.WorldOneMap.RedpandaScript;
 import Scripts.WorldOneMap.SlothScript;
 import Scripts.WorldOneMap.SoulConsumingFlameNPCScript;
 import Scripts.WorldOneMap.WalrusScript;
+import Scripts.WorldOneMap.WorldOneClearScript;
 import Tilesets.CommonTileset;
 import java.util.ArrayList;
 
@@ -113,7 +114,13 @@ public class WorldOneMap extends Map {
     @Override
     public ArrayList<Trigger> loadTriggers() {
         ArrayList<Trigger> triggers = new ArrayList<>();
-        //triggers.add(new Trigger(790, 1030, 100, 10, new LostBallScript(), "hasLostBall"));
+        triggers.add(new Trigger(790,20, 24, 24, new WorldOneClearScript()));
+
         return triggers;
     }
+
+    public static boolean worldOneClearedFlagState(){
+        return WorldOneClearScript.setWorldOneClearFlagState;
+    }
+
 }

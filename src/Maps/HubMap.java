@@ -32,9 +32,15 @@ public class HubMap extends Map {
         triggers.add(new Trigger(108,496,24,24, new unlockPortalOneScript(), "portalOneUnlocked"));//temp to unlock portal 1
         triggers.add(new Trigger(396,496,24,24, new unlockPortalTwoScript(), "portalTwoUnlocked"));//temp to unlock portal 2
         triggers.add(new Trigger(684,496,24,24, new unlockPortalThreeScript(), "portalThreeUnlocked"));//temp to unlock portal 3
+
+        
         
         return triggers;
     }    
+
+    public static boolean sawHubMsgFlagState(){
+        return hubMsgScript.setSawHubMsgFlagState;
+    }
     
     public static boolean unlockPortalOneFlagState(){
         return unlockPortalOneScript.setUnlockPortalOneFlagState;

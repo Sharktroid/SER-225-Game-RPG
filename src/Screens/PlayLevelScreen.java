@@ -77,6 +77,8 @@ public class PlayLevelScreen extends Screen {
             flagManager.addFlag("findFetch", false);
             flagManager.addFlag("foundFetch", false);
 
+            flagManager.addFlag("worldOneCleared", WorldOneMap.worldOneClearedFlagState());
+
 
 
 
@@ -109,14 +111,14 @@ public class PlayLevelScreen extends Screen {
             flagManager.addFlag("portalThreeActivated", false);
 
             flagManager.addFlag("startWorldThree", false);
-            flagManager.addFlag("sawHubMsg", false);
+            flagManager.addFlag("sawHubMsg", HubMap.sawHubMsgFlagState());
 
             flagManager.addFlag("portalOneUnlocked", HubMap.unlockPortalOneFlagState());
             flagManager.addFlag("portalTwoUnlocked", HubMap.unlockPortalTwoFlagState());
             flagManager.addFlag("portalThreeUnlocked", HubMap.unlockPortalThreeFlagState());
             
 
-            flagManager.addFlag("worldOneComplete", false);
+            flagManager.addFlag("worldOneComplete", WorldOneMap.worldOneClearedFlagState());
             flagManager.addFlag("worldTwoComplete", false);
             flagManager.addFlag("worldThreeComplete", false);
 
@@ -200,6 +202,7 @@ public class PlayLevelScreen extends Screen {
                     keyLocker.unlockKey(Key.E);
                 }
                 if (inventory.isActive()) {
+                    
                     inventory.update();
                 }
 
@@ -221,7 +224,7 @@ public class PlayLevelScreen extends Screen {
         if (map.getFlagManager().isFlagSet("portalOneActivated")|| Keyboard.isKeyDown(Key.ONE) && !keyLocker.isKeyLocked(Key.ONE)) {
             worldNum = 1;
             initialize();
-        } else if (map.getFlagManager().isFlagSet("portalTwoActivated")||Keyboard.isKeyDown(Key.TWO) && !keyLocker.isKeyLocked(Key.TWO)) {
+        } else if ((map.getFlagManager().isFlagSet("portalTwoActivated"))||Keyboard.isKeyDown(Key.TWO) && !keyLocker.isKeyLocked(Key.TWO)) {
             worldNum = 2;
             initialize();
         } else if (map.getFlagManager().isFlagSet("portalThreeActivated") || Keyboard.isKeyDown(Key.THREE) && !keyLocker.isKeyLocked(Key.THREE)) {
@@ -229,10 +232,14 @@ public class PlayLevelScreen extends Screen {
             initialize();
         }
         
-        //other worlds initialization        
-        else if (Keyboard.isKeyDown(Key.FOUR) && !keyLocker.isKeyLocked(Key.FOUR)) {
+        //other worlds initialization 
+        
+        //hub world
+        else if (map.getFlagManager().isFlagSet("worldOneCleared")|| Keyboard.isKeyDown(Key.FOUR) && !keyLocker.isKeyLocked(Key.FOUR)) {
             worldNum = 4;
             initialize();
+
+
 
         }else if (Keyboard.isKeyDown(Key.ZERO) && !keyLocker.isKeyLocked(Key.ZERO)) {
             worldNum = 0;
