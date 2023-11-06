@@ -1,37 +1,33 @@
-package Scripts.HubMap;
+package Scripts.WorldOneMap;
 
 import Level.Script;
 import Level.ScriptState;
 import Level.Textbox.Style;
 
-public class unlockPortalOneScript extends Script {
+// trigger script at beginning of game to set that heavy emotional plot
+public class WorldOneClearScript extends Script {
 
-    public static boolean setUnlockPortalOneFlagState = false;
+    public static boolean setWorldOneClearFlagState = false;
 
     @Override
     protected void setup() {
+        setTextboxStyle(Style.WORLDONE);
         lockPlayer();
-        setTextboxStyle(Style.HUBWORLD);
         showTextbox();
-
-        addTextToTextboxQueue("(**unlocked portal one**)");
+        addTextToTextboxQueue("World One Cleared");
     }
 
     @Override
     protected void cleanup() {
+        setFlag("worldOneCleared");
         hideTextbox();
         unlockPlayer();
-        player.moveY(-10);
-        setFlag("portalOneUnlocked");
-        setUnlockPortalOneFlagState = isFlagSet("portalOneUnlocked");
-        
-
+        setWorldOneClearFlagState = isFlagSet("worldOneCleared");
     }
 
     @Override
     public ScriptState execute() {
-
-        if (!isFlagSet("portalOneUnlocked")) {
+        if (!isFlagSet("worldOneCleared")) {
             start();
             if (!isTextboxQueueEmpty()) {
                 return ScriptState.RUNNING;

@@ -12,10 +12,15 @@ public class portalTwoScript extends Script {
         setTextboxStyle(Style.HUBWORLD);
         showTextbox();
 
-        if (!isFlagSet("portalTwoUnlocked")) {
-            addTextToTextboxQueue("Talk to the Firefox (**trigger*)");
-        } else {
-            addTextToTextboxQueue("Teleporting to world 2");
+        if (!isFlagSet("portalTwoUnlocked") && !isFlagSet("worldOneComplete")) {
+            addTextToTextboxQueue("clear world one then talk to the firefox");
+        } else if (!isFlagSet("portalTwoUnlocked") && isFlagSet("worldOneComplete")){
+            addTextToTextboxQueue("world one cleared. talk to the firefox)");
+        }else if (isFlagSet("portalTwoUnlocked") && isFlagSet("worldOneComplete")){
+            addTextToTextboxQueue("world one cleared and firefox talked to");
+            addTextToTextboxQueue("teleporting to world 2");
+        }else{
+            addTextToTextboxQueue("teleport flag error: portalTwoScript");
         }
     }
 
@@ -24,7 +29,7 @@ public class portalTwoScript extends Script {
         hideTextbox();
         unlockPlayer();
 
-        if (!isFlagSet("portalTwoUnlocked")) {
+        if (!isFlagSet("portalTwoUnlocked") || !isFlagSet("worldOneComplete")) {
             player.moveY(10);
         } else {
             setFlag("portalTwoActivated");
