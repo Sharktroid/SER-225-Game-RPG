@@ -4,7 +4,6 @@ public abstract class Combatant {
     protected NPC npc;
     private int hitPoints;
     private int maxHitPoints;
-    private ControlType controlType;
     protected String name;
     protected Map map;
 
@@ -14,12 +13,7 @@ public abstract class Combatant {
     }
 
     public Combatant(NPC npc, Map map) {
-        this(npc, map, ControlType.COMPUTER);
-    }
-
-    public Combatant(NPC npc, Map map, ControlType controlType) {
         this.npc = npc;
-        this.controlType = controlType;
         this.map = map;
     }
 
@@ -44,10 +38,6 @@ public abstract class Combatant {
         else if (hitPoints > maxHitPoints) {
             hitPoints = maxHitPoints;
         }
-    }
-
-    public ControlType getControlType() {
-        return controlType;
     }
 
     public String getName() {

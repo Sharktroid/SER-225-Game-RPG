@@ -18,9 +18,7 @@ public class SoulConsumingFlameNPCScript extends Script<NPC> {
         lockPlayer();
         setTextboxStyle(Style.WORLDONE);
         ArrayList<Combatant> combatants = new ArrayList<Combatant>();
-        combatants.add(new PlayerCombatant(player, map, Combatant.ControlType.HUMAN));
-        combatants.add(new SoulConsumingFlame(entity, map));
-        map.initiateCombat(player, new ArrayList<Combatant>(combatants));
+        map.initiateCombat(player, new SoulConsumingFlame(entity, map));
     }
 
     @Override

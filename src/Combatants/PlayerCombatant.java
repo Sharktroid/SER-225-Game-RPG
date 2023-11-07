@@ -3,12 +3,11 @@ package Combatants;
 import Level.Combatant;
 import Level.Map;
 import Level.Player;
-import Scripts.HubMap.portalOneScript;
 
 public class PlayerCombatant extends Combatant {
 
-    public PlayerCombatant(Player player, Map map, ControlType controlType) {
-        super(null, map, controlType);
+    public PlayerCombatant(Player player, Map map) {
+        super(null, map);
         setMaxHitPoints((int) player.getCurrentHealth());
         name = player.getName();
     }

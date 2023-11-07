@@ -1,7 +1,6 @@
 package GameObject;
 
-import java.lang.IllegalStateException;
-
+import Level.Combatant;
 import Level.Player;
 
 public abstract class Item {
@@ -44,10 +43,14 @@ public abstract class Item {
     public void use() {
         // Meant to be overridden or never used; throws when called.
         if (usable) {
-            throw new IllegalStateException("An unusable item was used");
+            throw new RuntimeException("An unusable item was used");
         }
         else {
-            throw new AbstractMethodError("This item was not given a proper 'Use' command");
+            throw new RuntimeException("This item was not given a proper 'Use' command");
         }
+    }
+
+    public void use(Combatant combatant) {
+
     }
 }
