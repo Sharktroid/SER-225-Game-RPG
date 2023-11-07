@@ -26,7 +26,7 @@ public abstract class Menu {
     protected int currentTextItemHovered = 0;
     private KeyLocker keyLocker = new KeyLocker();
     private int currentRow;
-    private Panel panel;
+    protected Panel panel;
 
     public Menu() {
         updatePanel();

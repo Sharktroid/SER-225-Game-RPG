@@ -3,12 +3,13 @@ package Combatants;
 import Level.Combatant;
 import Level.Map;
 import Level.Player;
+import Scripts.HubMap.portalOneScript;
 
 public class PlayerCombatant extends Combatant {
 
     public PlayerCombatant(Player player, Map map, ControlType controlType) {
         super(null, map, controlType);
-        hitPoints = (int) player.getCurrentHealth();
+        setMaxHitPoints((int) player.getCurrentHealth());
         name = player.getName();
     }
 
@@ -20,6 +21,11 @@ public class PlayerCombatant extends Combatant {
     public void bash(Combatant target) {
         target.dealDamage(20);
         map.getTextbox().addText(String.format("The %s attacks.\n20 damage.", name));
+    }
+
+    public void recover() {
+        dealDamage(-50);
+        map.getTextbox().addText(String.format("The %s heals themself.\n50 hit points restored.", name));
     }
 
     @Override

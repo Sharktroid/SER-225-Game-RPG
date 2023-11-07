@@ -2,7 +2,8 @@ package Level;
 
 public abstract class Combatant {
     protected NPC npc;
-    protected int hitPoints;
+    private int hitPoints;
+    private int maxHitPoints;
     private ControlType controlType;
     protected String name;
     protected Map map;
@@ -26,8 +27,23 @@ public abstract class Combatant {
         return hitPoints;
     }
 
+    protected void setMaxHitPoints(int maxHitPoints) {
+        this.maxHitPoints = maxHitPoints;
+        hitPoints = maxHitPoints;
+    }
+
+    public int getMaxHitPoints() {
+        return maxHitPoints;
+    }
+
     public void dealDamage(int damage) {
         hitPoints -= damage;
+        if (hitPoints < 0) {
+            hitPoints = 0;
+        }
+        else if (hitPoints > maxHitPoints) {
+            hitPoints = maxHitPoints;
+        }
     }
 
     public ControlType getControlType() {

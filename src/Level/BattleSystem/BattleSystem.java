@@ -2,6 +2,7 @@ package Level.BattleSystem;
 
 import java.util.ArrayList;
 
+import Combatants.PlayerCombatant;
 import Engine.GraphicsHandler;
 import Level.Combatant;
 import Level.Map;
@@ -39,11 +40,11 @@ public class BattleSystem {
                 map.endCombat();
             }
         }
-        if (!shuttingDown) {
+        if (!shuttingDown && !map.getTextbox().isActive()) {
             if (battleMenu != null && battleMenu.isActive()) {
                 battleMenu.update();
             }
-            if (!battleMenu.isActive() && !map.getTextbox().isActive()) {
+            if (!battleMenu.isActive()) {
                 advance();
             }
         }
@@ -70,7 +71,7 @@ public class BattleSystem {
                 map.getTextbox().setIsActive(true);
             } else {
                 battleMenu.setActive(true);
-                battleMenu.combatant = getCurrentCombatant();
+                battleMenu.combatant = (PlayerCombatant) getCurrentCombatant();
             }
         }
     }

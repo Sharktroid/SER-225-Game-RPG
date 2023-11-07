@@ -1,17 +1,25 @@
 package Level.BattleSystem;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 import Combatants.PlayerCombatant;
 import Engine.Config;
+import Engine.GraphicsHandler;
+import Engine.Key;
 import Level.Combatant;
 import Level.Menu;
+import Level.Panel;
+import Level.Textbox;
+import SpriteFont.SpriteFont;
 
 public class BattleMenu extends Menu {
     private State currentState = State.SELECTINGATTACK;
-    Combatant combatant;
+    PlayerCombatant combatant;
     private BattleSystem battleSystem;
     private ArrayList<Combatant> enemyCombatants;
+    private static final String[] actions = {"Bash", "Recover"};
+    private String actionName;
 
     public enum State {
         SELECTINGATTACK,
@@ -23,8 +31,8 @@ public class BattleMenu extends Menu {
         top = 400;
         width = Config.GAME_WINDOW_WIDTH - left * 2 - 16;
         height = Config.GAME_WINDOW_HEIGHT - top - 25 - 39;
-        rows = 1;
-        columns = 1;
+        rows = 2;
+        columns = 2;
         reset();
         updatePanel();
     }
@@ -33,22 +41,51 @@ public class BattleMenu extends Menu {
         return currentState;
     }
 
+    public void draw(GraphicsHandler graphicsHandler) {
+        super.draw(graphicsHandler);
+        Combatant currentCombatant;
+        if (currentState == State.SELECTINGATTACK) {
+            currentCombatant = combatant;
+        }
+        else {
+            currentCombatant = enemyCombatants.get(currentTextItemHovered);
+        }
+        SpriteFont descriptionSpriteFont = new SpriteFont(
+                String.format("HP: %d/%d", currentCombatant.getHitPoints(), currentCombatant.getMaxHitPoints()), left + border,
+                top + border - 48, Textbox.getFont(), Color.black);
+        descriptionSpriteFont.drawWithParsedNewLines(graphicsHandler, 10);
+    }
+
     @Override
     protected void optionSelected() {
         if (currentState == State.SELECTINGATTACK) {
-            enemyCombatants = new ArrayList<Combatant>();
-            ArrayList<String> enemyCombatantStrings = new ArrayList<String>();
-            for (int i = 0; i < battleSystem.combatants.size(); i++) {
-                if (battleSystem.combatants.get(i) != combatant) {
-                    enemyCombatants.add(battleSystem.combatants.get(i));
-                    enemyCombatantStrings.add(battleSystem.combatants.get(i).getName());
-                }
+            actionName = actions[currentTextItemHovered];
+            if (actionName == "Recover") {
+                combatant.recover();
+                setActive(false);
             }
-            setText(enemyCombatantStrings);
-            currentState = State.SELECTINGTARGET;
+            else    {
+                enemyCombatants = new ArrayList<Combatant>();
+                ArrayList<String> enemyCombatantStrings = new ArrayList<String>();
+                for (int i = 0; i < battleSystem.combatants.size(); i++) {
+                    if (battleSystem.combatants.get(i) != combatant) {
+                        enemyCombatants.add(battleSystem.combatants.get(i));
+                        enemyCombatantStrings.add(battleSystem.combatants.get(i).getName());
+                    }
+                }
+                setText(enemyCombatantStrings);
+                currentState = State.SELECTINGTARGET;
+            }
         }
         else {
-            ((PlayerCombatant) combatant).bash(enemyCombatants.get(currentTextItemHovered));
+            Combatant enemyCombatant = enemyCombatants.get(currentTextItemHovered);
+            switch (actionName) {
+                case "Bash":
+                    combatant.bash(enemyCombatant);
+                    break;
+                default:
+                    throw new RuntimeException("Unrecognized attack name");
+            }
             setActive(false);
         }
     }
@@ -59,15 +96,19 @@ public class BattleMenu extends Menu {
             currentState = State.SELECTINGATTACK;
             reset();
 
-        }
-        else {
+        } else {
             battleSystem.map.getTextbox().setIsActive(true);
         }
         super.setActive(active);
+        lockKey(Key.ENTER);
     }
 
     private void reset() {
-        String[] items = {"Bash"};
-        setText(items);
+        setText(actions);
+    }
+
+    @Override
+    protected void updatePanel() {
+        panel = new Panel(left, top - 64, width, height + 64, false);
     }
 }

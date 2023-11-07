@@ -8,7 +8,7 @@ public class SoulConsumingFlame extends Combatant {
 
     public SoulConsumingFlame(NPC npc, Map map) {
         super(npc, map);
-        hitPoints = 50;
+        setMaxHitPoints(50);
         name = "Soul Consuming Flame";
     }
 
