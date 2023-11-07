@@ -6,7 +6,7 @@ import Level.Textbox.Style;
 
 public class hubMsgScript extends Script {
 
-    public static boolean setSawHubMsgFlagState = false;
+    public static boolean setSawHubMsgFS = false;
 
     @Override
     protected void setup() {
@@ -28,7 +28,7 @@ public class hubMsgScript extends Script {
         setFlag("sawHubMsg");
         hideTextbox();
         unlockPlayer();
-        setSawHubMsgFlagState = isFlagSet("sawHubMsg");
+        setSawHubMsgFS = isFlagSet("sawHubMsg");
     }
 
     @Override
