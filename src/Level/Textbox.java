@@ -85,8 +85,8 @@ public class Textbox {
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
-        //panel = new Panel(x, y, width, height, true);
-        //selectPanel = new Panel(xSelect, ySelect, widthSelect, heightSelect, false);
+        panel = new Panel(x, y, width, height, true);
+        selectPanel = new Panel(xSelect, ySelect, widthSelect, heightSelect, false);
     }
 
     public void addText(String text) {

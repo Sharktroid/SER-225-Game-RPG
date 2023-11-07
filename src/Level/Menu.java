@@ -33,7 +33,7 @@ public abstract class Menu {
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
-        //panel.draw(graphicsHandler);
+        panel.draw(graphicsHandler);
 
         for (int i = 0; i < spriteFonts.size(); i++) {
             spriteFonts.get(i).setColor(Color.black);
@@ -154,6 +154,6 @@ public abstract class Menu {
     }
 
     protected void updatePanel() {
-        //panel = new Panel(left, top, width, height, false);
+        panel = new Panel(left, top, width, height, false);
     }
 }
