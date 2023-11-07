@@ -8,20 +8,22 @@ import Engine.Screen;
 import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.*;
+import Level.Textbox.Style;
 import Maps.WorldOneMap;
 import Maps.WorldTwoMap;
 import Maps.WorldThreeFloors;
 import Maps.WorldZeroMap;
-//import Maps.CalvinTestMap;
-//import Maps.EvanTestMap;
-//import Maps.ShannonTestMap;
-//import Maps.JulietTestMap;
-//import Maps.AaronTestMap;
+import Maps.CalvinTestMap;
+import Maps.EvanTestMap;
+import Maps.ShannonTestMap;
+import Maps.JulietTestMap;
+import Maps.AaronTestMap;
 import Menus.InventoryMenu;
 import Maps.HubMap;
 import Players.Cat;
 import Utils.Direction;
 import Utils.Point;
+import Level.Script;
 
 // This class is for when the platformer game is actually being played
 public class PlayLevelScreen extends Screen {
@@ -75,6 +77,8 @@ public class PlayLevelScreen extends Screen {
             flagManager.addFlag("findFetch", false);
             flagManager.addFlag("foundFetch", false);
 
+            flagManager.addFlag("worldOneCleared", WorldOneMap.worldOneClearedFlagState());
+
 
 
 
@@ -102,13 +106,31 @@ public class PlayLevelScreen extends Screen {
         else if (worldNum == 4) {
             this.map = new HubMap();
 
+            flagManager.addFlag("beenToWorldOne", false);
+            flagManager.addFlag("beenToWorldTwo", false);
+            flagManager.addFlag("beenToWorldThree", false);
+
+            flagManager.addFlag("hasTalkedToFirefox", false);
+
             flagManager.addFlag("portalOneActivated", false);
             flagManager.addFlag("portalTwoActivated", false);
             flagManager.addFlag("portalThreeActivated", false);
+
             flagManager.addFlag("startWorldThree", false);
-            flagManager.addFlag("sawHubMsg", false);
+            flagManager.addFlag("sawHubMsg", HubMap.sawHubMsgFlagState());
+
+            flagManager.addFlag("portalOneUnlocked", HubMap.unlockPortalOneFlagState());
+            flagManager.addFlag("portalTwoUnlocked", HubMap.unlockPortalTwoFlagState());
+            flagManager.addFlag("portalThreeUnlocked", HubMap.unlockPortalThreeFlagState());
+            
+
+            flagManager.addFlag("worldOneComplete", WorldOneMap.worldOneClearedFlagState());
+            flagManager.addFlag("worldTwoComplete", false);
+            flagManager.addFlag("worldThreeComplete", false);
+
+            
         }
-/* 
+
         else if (worldNum == 5){
             this.map = new EvanTestMap();
         }
@@ -124,7 +146,7 @@ public class PlayLevelScreen extends Screen {
         else if (worldNum == 9){
             this.map = new AaronTestMap();
         }
-*/
+
         map.setFlagManager(flagManager);
 
         // setup player
@@ -186,6 +208,7 @@ public class PlayLevelScreen extends Screen {
                     keyLocker.unlockKey(Key.E);
                 }
                 if (inventory.isActive()) {
+                    
                     inventory.update();
                 }
 
@@ -202,19 +225,27 @@ public class PlayLevelScreen extends Screen {
                 break;
         }
 
+
         //hub world teleportation **(temporary quick world swap keys)
-        if (map.getFlagManager().isFlagSet("portalOneActivated") || Keyboard.isKeyDown(Key.ONE) && !keyLocker.isKeyLocked(Key.ONE)) {
+        if (map.getFlagManager().isFlagSet("portalOneActivated")|| Keyboard.isKeyDown(Key.ONE) && !keyLocker.isKeyLocked(Key.ONE)) {
             worldNum = 1;
             initialize();
-        } else if (map.getFlagManager().isFlagSet("portalTwoActivated")||Keyboard.isKeyDown(Key.TWO) && !keyLocker.isKeyLocked(Key.TWO)) {
+        } else if ((map.getFlagManager().isFlagSet("portalTwoActivated"))||Keyboard.isKeyDown(Key.TWO) && !keyLocker.isKeyLocked(Key.TWO)) {
             worldNum = 2;
             initialize();
         } else if (map.getFlagManager().isFlagSet("portalThreeActivated") || Keyboard.isKeyDown(Key.THREE) && !keyLocker.isKeyLocked(Key.THREE)) {
             worldNum = 3;
             initialize();
-        }else if (Keyboard.isKeyDown(Key.FOUR) && !keyLocker.isKeyLocked(Key.FOUR)) {
+        }
+        
+        //other worlds initialization 
+        
+        //hub world
+        else if (map.getFlagManager().isFlagSet("worldOneCleared")|| Keyboard.isKeyDown(Key.FOUR) && !keyLocker.isKeyLocked(Key.FOUR)) {
             worldNum = 4;
             initialize();
+
+
 
         }else if (Keyboard.isKeyDown(Key.ZERO) && !keyLocker.isKeyLocked(Key.ZERO)) {
             worldNum = 0;
@@ -254,6 +285,7 @@ public class PlayLevelScreen extends Screen {
                 initialize();
             }
         }
+
 
         // if flag is set at any point during gameplay, game is "won" (**from old test map)
         if (map.getFlagManager().isFlagSet("hasFoundBall")) {

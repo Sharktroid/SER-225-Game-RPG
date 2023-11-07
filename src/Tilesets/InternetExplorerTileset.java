@@ -76,6 +76,16 @@ public class InternetExplorerTileset extends Tileset {
 
         mapTiles.add(treeLeavesTile);
 
+        // tree leaves
+        Frame nonPassablestreeLeavesFrame= new FrameBuilder(getSubImage(0, 3))
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder nonPassabletreeLeavesTile = new MapTileBuilder(nonPassablestreeLeavesFrame)
+                .withTileType(TileType.NOT_PASSABLE);
+
+        mapTiles.add(nonPassabletreeLeavesTile);
+
 
         // blue 
         Frame blueFrame= new FrameBuilder(getSubImage(0, 4))

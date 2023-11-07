@@ -12,7 +12,7 @@ import Level.Player;
 import Level.Textbox;
 import SpriteFont.SpriteFont;
 import Utils.Point;
-//import Level.Panel;
+import Level.Panel;
 
 public class InventoryMenu extends Menu {
     private Player player;
@@ -22,7 +22,7 @@ public class InventoryMenu extends Menu {
 
     private Boolean viewingKeyItems = false;
     protected InventoryMenuItemSelectionBox selectionBox;
-    //private Panel descriptionPanel;
+    private Panel descriptionPanel;
 
     public InventoryMenu(Player player) {
         super();
@@ -40,7 +40,7 @@ public class InventoryMenu extends Menu {
     public void draw(GraphicsHandler graphicsHandler) {
         updateItemText();
         super.draw(graphicsHandler);
-        //descriptionPanel.draw(graphicsHandler);
+        descriptionPanel.draw(graphicsHandler);
         String description = "";
         if (getCurrentItem() != null) {
             description = getCurrentItem().getDescription();
@@ -124,6 +124,6 @@ public class InventoryMenu extends Menu {
     @Override
     protected void updatePanel() {
         super.updatePanel();
-        //descriptionPanel = new Panel(left, descriptionTop, width, descriptionHeight, false);
+        descriptionPanel = new Panel(left, descriptionTop, width, descriptionHeight, false);
     }
 }

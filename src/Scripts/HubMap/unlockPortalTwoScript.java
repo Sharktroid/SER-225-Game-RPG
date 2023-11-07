@@ -4,7 +4,9 @@ import Level.Script;
 import Level.ScriptState;
 import Level.Textbox.Style;
 
-public class portalThreeScript extends Script {
+public class unlockPortalTwoScript extends Script {
+
+    public static boolean setUnlockPortalTwoFlagState = false;
 
     @Override
     protected void setup() {
@@ -12,29 +14,36 @@ public class portalThreeScript extends Script {
         setTextboxStyle(Style.HUBWORLD);
         showTextbox();
 
-        if (!isFlagSet("portalThreeUnlocked")) {
-            addTextToTextboxQueue("Talk to the Firefox (**trigger*)");
-        } else {
-            addTextToTextboxQueue("Teleporting to world 3");
+        if (!isFlagSet("worldOneComplete")){
+            addTextToTextboxQueue("clear world one then come back");
+        }else{
+            addTextToTextboxQueue("(**unlocked portal two**)");
         }
+
     }
 
     @Override
     protected void cleanup() {
         hideTextbox();
         unlockPlayer();
+        player.moveY(-10);
+        
+        
 
-        if (!isFlagSet("portalThreeUnlocked")) {
-            player.moveY(10);
+        if (!isFlagSet("worldOneComplete")) {
+            player.moveY(-10);
         } else {
-            setFlag("portalThreeActivated");
+            setFlag("portalTwoUnlocked");
+            setUnlockPortalTwoFlagState = isFlagSet("portalTwoUnlocked");
         }
+
     }
 
     @Override
     public ScriptState execute() {
 
-        if (!isFlagSet("portalThreeActivated")) {
+
+        if (!isFlagSet("portalTwoUnlocked")) {
             start();
             if (!isTextboxQueueEmpty()) {
                 return ScriptState.RUNNING;

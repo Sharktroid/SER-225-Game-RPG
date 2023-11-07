@@ -56,8 +56,9 @@ public class HubTileset extends Tileset {
                 .withScale(tileScale)
                 .build();
 
-        MapTileBuilder middleTopTile = new MapTileBuilder(middleTopFrame)
-                .withTileType(TileType.NOT_PASSABLE);
+        MapTileBuilder middleTopTile = new MapTileBuilder(grassFrame)
+                .withTopLayer(middleTopFrame)
+                .withTileType(TileType.PASSABLE);
 
         mapTiles.add(middleTopTile);
 
