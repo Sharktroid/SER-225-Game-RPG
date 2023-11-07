@@ -16,7 +16,7 @@ import Utils.Point;
 // when the player walks into it, it will be "pushed" forward in the same direction the player was moving in
 public class PushableRock extends EnhancedMapTile {
     public PushableRock(Point location) {
-        super(location.x, location.y, new SpriteSheet(ImageLoader.load("Rock.png"), 16, 16), TileType.NOT_PASSABLE);
+        super(location.x, location.y, new SpriteSheet(ImageLoader.load("BookPile.png"), 15, 15), TileType.NOT_PASSABLE);
     }
 
     @Override

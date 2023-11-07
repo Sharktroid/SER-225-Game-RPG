@@ -193,6 +193,17 @@ public class InternetExplorerTileset extends Tileset {
 
         mapTiles.add(windowTile);
 
+        // window frame
+        Frame windowFramePass = new FrameBuilder(getSubImage(2, 0))
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder windowTilePass = new MapTileBuilder(windowFramePass);
+                
+
+        mapTiles.add(windowTilePass);
+
+
         // starFlower frames
         Frame[] starFlowerFrames = new Frame[] {
                 new FrameBuilder(getSubImage(2, 1), 20)
