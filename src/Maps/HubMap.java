@@ -21,7 +21,7 @@ public class HubMap extends Map {
     public static boolean[] talkedToFirefoxFS = new boolean[] { false, false, false, false };
 
     public HubMap() {
-        super("hub_map.txt", new CommonTileset());
+        super("hub_map.txt", new HubTileset());
         this.playerStartPosition = getMapTile(1, 1).getLocation();
     }
 
