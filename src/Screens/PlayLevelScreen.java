@@ -137,6 +137,8 @@ public class PlayLevelScreen extends Screen {
         }
         else if (worldNum == 7){
             this.map = new ShannonTestMap();
+            flagManager.addFlag("hasTalkedToOMJ", false);
+            flagManager.addFlag("hasFoundDentures", false);
         }
         else if (worldNum == 8){
             this.map = new JulietTestMap();

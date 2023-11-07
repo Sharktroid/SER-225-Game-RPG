@@ -29,6 +29,9 @@ public class FirefoxScript extends Script<NPC> {
                 setNPCName("T");
                 addTextToTextboxQueue( "Is this... the Firefox? I thought it was only a myth.\nWhat is it doing here?");
                 addTextToTextboxQueue( "No, I have no idea where your orb went.");
+            } else if (sequence == 2) {
+                setNPCName("Firefox");
+                addTextToTextboxQueue( "You must help me find it!");
             }
         } else if (isFlagSet("beenToWorldOne")) {
             addTextToTextboxQueue("Is that... my orb?");
@@ -53,6 +56,8 @@ public class FirefoxScript extends Script<NPC> {
         if (sequence == 0) {
             sequence++;
         } else if (sequence == 1) {
+            sequence++;
+        } else if (sequence == 2) {
             setFlag("hasTalkedToFirefox");
             sequence++;
         }
@@ -67,6 +72,11 @@ public class FirefoxScript extends Script<NPC> {
                     end();
                 }
             } else if (sequence == 1) {
+                start();
+                if (isTextboxQueueEmpty()) {
+                    end();
+                }
+            } else if (sequence == 2) {
                 start();
                 if (isTextboxQueueEmpty()) {
                     end();

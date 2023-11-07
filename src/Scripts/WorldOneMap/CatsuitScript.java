@@ -13,10 +13,9 @@ public class CatsuitScript extends Script<NPC> {
         lockPlayer();
 
         setTextboxStyle(Style.WORLDONE);
-        setNPCName("Catsuit");
+        setNPCName("Police Officer");
         showTextbox();
 
-        // changes what catsuit says when talking to him the first time (flag is not set) vs talking to him afterwards (flag is set)
         if (!isFlagSet("hasTalkedToCatsuit")) {
             addTextToTextboxQueue( "Hello fellow cat");
             addTextToTextboxQueue( "looks like not everyone likes to be presentable");
