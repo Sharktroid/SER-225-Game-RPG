@@ -34,6 +34,9 @@ import Tilesets.CommonTileset;
 import java.util.ArrayList;
 
 public class WorldOneMap extends Map {
+
+    public static boolean w1ClearedFS = false;
+
     public WorldOneMap() {
         super("world_one_map.txt", new CommonTileset());
         this.playerStartPosition = getMapTile(0, 14).getLocation();
@@ -119,8 +122,12 @@ public class WorldOneMap extends Map {
         return triggers;
     }
 
-    public static boolean worldOneClearedFlagState(){
-        return WorldOneClearScript.setWorldOneClearFlagState;
+    public static void SW1ClearedFS(){
+        
+    }
+
+    public static boolean getW1ClearedFS(){
+        return w1ClearedFS;
     }
 
 }

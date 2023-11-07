@@ -1,5 +1,6 @@
 package Screens;
 
+import java.util.ArrayList;
 import Engine.GraphicsHandler;
 import Engine.Key;
 import Engine.KeyLocker;
@@ -20,6 +21,7 @@ import Maps.AaronTestMap;
 import Menus.InventoryMenu;
 import Maps.HubMap;
 import Players.Cat;
+import Scripts.HubMap.hubMsgScript;
 import Utils.Direction;
 import Utils.Point;
 
@@ -35,17 +37,25 @@ public class PlayLevelScreen extends Screen {
     protected int floorNum = 0;
     private InventoryMenu inventory;
 
-    protected boolean flagStates[];
+   
     private KeyLocker keyLocker = new KeyLocker();
+
+    //public String[] persistentFlags = {"sawHubMsg","hasTalkedToFirefox0","hasTalkedToFirefox1", "hasTalkedToFirefox2","hasTalkedToFirefox3","unlockedPortal1","unlockedPortal2","unlockedPortal2","unlockedPortal3","worldOneComplete","worldTwoComplete","worldThreeComplete"};
+    
+    
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
+        //String[] persistentFlags = {"sawHubMsg","hasTalkedToFirefox0","hasTalkedToFirefox1", "hasTalkedToFirefox2","hasTalkedToFirefox3","unlockedPortal1","unlockedPortal2","unlockedPortal2","unlockedPortal3","worldOneComplete","worldTwoComplete","worldThreeComplete"};
+        //FlagSaves flagSaves = new FlagSaves();
+        //FlagSaves.initialize(persistentFlags);
     }
 
     public void initialize() {
 
         // setup state
         flagManager = new FlagManager();
+                
 
         // takes world number variable form menu screen to choose world
         if (worldNum == -1) {
@@ -75,7 +85,7 @@ public class PlayLevelScreen extends Screen {
             flagManager.addFlag("findFetch", false);
             flagManager.addFlag("foundFetch", false);
 
-            flagManager.addFlag("worldOneCleared", WorldOneMap.worldOneClearedFlagState());
+            flagManager.addFlag("worldOneCleared", false);
 
 
 
@@ -98,35 +108,55 @@ public class PlayLevelScreen extends Screen {
             flagManager.addFlag("wentDownLevel", false);
             flagManager.addFlag("hasTalkedToRedPanda", WorldThreeFloors.redPandaFlagState());
             flagManager.addFlag("hasTalkedToDino", WorldThreeFloors.DinoFlagState());
+
+            
+
         }
 
         //setup hub world map
         else if (worldNum == 4) {
             this.map = new HubMap();
-
+            
+            
             flagManager.addFlag("beenToWorldOne", false);
             flagManager.addFlag("beenToWorldTwo", false);
             flagManager.addFlag("beenToWorldThree", false);
 
-            flagManager.addFlag("hasTalkedToFirefox", false);
-
+            for (int i = 0; i < 4; i++){
+                if (!HubMap.getTalkedFS(i)){
+                    flagManager.addFlag("hasTalkedToFirefox"+i, false);
+                    
+                }
+                else if (HubMap.getTalkedFS(i)){
+                    flagManager.addFlag("hasTalkedToFirefox"+i, true);
+                    
+                }
+            }
+            
+            
             flagManager.addFlag("portalOneActivated", false);
             flagManager.addFlag("portalTwoActivated", false);
             flagManager.addFlag("portalThreeActivated", false);
 
             flagManager.addFlag("startWorldThree", false);
-            flagManager.addFlag("sawHubMsg", HubMap.sawHubMsgFlagState());
+            flagManager.addFlag("sawHubMsg", HubMap.getHubMsgFS());
 
-            flagManager.addFlag("portalOneUnlocked", HubMap.unlockPortalOneFlagState());
-            flagManager.addFlag("portalTwoUnlocked", HubMap.unlockPortalTwoFlagState());
-            flagManager.addFlag("portalThreeUnlocked", HubMap.unlockPortalThreeFlagState());
+
+            for (int i = 1; i <= 3; i++){
+                if (!HubMap.getUnlockedPortalFS(i)){
+                    flagManager.addFlag("unlockedPortal"+i, HubMap.getUnlockedPortalFS(i));
+                }
+                else if (HubMap.getUnlockedPortalFS(i)){
+                    flagManager.addFlag("unlockedPortal"+i, HubMap.getUnlockedPortalFS(i));
+                }
+            }
+
             
 
-            flagManager.addFlag("worldOneComplete", WorldOneMap.worldOneClearedFlagState());
+            flagManager.addFlag("worldOneComplete", WorldOneMap.w1ClearedFS);
             flagManager.addFlag("worldTwoComplete", false);
             flagManager.addFlag("worldThreeComplete", false);
 
-            
         }
 
         else if (worldNum == 5){
@@ -250,10 +280,10 @@ public class PlayLevelScreen extends Screen {
         //other worlds initialization 
         
         //hub world
-        else if (map.getFlagManager().isFlagSet("worldOneCleared")|| Keyboard.isKeyDown(Key.FOUR) && !keyLocker.isKeyLocked(Key.FOUR)) {
+        else if (map.getFlagManager().isFlagSet("worldOneCleared")|| map.getFlagManager().isFlagSet("worldTwoCleared") || map.getFlagManager().isFlagSet("worldThreeCleared") || Keyboard.isKeyDown(Key.FOUR) && !keyLocker.isKeyLocked(Key.FOUR)) {
             worldNum = 4;
             initialize();
-
+            
 
 
         }else if (Keyboard.isKeyDown(Key.ZERO) && !keyLocker.isKeyLocked(Key.ZERO)) {
@@ -332,15 +362,6 @@ public class PlayLevelScreen extends Screen {
     public boolean getFlagState(boolean flagState){
 
         return flagState;
-    }
-
-    public boolean setFlagState(boolean flagState){
-        if (flagState == true){
-            return true;
-        }
-        else{
-            return false;
-        }
     }
 
     // This enum represents the different states this screen can be in
