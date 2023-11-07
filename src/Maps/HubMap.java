@@ -15,12 +15,14 @@ import Scripts.HubMap.unlockPortalOneScript;
 import Scripts.HubMap.unlockPortalTwoScript;
 import Scripts.HubMap.unlockPortalThreeScript;
 import Tilesets.CommonTileset;
+import Tilesets.HubTileset;
+
 
 public class HubMap extends Map {
 
     public HubMap() {
-        super("hub_map.txt", new CommonTileset());
-        this.playerStartPosition = getMapTile(9, 7).getLocation();
+        super("hub_map.txt", new HubTileset());
+        this.playerStartPosition = getMapTile(8, 7).getLocation();
 
     }
 

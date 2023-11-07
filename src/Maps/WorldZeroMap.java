@@ -8,7 +8,7 @@ public class WorldZeroMap extends Map {
 
     public WorldZeroMap() {
         super("world_zero_map.txt", new HubTileset());
-        this.playerStartPosition = getMapTile(0, 0).getLocation();
+        this.playerStartPosition = getMapTile(8, 9).getLocation();
 
     }
 
