@@ -14,6 +14,9 @@ public abstract class Script<T extends MapEntity> {
     // if true, script should perform "setup" logic
     protected boolean start = true;
 
+    // reset back to 0
+    // protected int sequence = 0;
+
     // references to the map entity the script is attached to
     // use generic type if you need to use this reference
     protected T entity;
@@ -65,6 +68,7 @@ public abstract class Script<T extends MapEntity> {
     protected void start() {
         if (start) {
             setup();
+            // sequence = 0;
             start = false;
         }
     }

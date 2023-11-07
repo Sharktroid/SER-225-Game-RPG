@@ -85,7 +85,9 @@ public class FirefoxScript extends Script<NPC> {
         if (!isFlagSet("hasTalkedToFirefox0")) {
             if (sequence == 0) {
                 sequence++;
-            } else if (sequence == 1) {
+            }else if(sequence == 1){
+                sequence++;
+            }else if (sequence == 2) {
                 setFlag("hasTalkedToFirefox0");
                 setFlag("unlockedPortal1");
                 
@@ -116,6 +118,7 @@ public class FirefoxScript extends Script<NPC> {
             setFlag("hasTalkedToFirefox3");
             // WIN FLAG HERE
             HubMap.talkedToFirefoxFS[3] = true;
+
         }
     }
 
@@ -129,6 +132,11 @@ public class FirefoxScript extends Script<NPC> {
                     end();
                 }
             } else if (sequence == 1) {
+                start();
+                if (isTextboxQueueEmpty()) {
+                    end();
+                }
+            } else if (sequence == 2) {
                 start();
                 if (isTextboxQueueEmpty()) {
                     end();
