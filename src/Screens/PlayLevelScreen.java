@@ -8,7 +8,6 @@ import Engine.Screen;
 import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.*;
-import Level.Textbox.Style;
 import Maps.WorldOneMap;
 import Maps.WorldTwoMap;
 import Maps.WorldThreeFloors;
@@ -23,7 +22,6 @@ import Maps.HubMap;
 import Players.Cat;
 import Utils.Direction;
 import Utils.Point;
-import Level.Script;
 
 // This class is for when the platformer game is actually being played
 public class PlayLevelScreen extends Screen {
@@ -139,6 +137,17 @@ public class PlayLevelScreen extends Screen {
         }
         else if (worldNum == 7){
             this.map = new ShannonTestMap();
+            flagManager.addFlag("hasTalkedToOMJ", false);
+            flagManager.addFlag("hasFoundDentures", false);
+
+            flagManager.addFlag("hasTalkedToNSE", false);
+
+            flagManager.addFlag("curedNPC1", false);
+            flagManager.addFlag("curedNPC2", false);
+            flagManager.addFlag("curedNPC3", false);
+            flagManager.addFlag("curedNPC4", false);
+            flagManager.addFlag("curedNPC5", false);
+            flagManager.addFlag("hasCuredAllNPCs", false);
         }
         else if (worldNum == 8){
             this.map = new JulietTestMap();
