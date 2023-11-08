@@ -1,6 +1,5 @@
 package Screens;
 
-import java.util.ArrayList;
 import Engine.GraphicsHandler;
 import Engine.Key;
 import Engine.KeyLocker;
@@ -21,7 +20,6 @@ import Maps.AaronTestMap;
 import Menus.InventoryMenu;
 import Maps.HubMap;
 import Players.Cat;
-import Scripts.HubMap.hubMsgScript;
 import Utils.Direction;
 import Utils.Point;
 
@@ -75,21 +73,38 @@ public class PlayLevelScreen extends Screen {
             flagManager.addFlag("hasTalkedToDinosaur", false);
             flagManager.addFlag("hasFoundBall", false);
             flagManager.addFlag("sawHubMsg", false);
-            flagManager.addFlag("hasTalkedToElder", false);
-            flagManager.addFlag("findCat", false);
-            flagManager.addFlag("foundCat", false);
-            flagManager.addFlag("foundCat2", false);
-            flagManager.addFlag("hasTalkedToGarfunkle", false);
-            flagManager.addFlag("finishedElder", false);
-            flagManager.addFlag("hasTalkedToElder2", false);
-            flagManager.addFlag("findFetch", false);
-            flagManager.addFlag("foundFetch", false);
+            // flagManager.addFlag("hasTalkedToElder", false);
+            // flagManager.addFlag("findCat", false);
+            // flagManager.addFlag("foundCat", false);
+            // flagManager.addFlag("foundCat2", false);
+            // flagManager.addFlag("hasTalkedToGarfunkle", false);
+            // flagManager.addFlag("finishedElder", false);
+            // flagManager.addFlag("hasTalkedToElder2", false);
+            // flagManager.addFlag("findFetch", false);
+            // flagManager.addFlag("foundFetch", false);
+
+            //old man jenkins
+            flagManager.addFlag("hasTalkedToOMJ", false);
+            flagManager.addFlag("hasFoundDentures", false);
+            flagManager.addFlag("hasFinishedOMJ", false);
+            //engineer
+            flagManager.addFlag("hasTalkedToNSE", false);
+            //librarian
+            flagManager.addFlag("hasTalkedToLibrarian", false);
+            flagManager.addFlag("hasRanVirusScanLibrarian", false);
+            flagManager.addFlag("hasFoundLibraryShard", false);
+            //normal npcs
+            flagManager.addFlag("hasRanVirusScanNPC1", false);
+            flagManager.addFlag("hasRanVirusScanNPC2", false);
+            //infected npcs
+            flagManager.addFlag("curedNPC1", false);
+            flagManager.addFlag("curedNPC2", false);
+            flagManager.addFlag("curedNPC3", false);
+            flagManager.addFlag("curedNPC4", false);
+            flagManager.addFlag("curedNPC5", false);
+            flagManager.addFlag("hasCuredAllNPCs", false);
 
             flagManager.addFlag("worldOneCleared", false);
-
-
-
-
 
         }
         //setup world two map
