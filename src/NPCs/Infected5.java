@@ -46,14 +46,14 @@ public class Infected5 extends NPC {
             put("STAND_LEFT", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(0, 0))
                             .withScale(3)
-                            .withBounds(7, 0, 11, 20)
+                            .withBounds(2, 0, 20, 20)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                             .build()
             });
             put("STAND_RIGHT", new Frame[] {
                    new FrameBuilder(spriteSheet.getSprite(0, 0))
                            .withScale(3)
-                           .withBounds(7, 0, 11, 20)
+                           .withBounds(2, 0, 20, 20)
                            .build()
            });
         }};
