@@ -31,6 +31,8 @@ import Scripts.WorldOneMap.SoulConsumingFlameNPCScript;
 import Scripts.WorldOneMap.WalrusScript;
 import Scripts.WorldOneMap.WorldOneClearScript;
 import Tilesets.CommonTileset;
+import Tilesets.InternetExplorerTileset;
+
 import java.util.ArrayList;
 
 public class WorldOneMap extends Map {
@@ -38,7 +40,7 @@ public class WorldOneMap extends Map {
     public static boolean w1ClearedFS = false;
 
     public WorldOneMap() {
-        super("world_one_map.txt", new CommonTileset());
+        super("world_one_map.txt", new InternetExplorerTileset());
         this.playerStartPosition = getMapTile(0, 14).getLocation();
     }
 
