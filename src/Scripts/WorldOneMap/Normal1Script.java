@@ -36,8 +36,11 @@ public class Normal1Script extends Script<NPC> {
         unlockPlayer();
         hideTextbox();
 
-        if (responseNum == 0) {
-            setFlag("hasRanVirusScanNPC1");
+        if (!isFlagSet("hasRanVirusScanNPC1")) {
+            responseNum = getChoice();
+            if (responseNum == 0) {
+                setFlag("hasRanVirusScanNPC1");
+            }
         }
     }
 

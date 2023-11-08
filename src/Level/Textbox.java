@@ -27,7 +27,7 @@ public class Textbox {
     protected int fontBottomY = 472;
     protected int fontTopY = 55;
     protected int width = 520;
-    protected int height = 100;
+    protected int height = 125;
     //select box
     protected int xSelect = 542;
     protected int ySelect = 0;
