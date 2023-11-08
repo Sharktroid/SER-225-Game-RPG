@@ -5,8 +5,8 @@ import Level.Script;
 import Level.ScriptState;
 import Level.Textbox.Style;
 
-// script for talking to sloth npc
-public class SlothScript extends Script<NPC> {
+// script for talking to giraffe npc
+public class Infected3Script extends Script<NPC> {
 
     private boolean hasWonBattle = false;
 
@@ -15,14 +15,14 @@ public class SlothScript extends Script<NPC> {
         lockPlayer();
 
         setTextboxStyle(Style.WORLDONE);
-        setNPCName("Infected NPC 5");
+        setNPCName("Infected NPC 3");
         showTextbox();
 
         String[] selections = {"RUN VIRUS SCAN", "LEAVE"};
         String[] answers = {"VIRUS DETECTED", "Yeah, go away."};
 
         entity.facePlayer(player);
-        if (!isFlagSet("hasCured5")) {
+        if (!isFlagSet("hasCured3")) {
             addTextToTextboxQueue( "I'm saying something rude!", selections, answers);
 
             if (hasWonBattle) {
@@ -42,13 +42,13 @@ public class SlothScript extends Script<NPC> {
         hideTextbox();
 
         if (hasWonBattle) {
-            setFlag("hasCured5");
+            setFlag("hasCured3");
         }
     }
 
     @Override
     public ScriptState execute() {
-        if (!isFlagSet("hasCured5")) {
+        if (!isFlagSet("hasCured3")) {
             start();
             if (!isTextboxQueueEmpty()) {
                 return ScriptState.RUNNING;
@@ -65,6 +65,4 @@ public class SlothScript extends Script<NPC> {
         }
     }
 }
-
-
 

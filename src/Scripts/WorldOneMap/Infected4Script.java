@@ -5,9 +5,9 @@ import Level.Script;
 import Level.ScriptState;
 import Level.Textbox.Style;
 
-// script for talking to beaver npc
-public class BeaverScript extends Script<NPC> {
-    
+// script for talking to redpanda npc
+public class Infected4Script extends Script<NPC> {
+
     private boolean hasWonBattle = false;
 
     @Override
@@ -15,14 +15,14 @@ public class BeaverScript extends Script<NPC> {
         lockPlayer();
 
         setTextboxStyle(Style.WORLDONE);
-        setNPCName("Infected NPC 1");
+        setNPCName("Infected NPC 4");
         showTextbox();
 
         String[] selections = {"RUN VIRUS SCAN", "LEAVE"};
         String[] answers = {"VIRUS DETECTED", "Yeah, go away."};
 
         entity.facePlayer(player);
-        if (!isFlagSet("hasCured1")) {
+        if (!isFlagSet("hasCured4")) {
             addTextToTextboxQueue( "I'm saying something rude!", selections, answers);
 
             if (hasWonBattle) {
@@ -42,13 +42,13 @@ public class BeaverScript extends Script<NPC> {
         hideTextbox();
 
         if (hasWonBattle) {
-            setFlag("hasCured1");
+            setFlag("hasCured4");
         }
     }
 
     @Override
     public ScriptState execute() {
-        if (!isFlagSet("hasCured1")) {
+        if (!isFlagSet("hasCured4")) {
             start();
             if (!isTextboxQueueEmpty()) {
                 return ScriptState.RUNNING;
@@ -65,3 +65,7 @@ public class BeaverScript extends Script<NPC> {
         }
     }
 }
+
+
+
+

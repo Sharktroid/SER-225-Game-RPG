@@ -10,7 +10,7 @@ import Utils.Point;
 
 // script for talking to dino npc
 // the script is segmented -- it has multiple setups, cleanups, and executions based on its current action
-public class DinoScript extends Script<NPC> {
+public class Infected2Script extends Script<NPC> {
 
     private boolean hasWonBattle = false;
 

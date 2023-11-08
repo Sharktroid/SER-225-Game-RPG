@@ -6,7 +6,7 @@ import Level.ScriptState;
 import Level.Textbox.Style;
 
 // script for talking to walrus npc
-public class WalrusScript extends Script<NPC> {
+public class LibrarianScript extends Script<NPC> {
 
     private int sequence = 0;
     // private int responseNum = -1;

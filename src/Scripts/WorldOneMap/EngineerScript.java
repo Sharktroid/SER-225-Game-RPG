@@ -6,7 +6,7 @@ import Level.ScriptState;
 import Level.Textbox.Style;
 
 // script for talking to catsuit npc
-public class CatsuitScript extends Script<NPC> {
+public class EngineerScript extends Script<NPC> {
 
     private int sequence = 0;
     // private int miniSequence = 0;

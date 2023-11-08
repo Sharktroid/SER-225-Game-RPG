@@ -86,6 +86,7 @@ public class PlayLevelScreen extends Screen {
             //old man jenkins
             flagManager.addFlag("hasTalkedToOMJ", false);
             flagManager.addFlag("hasFoundDentures", false);
+            flagManager.addFlag("hasFinishedOMJ", false);
             //engineer
             flagManager.addFlag("hasTalkedToNSE", false);
             //librarian

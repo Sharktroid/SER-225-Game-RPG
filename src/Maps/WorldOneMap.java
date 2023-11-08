@@ -7,27 +7,29 @@ import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
 import Level.Trigger;
-import NPCs.Beaver;
-import NPCs.Catsuit;
-import NPCs.Dinosaur;
-import NPCs.Elder;
-import NPCs.Garfunkle;
-import NPCs.Giraffe;
+import NPCs.Engineer;
+import NPCs.EngineerPartner;
+import NPCs.Infected1;
+import NPCs.Infected2;
+import NPCs.Infected3;
+import NPCs.Infected4;
+import NPCs.Infected5;
+import NPCs.Librarian;
+import NPCs.Normal1;
+import NPCs.Normal2;
+import NPCs.OldManJenks;
 import NPCs.SoulConsumingFlameNPC;
-import NPCs.Redpanda;
-import NPCs.Sloth;
-import NPCs.Walrus;
-import Scripts.WorldOneMap.BeaverScript;
-import Scripts.WorldOneMap.CatsuitScript;
-import Scripts.WorldOneMap.DinoScript;
-import Scripts.WorldOneMap.GiraffeScript;
-import Scripts.WorldOneMap.NormalNPC1Script;
-import Scripts.WorldOneMap.NormalNPC2Script;
+import Scripts.WorldOneMap.Infected1Script;
+import Scripts.WorldOneMap.EngineerScript;
+import Scripts.WorldOneMap.Infected2Script;
+import Scripts.WorldOneMap.Infected3Script;
+import Scripts.WorldOneMap.Normal1Script;
+import Scripts.WorldOneMap.Normal2Script;
 import Scripts.WorldOneMap.OldManJenksScript;
-import Scripts.WorldOneMap.RedpandaScript;
-import Scripts.WorldOneMap.SlothScript;
+import Scripts.WorldOneMap.Infected4Script;
+import Scripts.WorldOneMap.Infected5Script;
 import Scripts.WorldOneMap.SoulConsumingFlameNPCScript;
-import Scripts.WorldOneMap.WalrusScript;
+import Scripts.WorldOneMap.LibrarianScript;
 import Scripts.WorldOneMap.WorldOneClearScript;
 import Tilesets.InternetExplorerTileset;
 
@@ -65,54 +67,57 @@ public class WorldOneMap extends Map {
         ArrayList<NPC> npcs = new ArrayList<>();
         // remember to import NPC and Scripts for new NPC
 
-        //old man jenkins
-        Elder elder = new Elder(9, getMapTile(25, 14).getLocation());
-        elder.setInteractScript(new OldManJenksScript());
-        npcs.add(elder);
+        OldManJenks oldManJenks = new OldManJenks(1, getMapTile(25, 14).getLocation());
+        oldManJenks.setExistenceFlag("hasFinishedOMJ");
+        oldManJenks.setInteractScript(new OldManJenksScript());
+        npcs.add(oldManJenks);
 
-        //engineer
-        Catsuit catsuit = new Catsuit(7, getMapTile(35, 24).getLocation());
-        catsuit.setInteractScript(new CatsuitScript());
-        npcs.add(catsuit);
+        Engineer engineer = new Engineer(2, getMapTile(35, 24).getLocation());
+        engineer.setInteractScript(new EngineerScript());
+        npcs.add(engineer);
 
-        //librarian
-        Walrus walrus = new Walrus(1, getMapTile(36, 9).getLocation());
-        walrus.setInteractScript(new WalrusScript());
-        npcs.add(walrus);
+        EngineerPartner engineerPartner = new EngineerPartner(3, getMapTile(36, 24).getLocation());
+        engineerPartner.setInteractScript(new EngineerScript());
+        npcs.add(engineerPartner);
+
+        Librarian librarian = new Librarian(4, getMapTile(36, 9).getLocation());
+        librarian.setInteractScript(new LibrarianScript());
+        npcs.add(librarian);
 
         //infected npcs
-        Dinosaur dinosaur = new Dinosaur(2, getMapTile(8, 15).getLocation());
-        dinosaur.setExistenceFlag("hasTalkedToDinosaur");
-        dinosaur.setInteractScript(new DinoScript());
-        npcs.add(dinosaur);
-
-        Beaver beaver = new Beaver(3, getMapTile(15, 7).getLocation());
-        beaver.setInteractScript(new BeaverScript());
-        npcs.add(beaver);
-
-        Giraffe giraffe = new Giraffe(4, getMapTile(3, 8).getLocation());
-        giraffe.setInteractScript(new GiraffeScript());
-        npcs.add(giraffe);
-
-        Redpanda redpanda = new Redpanda(5, getMapTile(38, 31).getLocation());
-        redpanda.setInteractScript(new RedpandaScript());
-        npcs.add(redpanda);
-
-        Sloth sloth = new Sloth(6, getMapTile(9, 28).getLocation());
-        sloth.setInteractScript(new SlothScript());
-        npcs.add(sloth);
+        //green
+        Infected1 infected1 = new Infected1(5, getMapTile(20, 8).getLocation());
+        infected1.setInteractScript(new Infected1Script());
+        npcs.add(infected1);
+        //purple
+        Infected2 infected2 = new Infected2(6, getMapTile(23, 21).getLocation());
+        infected2.setInteractScript(new Infected2Script());
+        npcs.add(infected2);
+        //red
+        Infected3 infected3 = new Infected3(7, getMapTile(3, 8).getLocation());
+        infected3.setInteractScript(new Infected3Script());
+        npcs.add(infected3);
+        //pink
+        Infected4 infected4 = new Infected4(8, getMapTile(34, 32).getLocation());
+        infected4.setInteractScript(new Infected4Script());
+        npcs.add(infected4);
+        //green
+        Infected5 infected5 = new Infected5(9, getMapTile(7, 28).getLocation());
+        infected5.setInteractScript(new Infected5Script());
+        npcs.add(infected5);
 
         //normal npcs
-        Garfunkle normal1 = new Garfunkle(10, getMapTile(12, 29).getLocation());
-        normal1.setInteractScript(new NormalNPC1Script());
+        //red
+        Normal1 normal1 = new Normal1(10, getMapTile(14, 30).getLocation());
+        normal1.setInteractScript(new Normal1Script());
         npcs.add(normal1);
-
-        Garfunkle normal2 = new Garfunkle(10, getMapTile(14, 29).getLocation());
-        normal2.setInteractScript(new NormalNPC2Script());
+        //pink
+        Normal2 normal2 = new Normal2(11, getMapTile(1, 17).getLocation());
+        normal2.setInteractScript(new Normal2Script());
         npcs.add(normal2);
 
 
-        SoulConsumingFlameNPC soulConsumingFlame = new SoulConsumingFlameNPC(8, getMapTile(11, 16).getLocation().subtractY(40));
+        SoulConsumingFlameNPC soulConsumingFlame = new SoulConsumingFlameNPC(12, getMapTile(11, 16).getLocation().subtractY(40));
         soulConsumingFlame.setInteractScript(new SoulConsumingFlameNPCScript());
         npcs.add(soulConsumingFlame);
 

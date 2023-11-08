@@ -5,7 +5,7 @@ import Level.Script;
 import Level.ScriptState;
 import Level.Textbox.Style;
 
-// script for talking to elder npc
+// old man
 public class OldManJenksScript extends Script<NPC> {
 
     private int sequence = 0;

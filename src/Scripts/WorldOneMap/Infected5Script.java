@@ -5,8 +5,8 @@ import Level.Script;
 import Level.ScriptState;
 import Level.Textbox.Style;
 
-// script for talking to redpanda npc
-public class RedpandaScript extends Script<NPC> {
+// script for talking to sloth npc
+public class Infected5Script extends Script<NPC> {
 
     private boolean hasWonBattle = false;
 
@@ -15,14 +15,14 @@ public class RedpandaScript extends Script<NPC> {
         lockPlayer();
 
         setTextboxStyle(Style.WORLDONE);
-        setNPCName("Infected NPC 4");
+        setNPCName("Infected NPC 5");
         showTextbox();
 
         String[] selections = {"RUN VIRUS SCAN", "LEAVE"};
         String[] answers = {"VIRUS DETECTED", "Yeah, go away."};
 
         entity.facePlayer(player);
-        if (!isFlagSet("hasCured4")) {
+        if (!isFlagSet("hasCured5")) {
             addTextToTextboxQueue( "I'm saying something rude!", selections, answers);
 
             if (hasWonBattle) {
@@ -42,13 +42,13 @@ public class RedpandaScript extends Script<NPC> {
         hideTextbox();
 
         if (hasWonBattle) {
-            setFlag("hasCured4");
+            setFlag("hasCured5");
         }
     }
 
     @Override
     public ScriptState execute() {
-        if (!isFlagSet("hasCured4")) {
+        if (!isFlagSet("hasCured5")) {
             start();
             if (!isTextboxQueueEmpty()) {
                 return ScriptState.RUNNING;
@@ -65,7 +65,6 @@ public class RedpandaScript extends Script<NPC> {
         }
     }
 }
-
 
 
 
