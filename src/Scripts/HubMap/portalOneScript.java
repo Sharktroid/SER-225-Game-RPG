@@ -12,8 +12,8 @@ public class portalOneScript extends Script {
         setTextboxStyle(Style.HUBWORLD);
         showTextbox();
 
-        if (!isFlagSet("portalOneUnlocked")) {
-            addTextToTextboxQueue("Talk to the Firefox (**trigger*)");
+        if (!isFlagSet("unlockedPortal1")) {
+            addTextToTextboxQueue("Talk to the Firefox before teleporting to world one.");
         } else {
             addTextToTextboxQueue("Teleporting to world 1");
         }
@@ -24,8 +24,10 @@ public class portalOneScript extends Script {
         hideTextbox();
         unlockPlayer();
 
-        if (!isFlagSet("portalOneUnlocked")) {
+
+        if (!isFlagSet("unlockedPortal1")) {
             player.moveY(10);
+            
         } else {
             setFlag("portalOneActivated");
         }

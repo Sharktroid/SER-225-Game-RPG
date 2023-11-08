@@ -29,12 +29,18 @@ import Scripts.WorldOneMap.RedpandaScript;
 import Scripts.WorldOneMap.SlothScript;
 import Scripts.WorldOneMap.SoulConsumingFlameNPCScript;
 import Scripts.WorldOneMap.WalrusScript;
+import Scripts.WorldOneMap.WorldOneClearScript;
 import Tilesets.CommonTileset;
+import Tilesets.InternetExplorerTileset;
+
 import java.util.ArrayList;
 
 public class WorldOneMap extends Map {
+
+    public static boolean w1ClearedFS = false;
+
     public WorldOneMap() {
-        super("world_one_map.txt", new CommonTileset());
+        super("world_one_map.txt", new InternetExplorerTileset());
         this.playerStartPosition = getMapTile(0, 14).getLocation();
     }
 
@@ -113,7 +119,17 @@ public class WorldOneMap extends Map {
     @Override
     public ArrayList<Trigger> loadTriggers() {
         ArrayList<Trigger> triggers = new ArrayList<>();
-        //triggers.add(new Trigger(790, 1030, 100, 10, new LostBallScript(), "hasLostBall"));
+        triggers.add(new Trigger(790,20, 24, 24, new WorldOneClearScript()));
+
         return triggers;
     }
+
+    public static void SW1ClearedFS(){
+        
+    }
+
+    public static boolean getW1ClearedFS(){
+        return w1ClearedFS;
+    }
+
 }
