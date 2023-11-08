@@ -89,13 +89,13 @@ public class Infected2Script extends Script<NPC> {
         //     }
         //     else if (sequence == 3) {
         //         entity.stand(Direction.RIGHT);
-        //         amountMoved = 0;
+        //         amountMoved = 0; walk down
         //     }
         //     else if (sequence == 4) {
-        //         amountMoved = 0;
+        //         amountMoved = 0; walk right
         //     }
         //     else if (sequence == 5) {
-        //         entity.stand(Direction.LEFT);
+        //         entity.stand(Direction.LEFT); walk up
 
         //         // change door to the open door map tile
         //         Frame openDoorFrame = new FrameBuilder(map.getTileset().getSubImage(4, 4), 0)
