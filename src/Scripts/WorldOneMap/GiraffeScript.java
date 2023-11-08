@@ -8,23 +8,32 @@ import Level.Textbox.Style;
 // script for talking to giraffe npc
 public class GiraffeScript extends Script<NPC> {
 
+    private boolean hasWonBattle = false;
+
     @Override
     protected void setup() {
         lockPlayer();
 
         setTextboxStyle(Style.WORLDONE);
-        setNPCName("Giraffe");
+        setNPCName("Infected NPC 3");
         showTextbox();
 
-        // changes what Giraffe says when talking to him the first time (flag is not set) vs talking to him afterwards (flag is set)
-        if (!isFlagSet("hasTalkedToGiraffe")) {
-            addTextToTextboxQueue( "Hows it going little cat");
-            addTextToTextboxQueue( "Do you need need me to grab anything for you?");
-        }
-        else {
-            addTextToTextboxQueue( "If you need me to grab anything for you let me know");
-        }
+        String[] selections = {"RUN VIRUS SCAN", "LEAVE"};
+        String[] answers = {"VIRUS DETECTED", "Yeah, go away."};
+
         entity.facePlayer(player);
+        if (!isFlagSet("hasCured3")) {
+            addTextToTextboxQueue( "I'm saying something rude!", selections, answers);
+
+            if (hasWonBattle) {
+                addTextToTextboxQueue("Woah, what happened? I was infected?");
+                addTextToTextboxQueue("Thanks for helping me!");
+            } else {
+                addTextToTextboxQueue("Y0U'LL N3V3R D3F3AT M3");
+            }
+        } else {
+            addTextToTextboxQueue( "Thank you again.");
+        }
     }
 
     @Override
@@ -32,18 +41,28 @@ public class GiraffeScript extends Script<NPC> {
         unlockPlayer();
         hideTextbox();
 
-        // set flag so that if Giraffe is talked to again after the first time, what he says changes
-        setFlag("hasTalkedToGiraffe");
+        if (hasWonBattle) {
+            setFlag("hasCured3");
+        }
     }
 
     @Override
     public ScriptState execute() {
-        start();
-        if (!isTextboxQueueEmpty()) {
-            return ScriptState.RUNNING;
+        if (!isFlagSet("hasCured3")) {
+            start();
+            if (!isTextboxQueueEmpty()) {
+                return ScriptState.RUNNING;
+            }
+            end();
+            return ScriptState.COMPLETED;
+        } else {
+            start();
+            if (!isTextboxQueueEmpty()) {
+                return ScriptState.RUNNING;
+            }
+            end();
+            return ScriptState.COMPLETED;
         }
-        end();
-        return ScriptState.COMPLETED;
     }
 }
 

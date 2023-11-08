@@ -7,24 +7,33 @@ import Level.Textbox.Style;
 
 // script for talking to beaver npc
 public class BeaverScript extends Script<NPC> {
+    
+    private boolean hasWonBattle = false;
 
     @Override
     protected void setup() {
         lockPlayer();
 
         setTextboxStyle(Style.WORLDONE);
-        setNPCName("Beaver");
+        setNPCName("Infected NPC 1");
         showTextbox();
 
-        // changes what beaver says when talking to him the first time (flag is not set) vs talking to him afterwards (flag is set)
-        if (!isFlagSet("hasTalkedToBeaver")) {
-            addTextToTextboxQueue( "Hello Mr Cat!");
-            addTextToTextboxQueue( "I just want to build a dam");
-        }
-        else {
-            addTextToTextboxQueue( "I hope I can build a damn soon!");
-        }
+        String[] selections = {"RUN VIRUS SCAN", "LEAVE"};
+        String[] answers = {"VIRUS DETECTED", "Yeah, go away."};
+
         entity.facePlayer(player);
+        if (!isFlagSet("hasCured1")) {
+            addTextToTextboxQueue( "I'm saying something rude!", selections, answers);
+
+            if (hasWonBattle) {
+                addTextToTextboxQueue("Woah, what happened? I was infected?");
+                addTextToTextboxQueue("Thanks for helping me!");
+            } else {
+                addTextToTextboxQueue("Y0U'LL N3V3R D3F3AT M3");
+            }
+        } else {
+            addTextToTextboxQueue( "Thank you again.");
+        }
     }
 
     @Override
@@ -32,17 +41,27 @@ public class BeaverScript extends Script<NPC> {
         unlockPlayer();
         hideTextbox();
 
-        // set flag so that if beaver is talked to again after the first time, what he says changes
-        setFlag("hasTalkedToBeaver");
+        if (hasWonBattle) {
+            setFlag("hasCured1");
+        }
     }
 
     @Override
     public ScriptState execute() {
-        start();
-        if (!isTextboxQueueEmpty()) {
-            return ScriptState.RUNNING;
+        if (!isFlagSet("hasCured1")) {
+            start();
+            if (!isTextboxQueueEmpty()) {
+                return ScriptState.RUNNING;
+            }
+            end();
+            return ScriptState.COMPLETED;
+        } else {
+            start();
+            if (!isTextboxQueueEmpty()) {
+                return ScriptState.RUNNING;
+            }
+            end();
+            return ScriptState.COMPLETED;
         }
-        end();
-        return ScriptState.COMPLETED;
     }
 }

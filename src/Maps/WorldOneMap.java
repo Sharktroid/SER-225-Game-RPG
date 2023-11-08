@@ -11,6 +11,7 @@ import NPCs.Beaver;
 import NPCs.Catsuit;
 import NPCs.Dinosaur;
 import NPCs.Elder;
+import NPCs.Garfunkle;
 import NPCs.Giraffe;
 import NPCs.SoulConsumingFlameNPC;
 import NPCs.Redpanda;
@@ -20,6 +21,8 @@ import Scripts.WorldOneMap.BeaverScript;
 import Scripts.WorldOneMap.CatsuitScript;
 import Scripts.WorldOneMap.DinoScript;
 import Scripts.WorldOneMap.GiraffeScript;
+import Scripts.WorldOneMap.NormalNPC1Script;
+import Scripts.WorldOneMap.NormalNPC2Script;
 import Scripts.WorldOneMap.OldManJenksScript;
 import Scripts.WorldOneMap.RedpandaScript;
 import Scripts.WorldOneMap.SlothScript;
@@ -98,6 +101,16 @@ public class WorldOneMap extends Map {
         Sloth sloth = new Sloth(6, getMapTile(9, 28).getLocation());
         sloth.setInteractScript(new SlothScript());
         npcs.add(sloth);
+
+        //normal npcs
+        Garfunkle normal1 = new Garfunkle(10, getMapTile(12, 29).getLocation());
+        normal1.setInteractScript(new NormalNPC1Script());
+        npcs.add(normal1);
+
+        Garfunkle normal2 = new Garfunkle(10, getMapTile(14, 29).getLocation());
+        normal2.setInteractScript(new NormalNPC2Script());
+        npcs.add(normal2);
+
 
         SoulConsumingFlameNPC soulConsumingFlame = new SoulConsumingFlameNPC(8, getMapTile(11, 16).getLocation().subtractY(40));
         soulConsumingFlame.setInteractScript(new SoulConsumingFlameNPCScript());
