@@ -15,8 +15,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import Combatants.PlayerCombatant;
-
 /*
     This class is for defining a map that is used for a specific level
     The map class handles/manages a lot of different things, including:
@@ -605,7 +603,7 @@ public abstract class Map {
     }
 
     public void initiateCombat(Player player, Combatant enemy) {
-        currentBattleSystem = new BattleSystem(this, new PlayerCombatant(player, this), enemy);
+        currentBattleSystem = new BattleSystem(this, player, enemy);
     }
 
     public void endCombat() {

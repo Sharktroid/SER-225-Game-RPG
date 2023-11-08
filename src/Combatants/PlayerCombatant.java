@@ -42,4 +42,8 @@ public class PlayerCombatant extends Combatant {
         map.getTextbox().addText("Game Over");
     }
 
+    public Map getMap() {
+        return map;
+    }
+
 }

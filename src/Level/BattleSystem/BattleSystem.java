@@ -2,27 +2,31 @@ package Level.BattleSystem;
 
 import Combatants.PlayerCombatant;
 import Engine.GraphicsHandler;
+import Items.Medkit;
 import Level.Combatant;
 import Level.Map;
+import Level.Player;
 
 public class BattleSystem {
-    PlayerCombatant player;
+    Player player;
+    PlayerCombatant playerCombatant;
     Combatant enemy;
     private BattleMenu battleMenu;
     Map map;
     private Boolean shuttingDown = false;
-    Boolean playerTurn;
+    public Boolean playerTurn;
 
-    public BattleSystem(Map map, PlayerCombatant player, Combatant enemy) {
+    public BattleSystem(Map map, Player player, Combatant enemy) {
         this.map = map;
         this.player = player;
+        this.playerCombatant = new PlayerCombatant(player, map);
         this.enemy = enemy;
-        battleMenu = new BattleMenu(this);
-        battleMenu.setActive(true);
+        battleMenu = new BattleMenu(this, playerCombatant);
+        battleMenu.setActive(false);
         map.getTextbox().addText(enemy.getIntroMessage());
         map.getTextbox().setIsActive(true);
-        battleMenu.combatant = player;
         playerTurn = true;
+        player.items.add(new Medkit(player));
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
@@ -62,7 +66,7 @@ public class BattleSystem {
                 battleMenu.setActive(true);
             }
             else {
-                enemy.autoExecuteMove(player);
+                enemy.autoExecuteMove(playerCombatant);
                 playerTurn = true;
             }
         }

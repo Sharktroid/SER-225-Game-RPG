@@ -10,15 +10,17 @@ import Level.Combatant;
 import Level.Menu;
 import Level.Panel;
 import Level.Textbox;
+import Menus.CombatInventoryMenu;
 import SpriteFont.SpriteFont;
 
 public class BattleMenu extends Menu {
     PlayerCombatant combatant;
-    private BattleSystem battleSystem;
-    private static final String[] actions = {"Bash", "Recover"};
+    public BattleSystem battleSystem;
+    private static final String[] actions = { "Bash", "Item", "Recover" };
     private String actionName;
+    private CombatInventoryMenu inventoryMenu;
 
-    public BattleMenu(BattleSystem battleSystem) {
+    public BattleMenu(BattleSystem battleSystem, PlayerCombatant combatant) {
         this.battleSystem = battleSystem;
         top = 400;
         width = Config.GAME_WINDOW_WIDTH - left * 2 - 16;
@@ -27,31 +29,51 @@ public class BattleMenu extends Menu {
         columns = 2;
         setText(actions);
         updatePanel();
+        this.combatant = combatant;
+        inventoryMenu = new CombatInventoryMenu(battleSystem.player, combatant, this);
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
-        super.draw(graphicsHandler);
-        SpriteFont descriptionSpriteFont = new SpriteFont(
-                String.format("HP: %d/%d", combatant.getHitPoints(), combatant.getMaxHitPoints()), left + border,
-                top + border - 48, Textbox.getFont(), Color.black);
-        descriptionSpriteFont.drawWithParsedNewLines(graphicsHandler, 10);
+        if (inventoryMenu.isActive() == true) {
+            inventoryMenu.draw(graphicsHandler);
+        } else {
+            super.draw(graphicsHandler);
+            SpriteFont descriptionSpriteFont = new SpriteFont(
+                    String.format("HP: %d/%d", combatant.getHitPoints(), combatant.getMaxHitPoints()), left + border,
+                    top + border - 48, Textbox.getFont(), Color.black);
+            descriptionSpriteFont.drawWithParsedNewLines(graphicsHandler, 10);
+        }
+    }
+
+    @Override
+    public void update() {
+        if (inventoryMenu.isActive() == true) {
+            inventoryMenu.update();
+        }
+        super.update();
     }
 
     @Override
     protected void optionSelected() {
         Combatant enemyCombatant = battleSystem.enemy;
         actionName = actions[currentTextItemHovered];
-        switch (actionName) {
-            case "Bash":
-                combatant.bash(enemyCombatant);
-                break;
-            case "Recover":
-                combatant.recover();
-            default:
-                throw new RuntimeException("Unrecognized attack name");
+        if (actionName == "Item") {
+            inventoryMenu.setActive(true);
+            setActive(false);
+        } else {
+            switch (actionName) {
+                case "Bash":
+                    combatant.bash(enemyCombatant);
+                    break;
+                case "Recover":
+                    combatant.recover();
+                    break;
+                default:
+                    throw new RuntimeException(String.format("Unrecognized attack name %s", actionName));
+            }
+            setActive(false);
+            battleSystem.playerTurn = false;
         }
-        setActive(false);
-        battleSystem.playerTurn = false;
     }
 
     @Override

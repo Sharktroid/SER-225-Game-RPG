@@ -91,7 +91,7 @@ public class InventoryMenu extends Menu {
         }
     }
 
-    private Item getCurrentItem() {
+    protected Item getCurrentItem() {
         if (getCurrentItems().size() > 0) {
             return getCurrentItems().get(currentTextItemHovered);
         } else {
