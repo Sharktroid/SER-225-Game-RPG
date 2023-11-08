@@ -602,8 +602,8 @@ public abstract class Map {
         }
     }
 
-    public void initiateCombat(Player player, ArrayList<Combatant> combatants) {
-        currentBattleSystem = new BattleSystem(this, combatants);
+    public void initiateCombat(Player player, Combatant enemy) {
+        currentBattleSystem = new BattleSystem(this, player, enemy);
     }
 
     public void endCombat() {

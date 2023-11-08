@@ -8,8 +8,8 @@ import Utils.Point;
 
 public class InventoryMenuItemSelectionBox extends Menu {
     protected ArrayList<String> choices = new ArrayList<String>();
-    private InventoryMenu inventoryScreen;
-    private Item item;
+    protected InventoryMenu inventoryScreen;
+    protected Item item;
 
     public InventoryMenuItemSelectionBox(InventoryMenu inventoryScreen, Item item, Point position) {
         super();

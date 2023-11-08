@@ -1,29 +1,32 @@
 package Level.BattleSystem;
 
-import java.util.ArrayList;
-
+import Combatants.PlayerCombatant;
 import Engine.GraphicsHandler;
+import Items.Medkit;
 import Level.Combatant;
 import Level.Map;
+import Level.Player;
 
 public class BattleSystem {
-    ArrayList<Combatant> combatants;
-    private int currentCombatantIndex = 0;
+    Player player;
+    PlayerCombatant playerCombatant;
+    Combatant enemy;
     private BattleMenu battleMenu;
     Map map;
     private Boolean shuttingDown = false;
+    public Boolean playerTurn;
 
-    public BattleSystem(Map map, ArrayList<Combatant> combatants) {
+    public BattleSystem(Map map, Player player, Combatant enemy) {
         this.map = map;
-        this.combatants = combatants;
-        currentCombatantIndex = combatants.size() - 1;
-        battleMenu = new BattleMenu(this);
+        this.player = player;
+        this.playerCombatant = new PlayerCombatant(player, map);
+        this.enemy = enemy;
+        battleMenu = new BattleMenu(this, playerCombatant);
         battleMenu.setActive(false);
-        for (int i = 0; i < combatants.size(); i++) {
-            if (combatants.get(i).getIntroMessage() != null) {
-                map.getTextbox().addText(combatants.get(i).getIntroMessage());
-            }
-        }
+        map.getTextbox().addText(enemy.getIntroMessage());
+        map.getTextbox().setIsActive(true);
+        playerTurn = true;
+        player.items.add(new Medkit(player));
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
@@ -38,44 +41,34 @@ public class BattleSystem {
             if (shuttingDown) {
                 map.endCombat();
             }
+            if (!battleMenu.isActive()) {
+                battleMenu.lock();
+            }
         }
-        if (!shuttingDown) {
+        if (!shuttingDown && !map.getTextbox().isActive()) {
             if (battleMenu != null && battleMenu.isActive()) {
                 battleMenu.update();
             }
-            if (!battleMenu.isActive() && !map.getTextbox().isActive()) {
+            if (!battleMenu.isActive()) {
                 advance();
             }
         }
     }
 
     private void advance() {
-        for (int i = 0; i < combatants.size(); i++) {
-            if (combatants.get(i).getHitPoints() <= 0) {
-                combatants.get(i).kill();
-                combatants.remove(combatants.get(i));
-            }
-        }
-        if (combatants.size() <= 1) {
+        if (enemy.getHitPoints() <= 0) {
+            enemy.kill();
             map.getTextbox().addText("You Win!!");
             map.getTextbox().setIsActive(true);
             shuttingDown = true;
         } else {
-            currentCombatantIndex++;
-            if (currentCombatantIndex >= combatants.size()) {
-                currentCombatantIndex = 0;
-            }
-            if (getCurrentCombatant().getControlType() == Combatant.ControlType.COMPUTER) {
-                getCurrentCombatant().autoExecuteMove(combatants.get(0));
-                map.getTextbox().setIsActive(true);
-            } else {
+            if (playerTurn) {
                 battleMenu.setActive(true);
-                battleMenu.combatant = getCurrentCombatant();
+            }
+            else {
+                enemy.autoExecuteMove(playerCombatant);
+                playerTurn = true;
             }
         }
-    }
-
-    private Combatant getCurrentCombatant() {
-        return combatants.get(currentCombatantIndex);
     }
 }

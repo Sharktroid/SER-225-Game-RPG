@@ -6,9 +6,9 @@ import Level.Player;
 
 public class PlayerCombatant extends Combatant {
 
-    public PlayerCombatant(Player player, Map map, ControlType controlType) {
-        super(null, map, controlType);
-        hitPoints = (int) player.getCurrentHealth();
+    public PlayerCombatant(Player player, Map map) {
+        super(null, map);
+        setMaxHitPoints((int) player.getCurrentHealth());
         name = player.getName();
     }
 
@@ -20,6 +20,11 @@ public class PlayerCombatant extends Combatant {
     public void bash(Combatant target) {
         target.dealDamage(20);
         map.getTextbox().addText(String.format("The %s attacks.\n20 damage.", name));
+    }
+
+    public void recover() {
+        dealDamage(-50);
+        map.getTextbox().addText(String.format("The %s heals themself.\n50 hit points restored.", name));
     }
 
     @Override
@@ -35,6 +40,10 @@ public class PlayerCombatant extends Combatant {
     public void kill() {
         map.getTextbox().addText(getDeathMessage());
         map.getTextbox().addText("Game Over");
+    }
+
+    public Map getMap() {
+        return map;
     }
 
 }
