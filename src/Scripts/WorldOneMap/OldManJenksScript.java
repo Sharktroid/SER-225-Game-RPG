@@ -111,8 +111,8 @@ public class OldManJenksScript extends Script<NPC> {
                 sequence++;
             } else if (sequence == 2) {
                 setFlag("hasTalkedToOMJ");
-                // setFlag("hasFoundDentures"); //get rid later
-                sequence++;
+                setFlag("hasFoundDentures"); //get rid later
+                sequence=0;
             }
         } else if (isFlagSet("hasFoundDentures")) {
             if (sequence == 0) {
