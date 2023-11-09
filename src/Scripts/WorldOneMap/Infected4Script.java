@@ -22,8 +22,10 @@ public class Infected4Script extends Script<NPC> {
         String[] answers = {"VIRUS DETECTED", "Yeah, go away."};
 
         entity.facePlayer(player);
-        if (!isFlagSet("hasCured4")) {
-            addTextToTextboxQueue( "I'm saying something rude!", selections, answers);
+        if (!isFlagSet("hasTalkedToNSE")) {
+            addTextToTextboxQueue( "Do I know you?");
+        } else if (!isFlagSet("hasCured4")) {
+            addTextToTextboxQueue( "I'm a little busy right now...", selections, answers);
 
             if (hasWonBattle) {
                 addTextToTextboxQueue("Woah, what happened? I was infected?");
@@ -32,7 +34,7 @@ public class Infected4Script extends Script<NPC> {
                 addTextToTextboxQueue("Y0U'LL N3V3R D3F3AT M3");
             }
         } else {
-            addTextToTextboxQueue( "Thank you again.");
+            addTextToTextboxQueue( "Thanks!");
         }
     }
 

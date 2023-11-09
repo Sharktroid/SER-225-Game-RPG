@@ -5,7 +5,7 @@ import Level.Script;
 import Level.ScriptState;
 import Level.Textbox.Style;
 
-// script for talking to beaver npc
+
 public class Infected1Script extends Script<NPC> {
     
     private boolean hasWonBattle = false;
@@ -22,17 +22,18 @@ public class Infected1Script extends Script<NPC> {
         String[] answers = {"VIRUS DETECTED", "Yeah, go away."};
 
         entity.facePlayer(player);
-        if (!isFlagSet("hasCured1")) {
-            addTextToTextboxQueue( "I'm saying something rude!", selections, answers);
+        if (!isFlagSet("hasTalkedToNSE")) {
+            addTextToTextboxQueue( "What are you looking at?...");
+        } else if (!isFlagSet("hasCured1")) {
+            addTextToTextboxQueue( "Woah... Why are you getting so close to me?", selections, answers);
 
             if (hasWonBattle) {
-                addTextToTextboxQueue("Woah, what happened? I was infected?");
-                addTextToTextboxQueue("Thanks for helping me!");
+                addTextToTextboxQueue("I was a virus? Sorry if I was rude!");
             } else {
                 addTextToTextboxQueue("Y0U'LL N3V3R D3F3AT M3");
             }
         } else {
-            addTextToTextboxQueue( "Thank you again.");
+            addTextToTextboxQueue( "Thank you so much for helping me.");
         }
     }
 

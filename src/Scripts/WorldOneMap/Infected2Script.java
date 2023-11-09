@@ -16,15 +16,15 @@ public class Infected2Script extends Script<NPC> {
         showTextbox();
 
         String[] selections = {"RUN VIRUS SCAN", "LEAVE"};
-        String[] answers = {"VIRUS DETECTED", "Yeah, go away."};
+        String[] answers = {"VIRUS DETECTED", "Leave me alone."};
 
         entity.facePlayer(player);
-        if (!isFlagSet("hasCured2")) {
-            addTextToTextboxQueue( "I'm saying something rude!", selections, answers);
-
+        if (!isFlagSet("hasTalkedToNSE")) {
+            addTextToTextboxQueue( "Don't bother me.");
+        } else if (!isFlagSet("hasCured2")) {
+            addTextToTextboxQueue( "Would you let me stand here in peace???", selections, answers);
             if (hasWonBattle) {
-                addTextToTextboxQueue("Woah, what happened? I was infected?");
-                addTextToTextboxQueue("Thanks for helping me!");
+                addTextToTextboxQueue("You helped me! Thank you!");
             } else {
                 addTextToTextboxQueue("Y0U'LL N3V3R D3F3AT M3");
             }
