@@ -152,7 +152,7 @@ public class WorldOneMap extends Map {
     @Override
     public ArrayList<Trigger> loadTriggers() {
         ArrayList<Trigger> triggers = new ArrayList<>();
-        triggers.add(new Trigger(1212,780, 24, 24, new WorldOneClearScript()));
+        triggers.add(new Trigger(1130,624, 24, 24, new WorldOneClearScript()));
 
         triggers.add(new Trigger(1820, 300, 100, 20, new EnterLibraryScript()));
 
