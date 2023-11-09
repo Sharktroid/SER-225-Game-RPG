@@ -17,36 +17,13 @@ import SpriteFont.SpriteFont;
 public class BattleMenu extends Menu {
     PlayerCombatant combatant;
     public BattleSystem battleSystem;
-    private static final Actions[] actions = { Actions.BASH, Actions.ITEMS, Actions.REFRESH, Actions.STACKSMASH,
-            Actions.DDOS, Actions.REBOOT, Actions.INTERUPTREQUEST };
-    private String actionName;
+    private static final PlayerCombatant.Actions[] actions = { PlayerCombatant.Actions.BASH,
+            PlayerCombatant.Actions.ITEMS, PlayerCombatant.Actions.REFRESH, PlayerCombatant.Actions.STACKSMASH,
+            PlayerCombatant.Actions.DDOS, PlayerCombatant.Actions.REBOOT, PlayerCombatant.Actions.INTERRUPTREQUEST };
     private CombatInventoryMenu inventoryMenu;
     private Panel descriptionPanel;
     private int descriptionTop;
     private int descriptionHeight = 100;
-
-    private enum Actions {
-        BASH,
-        ITEMS,
-        REFRESH,
-        STACKSMASH,
-        DDOS,
-        REBOOT,
-        INTERUPTREQUEST;
-
-        @Override
-        public String toString() {
-            String name = super.toString();
-            switch (name) {
-                case "STACKSMASH":
-                    return "Stack Smash";
-                case "INTERUPTREQUEST":
-                    return "Interupt Request";
-                default:
-                    return (name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase());
-            }
-        }
-    }
 
     public BattleMenu(BattleSystem battleSystem, PlayerCombatant combatant) {
         this.battleSystem = battleSystem;
@@ -57,7 +34,7 @@ public class BattleMenu extends Menu {
         columns = 4;
         descriptionTop = top + height + 10;
         ArrayList<String> actionNames = new ArrayList<String>();
-        for (Actions action: actions) {
+        for (PlayerCombatant.Actions action : actions) {
             actionNames.add(action.toString());
         }
         setText(actionNames);
@@ -72,14 +49,48 @@ public class BattleMenu extends Menu {
             inventoryMenu.draw(graphicsHandler);
         } else {
             super.draw(graphicsHandler);
-            SpriteFont HPSpriteFont = new SpriteFont(
-                    String.format("HP: %d/%d", combatant.getHitPoints(), combatant.getMaxHitPoints()), left + border,
+            SpriteFont PlayerHPSpriteFont = new SpriteFont(
+                    String.format("Player HP: %d/%d", combatant.getHitPoints(), combatant.getMaxHitPoints()),
+                    left + border, top + border - 48, Textbox.getFont(), Color.black);
+            PlayerHPSpriteFont.drawWithParsedNewLines(graphicsHandler, 10);
+            SpriteFont TPSpriteFont = new SpriteFont(
+                    String.format("TP: %d/%d", combatant.getCurrentTP(), combatant.getMaxTP()), left + border + 200,
                     top + border - 48, Textbox.getFont(), Color.black);
-            HPSpriteFont.drawWithParsedNewLines(graphicsHandler, 10);
-            super.draw(graphicsHandler);
+            TPSpriteFont.drawWithParsedNewLines(graphicsHandler, 10);
+            SpriteFont EnemyHPSpriteFont = new SpriteFont(
+                    String.format("Enemy HP: %d/%d", battleSystem.enemy.getHitPoints(),
+                            battleSystem.enemy.getMaxHitPoints()),
+                    left + border + 400, top + border - 48, Textbox.getFont(), Color.black);
+            EnemyHPSpriteFont.drawWithParsedNewLines(graphicsHandler, 10);
             descriptionPanel.draw(graphicsHandler);
             String description = "";
-            description = "TEST";
+            PlayerCombatant.Actions currentAction = actions[currentTextItemHovered];
+            switch (currentAction) {
+                case BASH:
+                    description = String.format("Standard, low might attack.\n Cost: %d TP", currentAction.getTPCost());
+                    break;
+                case ITEMS:
+                    description = "Opens inventory and allows use of items.";
+                    break;
+                case REFRESH:
+                    description = String.format("Heals some health.\n Cost: %d TP", currentAction.getTPCost());
+                    break;
+                case STACKSMASH:
+                    description = String.format("Deals significant damage.\n Cost: %d TP", currentAction.getTPCost());
+                    break;
+                case DDOS:
+                    description = String.format("Depletes enemy's TP.\n Cost: %d TP", currentAction.getTPCost());
+                    break;
+                case REBOOT:
+                    description = String.format("Restores health fully, but wastes a turn.\n Cost: %d TP",
+                            currentAction.getTPCost());
+                    break;
+                case INTERRUPTREQUEST:
+                    description = String.format("Disables the enemy until they attack again.\n Cost: %d TP",
+                            currentAction.getTPCost());
+                    break;
+
+            }
             SpriteFont descriptionSpriteFont = new SpriteFont(description, 0, 0, Textbox.getFont(), Color.black);
             descriptionSpriteFont.setX(left + border);
             descriptionSpriteFont.setY(descriptionTop + border);
@@ -98,24 +109,43 @@ public class BattleMenu extends Menu {
     @Override
     protected void optionSelected() {
         Combatant enemyCombatant = battleSystem.enemy;
-        actionName = actions[currentTextItemHovered];
-        if (actionName == "Item") {
-            inventoryMenu.setActive(true);
-            setActive(false);
-        } else {
-            switch (actionName) {
-                case "Bash":
+        PlayerCombatant.Actions action = actions[currentTextItemHovered];
+        if (combatant.tPCheck(action)) {
+            switch (action) {
+                case BASH:
                     combatant.bash(enemyCombatant);
+                    battleSystem.playerTurn = false;
                     break;
-                case "Refresh":
-                    combatant.recover();
+                case ITEMS:
+                    inventoryMenu.setActive(true);
+                case REFRESH:
+                    combatant.refresh();
+                    battleSystem.playerTurn = false;
+                    break;
+                case STACKSMASH:
+                    combatant.stackSmash(enemyCombatant);
+                    battleSystem.playerTurn = false;
+                    break;
+                case DDOS:
+                    combatant.dDoS(enemyCombatant);
+                    battleSystem.playerTurn = false;
+                    break;
+                case REBOOT:
+                    combatant.reboot();
+                    battleSystem.playerTurn = false;
+                    break;
+                case INTERRUPTREQUEST:
+                    combatant.interruptRequest(enemyCombatant);
+                    battleSystem.playerTurn = false;
                     break;
                 default:
-                    throw new RuntimeException(String.format("Unrecognized attack name %s", actionName));
+                    break;
             }
-            setActive(false);
-            battleSystem.playerTurn = false;
+            combatant.removeTP(action.getTPCost());
+        } else {
+            battleSystem.map.getTextbox().addText("Not Enough TP");
         }
+        setActive(false);
     }
 
     @Override
