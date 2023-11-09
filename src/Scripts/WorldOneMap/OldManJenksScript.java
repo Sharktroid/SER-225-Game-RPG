@@ -24,7 +24,7 @@ public class OldManJenksScript extends Script<NPC> {
 
         setTextboxStyle(Style.WORLDONE);
         setNPCName("Old Man Jenkins");
-        showTextbox();
+        // showTextbox();
 
         String[] selections = {"Where am I?", "Have you seen a purple\norb around here?"};
         String[] answersBefore = {"A can til yo if yo can fin ma den-ers","A can til yo if yo can fin ma den-ers"};
@@ -32,6 +32,7 @@ public class OldManJenksScript extends Script<NPC> {
 
         entity.facePlayer(player);
         if (!isFlagSet("hasTalkedToOMJ") && !isFlagSet("hasFoundDentures")) {
+            showTextbox();
             if (sequence == 0) {
                 addTextToTextboxQueue("Hewlo?", selections, answersBefore);
             } else if (sequence == 1) {
@@ -43,8 +44,10 @@ public class OldManJenksScript extends Script<NPC> {
             }
         } else if (isFlagSet("hasFoundDentures")) {
             if (sequence == 0) {
+                showTextbox();
                 addTextToTextboxQueue("You found them! Thank you!", selections, answers);
             } else if (sequence == 1) {
+                showTextbox();
                 if (responseNum == 0) {
                     if (miniSequence == 0) {
                         addTextToTextboxQueue("Well, it was bliss before a huge earthquake hit and this portal opened up.");
@@ -61,15 +64,19 @@ public class OldManJenksScript extends Script<NPC> {
                 addTextToTextboxQueue("It was right near the portal you came out of.");
                 addTextToTextboxQueue("Since you were so kind to find me my dentures, I can give it to you.");
             } else if (sequence == 2) {
+                showTextbox();
                 setNPCName("T");
                 addTextToTextboxQueue("Thank you, sir!");
             } else if (sequence == 3) {
+                showTextbox();
                 setNPCName("Old Man Jenkins");
                 addTextToTextboxQueue("Now... before you venture off, just beware that people\nare starting to act weird around here...");
             } else if (sequence == 4) {
+                showTextbox();
                 setNPCName("T");
                 addTextToTextboxQueue("Strange? What do you mean?");
             } else if (sequence == 5) {
+                showTextbox();
                 setNPCName("Old Man Jenkins");
                 addTextToTextboxQueue("I have to head inside before they get me too...");
             } else if (sequence == 6) {
@@ -130,7 +137,6 @@ public class OldManJenksScript extends Script<NPC> {
                 hideTextbox();
                 sequence++;
             } else if (sequence == 6) {
-                hideTextbox();
                 sequence++;
             } else if (sequence == 7) {
                 sequence++;
@@ -209,7 +215,7 @@ public class OldManJenksScript extends Script<NPC> {
                 start();
                 entity.walk(Direction.LEFT,2);
                 amountMoved += 2;
-                if (amountMoved == 150) {
+                if (amountMoved == 140) {
                     end();
                 }
             } else if (sequence == 8) {
@@ -223,13 +229,14 @@ public class OldManJenksScript extends Script<NPC> {
                 start();
                 entity.walk(Direction.LEFT,2);
                 amountMoved += 2;
-                if (amountMoved == 218) {
+                if (amountMoved == 206) {
                     end();
                 }
             } else if (sequence == 10) {
+                start();
                 entity.walk(Direction.UP,2);
                 amountMoved += 2;
-                if (amountMoved == 142) {
+                if (amountMoved == 100) {
                     end();
                 }
             }

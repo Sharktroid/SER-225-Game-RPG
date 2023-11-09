@@ -110,11 +110,11 @@ public class InternetExplorerTileset extends Tileset {
         // pole
         Frame poleFrame = new FrameBuilder(getSubImage(0, 6))
                 .withScale(tileScale)
-                .withBounds(0, 6, 16, 4)
+                .withBounds(5, 0, 5, 16)
                 .build();
 
-        MapTileBuilder poleTile = new MapTileBuilder(grassFrame)
-                .withTopLayer(poleFrame)
+        MapTileBuilder poleTile = new MapTileBuilder(poleFrame)
+                // .withTopLayer(poleFrame)
                 .withTileType(TileType.NOT_PASSABLE);
         mapTiles.add (poleTile);
 
@@ -152,7 +152,7 @@ public class InternetExplorerTileset extends Tileset {
 
         mapTiles.add(leftRoofTile);
 
-        // white block
+        // red block
         Frame redFrame = new FrameBuilder(getSubImage(1, 2))
                 .withScale(tileScale)
                 .build();
@@ -244,12 +244,13 @@ public class InternetExplorerTileset extends Tileset {
 
 
         // trash 
-        Frame trashFrame= new FrameBuilder(getSubImage(2, 6))
+        Frame trashFrame = new FrameBuilder(getSubImage(2, 6))
                 .withScale(tileScale)
+                .withBounds(1, 1, 14, 14)
                 .build();
 
-        MapTileBuilder trashTile = new MapTileBuilder(grassFrame)
-                .withTopLayer(trashFrame)
+        MapTileBuilder trashTile = new MapTileBuilder(trashFrame)
+                // .withTopLayer(trashFrame)
                 .withTileType(TileType.NOT_PASSABLE);
 
         mapTiles.add(trashTile);
