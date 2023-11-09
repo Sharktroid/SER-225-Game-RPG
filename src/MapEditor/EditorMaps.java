@@ -5,6 +5,7 @@ import Maps.TitleScreenMap;
 import Maps.HubMap;
 import Maps.WorldZeroMap;
 import Maps.WorldOneMap;
+import Maps.LibraryMap;
 import Maps.WorldTwoMap;
 import Maps.WorldThreeFloors;
 import Maps.EvanTestMap;
@@ -21,6 +22,7 @@ public class EditorMaps {
             add("TitleScreen");
             add("WorldZeroMap");
             add("WorldOneMap");
+            add("LibraryMap");
             add("WorldTwoMap");
             add("WorldThreeMap");
             add("WorldThreeZeroMap");
@@ -47,6 +49,8 @@ public class EditorMaps {
                 return new WorldZeroMap();
             case "WorldOneMap":
                 return new WorldOneMap();
+            case "LibraryMap":
+                return new LibraryMap();
             case "WorldTwoMap":
                 return new WorldTwoMap();
             case "WorldThreeZeroMap":
