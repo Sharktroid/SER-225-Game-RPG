@@ -36,7 +36,7 @@ public class BattleSystem {
     }
 
     public void update() {
-        if (map.getTextbox().isTextQueueEmpty()) {
+        if (map.getTextbox().isTextQueueEmpty() && map.getTextbox().isActive()) {
             map.getTextbox().setIsActive(false);
             if (shuttingDown) {
                 map.endCombat();
@@ -45,7 +45,7 @@ public class BattleSystem {
                 battleMenu.lock();
             }
         }
-        if (!shuttingDown && !map.getTextbox().isActive()) {
+        if (!shuttingDown && (!map.getTextbox().isActive())) {
             if (battleMenu != null && battleMenu.isActive()) {
                 battleMenu.update();
             }
@@ -63,10 +63,18 @@ public class BattleSystem {
             shuttingDown = true;
         } else {
             if (playerTurn) {
-                battleMenu.setActive(true);
-            }
-            else {
-                enemy.autoExecuteMove(playerCombatant);
+                if (playerCombatant.statusCheck()) {
+                    battleMenu.setActive(true);
+                }
+                else {
+                    playerTurn = false;
+                    map.getTextbox().setIsActive(true);
+                }
+            } else {
+                if (enemy.statusCheck()) {
+                    enemy.autoExecuteMove(playerCombatant);
+                }
+                map.getTextbox().setIsActive(true);
                 playerTurn = true;
             }
         }

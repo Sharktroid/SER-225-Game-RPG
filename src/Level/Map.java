@@ -574,11 +574,11 @@ public abstract class Map {
 
     public void draw(Player player, GraphicsHandler graphicsHandler) {
         camera.draw(player, graphicsHandler);
-        if (textbox.isActive()) {
-            textbox.draw(graphicsHandler);
-        }
         if (currentBattleSystem != null) {
             currentBattleSystem.draw(graphicsHandler);
+        }
+        if (textbox.isActive()) {
+            textbox.draw(graphicsHandler);
         }
     }
 
