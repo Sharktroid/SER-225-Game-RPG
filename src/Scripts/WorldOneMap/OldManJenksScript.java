@@ -4,13 +4,19 @@ import Level.NPC;
 import Level.Script;
 import Level.ScriptState;
 import Level.Textbox.Style;
+// import Builders.FrameBuilder;
+// import Builders.MapTileBuilder;
+// import GameObject.Frame;
+import Utils.Direction;
+// import Utils.Point;
 
-// script for talking to elder npc
+// old man
 public class OldManJenksScript extends Script<NPC> {
 
     private int sequence = 0;
     private int miniSequence = 0;
     private int responseNum = -1;
+    private int amountMoved = 0;
 
     @Override
     protected void setup() {
@@ -59,13 +65,24 @@ public class OldManJenksScript extends Script<NPC> {
                 addTextToTextboxQueue("Thank you, sir!");
             } else if (sequence == 3) {
                 setNPCName("Old Man Jenkins");
-                addTextToTextboxQueue("Now... before you venture off, just beware that people are starting to act weird around here...");
+                addTextToTextboxQueue("Now... before you venture off, just beware that people\nare starting to act weird around here...");
             } else if (sequence == 4) {
                 setNPCName("T");
                 addTextToTextboxQueue("Strange? What do you mean?");
             } else if (sequence == 5) {
                 setNPCName("Old Man Jenkins");
                 addTextToTextboxQueue("I have to head inside before they get me too...");
+            } else if (sequence == 6) {
+                entity.stand(Direction.LEFT);
+                amountMoved = 0;
+            } else if (sequence == 7) {
+                amountMoved = 0;
+            } else if (sequence == 8) {
+                amountMoved = 0;
+            } else if (sequence == 9) {
+                amountMoved = 0;
+            } else if (sequence == 10) {
+                amountMoved = 0;
             }
         } else {
             addTextToTextboxQueue("Yo hav-nt fin em yet? Go!");
@@ -87,6 +104,7 @@ public class OldManJenksScript extends Script<NPC> {
                 sequence++;
             } else if (sequence == 2) {
                 setFlag("hasTalkedToOMJ");
+                setFlag("hasFoundDentures"); //get rid later
                 sequence++;
             }
         } else if (isFlagSet("hasFoundDentures")) {
@@ -109,6 +127,20 @@ public class OldManJenksScript extends Script<NPC> {
             } else if (sequence == 4) {
                 sequence++;
             } else if (sequence == 5) {
+                hideTextbox();
+                sequence++;
+            } else if (sequence == 6) {
+                hideTextbox();
+                sequence++;
+            } else if (sequence == 7) {
+                sequence++;
+            } else if (sequence == 8) {
+                sequence++;
+            } else if (sequence == 9) {
+                sequence++;
+            } else if (sequence == 10) {
+                entity.setIsHidden(true);
+                setFlag("hasFinishedOMJ");
                 sequence++;
             }
         }
@@ -165,7 +197,40 @@ public class OldManJenksScript extends Script<NPC> {
                 start();
                 if (isTextboxQueueEmpty()) {
                     end();
-                    return ScriptState.COMPLETED;
+                }
+            } else if (sequence == 6) {
+                start();
+                entity.walk(Direction.DOWN,2);
+                amountMoved += 2;
+                if (amountMoved == 40) {
+                    end();
+                }
+            } else if (sequence == 7) {
+                start();
+                entity.walk(Direction.LEFT,2);
+                amountMoved += 2;
+                if (amountMoved == 150) {
+                    end();
+                }
+            } else if (sequence == 8) {
+                start();
+                entity.walk(Direction.DOWN,2);
+                amountMoved += 2;
+                if (amountMoved == 120) {
+                    end();
+                }
+            } else if (sequence == 9) {
+                start();
+                entity.walk(Direction.LEFT,2);
+                amountMoved += 2;
+                if (amountMoved == 218) {
+                    end();
+                }
+            } else if (sequence == 10) {
+                entity.walk(Direction.UP,2);
+                amountMoved += 2;
+                if (amountMoved == 142) {
+                    end();
                 }
             }
             return ScriptState.RUNNING;

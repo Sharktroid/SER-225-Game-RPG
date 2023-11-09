@@ -34,7 +34,7 @@ public class Panel {
         this.y = y + 25;
         this.width = width;
         this.height = height - 25;
-        this. displayWindowName = displayWindowName;
+        this.displayWindowName = displayWindowName;
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
