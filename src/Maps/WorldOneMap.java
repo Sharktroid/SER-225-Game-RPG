@@ -21,6 +21,7 @@ import NPCs.OldManJenks;
 import NPCs.SoulConsumingFlameNPC;
 import Scripts.WorldOneMap.Infected1Script;
 import Scripts.WorldOneMap.EngineerScript;
+import Scripts.WorldOneMap.EnterLibraryScript;
 import Scripts.WorldOneMap.Infected2Script;
 import Scripts.WorldOneMap.Infected3Script;
 import Scripts.WorldOneMap.Normal1Script;
@@ -129,6 +130,8 @@ public class WorldOneMap extends Map {
     public ArrayList<Trigger> loadTriggers() {
         ArrayList<Trigger> triggers = new ArrayList<>();
         triggers.add(new Trigger(790,20, 24, 24, new WorldOneClearScript()));
+
+        triggers.add(new Trigger(1820, 300, 100, 20, new EnterLibraryScript()));
 
         return triggers;
     }

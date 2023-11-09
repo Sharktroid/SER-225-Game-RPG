@@ -18,7 +18,7 @@ public class FlagSaves {
     }
 
 
-    public void saveAll(){
+    /*public void saveAll(){
         for (int i = 0; i <n-1; i++){
             savedFlagData.get(i).setState(Map.flagManager.);
             
@@ -35,5 +35,5 @@ public class FlagSaves {
     private Flag getFlag(String flagnames[]){
        reurn
     }
-    
+    */
 }

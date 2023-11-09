@@ -16,6 +16,7 @@ import Maps.CalvinTestMap;
 import Maps.EvanTestMap;
 import Maps.ShannonTestMap;
 import Maps.JulietTestMap;
+import Maps.LibraryMap;
 import Maps.AaronTestMap;
 import Menus.InventoryMenu;
 import Maps.HubMap;
@@ -104,9 +105,14 @@ public class PlayLevelScreen extends Screen {
             flagManager.addFlag("curedNPC5", false);
             flagManager.addFlag("hasCuredAllNPCs", false);
 
+            flagManager.addFlag("enteredLibrary", false);
+
             flagManager.addFlag("worldOneCleared", false);
 
+
         }
+
+        
         //setup world two map
         else if (worldNum == 2) {
             this.map = new WorldTwoMap();
@@ -127,6 +133,8 @@ public class PlayLevelScreen extends Screen {
             
 
         }
+
+        
 
         //setup hub world map
         else if (worldNum == 4) {
@@ -200,6 +208,16 @@ public class PlayLevelScreen extends Screen {
         else if (worldNum == 9){
             this.map = new AaronTestMap();
         }
+
+
+        else if (worldNum == 11){
+            this.map = new LibraryMap();
+
+            flagManager.addFlag("exitedLibrary", false);
+
+            
+        }
+
 
         map.setFlagManager(flagManager);
 
@@ -280,27 +298,30 @@ public class PlayLevelScreen extends Screen {
         }
 
 
-        //hub world teleportation **(temporary quick world swap keys)
-        if (map.getFlagManager().isFlagSet("portalOneActivated")|| Keyboard.isKeyDown(Key.ONE) && !keyLocker.isKeyLocked(Key.ONE)) {
+        //world traversal
+
+        //to internet explorer world
+        if (map.getFlagManager().isFlagSet("portalOneActivated")|| (map.getFlagManager().isFlagSet("exitedLibrary")) || Keyboard.isKeyDown(Key.ONE) && !keyLocker.isKeyLocked(Key.ONE)) {
             worldNum = 1;
             initialize();
+
+        //to safari world 
         } else if ((map.getFlagManager().isFlagSet("portalTwoActivated"))||Keyboard.isKeyDown(Key.TWO) && !keyLocker.isKeyLocked(Key.TWO)) {
             worldNum = 2;
             initialize();
+
+        //to chrome word
         } else if (map.getFlagManager().isFlagSet("portalThreeActivated") || Keyboard.isKeyDown(Key.THREE) && !keyLocker.isKeyLocked(Key.THREE)) {
             worldNum = 3;
             initialize();
         }
         
-        //other worlds initialization 
-        
-        //hub world
+        //to hub world
         else if (map.getFlagManager().isFlagSet("worldOneCleared")|| map.getFlagManager().isFlagSet("worldTwoCleared") || map.getFlagManager().isFlagSet("worldThreeCleared") || Keyboard.isKeyDown(Key.FOUR) && !keyLocker.isKeyLocked(Key.FOUR)) {
             worldNum = 4;
             initialize();
             
-
-
+        //to world zero -> nine
         }else if (Keyboard.isKeyDown(Key.ZERO) && !keyLocker.isKeyLocked(Key.ZERO)) {
             worldNum = 0;
             initialize();
@@ -319,8 +340,21 @@ public class PlayLevelScreen extends Screen {
         }else if (Keyboard.isKeyDown(Key.NINE) && !keyLocker.isKeyLocked(Key.NINE)) { //Aaron
             worldNum = 9;
             initialize();
+        }        
+
+        //world one area traversal
+        if (worldNum == 1 || worldNum == 11){
+            if (map.getFlagManager().isFlagSet("enteredLibrary")) {
+                worldNum = 11;
+                initialize();
+            }
+
+            if (map.getFlagManager().isFlagSet("exitedLibrary")) {
+                worldNum = 1;
+                initialize();
+            }
         }
-        
+
         //world three floor traversal
         if (worldNum == 3) {
             if (map.getFlagManager().isFlagSet("enteredBuilding")) {
