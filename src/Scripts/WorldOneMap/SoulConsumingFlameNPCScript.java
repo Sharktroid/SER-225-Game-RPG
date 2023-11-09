@@ -1,10 +1,8 @@
 package Scripts.WorldOneMap;
 
-import java.util.ArrayList;
-
-import Combatants.PlayerCombatant;
 import Combatants.SoulConsumingFlame;
-import Level.Combatant;
+import Game.SoundPlayer;
+import Game.SoundPlayer.MusicTracks;
 import Level.NPC;
 import Level.Script;
 import Level.ScriptState;
@@ -16,8 +14,8 @@ public class SoulConsumingFlameNPCScript extends Script<NPC> {
     @Override
     protected void setup() {
         lockPlayer();
+        SoundPlayer.playMusic(MusicTracks.BATTLETHEME);
         setTextboxStyle(Style.WORLDONE);
-        ArrayList<Combatant> combatants = new ArrayList<Combatant>();
         map.initiateCombat(player, new SoulConsumingFlame(entity, map));
     }
 
@@ -25,6 +23,7 @@ public class SoulConsumingFlameNPCScript extends Script<NPC> {
     protected void cleanup() {
         unlockPlayer();
         hideTextbox();
+        SoundPlayer.playMusic(MusicTracks.WORLDONEBGM);
     }
 
     @Override

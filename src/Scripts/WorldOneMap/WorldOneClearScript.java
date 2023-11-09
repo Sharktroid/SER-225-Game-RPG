@@ -1,5 +1,7 @@
 package Scripts.WorldOneMap;
 
+import Game.SoundPlayer;
+import Game.SoundPlayer.SoundEffects;
 import Level.Script;
 import Level.ScriptState;
 import Level.Textbox.Style;
@@ -16,6 +18,8 @@ public class WorldOneClearScript extends Script {
         showTextbox();
         addTextToTextboxQueue("World One Cleared!");
         addTextToTextboxQueue("The Firefox is summoning you.");
+        SoundPlayer.stopMusic();
+        SoundPlayer.playSoundEffect(SoundEffects.WORLDCLEAR);
     }
 
     @Override
