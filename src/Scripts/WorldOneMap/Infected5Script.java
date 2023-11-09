@@ -22,17 +22,19 @@ public class Infected5Script extends Script<NPC> {
         String[] answers = {"VIRUS DETECTED", "Yeah, go away."};
 
         entity.facePlayer(player);
-        if (!isFlagSet("hasCured5")) {
-            addTextToTextboxQueue( "I'm saying something rude!", selections, answers);
+        if (!isFlagSet("hasTalkedToNSE")) {
+            addTextToTextboxQueue( "I've seen salad that dresses better than you.");
+        } else if (!isFlagSet("hasCured5")) {
+            addTextToTextboxQueue( "You really need to brush your teeth.", selections, answers);
 
             if (hasWonBattle) {
-                addTextToTextboxQueue("Woah, what happened? I was infected?");
-                addTextToTextboxQueue("Thanks for helping me!");
+                addTextToTextboxQueue("A virus infected me? That's crazy.");
+                addTextToTextboxQueue("Thanks a lot!");
             } else {
                 addTextToTextboxQueue("Y0U'LL N3V3R D3F3AT M3");
             }
         } else {
-            addTextToTextboxQueue( "Thank you again.");
+            addTextToTextboxQueue( "Thanks so much!");
         }
     }
 
