@@ -28,7 +28,7 @@ public class Slideshow extends Screen
     protected Rectangle rect;
     protected int counter = 1;
     protected int x,y;
-    protected BufferedImage image = ImageLoader.load("RedPanda.png"); //first image played in slideshow
+    protected BufferedImage image = ImageLoader.load("SlideshowOne.png"); //first image played in slideshow
     protected SpriteFont spaceToContinue;
 
 
@@ -45,7 +45,7 @@ public class Slideshow extends Screen
 
     @Override
     public void initialize() {
-        System.out.println("slideshow");
+        //System.out.println("slideshow");
 
         background = new TitleScreenMap();
         background.setAdjustCamera(false);
@@ -71,22 +71,27 @@ public class Slideshow extends Screen
             x=300;
             y=300;
 
-            image = ImageLoader.load("Walrus.png"); //second image in slideshow
+            image = ImageLoader.load("SlideshowTwo.png"); //second image in slideshow
             counter ++;
         }else if(counter == 2)
         {
             x=500;
             y=500;
-            image = ImageLoader.load("Beaver.png"); //third image in slideshow
+            image = ImageLoader.load("SlideshowThree.png"); //third image in slideshow
             counter ++;
         }else if (counter == 3)
         {
             x=100;
             y=100;
-            image = ImageLoader.load("Catsuit.png"); //fourth image in slideshow
+            image = ImageLoader.load("SlideshowFour.png"); //fourth image in slideshow
             counter ++;
 
         }else if (counter == 4)
+        {
+            image = ImageLoader.load("SlideshowFive.png"); //fifth image in slideshow
+            counter ++;
+            
+        }else if (counter == 5)
         {
             screenCoordinator.setGameState(GameState.LEVEL);
         }
@@ -102,7 +107,7 @@ public class Slideshow extends Screen
     @Override
     public void draw(GraphicsHandler graphicsHandler) {
         //background.draw(graphicsHandler);
-        graphicsHandler.drawImage(image,0,0,300,300);
+        graphicsHandler.drawImage(image,0,0,800,605);
         spaceToContinue.draw(graphicsHandler);
 
     }
