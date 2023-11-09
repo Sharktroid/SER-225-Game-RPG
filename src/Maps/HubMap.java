@@ -22,7 +22,7 @@ public class HubMap extends Map {
 
     public HubMap() {
         super("hub_map.txt", new HubTileset());
-        this.playerStartPosition = getMapTile(1, 1).getLocation();
+        this.playerStartPosition = getMapTile(8, 10).getLocation();
     }
 
     @Override
