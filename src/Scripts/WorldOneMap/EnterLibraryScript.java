@@ -12,7 +12,7 @@ public class EnterLibraryScript extends Script {
         setTextboxStyle(Style.WORLDONE);
         showTextbox();
 
-        addTextToTextboxQueue("entring library");
+        addTextToTextboxQueue("entering library");
     }
 
     @Override
