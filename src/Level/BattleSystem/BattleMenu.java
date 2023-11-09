@@ -1,6 +1,7 @@
 package Level.BattleSystem;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 import Combatants.PlayerCombatant;
 import Engine.Config;
@@ -16,21 +17,54 @@ import SpriteFont.SpriteFont;
 public class BattleMenu extends Menu {
     PlayerCombatant combatant;
     public BattleSystem battleSystem;
-    private static final String[] actions = { "Bash", "Item", "Recover" };
+    private static final Actions[] actions = { Actions.BASH, Actions.ITEMS, Actions.REFRESH, Actions.STACKSMASH,
+            Actions.DDOS, Actions.REBOOT, Actions.INTERUPTREQUEST };
     private String actionName;
     private CombatInventoryMenu inventoryMenu;
+    private Panel descriptionPanel;
+    private int descriptionTop;
+    private int descriptionHeight = 100;
+
+    private enum Actions {
+        BASH,
+        ITEMS,
+        REFRESH,
+        STACKSMASH,
+        DDOS,
+        REBOOT,
+        INTERUPTREQUEST;
+
+        @Override
+        public String toString() {
+            String name = super.toString();
+            switch (name) {
+                case "STACKSMASH":
+                    return "Stack Smash";
+                case "INTERUPTREQUEST":
+                    return "Interupt Request";
+                default:
+                    return (name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase());
+            }
+        }
+    }
 
     public BattleMenu(BattleSystem battleSystem, PlayerCombatant combatant) {
         this.battleSystem = battleSystem;
-        top = 400;
+        top = 300;
         width = Config.GAME_WINDOW_WIDTH - left * 2 - 16;
-        height = Config.GAME_WINDOW_HEIGHT - top - 25 - 39;
+        height = Config.GAME_WINDOW_HEIGHT - top - descriptionHeight - 25 - 39;
         rows = 2;
-        columns = 2;
-        setText(actions);
+        columns = 4;
+        descriptionTop = top + height + 10;
+        ArrayList<String> actionNames = new ArrayList<String>();
+        for (Actions action: actions) {
+            actionNames.add(action.toString());
+        }
+        setText(actionNames);
         updatePanel();
         this.combatant = combatant;
         inventoryMenu = new CombatInventoryMenu(battleSystem.player, combatant, this);
+        descriptionPanel = new Panel(left, descriptionTop, width, descriptionHeight, false);
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
@@ -38,9 +72,17 @@ public class BattleMenu extends Menu {
             inventoryMenu.draw(graphicsHandler);
         } else {
             super.draw(graphicsHandler);
-            SpriteFont descriptionSpriteFont = new SpriteFont(
+            SpriteFont HPSpriteFont = new SpriteFont(
                     String.format("HP: %d/%d", combatant.getHitPoints(), combatant.getMaxHitPoints()), left + border,
                     top + border - 48, Textbox.getFont(), Color.black);
+            HPSpriteFont.drawWithParsedNewLines(graphicsHandler, 10);
+            super.draw(graphicsHandler);
+            descriptionPanel.draw(graphicsHandler);
+            String description = "";
+            description = "TEST";
+            SpriteFont descriptionSpriteFont = new SpriteFont(description, 0, 0, Textbox.getFont(), Color.black);
+            descriptionSpriteFont.setX(left + border);
+            descriptionSpriteFont.setY(descriptionTop + border);
             descriptionSpriteFont.drawWithParsedNewLines(graphicsHandler, 10);
         }
     }
@@ -65,7 +107,7 @@ public class BattleMenu extends Menu {
                 case "Bash":
                     combatant.bash(enemyCombatant);
                     break;
-                case "Recover":
+                case "Refresh":
                     combatant.recover();
                     break;
                 default:
