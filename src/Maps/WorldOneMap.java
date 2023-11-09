@@ -1,6 +1,8 @@
 package Maps;
 
 import EnhancedMapTiles.MedkitObject;
+import Game.SoundPlayer;
+import Game.SoundPlayer.MusicTracks;
 import EnhancedMapTiles.CatFoodObject;
 import EnhancedMapTiles.FetchObject;
 import EnhancedMapTiles.FragmentObject;
@@ -47,6 +49,7 @@ public class WorldOneMap extends Map {
     public WorldOneMap() {
         super("world_one_map.txt", new InternetExplorerTileset());
         this.playerStartPosition = getMapTile(23, 13).getLocation();
+        SoundPlayer.playMusic(MusicTracks.WORLDONEBGM);
     }
 
     @Override
@@ -157,7 +160,7 @@ public class WorldOneMap extends Map {
     }
 
     public static void SW1ClearedFS(){
-        
+
     }
 
     public static boolean getW1ClearedFS(){

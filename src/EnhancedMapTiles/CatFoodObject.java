@@ -2,6 +2,8 @@ package EnhancedMapTiles;
 
 import Builders.FrameBuilder;
 import Engine.ImageLoader;
+import Game.SoundPlayer;
+import Game.SoundPlayer.SoundEffects;
 import GameObject.Frame;
 import GameObject.GameObject;
 import GameObject.SpriteSheet;
@@ -27,6 +29,7 @@ public class CatFoodObject extends EnhancedMapTile {
     public void update(Player player) {
         super.update(player);
         if (player.overlaps(this) && player.getPlayerState() == PlayerState.WALKING) {
+            SoundPlayer.playSoundEffect(SoundEffects.ITEMGET);
             player.addItem(new CatFood(player));
             this.mapEntityStatus = MapEntityStatus.REMOVED;
         }

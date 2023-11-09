@@ -2,6 +2,8 @@ package EnhancedMapTiles;
 
 import Builders.FrameBuilder;
 import Engine.ImageLoader;
+import Game.SoundPlayer;
+import Game.SoundPlayer.SoundEffects;
 import GameObject.Frame;
 import GameObject.GameObject;
 import GameObject.SpriteSheet;
@@ -24,7 +26,7 @@ public class FetchObject extends EnhancedMapTile {
     public void update(Player player) {
         super.update(player);
         if (player.overlaps(this) && player.getPlayerState() == PlayerState.WALKING) {
-            // Update the player's health by adding the healingAmount
+            SoundPlayer.playSoundEffect(SoundEffects.ITEMGET);
             player.addItem(new Fetch(player));
             this.mapEntityStatus = MapEntityStatus.REMOVED;
         }
