@@ -152,7 +152,7 @@ public class InternetExplorerTileset extends Tileset {
 
         mapTiles.add(leftRoofTile);
 
-        // white block
+        // red block
         Frame redFrame = new FrameBuilder(getSubImage(1, 2))
                 .withScale(tileScale)
                 .build();
