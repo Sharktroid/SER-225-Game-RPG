@@ -58,6 +58,7 @@ public class SoundPlayer {
             AudioInputStream stream = AudioSystem
                     .getAudioInputStream(new File(soundEffectPath, soundEffect.toString()));
             Clip clip = AudioSystem.getClip();
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
             clip.open(stream);
             clip.start();
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
