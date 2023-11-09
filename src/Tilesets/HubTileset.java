@@ -184,7 +184,7 @@ public class HubTileset extends Tileset {
         mapTiles.add(houseBodyTile);
 
 
-        // remnant ------------- top water
+        // portal frames
         Frame[] portalFrames = new Frame[] {
             new FrameBuilder(getSubImage(4, 0), 10)
                     .withScale(tileScale)
