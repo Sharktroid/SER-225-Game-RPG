@@ -40,10 +40,10 @@ public class HubMap extends Map {
     @Override
     public ArrayList<Trigger> loadTriggers() {
         ArrayList<Trigger> triggers = new ArrayList<>();
-        triggers.add(new Trigger(108, 60, 24, 24, new portalOneScript()));
-        triggers.add(new Trigger(396, 60, 24, 24, new portalTwoScript()));
-        triggers.add(new Trigger(684, 60, 24, 24, new portalThreeScript()));
-        triggers.add(new Trigger(384, 336, 48, 48, new hubMsgScript(),"sawHubMsg"));        
+        triggers.add(new Trigger(204, 108, 24, 24, new portalOneScript()));
+        triggers.add(new Trigger(396, 108, 24, 24, new portalTwoScript()));
+        triggers.add(new Trigger(588, 108, 24, 24, new portalThreeScript()));
+        //triggers.add(new Trigger(384, 336, 48, 48, new hubMsgScript(),"sawHubMsg"));        
 
         return triggers;
     }    
