@@ -27,12 +27,6 @@ public class LibraryMap extends Map {
     public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
         ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
 
-        FragmentObject fragment = new FragmentObject(getMapTile(6, 3).getLocation(), 1);
-        enhancedMapTiles.add(fragment);
-
-        FragmentObject fragment2 = new FragmentObject(getMapTile(6, 3).getLocation(), 1);
-        enhancedMapTiles.add(fragment2);
-
         PushableRock pushableRock = new PushableRock(getMapTile(4, 3).getLocation());
         enhancedMapTiles.add(pushableRock);
 

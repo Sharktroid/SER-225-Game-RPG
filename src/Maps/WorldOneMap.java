@@ -5,6 +5,7 @@ import Game.SoundPlayer;
 import Game.SoundPlayer.MusicTracks;
 import EnhancedMapTiles.CatFoodObject;
 import EnhancedMapTiles.FetchObject;
+import EnhancedMapTiles.FragmentObject;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
@@ -21,6 +22,7 @@ import NPCs.Normal1;
 import NPCs.Normal2;
 import NPCs.OldManJenks;
 import NPCs.SoulConsumingFlameNPC;
+import NPCs.Testfox;
 import Scripts.WorldOneMap.Infected1Script;
 import Scripts.WorldOneMap.EngineerScript;
 import Scripts.WorldOneMap.EnterLibraryScript;
@@ -32,6 +34,7 @@ import Scripts.WorldOneMap.OldManJenksScript;
 import Scripts.WorldOneMap.Infected4Script;
 import Scripts.WorldOneMap.Infected5Script;
 import Scripts.WorldOneMap.SoulConsumingFlameNPCScript;
+import Scripts.WorldOneMap.TestfoxScript;
 import Scripts.WorldOneMap.LibrarianScript;
 import Scripts.WorldOneMap.WorldOneClearScript;
 import Tilesets.InternetExplorerTileset;
@@ -41,6 +44,7 @@ import java.util.ArrayList;
 public class WorldOneMap extends Map {
 
     public static boolean w1ClearedFS = false;
+    public static int FragmentCount = 0;
 
     public WorldOneMap() {
         super("world_one_map.txt", new InternetExplorerTileset());
@@ -60,6 +64,16 @@ public class WorldOneMap extends Map {
 
         FetchObject fetch = new FetchObject(getMapTile(5, 14).getLocation(), 1);
         enhancedMapTiles.add(fetch);
+
+        FragmentObject fragment = new FragmentObject(getMapTile(6, 3).getLocation(), 1);
+        enhancedMapTiles.add(fragment);
+
+        FragmentObject fragment2 = new FragmentObject(getMapTile(6, 3).getLocation(), 1);
+        enhancedMapTiles.add(fragment2);
+
+        FragmentObject fragment3 = new FragmentObject(getMapTile(6, 3).getLocation(), 1);
+        enhancedMapTiles.add(fragment3);
+
 
 
 
@@ -125,14 +139,20 @@ public class WorldOneMap extends Map {
         soulConsumingFlame.setInteractScript(new SoulConsumingFlameNPCScript());
         npcs.add(soulConsumingFlame);
 
+
+        /*Testfox testfox = new Testfox(1, getMapTile(20, 13).getLocation().subtractY(40));
+        testfox.setInteractScript(new TestfoxScript());
+        npcs.add(testfox);*/
+
         return npcs;
+
     }
 
 
     @Override
     public ArrayList<Trigger> loadTriggers() {
         ArrayList<Trigger> triggers = new ArrayList<>();
-        triggers.add(new Trigger(790,20, 24, 24, new WorldOneClearScript()));
+        triggers.add(new Trigger(1212,780, 24, 24, new WorldOneClearScript()));
 
         triggers.add(new Trigger(1820, 300, 100, 20, new EnterLibraryScript()));
 
@@ -147,4 +167,12 @@ public class WorldOneMap extends Map {
         return w1ClearedFS;
     }
 
+    public static void addFragmentCount(int fragmentCount) {
+        FragmentCount = FragmentCount + fragmentCount ;
+        System.out.println("Added Fragment count");
+    }
+
+     public int getFragmentCount() {
+        return FragmentCount;
+    }
 }

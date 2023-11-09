@@ -256,6 +256,67 @@ public class InternetExplorerTileset extends Tileset {
         mapTiles.add(trashTile);
 
 
+        // window frame
+        Frame brokenWindowFrame = new FrameBuilder(getSubImage(3, 0))
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder brokenWindowTile = new MapTileBuilder(brokenWindowFrame)
+                .withTileType(TileType.NOT_PASSABLE);
+
+        mapTiles.add(brokenWindowTile);
+
+
+        // library floor 
+        Frame libraryFloorFrame = new FrameBuilder(getSubImage(3, 1))
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder libraryFloorTile = new MapTileBuilder(libraryFloorFrame);
+
+        mapTiles.add(libraryFloorTile);
+
+
+        // library roof block
+        Frame libraryRoofFrame = new FrameBuilder(getSubImage(3, 2))
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder libraryRoofTile = new MapTileBuilder(libraryRoofFrame)
+                .withTileType(TileType.NOT_PASSABLE);
+
+        mapTiles.add(libraryRoofTile);
+
+
+        // portal frames
+        Frame[] portalFrames = new Frame[] {
+                new FrameBuilder(getSubImage(3, 3), 10)
+                        .withScale(tileScale)
+                        .build(),
+                new FrameBuilder(getSubImage(3, 4), 10)
+                        .withScale(tileScale)
+                        .build(),
+                new FrameBuilder(getSubImage(3, 5), 10)
+                        .withScale(tileScale)
+                        .build(),
+                new FrameBuilder(getSubImage(3, 6), 10)
+                        .withScale(tileScale)
+                        .build()
+            };
+    
+            MapTileBuilder portalTile = new MapTileBuilder(portalFrames);
+    
+            mapTiles.add(portalTile);
+
+        // passable door
+        Frame passableDoorFrame= new FrameBuilder(getSubImage(0, 4))
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder passableDoorTile = new MapTileBuilder(passableDoorFrame)
+                .withTileType(TileType.PASSABLE);
+
+        mapTiles.add(passableDoorTile);
 
 
 

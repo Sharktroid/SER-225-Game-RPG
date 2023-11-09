@@ -3,6 +3,7 @@ package Items;
 import Screens.PlayLevelScreen;
 import GameObject.Item;
 import Level.Player;
+import Maps.WorldOneMap;
 import Scripts.WorldOneMap.TestfoxScript;
 
 public class Fragment extends Item {
@@ -16,7 +17,7 @@ public class Fragment extends Item {
 
     @Override
     public void use() {
-    TestfoxScript.addFragmentCount(fragmentCount);
+    WorldOneMap.addFragmentCount(fragmentCount);
     
         
     }

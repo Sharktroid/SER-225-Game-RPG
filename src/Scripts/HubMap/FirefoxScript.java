@@ -51,7 +51,7 @@ public class FirefoxScript extends Script<NPC> {
             }
         } else if (!isFlagSet("hasTalkedToFirefox1")) {
             if (!isFlagSet("worldOneComplete")) {
-                addTextToTextboxQueue("Go throug the portal, go look for my orb!");
+                addTextToTextboxQueue("Go through the portal, go look for my orb!");
             } else {
                 addTextToTextboxQueue("Is that... my orb?");
                 addTextToTextboxQueue("But it's only part of it... What have you done the rest of my orb?");
