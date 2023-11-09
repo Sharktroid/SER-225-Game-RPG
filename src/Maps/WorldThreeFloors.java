@@ -2,6 +2,7 @@ package Maps;
 
 import Level.Map;
 import Level.NPC;
+import Level.Textbox.Style;
 import Level.Trigger;
 import Scripts.WorldThreeFloors.upLevelScript;
 import Scripts.WorldThreeFloors.downLevelScript;
@@ -21,7 +22,7 @@ public class WorldThreeFloors extends Map {
     public static int currentFloorNumber = 0;
     public static boolean downFromFloor;
 
-    
+
 
 
     // current floor number getter
@@ -54,13 +55,14 @@ public class WorldThreeFloors extends Map {
                 this.playerStartPosition = getMapTile(8, 8).getLocation();
             }
 
-                
+
         }
 
         // player starting position floors 1-4
         else {
             this.playerStartPosition = getMapTile(8, 15).getLocation();
         }
+        textbox.setStyle(Style.WORLDTHREE);
     }
 
     @Override

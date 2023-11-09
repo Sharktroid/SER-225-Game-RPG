@@ -7,7 +7,6 @@ import Game.SoundPlayer.SoundEffects;
 import GameObject.Frame;
 import GameObject.GameObject;
 import GameObject.SpriteSheet;
-import Items.Fetch;
 import Items.Fragment;
 import Level.EnhancedMapTile;
 import Level.MapEntityStatus;

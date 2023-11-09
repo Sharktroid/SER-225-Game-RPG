@@ -1,15 +1,18 @@
 package Maps;
 
-import EnhancedMapTiles.MedkitObject;
-import Game.SoundPlayer;
-import Game.SoundPlayer.MusicTracks;
+import java.util.ArrayList;
+
 import EnhancedMapTiles.CatFoodObject;
 import EnhancedMapTiles.FetchObject;
 import EnhancedMapTiles.FragmentObject;
+import EnhancedMapTiles.MedkitObject;
+import Game.SoundPlayer;
+import Game.SoundPlayer.MusicTracks;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
 import Level.Trigger;
+import Level.Textbox.Style;
 import NPCs.Engineer;
 import NPCs.EngineerPartner;
 import NPCs.Infected1;
@@ -22,24 +25,20 @@ import NPCs.Normal1;
 import NPCs.Normal2;
 import NPCs.OldManJenks;
 import NPCs.SoulConsumingFlameNPC;
-import NPCs.Testfox;
-import Scripts.WorldOneMap.Infected1Script;
 import Scripts.WorldOneMap.EngineerScript;
 import Scripts.WorldOneMap.EnterLibraryScript;
+import Scripts.WorldOneMap.Infected1Script;
 import Scripts.WorldOneMap.Infected2Script;
 import Scripts.WorldOneMap.Infected3Script;
+import Scripts.WorldOneMap.Infected4Script;
+import Scripts.WorldOneMap.Infected5Script;
+import Scripts.WorldOneMap.LibrarianScript;
 import Scripts.WorldOneMap.Normal1Script;
 import Scripts.WorldOneMap.Normal2Script;
 import Scripts.WorldOneMap.OldManJenksScript;
-import Scripts.WorldOneMap.Infected4Script;
-import Scripts.WorldOneMap.Infected5Script;
 import Scripts.WorldOneMap.SoulConsumingFlameNPCScript;
-import Scripts.WorldOneMap.TestfoxScript;
-import Scripts.WorldOneMap.LibrarianScript;
 import Scripts.WorldOneMap.WorldOneClearScript;
 import Tilesets.InternetExplorerTileset;
-
-import java.util.ArrayList;
 
 public class WorldOneMap extends Map {
 
@@ -50,6 +49,7 @@ public class WorldOneMap extends Map {
         super("world_one_map.txt", new InternetExplorerTileset());
         this.playerStartPosition = getMapTile(23, 13).getLocation();
         SoundPlayer.playMusic(MusicTracks.WORLDONEBGM);
+        textbox.setStyle(Style.WORLDONE);
     }
 
     @Override

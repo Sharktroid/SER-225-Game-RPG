@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import Level.Map;
 import Level.NPC;
+import Level.Textbox.Style;
 import NPCs.Beaver;
 import Scripts.WorldTwoMap.BeaverScript;
 import Tilesets.CommonTileset;
@@ -12,6 +13,7 @@ public class WorldTwoMap extends Map {
     public WorldTwoMap() {
         super("world_two_map.txt", new CommonTileset());
         this.playerStartPosition = getMapTile(0, 6).getLocation();
+        textbox.setStyle(Style.WORLDTWO);
     }
 
     @Override

@@ -1,7 +1,5 @@
 package Level;
 
-import javax.swing.Action;
-
 public abstract class Combatant {
     protected NPC npc;
     private int hitPoints;
