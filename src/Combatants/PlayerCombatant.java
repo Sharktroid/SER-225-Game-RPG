@@ -10,7 +10,7 @@ public class PlayerCombatant extends Combatant {
         super(null, map);
         setMaxHitPoints((int) player.getCurrentHealth());
         name = player.getName();
-        currentTP = 0;
+        currentTP = 20;
         maxTP = 20;
     }
 
