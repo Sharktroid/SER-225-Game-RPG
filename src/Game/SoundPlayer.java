@@ -19,7 +19,8 @@ public class SoundPlayer {
 
     public static enum SoundEffects {
         ITEMGET,
-        WORLDCLEAR;
+        WORLDCLEAR,
+        FRAGMENTGET;
 
         @Override
         public String toString() {
@@ -29,6 +30,8 @@ public class SoundPlayer {
                     return "Receive Item.wav";
                 case "WORLDCLEAR":
                     return "Castle Captured.wav";
+                case "FRAGMENTGET":
+                    return "Receive Money.wav";
                 default:
                     return null;
             }

@@ -26,7 +26,7 @@ public class FragmentObject extends EnhancedMapTile {
     public void update(Player player) {
         super.update(player);
         if (player.overlaps(this) && player.getPlayerState() == PlayerState.WALKING) {
-            SoundPlayer.playSoundEffect(SoundEffects.ITEMGET);
+            SoundPlayer.playSoundEffect(SoundEffects.FRAGMENTGET);
             player.addItem(new Fragment(player));
             this.mapEntityStatus = MapEntityStatus.REMOVED;
         }
