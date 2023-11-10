@@ -160,7 +160,7 @@ public abstract class Map {
             npc.setMap(this);
         }
         try {
-            loadMapEntitiesPositions(this.npcs, fileInput);
+            loadMapEntitiesPositions(new ArrayList<MapEntity>(this.npcs), fileInput);
         }
         catch(java.util.NoSuchElementException e) {
             System.out.println(String.format(baseExceptionString, "NPC"));
@@ -174,7 +174,7 @@ public abstract class Map {
             enhancedMapTile.setMap(this);
         }
         try {
-            loadMapEntitiesPositions(this.enhancedMapTiles, fileInput);
+            loadMapEntitiesPositions(new ArrayList<MapEntity>(this.enhancedMapTiles), fileInput);
         }
         catch(java.util.NoSuchElementException e) {
             System.out.println(String.format(baseExceptionString, "Enhanced Map Tile"));
@@ -594,7 +594,7 @@ public abstract class Map {
     public int getEndBoundX() { return endBoundX; }
     public int getEndBoundY() { return endBoundY; }
 
-    private void loadMapEntitiesPositions(ArrayList iterator, Scanner scanner) throws java.util.NoSuchElementException {
+    private void loadMapEntitiesPositions(ArrayList<MapEntity> iterator, Scanner scanner) throws java.util.NoSuchElementException {
         for (int i = 0; i < iterator.size(); i++) {
             MapEntity currentNpc = (MapEntity) iterator.get(i);
             currentNpc.setX(scanner.nextFloat());

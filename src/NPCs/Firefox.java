@@ -8,7 +8,6 @@ import GameObject.ImageEffect;
 import GameObject.SpriteSheet;
 import Level.NPC;
 import Level.Player;
-
 import SpriteFont.SpriteFont;
 import Utils.Point;
 import java.awt.Color;

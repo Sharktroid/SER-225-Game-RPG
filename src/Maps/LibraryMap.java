@@ -1,6 +1,5 @@
 package Maps;
 
-import EnhancedMapTiles.FragmentObject;
 import EnhancedMapTiles.MedkitObject;
 import EnhancedMapTiles.PushableRock;
 import Level.EnhancedMapTile;
@@ -47,7 +46,7 @@ public class LibraryMap extends Map {
 
         PushableRock pushableRock7 = new PushableRock(getMapTile(10, 1).getLocation());
         enhancedMapTiles.add(pushableRock7);
-        
+
         PushableRock pushableRock8 = new PushableRock(getMapTile(10, 1).getLocation());
         enhancedMapTiles.add(pushableRock8);
 
@@ -55,7 +54,7 @@ public class LibraryMap extends Map {
         MedkitObject medkit = new MedkitObject(getMapTile(7, 3).getLocation(), 25);
         enhancedMapTiles.add(medkit);
 
-        
+
 
         return enhancedMapTiles;
     }
@@ -77,9 +76,9 @@ public class LibraryMap extends Map {
     }
 
     public static void SW1ClearedFS(){
-        
+
     }
-    
+
 }
 
 

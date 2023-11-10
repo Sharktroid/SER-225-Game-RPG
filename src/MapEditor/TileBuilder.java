@@ -126,12 +126,12 @@ public class TileBuilder extends JPanel {
     }
 
     public void tileSelected(Point selectedPoint) {
-        NPC currentNPC = (NPC) getMapEntity(selectedPoint, map.getNPCs());
+        NPC currentNPC = (NPC) getMapEntity(selectedPoint, new ArrayList<MapEntity>(map.getNPCs()));
         if(currentNPC != null) {
             selectedEntity = currentNPC;
         }
         else {
-            EnhancedMapTile currentEnhancedMapTile = (EnhancedMapTile) getMapEntity(selectedPoint, map.getEnhancedMapTiles());
+            EnhancedMapTile currentEnhancedMapTile = (EnhancedMapTile) getMapEntity(selectedPoint, new ArrayList<MapEntity>(map.getEnhancedMapTiles()));
             if (currentEnhancedMapTile == null) {
                 int selectedTileIndex = getSelectedTileIndex(selectedPoint);
                 if (selectedTileIndex != -1) {
@@ -148,7 +148,7 @@ public class TileBuilder extends JPanel {
         repaint();
     }
 
-    private MapEntity getMapEntity(Point point, ArrayList iterator) {
+    private MapEntity getMapEntity(Point point, ArrayList<MapEntity> iterator) {
         point = new Point((int) (point.getX() - point.getX() % map.getTileset().getScaledSpriteWidth()),
                 (int) (point.getY() - point.getY() % map.getTileset().getScaledSpriteHeight()));
         if (showNPCs) {

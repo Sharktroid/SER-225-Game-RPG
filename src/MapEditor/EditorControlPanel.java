@@ -124,8 +124,8 @@ public class EditorControlPanel extends JPanel {
                     }
                 }
             }
-            writeMapEntitiesPositions(map.getNPCs(), fileWriter);
-            writeMapEntitiesPositions(map.getEnhancedMapTiles(), fileWriter);
+            writeMapEntitiesPositions(new ArrayList<MapEntity>(map.getNPCs()), fileWriter);
+            writeMapEntitiesPositions(new ArrayList<MapEntity>(map.getEnhancedMapTiles()), fileWriter);
             fileWriter.close();
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -138,9 +138,9 @@ public class EditorControlPanel extends JPanel {
         mapBuilder.setMap(selectedMap);
     }
 
-    private void writeMapEntitiesPositions(ArrayList iterator, FileWriter fileWriter) throws IOException {
+    private void writeMapEntitiesPositions(ArrayList<MapEntity> iterator, FileWriter fileWriter) throws IOException {
             for (int i = 0; i < iterator.size();i++) {
-                MapEntity currentEntity = (MapEntity) iterator.get(i);
+                MapEntity currentEntity = iterator.get(i);
                 fileWriter.write(currentEntity.getX() + " " + currentEntity.getY() + " ");
             }
             fileWriter.write("|\n");

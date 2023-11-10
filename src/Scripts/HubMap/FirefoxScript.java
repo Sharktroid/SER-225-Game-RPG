@@ -6,7 +6,6 @@ import Level.ScriptState;
 import Level.Textbox.Style;
 import Maps.HubMap;
 import Maps.WorldOneMap;
-import Scripts.WorldOneMap.WorldOneClearScript;
 
 // script for talking to sloth npc
 public class FirefoxScript extends Script<NPC> {
@@ -19,7 +18,7 @@ public class FirefoxScript extends Script<NPC> {
         setTextboxStyle(Style.HUBWORLD);
         setNPCName("Firefox");
         showTextbox();
-        
+
 
         System.out.println("hasTalkedToFirefox0: " + isFlagSet("hasTalkedToFirefox0"));
         System.out.println("HubMap.getTalkedFS(0): " + HubMap.getTalkedFS(0));
@@ -90,7 +89,7 @@ public class FirefoxScript extends Script<NPC> {
             }else if (sequence == 2) {
                 setFlag("hasTalkedToFirefox0");
                 setFlag("unlockedPortal1");
-                
+
                 HubMap.setTalkedFS(0, true);
                 ;
                 HubMap.setUnlockPortalFS(1, true);
@@ -112,7 +111,7 @@ public class FirefoxScript extends Script<NPC> {
                 HubMap.setTalkedFS(2, true);
                 HubMap.setUnlockPortalFS(3, true);
             }
-            
+
         } else if (!isFlagSet("hasTalkedToFirefox3") && isFlagSet("worldOneComplete")
                 && isFlagSet("worldTwoComplete") && isFlagSet("worldThreeComplete")) {
             setFlag("hasTalkedToFirefox3");

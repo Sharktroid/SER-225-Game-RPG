@@ -9,7 +9,6 @@ import Level.NPC;
 import Level.Trigger;
 import NPCs.Testfox;
 import Scripts.WorldOneMap.TestfoxScript;
-import Tilesets.CommonTileset;
 import Tilesets.InternetExplorerTileset;
 import java.util.ArrayList;
 //To load: start program -> press 5 key
@@ -51,7 +50,7 @@ public class EvanTestMap extends Map {
 
         PushableRock pushableRock7 = new PushableRock(getMapTile(10, 1).getLocation());
         enhancedMapTiles.add(pushableRock7);
-        
+
         PushableRock pushableRock8 = new PushableRock(getMapTile(10, 1).getLocation());
         enhancedMapTiles.add(pushableRock8);
 
@@ -59,7 +58,7 @@ public class EvanTestMap extends Map {
         MedkitObject medkit = new MedkitObject(getMapTile(7, 3).getLocation(), 25);
         enhancedMapTiles.add(medkit);
 
-        
+
 
         return enhancedMapTiles;
     }
@@ -79,7 +78,7 @@ public class EvanTestMap extends Map {
         //triggers.add(new Trigger(790, 1030, 100, 10, new LostBallScript(), "hasLostBall"));
         return triggers;
     }
-    
+
 }
 
 

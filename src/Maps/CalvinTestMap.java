@@ -1,7 +1,5 @@
 package Maps;
 
-import java.util.ArrayList;
-
 import Level.Map;
 import Tilesets.CommonTileset;
 

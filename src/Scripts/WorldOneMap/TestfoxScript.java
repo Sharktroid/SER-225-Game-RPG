@@ -1,9 +1,4 @@
-
-
-
-
 package Scripts.WorldOneMap;
-import Level.Textbox.Style;
 import Level.*;
 
 // script for talking to ttestfox npc
@@ -16,13 +11,13 @@ static int FragmentCount = 0;
         setTextboxStyle(Textbox.Style.WORLDONE);
         setNPCName("Testfox");
         showTextbox();
-        
+
 
         if (FragmentCount >= 1) {
             showTextbox();
             addTextToTextboxQueue( "FragmentCount is " + FragmentCount);
-            
-            
+
+
 
         }
         else if (FragmentCount == 0) {

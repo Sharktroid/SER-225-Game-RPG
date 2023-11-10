@@ -5,7 +5,6 @@ import Builders.FrameBuilder;
 import Builders.MapTileBuilder;
 import Engine.ImageLoader;
 import GameObject.Frame;
-import GameObject.ImageEffect;
 import Level.TileType;
 import Level.Tileset;
 
@@ -41,7 +40,7 @@ public class HubTileset extends Tileset {
 
         mapTiles.add(signTile);
 
-        // first top 
+        // first top
         Frame firstTopFrame = new FrameBuilder(getSubImage(0, 1))
                 .withScale(tileScale)
                 .build();
@@ -51,7 +50,7 @@ public class HubTileset extends Tileset {
 
         mapTiles.add(firstTopTile);
 
-        // middle top 
+        // middle top
         Frame middleTopFrame = new FrameBuilder(getSubImage(0, 2))
                 .withScale(tileScale)
                 .build();
@@ -63,7 +62,7 @@ public class HubTileset extends Tileset {
         mapTiles.add(middleTopTile);
 
 
-        // last top 
+        // last top
         Frame lastTopFrame = new FrameBuilder(getSubImage(0, 3))
                 .withScale(tileScale)
                 .build();
@@ -73,7 +72,7 @@ public class HubTileset extends Tileset {
 
         mapTiles.add(lastTopTile);
 
-        // roof top 
+        // roof top
         Frame roofFrame = new FrameBuilder(getSubImage(0, 4))
                 .withScale(tileScale)
                 .build();
@@ -93,9 +92,9 @@ public class HubTileset extends Tileset {
 
         mapTiles.add(rockTile);
 
-        
- 
-        // top electric 
+
+
+        // top electric
         Frame[] topElectricFrames = new Frame[] {
                 new FrameBuilder(getSubImage(1, 0), 65)
                         .withScale(tileScale)
@@ -107,10 +106,10 @@ public class HubTileset extends Tileset {
                         .withScale(tileScale)
                         .build(),
             };
-    
+
             MapTileBuilder topElectricTile = new MapTileBuilder(topElectricFrames)
                     .withTileType(TileType.NOT_PASSABLE);
-    
+
             mapTiles.add(topElectricTile);
 
         // middle electric
@@ -125,13 +124,13 @@ public class HubTileset extends Tileset {
                         .withScale(tileScale)
                         .build(),
             };
-    
+
             MapTileBuilder middleElectricTile = new MapTileBuilder(middleElectricFrames)
                     .withTileType(TileType.NOT_PASSABLE);
-    
+
             mapTiles.add(middleElectricTile);
 
-        // bottom electric 
+        // bottom electric
         Frame[] bottomElectricFrames = new Frame[] {
                 new FrameBuilder(getSubImage(1, 2), 65)
                         .withScale(tileScale)
@@ -143,17 +142,17 @@ public class HubTileset extends Tileset {
                         .withScale(tileScale)
                         .build(),
             };
-    
+
             MapTileBuilder bottomElectricTile = new MapTileBuilder(bottomElectricFrames)
                     .withTileType(TileType.NOT_PASSABLE);
-    
+
             mapTiles.add(bottomElectricTile);
 
 
 
 
 
-        // n/a 
+        // n/a
         Frame greyRockFrame = new FrameBuilder(getSubImage(3, 2))
                 .withScale(tileScale)
                 .build();
