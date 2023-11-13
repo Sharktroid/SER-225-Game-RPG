@@ -55,94 +55,50 @@ public class PlayLevelScreen extends Screen {
                 
         flagSaves.loadFlags(flagManager);
 
-        switch(worldNum){
-            case -1:
-                worldNum = Screens.MenuScreen.worldNumber;
-            case 0:
-                this.map = new WorldZeroMap();
-            case 1:
-                this.map = new WorldOneMap();
-            case 2:
-                this.map = new WorldTwoMap();
-            case 3:
-                this.map = new WorldThreeFloors(floorNum);
-            case 4:
-                this.map = new HubMap();
-        }
-        // takes world number variable form menu screen to choose world
-        if (worldNum == -1) {
-            worldNum = Screens.MenuScreen.worldNumber;
-        }
-
-        //setup world zero map
-        if (worldNum == 0) {
-            this.map = new WorldZeroMap();
-        }
-        //set world one map
-        else if (worldNum == 1) {
-            this.map = new WorldOneMap();
-
-            
-
-
-        }
-
         
-        //setup world two map
-        else if (worldNum == 2) {
+        if (worldNum == -1) 
+            worldNum = Screens.MenuScreen.worldNumber;
+        
+        if (worldNum == 0) 
+            this.map = new WorldZeroMap();
+        
+        else if (worldNum == 1) 
+            this.map = new WorldOneMap();
+       
+        else if (worldNum == 2) 
             this.map = new WorldTwoMap();
 
-            
-        }
-
-        //setup world three map
-        else if (worldNum == 3) {
-
+        else if (worldNum == 3) 
             this.map = new WorldThreeFloors(floorNum);
 
-        
-            
-            
-
-        }
-
-        
-
-        //setup hub world map
-        else if (worldNum == 4) {
+        else if (worldNum == 4) 
             this.map = new HubMap();
 
-            
-    
-            
-        }
-
-        else if (worldNum == 5){
+        else if (worldNum == 5)
             this.map = new EvanTestMap();
-        }
-        else if (worldNum == 6){
+        
+        else if (worldNum == 6)
             this.map = new CalvinTestMap();
-        }
-        else if (worldNum == 7){
+        
+        else if (worldNum == 7)
             this.map = new ShannonTestMap();
             
-        }
-        else if (worldNum == 8){
+        else if (worldNum == 8)
             this.map = new JulietTestMap();
-        }
-        else if (worldNum == 9){
+        
+        else if (worldNum == 9)
             this.map = new AaronTestMap();
-        }
-
-
-        else if (worldNum == 11){
+        
+        else if (worldNum == 11)
             this.map = new LibraryMap();
 
+        else
+            this.map = new WorldZeroMap();
             
 
             
-        }
-
+        
+                                             
 
         map.setFlagManager(flagManager);
 
