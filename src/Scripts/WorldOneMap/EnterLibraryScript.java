@@ -21,13 +21,13 @@ public class EnterLibraryScript extends Script {
         unlockPlayer();
 
 
-        setFlag("enteredLibrary");
+        setFlag("enterLibrary");
     }
 
     @Override
     public ScriptState execute() {
 
-        if (!isFlagSet("enteredLibrary")) {
+        if (!isFlagSet("enterLibrary")) {
             start();
             if (!isTextboxQueueEmpty()) {
                 return ScriptState.RUNNING;

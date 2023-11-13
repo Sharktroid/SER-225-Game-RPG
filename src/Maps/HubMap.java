@@ -6,18 +6,11 @@ import Level.Map;
 import Level.NPC;
 import Level.Trigger;
 import NPCs.Firefox;
-import Scripts.HubMap.FirefoxScript;
-import Scripts.HubMap.hubMsgScript;
-import Scripts.HubMap.portalOneScript;
-import Scripts.HubMap.portalTwoScript;
-import Scripts.HubMap.portalThreeScript;
+import Scripts.HubMap.*;
 import Tilesets.HubTileset;
 
 
 public class HubMap extends Map {
-
-    public static boolean[] unlockPortalFS = new boolean[] { false, false, false };
-    public static boolean[] talkedToFirefoxFS = new boolean[] { false, false, false, false };
 
     public HubMap() {
         super("hub_map.txt", new HubTileset());
@@ -45,28 +38,6 @@ public class HubMap extends Map {
         //triggers.add(new Trigger(384, 336, 48, 48, new hubMsgScript(),"sawHubMsg"));
 
         return triggers;
-    }
-
-    public static boolean getHubMsgFS(){
-        return hubMsgScript.setSawHubMsgFS;
-    }
-
-    public static boolean getTalkedFS(int talkedIndex){
-        boolean talkedFS = talkedToFirefoxFS[talkedIndex];
-        return talkedFS;
-    }
-
-    public static void setTalkedFS(int talkedIndex, boolean newFS){
-        talkedToFirefoxFS[talkedIndex] = newFS;
-    }
-
-    public static boolean getUnlockedPortalFS(int portalNum){
-        boolean portalFS = unlockPortalFS[portalNum-1];
-        return portalFS;
-    }
-
-    public static void setUnlockPortalFS(int portalNum, boolean newFS){
-        unlockPortalFS[portalNum-1] = newFS;
     }
 
 }

@@ -1,37 +1,117 @@
 package Level;
 
-import java.util.ArrayList;
-
 public class FlagSaves {
-    public ArrayList<Flag> savedFlagData = new ArrayList<>();
-    public int n;
 
-    public void initialize(String[] flagnames){
-        n = flagnames.length;
-        for (int i = 0; i <flagnames.length-1; i++){
-            Flag flag = new Flag(flagnames[i], false);
-            savedFlagData.add(flag);
-        }
+    /**
+     * This method sets up all flags in the game to be stored in the flag manager.
+     * 
+     * @param flagManager The FlagManager that the flags are stored in
+     * 
+     */
+
+    public void initializeFlags(FlagManager flagManager) {
+
+        // all world flags
+        flagManager.addFlag("teleportToHub", false, false);// temp: used to teleport player to hub world
+
+        // hub world flags
+
+        // unused: could use these to detect whether player has been to each world
+        flagManager.addFlag("beenToWorldOne", false, false);
+        flagManager.addFlag("beenToWorldTwo", false, false);
+        flagManager.addFlag("beenToWorldThree", false, false);
+
+        // persistent: talked to fire fox flags. Used to see if the player has talked to
+        // the Firefox
+        flagManager.addFlag("hasTalkedToFirefox0", false, true);// before entering world one
+        flagManager.addFlag("hasTalkedToFirefox1", false, true);// after world one and before world two
+        flagManager.addFlag("hasTalkedToFirefox2", false, true);// after world two and before world three
+        flagManager.addFlag("hasTalkedToFirefox3", false, true);// after world three and before game clear
+
+        // temp: flags for teleportation using the portals in hub
+        flagManager.addFlag("portalOneActivated", false, false);// world one portal
+        flagManager.addFlag("portalTwoActivated", false, false);// world two portal
+        flagManager.addFlag("portalThreeActivated", false, false);// world three portal
+
+        // persistent: used to unlock portals in hub
+        flagManager.addFlag("unlockedPortal1", false, true);
+        flagManager.addFlag("unlockedPortal2", false, true);
+        flagManager.addFlag("unlockedPortal2", false, true);
+
+        // persistent: used to tell if each world hasa been completed
+        flagManager.addFlag("worldOneComplete", false, true);
+        flagManager.addFlag("worldTwoComplete", false, true);
+        flagManager.addFlag("worldThreeComplete", false, true);
+
+        // world one flags
+
+        // old man jenkins
+        flagManager.addFlag("hasTalkedToOMJ", false, false);
+        flagManager.addFlag("hasFoundDentures", false, false);
+        flagManager.addFlag("hasFinishedOMJ", false, true);
+
+        // engineer
+        flagManager.addFlag("hasTalkedToNSE", false, false);
+        // temp: librarian
+        flagManager.addFlag("hasTalkedToLibrarian", false, false);
+        flagManager.addFlag("hasRanVirusScanLibrarian", false, false);
+        flagManager.addFlag("hasFoundLibraryShard", false, false);
+        // temp: normal npcs
+        flagManager.addFlag("hasRanVirusScanNPC1", false);
+        flagManager.addFlag("hasRanVirusScanNPC2", false);
+        // temp: infected npcs
+        flagManager.addFlag("curedNPC1", false, false);
+        flagManager.addFlag("curedNPC2", false, false);
+        flagManager.addFlag("curedNPC3", false, false);
+        flagManager.addFlag("curedNPC4", false, false);
+        flagManager.addFlag("curedNPC5", false, false);
+        flagManager.addFlag("hasCuredAllNPCs", false, false);
+        // temp: enter library
+        flagManager.addFlag("enterLibrary", false);
+
+        // world 11/ library flags
+        // temp: exit library
+        flagManager.addFlag("exitLibrary", false);
+
+        // world two flags
+
+        // beaver
+        flagManager.addFlag("hasTalkedToBeaver", false);
+
+        // world three flags
+
+        // temp: used to go up and down levels
+        flagManager.addFlag("wentUpLevel", false, false);
+        flagManager.addFlag("wentDownLevel", false, false);
+
+        // persistent: test flags. **remove**
+        flagManager.addFlag("hasTalkedToRedPanda", false, true);
+        flagManager.addFlag("hasTalkedToDino", false, true);
+
+        // test world flags
+
+        // shannon test world
+        flagManager.addFlag("hasTalkedToOMJ", false);
+        flagManager.addFlag("hasFoundDentures", false);
+
+        flagManager.addFlag("hasTalkedToNSE", false);
+
+        flagManager.addFlag("curedNPC1", false);
+        flagManager.addFlag("curedNPC2", false);
+        flagManager.addFlag("curedNPC3", false);
+        flagManager.addFlag("curedNPC4", false);
+        flagManager.addFlag("curedNPC5", false);
+        flagManager.addFlag("hasCuredAllNPCs", false);
 
     }
 
-
-    /*public void saveAll(){
-        for (int i = 0; i <n-1; i++){
-            savedFlagData.get(i).setState(Map.flagManager.);
-
-        }
-
+    /**
+     * This method uses the FlagManager reset() method to set all temp flags back to
+     * their initial starting value but keep the new flag states.
+     * 
+     * @param flagManager FlagManager where the flags are stored
+     */
+    public void loadFlags(FlagManager flagManager) {
+        flagManager.reset();
     }
-
-
-
-    private boolean isInitialized(Flag flag){
-
-    }
-
-    private Flag getFlag(String flagnames[]){
-       reurn
-    }
-    */
 }

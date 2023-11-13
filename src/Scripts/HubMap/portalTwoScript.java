@@ -15,9 +15,9 @@ public class portalTwoScript extends Script {
         if (!isFlagSet("unlockedPortal2") && !isFlagSet("worldOneComplete")) {
             addTextToTextboxQueue("clear world one then talk to the firefox");
         } else if (!isFlagSet("unlockedPortal2") && isFlagSet("worldOneComplete")){
-            addTextToTextboxQueue("world one cleared. talk to the firefox)");
+            addTextToTextboxQueue("world one complete. talk to the firefox)");
         }else if (isFlagSet("unlockedPortal2") && isFlagSet("worldOneComplete")){
-            addTextToTextboxQueue("world one cleared and firefox talked to");
+            addTextToTextboxQueue("world one complete and firefox talked to");
             addTextToTextboxQueue("teleporting to world 2");
         }else if(isFlagSet("unlockedPortal2") && !isFlagSet("worldOneComplete")){
             addTextToTextboxQueue("teleport flag error: portalTwoScript");

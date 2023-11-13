@@ -42,7 +42,6 @@ import Tilesets.InternetExplorerTileset;
 
 public class WorldOneMap extends Map {
 
-    public static boolean w1ClearedFS = false;
     public static int FragmentCount = 0;
 
     public WorldOneMap() {
@@ -157,14 +156,6 @@ public class WorldOneMap extends Map {
         triggers.add(new Trigger(1820, 300, 100, 20, new EnterLibraryScript()));
 
         return triggers;
-    }
-
-    public static void SW1ClearedFS(){
-
-    }
-
-    public static boolean getW1ClearedFS(){
-        return w1ClearedFS;
     }
 
     public static void addFragmentCount(int fragmentCount) {

@@ -4,37 +4,52 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 public class FlagManager {
-    protected HashMap<String, Boolean> flags = new HashMap<>();
+    protected HashMap<String, Flag> flags = new HashMap<>();
+
+
 
     public void addFlag(String flagName) {
-        flags.put(flagName, false);
+        Flag flag = new Flag(flagName, false, false);
+        flags.put(flagName, flag);
     }
 
     public void addFlag(String flagName, boolean startingValue) {
-        flags.put(flagName, startingValue);
+        Flag flag = new Flag(flagName, startingValue, false);
+        flags.put(flagName, flag);
+    }
+
+    public void addFlag(String flagName, boolean startingValue, boolean persistence) {
+        Flag flag = new Flag(flagName, startingValue, persistence);
+        flags.put(flagName, flag);
     }
 
     public void setFlag(String flagName) {
         if (flags.containsKey(flagName)) {
-            flags.put(flagName, true);
+            flags.get(flagName).setState(true);
         }
     }
 
     public void unsetFlag(String flagName) {
         if (flags.containsKey(flagName)) {
-            flags.put(flagName, false);
+            flags.get(flagName).setState(true);
         }
     }
 
+    
     public void reset() {
-        for (Entry<String, Boolean> entry : flags.entrySet()) {
-            entry.setValue(false);
+        for (Entry<String, Flag> entry : flags.entrySet()) {
+            if (entry.getValue().getPersitence() == false)
+                entry.getValue().setState(entry.getValue().getInitialState());
         }
     }
+
+
+    
 
     public boolean isFlagSet(String flagName) {
         if (flags.containsKey(flagName)) {
-            return flags.get(flagName);
+            if (flags.get(flagName).getState() == true)
+                return true;
         }
         return false;
     }

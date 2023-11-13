@@ -75,10 +75,6 @@ public class LibraryMap extends Map {
         return triggers;
     }
 
-    public static void SW1ClearedFS(){
-
-    }
-
 }
 
 
