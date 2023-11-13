@@ -19,7 +19,7 @@ public class FirefoxScript extends Script<NPC> {
         setNPCName("Firefox");
         showTextbox();
 
-
+        /*Debugging
         System.out.println("hasTalkedToFirefox0: " + isFlagSet("hasTalkedToFirefox0"));
         System.out.println("HubMap.getTalkedFS(0): " + HubMap.getTalkedFS(0));
         System.out.println("\nhasTalkedToFirefox1: " + isFlagSet("hasTalkedToFirefox1"));
@@ -36,6 +36,7 @@ public class FirefoxScript extends Script<NPC> {
         System.out.println("\nworldOneComplete: " + isFlagSet("worldOneComplete"));
         System.out.println("WorldOneMap.getW1ClearedFS(): "+ WorldOneMap.getW1ClearedFS());
         System.out.println("------------------------------------------------");
+        */
 
         if (!isFlagSet("hasTalkedToFirefox0")) {
             if (sequence == 0) {
@@ -89,11 +90,6 @@ public class FirefoxScript extends Script<NPC> {
             }else if (sequence == 2) {
                 setFlag("hasTalkedToFirefox0");
                 setFlag("unlockedPortal1");
-
-                HubMap.setTalkedFS(0, true);
-                ;
-                HubMap.setUnlockPortalFS(1, true);
-                ;
                 sequence++;
             }
 
@@ -101,29 +97,23 @@ public class FirefoxScript extends Script<NPC> {
             if (isFlagSet("worldOneComplete")) {
                 setFlag("hasTalkedToFirefox1");
                 setFlag("unlockedPortal2");
-                HubMap.setTalkedFS(1, true);
-                HubMap.setUnlockPortalFS(2, true);
             }
         } else if (!isFlagSet("hasTalkedToFirefox2")) {
             if(isFlagSet("worldTwoComplete")){
                 setFlag("hasTalkedToFirefox2");
                 setFlag("portalThreeUnlocked");
-                HubMap.setTalkedFS(2, true);
-                HubMap.setUnlockPortalFS(3, true);
             }
 
         } else if (!isFlagSet("hasTalkedToFirefox3") && isFlagSet("worldOneComplete")
                 && isFlagSet("worldTwoComplete") && isFlagSet("worldThreeComplete")) {
             setFlag("hasTalkedToFirefox3");
             // WIN FLAG HERE
-            HubMap.talkedToFirefoxFS[3] = true;
 
         }
     }
 
     @Override
     public ScriptState execute() {
-        // System.out.println(isFlagSet("hasTalkedToFirefox0"));
         if (!isFlagSet("hasTalkedToFirefox0")) {
             if (sequence == 0) {
                 start();
