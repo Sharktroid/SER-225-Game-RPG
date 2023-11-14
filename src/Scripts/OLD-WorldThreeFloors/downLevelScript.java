@@ -1,8 +1,7 @@
-package Scripts.WorldThreeFloors;
+/*package Scripts.WorldThreeFloors;
 
 import Level.Script;
 import Level.ScriptState;
-import Maps.WorldThreeFloors;
 
 //script to go down a floor in world three
 public class downLevelScript extends Script {
@@ -28,3 +27,4 @@ public class downLevelScript extends Script {
         return ScriptState.COMPLETED;
     }
 }
+*/

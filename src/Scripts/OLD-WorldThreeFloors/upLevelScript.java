@@ -1,3 +1,4 @@
+/*
 package Scripts.WorldThreeFloors;
 
 import Level.Script;
@@ -28,3 +29,4 @@ public class upLevelScript extends Script {
         return ScriptState.COMPLETED;
     }
 }
+*/

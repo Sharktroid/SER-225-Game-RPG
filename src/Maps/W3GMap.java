@@ -1,67 +1,69 @@
 package Maps;
 
+import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
 import Level.Textbox.Style;
 import Level.Trigger;
 import Scripts.WorldThreeFloors.upLevelScript;
+import Scripts.WorldOneMap.EnterLibraryScript;
+import Scripts.WorldOneMap.WorldOneClearScript;
 import Scripts.WorldThreeFloors.downLevelScript;
 import Tilesets.CommonTileset;
-
-import NPCs.Redpanda;
-import NPCs.Dinosaur;
-import Scripts.WorldThreeFloors.RedpandaScript;
-import Scripts.WorldThreeFloors.DinoScript;
 
 import java.util.ArrayList;
 
 //all 5 world three maps are created using this class
-public class WorldThreeFloors extends Map {
-
-    // current floor number int
-    public static int currentFloorNumber = 0;
-    public static boolean downFromFloor;
-
-
-
-
-    // current floor number getter
-    public static int getCurrentFloorNumber() {
-        return currentFloorNumber;
-    }
-
-    // current floor number setter
-    public static void setCurrentFloorNumber(int newFloorNumber) {
-        currentFloorNumber = newFloorNumber;
-    }
-
-    public static void setDownFromFloorTrue(){
-        downFromFloor = true;
-    }
-
+public class W3GMap extends Map {
 
     // setup maps
-    public WorldThreeFloors(int floorNum) {
-        super("world_three_" + floorNum + "_map.txt", new CommonTileset());
+    public W3GMap() {
+        super("w3gmap.txt", new CommonTileset());
 
-        // player starting position floor 0
-        if (floorNum == 0) {
-            if (downFromFloor == false){
-                //starting positon when teleported to world three
+        this.playerStartPosition = getMapTile(8, 11).getLocation();
+        textbox.setStyle(Style.WORLDTHREE);
+    }
+    /*
+    @Override
+    public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
+
+        return enhancedMapTiles;
+    }
+
+    /*
+
+    @Override
+    public ArrayList<NPC> loadNPCs() {
+
+        return npcs;
+    }
+
+    @Override
+    public ArrayList<Trigger> loadTriggers() {
+        ArrayList<Trigger> triggers = new ArrayList<>();
+
+        return triggers;
+    }
+
+    
+    /* 
+        if (downFromFloor == false){
+            //starting positon when teleported to world three
                 this.playerStartPosition = getMapTile(8, 11).getLocation();
             }
-            else{
-                //starting position when exited building in world three
-                this.playerStartPosition = getMapTile(8, 8).getLocation();
-            }
-
-
+        else{
+            //starting position when exited building in world three
+            this.playerStartPosition = getMapTile(8, 8).getLocation();
         }
 
-        // player starting position floors 1-4
-        else {
+
+    }
+
+    
+    // player starting position floors 1-4
+    else {
             this.playerStartPosition = getMapTile(8, 15).getLocation();
-        }
+    }
         textbox.setStyle(Style.WORLDTHREE);
     }
 
@@ -128,11 +130,7 @@ public class WorldThreeFloors extends Map {
         return npcs;
     }
 
-    public static boolean redPandaFlagState(){
-        return RedpandaScript.setRedPandaFlagState;
-    }
+    */
 
-    public static boolean DinoFlagState(){
-        return DinoScript.setDinoFlagState;
-    }
+    
 }

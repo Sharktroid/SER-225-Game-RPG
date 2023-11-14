@@ -9,9 +9,9 @@ import NPCs.Beaver;
 import Scripts.WorldTwoMap.BeaverScript;
 import Tilesets.CommonTileset;
 
-public class WorldTwoMap extends Map {
-    public WorldTwoMap() {
-        super("world_two_map.txt", new CommonTileset());
+public class W2GMap extends Map {
+    public W2GMap() {
+        super("w2gmap.txt", new CommonTileset());
         this.playerStartPosition = getMapTile(0, 6).getLocation();
         textbox.setStyle(Style.WORLDTWO);
     }
