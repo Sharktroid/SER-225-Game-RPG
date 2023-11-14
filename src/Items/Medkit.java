@@ -1,5 +1,6 @@
 package Items;
 
+import Engine.ImageLoader;
 import GameObject.Item;
 import Level.Combatant;
 import Level.Map;
@@ -13,6 +14,7 @@ public class Medkit extends Item {
         name = "Medkit";
         usable = true;
         battleUsable = true;
+        sprite = ImageLoader.load("Apple.png");
     }
 
 

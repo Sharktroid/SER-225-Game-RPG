@@ -1,8 +1,8 @@
 package Maps;
 
-import EnhancedMapTiles.FragmentObject;
-import EnhancedMapTiles.MedkitObject;
+import EnhancedMapTiles.ItemMapObject;
 import EnhancedMapTiles.PushableRock;
+import Items.Fragment;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
@@ -24,11 +24,11 @@ public class EvanTestMap extends Map {
     public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
         ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
 
-        FragmentObject fragment = new FragmentObject(getMapTile(6, 3).getLocation(), 1);
-        enhancedMapTiles.add(fragment);
+        // ItemMapObject fragment = new ItemMapObject(getMapTile(6, 3).getLocation(), new Fragment(null));
+        // enhancedMapTiles.add(fragment);
 
-        FragmentObject fragment2 = new FragmentObject(getMapTile(6, 3).getLocation(), 1);
-        enhancedMapTiles.add(fragment2);
+        // ItemMapObject fragment2 = new ItemMapObject(getMapTile(6, 3).getLocation(), 1);
+        // enhancedMapTiles.add(fragment2);
 
         PushableRock pushableRock = new PushableRock(getMapTile(4, 3).getLocation());
         enhancedMapTiles.add(pushableRock);
@@ -55,8 +55,8 @@ public class EvanTestMap extends Map {
         enhancedMapTiles.add(pushableRock8);
 
 
-        MedkitObject medkit = new MedkitObject(getMapTile(7, 3).getLocation(), 25);
-        enhancedMapTiles.add(medkit);
+        // MedkitObject medkit = new MedkitObject(getMapTile(7, 3).getLocation(), 25);
+        // enhancedMapTiles.add(medkit);
 
 
 

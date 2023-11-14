@@ -17,7 +17,7 @@ public class WorldOneClearScript extends Script {
         lockPlayer();
         showTextbox();
 
-        //if 
+        //if
         ///addTextToTextboxQueue("World One Cleared!");
         //addTextToTextboxQueue("The Firefox is summoning you.");
 
@@ -26,8 +26,8 @@ public class WorldOneClearScript extends Script {
         if (WorldOneMap.FragmentCount < 3) {
             showTextbox();
             addTextToTextboxQueue( "FragmentCount is "+WorldOneMap.FragmentCount+".");
-            
-            
+
+
         }
         else if (WorldOneMap.FragmentCount == 3){
             showTextbox();
@@ -49,9 +49,9 @@ public class WorldOneClearScript extends Script {
             unlockPlayer();
             setFlag("worldOneCleared");
         }
-        
-        
-        WorldOneMap.w1ClearedFS = true;
+
+
+        // WorldOneMap.w1ClearedFS = true;
     }
 
     @Override

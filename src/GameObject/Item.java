@@ -3,6 +3,7 @@ package GameObject;
 import Level.Combatant;
 import Level.Map;
 import Level.Player;
+import java.awt.image.BufferedImage;
 
 public abstract class Item {
     protected String name;
@@ -12,7 +13,8 @@ public abstract class Item {
     protected Boolean keyItem = false;
     protected Boolean droppable = true;
     protected Boolean consumable = true;
-    protected Player player;
+    public Player player;
+    protected BufferedImage sprite;
 
     public Item(Player player) {
         this.player = player;
@@ -64,5 +66,8 @@ public abstract class Item {
         else {
             throw new RuntimeException("This item was not given a proper 'Use' command");
         }
+    }
+    public BufferedImage getSprite() {
+        return sprite;
     }
 }

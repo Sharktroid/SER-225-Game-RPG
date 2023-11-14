@@ -2,12 +2,13 @@ package Maps;
 
 import java.util.ArrayList;
 
-import EnhancedMapTiles.CatFoodObject;
-import EnhancedMapTiles.FetchObject;
-import EnhancedMapTiles.FragmentObject;
-import EnhancedMapTiles.MedkitObject;
+import EnhancedMapTiles.ItemMapObject;
 import Game.SoundPlayer;
 import Game.SoundPlayer.MusicTracks;
+import Items.CatFood;
+import Items.Fetch;
+import Items.Fragment;
+import Items.Medkit;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
@@ -25,6 +26,7 @@ import NPCs.Normal1;
 import NPCs.Normal2;
 import NPCs.OldManJenks;
 import NPCs.SoulConsumingFlameNPC;
+import Scripts.BasicFragmentScript;
 import Scripts.WorldOneMap.EngineerScript;
 import Scripts.WorldOneMap.EnterLibraryScript;
 import Scripts.WorldOneMap.Infected1Script;
@@ -42,7 +44,6 @@ import Tilesets.InternetExplorerTileset;
 
 public class WorldOneMap extends Map {
 
-    public static boolean w1ClearedFS = false;
     public static int FragmentCount = 0;
 
     public WorldOneMap() {
@@ -56,25 +57,26 @@ public class WorldOneMap extends Map {
     public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
         ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
 
-        MedkitObject medkit = new MedkitObject(getMapTile(16, 14).getLocation(), 25);
+        ItemMapObject medkit = new ItemMapObject(getMapTile(16, 14).getLocation(), new Medkit(null));
         enhancedMapTiles.add(medkit);
 
-        CatFoodObject catFood = new CatFoodObject(getMapTile(5, 10).getLocation(), 2);
+        ItemMapObject catFood = new ItemMapObject(getMapTile(5, 10).getLocation(), new CatFood(null));
         enhancedMapTiles.add(catFood);
 
-        FetchObject fetch = new FetchObject(getMapTile(5, 14).getLocation(), 1);
+        ItemMapObject fetch = new ItemMapObject(getMapTile(5, 14).getLocation(), new Fetch(null));
         enhancedMapTiles.add(fetch);
 
-        FragmentObject fragment = new FragmentObject(getMapTile(6, 3).getLocation(), 1);
+        ItemMapObject fragment = new ItemMapObject(getMapTile(6, 3).getLocation(), new Fragment(null));
+        fragment.setInteractScript(new BasicFragmentScript());
         enhancedMapTiles.add(fragment);
 
-        FragmentObject fragment2 = new FragmentObject(getMapTile(6, 3).getLocation(), 1);
+        ItemMapObject fragment2 = new ItemMapObject(getMapTile(6, 3).getLocation(), new Fragment(null));
+        fragment2.setInteractScript(new BasicFragmentScript());
         enhancedMapTiles.add(fragment2);
 
-        FragmentObject fragment3 = new FragmentObject(getMapTile(6, 3).getLocation(), 1);
+        ItemMapObject fragment3 = new ItemMapObject(getMapTile(6, 3).getLocation(), new Fragment(null));
+        fragment3.setInteractScript(new BasicFragmentScript());
         enhancedMapTiles.add(fragment3);
-
-
 
 
         return enhancedMapTiles;
@@ -157,14 +159,6 @@ public class WorldOneMap extends Map {
         triggers.add(new Trigger(1820, 300, 100, 20, new EnterLibraryScript()));
 
         return triggers;
-    }
-
-    public static void SW1ClearedFS(){
-
-    }
-
-    public static boolean getW1ClearedFS(){
-        return w1ClearedFS;
     }
 
     public static void addFragmentCount(int fragmentCount) {

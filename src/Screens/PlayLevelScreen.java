@@ -5,6 +5,7 @@ import Engine.Key;
 import Engine.KeyLocker;
 import Engine.Keyboard;
 import Engine.Screen;
+import EnhancedMapTiles.ItemMapObject;
 import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.*;
@@ -36,12 +37,12 @@ public class PlayLevelScreen extends Screen {
     protected int floorNum = 0;
     private InventoryMenu inventory;
 
-   
+
     private KeyLocker keyLocker = new KeyLocker();
 
     //public String[] persistentFlags = {"sawHubMsg","hasTalkedToFirefox0","hasTalkedToFirefox1", "hasTalkedToFirefox2","hasTalkedToFirefox3","unlockedPortal1","unlockedPortal2","unlockedPortal2","unlockedPortal3","worldOneComplete","worldTwoComplete","worldThreeComplete"};
-    
-    
+
+
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -54,7 +55,7 @@ public class PlayLevelScreen extends Screen {
 
         // setup state
         flagManager = new FlagManager();
-                
+
 
         // takes world number variable form menu screen to choose world
         if (worldNum == -1) {
@@ -112,7 +113,7 @@ public class PlayLevelScreen extends Screen {
 
         }
 
-        
+
         //setup world two map
         else if (worldNum == 2) {
             this.map = new WorldTwoMap();
@@ -130,17 +131,17 @@ public class PlayLevelScreen extends Screen {
             flagManager.addFlag("hasTalkedToRedPanda", WorldThreeFloors.redPandaFlagState());
             flagManager.addFlag("hasTalkedToDino", WorldThreeFloors.DinoFlagState());
 
-            
+
 
         }
 
-        
+
 
         //setup hub world map
         else if (worldNum == 4) {
             this.map = new HubMap();
-            
-            
+
+
             flagManager.addFlag("beenToWorldOne", false);
             flagManager.addFlag("beenToWorldTwo", false);
             flagManager.addFlag("beenToWorldThree", false);
@@ -148,15 +149,15 @@ public class PlayLevelScreen extends Screen {
             for (int i = 0; i < 4; i++){
                 if (!HubMap.getTalkedFS(i)){
                     flagManager.addFlag("hasTalkedToFirefox"+i, false);
-                    
+
                 }
                 else if (HubMap.getTalkedFS(i)){
                     flagManager.addFlag("hasTalkedToFirefox"+i, true);
-                    
+
                 }
             }
-            
-            
+
+
             flagManager.addFlag("portalOneActivated", false);
             flagManager.addFlag("portalTwoActivated", false);
             flagManager.addFlag("portalThreeActivated", false);
@@ -174,9 +175,9 @@ public class PlayLevelScreen extends Screen {
                 }
             }
 
-            
 
-            flagManager.addFlag("worldOneComplete", WorldOneMap.w1ClearedFS);
+
+            flagManager.addFlag("worldOneComplete", false);
             flagManager.addFlag("worldTwoComplete", false);
             flagManager.addFlag("worldThreeComplete", false);
 
@@ -215,7 +216,7 @@ public class PlayLevelScreen extends Screen {
 
             flagManager.addFlag("exitedLibrary", false);
 
-            
+
         }
 
 
@@ -280,7 +281,7 @@ public class PlayLevelScreen extends Screen {
                     keyLocker.unlockKey(Key.E);
                 }
                 if (inventory.isActive()) {
-                    
+
                     inventory.update();
                 }
 
@@ -305,7 +306,7 @@ public class PlayLevelScreen extends Screen {
             worldNum = 1;
             initialize();
 
-        //to safari world 
+        //to safari world
         } else if ((map.getFlagManager().isFlagSet("portalTwoActivated"))||Keyboard.isKeyDown(Key.TWO) && !keyLocker.isKeyLocked(Key.TWO)) {
             worldNum = 2;
             initialize();
@@ -315,12 +316,12 @@ public class PlayLevelScreen extends Screen {
             worldNum = 3;
             initialize();
         }
-        
+
         //to hub world
         else if (map.getFlagManager().isFlagSet("worldOneCleared")|| map.getFlagManager().isFlagSet("worldTwoCleared") || map.getFlagManager().isFlagSet("worldThreeCleared") || Keyboard.isKeyDown(Key.FOUR) && !keyLocker.isKeyLocked(Key.FOUR)) {
             worldNum = 4;
             initialize();
-            
+
         //to world zero -> nine
         }else if (Keyboard.isKeyDown(Key.ZERO) && !keyLocker.isKeyLocked(Key.ZERO)) {
             worldNum = 0;
@@ -340,7 +341,7 @@ public class PlayLevelScreen extends Screen {
         }else if (Keyboard.isKeyDown(Key.NINE) && !keyLocker.isKeyLocked(Key.NINE)) { //Aaron
             worldNum = 9;
             initialize();
-        }        
+        }
 
         //world one area traversal
         if (worldNum == 1 || worldNum == 11){

@@ -1,5 +1,6 @@
 package Items;
 
+import Engine.ImageLoader;
 import GameObject.Item;
 import Level.Player;
 import Scripts.WorldOneMap.GarfunkleScript;
@@ -11,6 +12,7 @@ public class Fetch extends Item {
         super(player);
         name = "Lasagna";
         usable = true;
+        sprite = ImageLoader.load("Lasanga.png");
     }
 
     @Override
