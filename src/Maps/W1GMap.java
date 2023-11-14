@@ -40,12 +40,12 @@ import Scripts.WorldOneMap.SoulConsumingFlameNPCScript;
 import Scripts.WorldOneMap.WorldOneClearScript;
 import Tilesets.InternetExplorerTileset;
 
-public class WorldOneMap extends Map {
+public class W1GMap extends Map {
 
     public static int FragmentCount = 0;
 
-    public WorldOneMap() {
-        super("world_one_map.txt", new InternetExplorerTileset());
+    public W1GMap() {
+        super("w1gmap.txt", new InternetExplorerTileset());
         this.playerStartPosition = getMapTile(23, 13).getLocation();
         SoundPlayer.playMusic(MusicTracks.WORLDONEBGM);
         textbox.setStyle(Style.WORLDONE);

@@ -5,10 +5,6 @@ import Level.Map;
 import Level.NPC;
 import Level.Textbox.Style;
 import Level.Trigger;
-import Scripts.WorldThreeFloors.upLevelScript;
-import Scripts.WorldOneMap.EnterLibraryScript;
-import Scripts.WorldOneMap.WorldOneClearScript;
-import Scripts.WorldThreeFloors.downLevelScript;
 import Tilesets.CommonTileset;
 
 import java.util.ArrayList;

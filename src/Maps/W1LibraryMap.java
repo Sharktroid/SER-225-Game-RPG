@@ -12,13 +12,13 @@ import Tilesets.InternetExplorerTileset;
 import java.util.ArrayList;
 
 
-public class LibraryMap extends Map {
+public class W1LibraryMap extends Map {
 
     public static int currentArea = 1;
     public static boolean entered = true;
 
-    public LibraryMap() {
-        super("library_map.txt", new InternetExplorerTileset());
+    public W1LibraryMap() {
+        super("w1_library_map.txt", new InternetExplorerTileset());
         this.playerStartPosition = getMapTile(6, 1).getLocation().addX(20);
     }
 

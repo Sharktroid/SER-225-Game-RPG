@@ -11,8 +11,8 @@ public class EditorMaps {
             {
                 add("TitleScreen");
                 add("WorldZeroMap");
-                add("WorldOneMap");
-                add("LibraryMap");
+                add("W1GMap");
+                add("W1LibraryMap");
                 add("W2GMap");
                 add("W2AmazonMap");
                 add("W2AppleMap");
@@ -41,10 +41,10 @@ public class EditorMaps {
                 return new HubMap();
             case "WorldZeroMap":
                 return new WorldZeroMap();
-            case "WorldOneMap":
-                return new WorldOneMap();
-            case "LibraryMap":
-                return new LibraryMap();
+            case "W1GMap":
+                return new W1GMap();
+            case "W1LibraryMap":
+                return new W1LibraryMap();
             case "W2GMap":
                 return new W2GMap();
             case "W2AmazonMap":
