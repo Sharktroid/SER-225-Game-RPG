@@ -1,46 +1,40 @@
 package MapEditor;
 
 import Level.Map;
-import Maps.TitleScreenMap;
-import Maps.HubMap;
-import Maps.WorldZeroMap;
-import Maps.WorldOneMap;
-import Maps.LibraryMap;
-import Maps.WorldTwoMap;
-import Maps.WorldThreeFloors;
-import Maps.EvanTestMap;
-import Maps.CalvinTestMap;
-import Maps.ShannonTestMap;
-import Maps.JulietTestMap;
-import Maps.AaronTestMap;
+import Maps.*;
 
 import java.util.ArrayList;
 
 public class EditorMaps {
     public static ArrayList<String> getMapNames() {
-        return new ArrayList<String>() {{
-            add("TitleScreen");
-            add("WorldZeroMap");
-            add("WorldOneMap");
-            add("LibraryMap");
-            add("WorldTwoMap");
-            add("WorldThreeMap");
-            add("WorldThreeZeroMap");
-            add("WorldThreeOneMap");
-            add("WorldThreeTwoMap");
-            add("WorldThreeThreeMap");
-            add("WorldThreeFourMap");
-            add("EvanTestMap");
-            add("CalvinTestMap");
-            add("ShannonTestMap");
-            add("JulietTestMap");
-            add("AaronTestMap");
-            add("HubMap");
-        }};
+        return new ArrayList<String>() {
+            {
+                add("TitleScreen");
+                add("WorldZeroMap");
+                add("WorldOneMap");
+                add("LibraryMap");
+                add("W2GMap");
+                add("W2AmazonMap");
+                add("W2AppleMap");
+                add("W2SpotifyMap");
+                add("W2StarbucksMap");
+                add("W3GMap");
+                add("W31Map");
+                add("W32Map");
+                add("W33Map");
+                add("W34Map");
+                add("EvanTestMap");
+                add("CalvinTestMap");
+                add("ShannonTestMap");
+                add("JulietTestMap");
+                add("AaronTestMap");
+                add("HubMap");
+            }
+        };
     }
 
     public static Map getMapByName(String mapName) {
-        switch(mapName) {
+        switch (mapName) {
             case "TitleScreen":
                 return new TitleScreenMap();
             case "HubMap":
@@ -51,18 +45,26 @@ public class EditorMaps {
                 return new WorldOneMap();
             case "LibraryMap":
                 return new LibraryMap();
-            case "WorldTwoMap":
-                return new WorldTwoMap();
-            case "WorldThreeZeroMap":
-                return new WorldThreeFloors(0);
-            case "WorldThreeOneMap":
-                return new WorldThreeFloors(1);
-            case "WorldThreeTwoMap":
-                return new WorldThreeFloors(2);
-            case "WorldThreeThreeMap":
-                return new WorldThreeFloors(3);
-            case "WorldThreeFourMap":
-                return new WorldThreeFloors(4);
+            case "W2GMap":
+                return new W2GMap();
+            case "W2AmazonMap":
+                return new W2AmazonMap();
+            case "W2AppleMap":
+                return new W2AppleMap();
+            case "W2SpotifyMap":
+                return new W2SpotifyMap();
+            case "W2StarbucksMap":
+                return new W2StarbucksMap();
+            case "W3GMap":
+                return new W3GMap();
+            case "W31Map":
+                return new W31Map();
+            case "W32Map":
+                return new W32Map();
+            case "W33Map":
+                return new W33Map();
+            case "W34Map":
+                return new W34Map();
             case "EvanTestMap":
                 return new EvanTestMap();
             case "CalvinTestMap":

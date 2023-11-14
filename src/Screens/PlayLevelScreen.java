@@ -8,18 +8,8 @@ import Engine.Screen;
 import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.*;
-import Maps.WorldOneMap;
-import Maps.WorldTwoMap;
-import Maps.WorldThreeFloors;
-import Maps.WorldZeroMap;
-import Maps.CalvinTestMap;
-import Maps.EvanTestMap;
-import Maps.ShannonTestMap;
-import Maps.JulietTestMap;
-import Maps.LibraryMap;
-import Maps.AaronTestMap;
+import Maps.*;
 import Menus.InventoryMenu;
-import Maps.HubMap;
 import Players.Cat;
 import Utils.Direction;
 import Utils.Point;
@@ -63,13 +53,13 @@ public class PlayLevelScreen extends Screen {
             this.map = new WorldZeroMap();
         
         else if (worldNum == 1) 
-            this.map = new WorldOneMap();
+            this.map = new W1GMap();
        
         else if (worldNum == 2) 
-            this.map = new WorldTwoMap();
+            this.map = new W2GMap();
 
         else if (worldNum == 3) 
-            this.map = new WorldThreeFloors(floorNum);
+            this.map = new W3GMap();
 
         else if (worldNum == 4) 
             this.map = new HubMap();
@@ -90,7 +80,7 @@ public class PlayLevelScreen extends Screen {
             this.map = new AaronTestMap();
         
         else if (worldNum == 11)
-            this.map = new LibraryMap();
+            this.map = new W1LibraryMap();
 
         else
             this.map = new WorldZeroMap();
@@ -236,7 +226,7 @@ public class PlayLevelScreen extends Screen {
             }
         }
 
-        //world three floor traversal
+        /* old *********world three floor traversal
         if (worldNum == 3) {
             if (map.getFlagManager().isFlagSet("enteredBuilding")) {
                 flagManager.unsetFlag("enteredBuilding");
@@ -253,8 +243,9 @@ public class PlayLevelScreen extends Screen {
                 WorldThreeFloors.setDownFromFloorTrue();
                 initialize();
             }
+            
         }
-
+        */
 
         // if flag is set at any point during gameplay, game is "won" (**from old test map)
         if (map.getFlagManager().isFlagSet("hasFoundBall")) {
