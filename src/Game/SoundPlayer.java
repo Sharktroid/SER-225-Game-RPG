@@ -57,7 +57,7 @@ public class SoundPlayer {
             }
         }
 
-        public Boolean doesLoop() {
+        public Boolean hasIntro() {
             switch (getInternalName()) {
                 case "BATTLETHEME":
                     return true;
@@ -90,12 +90,12 @@ public class SoundPlayer {
             }
             stopMusic();
             String trackName = musicTrack.toString() + ".wav";
-            if (musicTrack.doesLoop()) {
+            if (musicTrack.hasIntro()) {
                 trackName = musicTrack.toString() + "-intro.wav";
             }
             AudioInputStream stream = AudioSystem.getAudioInputStream(new File(musicPath, trackName));
             musicClip.open(stream);
-            if (musicTrack.doesLoop()) {
+            if (musicTrack.hasIntro()) {
                 inIntro = true;
                 AudioInputStream loopStream = AudioSystem.getAudioInputStream(new File(musicPath, musicTrack.toString() + "-loop.wav"));
                 Clip loopingClip = AudioSystem.getClip();
