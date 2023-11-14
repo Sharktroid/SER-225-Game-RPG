@@ -27,12 +27,12 @@ public class PlayLevelScreen extends Screen {
     protected int floorNum = 0;
     private InventoryMenu inventory;
 
-   
+
     private KeyLocker keyLocker = new KeyLocker();
 
     //public String[] persistentFlags = {"sawHubMsg","hasTalkedToFirefox0","hasTalkedToFirefox1", "hasTalkedToFirefox2","hasTalkedToFirefox3","unlockedPortal1","unlockedPortal2","unlockedPortal2","unlockedPortal3","worldOneComplete","worldTwoComplete","worldThreeComplete"};
-    
-    
+
+
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -42,53 +42,53 @@ public class PlayLevelScreen extends Screen {
     }
 
     public void initialize() {
-                
+
         flagSaves.loadFlags(flagManager);
 
-        
-        if (worldNum == -1) 
+
+        if (worldNum == -1)
             worldNum = Screens.MenuScreen.worldNumber;
-        
-        if (worldNum == 0) 
+
+        if (worldNum == 0)
             this.map = new WorldZeroMap();
-        
-        else if (worldNum == 1) 
+
+        else if (worldNum == 1)
             this.map = new W1GMap();
-       
-        else if (worldNum == 2) 
+
+        else if (worldNum == 2)
             this.map = new W2GMap();
 
-        else if (worldNum == 3) 
+        else if (worldNum == 3)
             this.map = new W3GMap();
 
-        else if (worldNum == 4) 
+        else if (worldNum == 4)
             this.map = new HubMap();
 
         else if (worldNum == 5)
             this.map = new EvanTestMap();
-        
+
         else if (worldNum == 6)
             this.map = new CalvinTestMap();
-        
+
         else if (worldNum == 7)
             this.map = new ShannonTestMap();
-            
+
         else if (worldNum == 8)
             this.map = new JulietTestMap();
-        
+
         else if (worldNum == 9)
             this.map = new AaronTestMap();
-        
+
         else if (worldNum == 11)
             this.map = new W1LibraryMap();
 
         else
             this.map = new WorldZeroMap();
-            
 
-            
-        
-                                             
+
+
+
+
 
         map.setFlagManager(flagManager);
 
@@ -151,7 +151,7 @@ public class PlayLevelScreen extends Screen {
                     keyLocker.unlockKey(Key.E);
                 }
                 if (inventory.isActive()) {
-                    
+
                     inventory.update();
                 }
 
@@ -176,7 +176,7 @@ public class PlayLevelScreen extends Screen {
             worldNum = 1;
             initialize();
 
-        //to safari world 
+        //to safari world
         } else if ((map.getFlagManager().isFlagSet("portalTwoActivated"))||Keyboard.isKeyDown(Key.TWO) && !keyLocker.isKeyLocked(Key.TWO)) {
             worldNum = 2;
             initialize();
@@ -186,12 +186,12 @@ public class PlayLevelScreen extends Screen {
             worldNum = 3;
             initialize();
         }
-        
+
         //to hub world
         else if (map.getFlagManager().isFlagSet("teleportToHub") || Keyboard.isKeyDown(Key.FOUR) && !keyLocker.isKeyLocked(Key.FOUR)) {
             worldNum = 4;
             initialize();
-            
+
         //to world zero -> nine
         }else if (Keyboard.isKeyDown(Key.ZERO) && !keyLocker.isKeyLocked(Key.ZERO)) {
             worldNum = 0;
@@ -211,7 +211,7 @@ public class PlayLevelScreen extends Screen {
         }else if (Keyboard.isKeyDown(Key.NINE) && !keyLocker.isKeyLocked(Key.NINE)) { //Aaron
             worldNum = 9;
             initialize();
-        }        
+        }
 
         //world one area traversal
         if (worldNum == 1 || worldNum == 11){
@@ -243,7 +243,6 @@ public class PlayLevelScreen extends Screen {
                 WorldThreeFloors.setDownFromFloorTrue();
                 initialize();
             }
-            
         }
         */
 
