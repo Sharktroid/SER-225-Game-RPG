@@ -5,22 +5,11 @@ import Engine.Key;
 import Engine.KeyLocker;
 import Engine.Keyboard;
 import Engine.Screen;
-import EnhancedMapTiles.ItemMapObject;
 import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.*;
-import Maps.WorldOneMap;
-import Maps.WorldTwoMap;
-import Maps.WorldThreeFloors;
-import Maps.WorldZeroMap;
-import Maps.CalvinTestMap;
-import Maps.EvanTestMap;
-import Maps.ShannonTestMap;
-import Maps.JulietTestMap;
-import Maps.LibraryMap;
-import Maps.AaronTestMap;
+import Maps.*;
 import Menus.InventoryMenu;
-import Maps.HubMap;
 import Players.Cat;
 import Utils.Direction;
 import Utils.Point;
@@ -33,6 +22,7 @@ public class PlayLevelScreen extends Screen {
     protected PlayLevelScreenState playLevelScreenState;
     protected WinScreen winScreen;
     protected FlagManager flagManager;
+    protected FlagSaves flagSaves;
     protected int worldNum = -1;
     protected int floorNum = 0;
     private InventoryMenu inventory;
@@ -46,178 +36,58 @@ public class PlayLevelScreen extends Screen {
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
-        //String[] persistentFlags = {"sawHubMsg","hasTalkedToFirefox0","hasTalkedToFirefox1", "hasTalkedToFirefox2","hasTalkedToFirefox3","unlockedPortal1","unlockedPortal2","unlockedPortal2","unlockedPortal3","worldOneComplete","worldTwoComplete","worldThreeComplete"};
-        //FlagSaves flagSaves = new FlagSaves();
-        //FlagSaves.initialize(persistentFlags);
+        flagManager = new FlagManager();
+        flagSaves = new FlagSaves();
+        flagSaves.initializeFlags(flagManager);
     }
 
     public void initialize() {
 
-        // setup state
-        flagManager = new FlagManager();
+        flagSaves.loadFlags(flagManager);
 
 
-        // takes world number variable form menu screen to choose world
-        if (worldNum == -1) {
+        if (worldNum == -1)
             worldNum = Screens.MenuScreen.worldNumber;
-        }
 
-        //setup world zero map
-        if (worldNum == 0) {
+        if (worldNum == 0)
             this.map = new WorldZeroMap();
-        }
-        //set world one map
-        else if (worldNum == 1) {
-            this.map = new WorldOneMap();
 
-            flagManager.addFlag("hasLostBall", false);
-            flagManager.addFlag("hasTalkedToWalrus", false);
-            flagManager.addFlag("hasTalkedToDinosaur", false);
-            flagManager.addFlag("hasFoundBall", false);
-            flagManager.addFlag("sawHubMsg", false);
-            // flagManager.addFlag("hasTalkedToElder", false);
-            // flagManager.addFlag("findCat", false);
-            // flagManager.addFlag("foundCat", false);
-            // flagManager.addFlag("foundCat2", false);
-            // flagManager.addFlag("hasTalkedToGarfunkle", false);
-            // flagManager.addFlag("finishedElder", false);
-            // flagManager.addFlag("hasTalkedToElder2", false);
-            // flagManager.addFlag("findFetch", false);
-            // flagManager.addFlag("foundFetch", false);
+        else if (worldNum == 1)
+            this.map = new W1GMap();
 
-            //old man jenkins
-            flagManager.addFlag("hasTalkedToOMJ", false);
-            flagManager.addFlag("hasFoundDentures", false);
-            flagManager.addFlag("hasFinishedOMJ", false);
-            //engineer
-            flagManager.addFlag("hasTalkedToNSE", false);
-            //librarian
-            flagManager.addFlag("hasTalkedToLibrarian", false);
-            flagManager.addFlag("hasRanVirusScanLibrarian", false);
-            flagManager.addFlag("hasFoundLibraryShard", false);
-            //normal npcs
-            flagManager.addFlag("hasRanVirusScanNPC1", false);
-            flagManager.addFlag("hasRanVirusScanNPC2", false);
-            //infected npcs
-            flagManager.addFlag("curedNPC1", false);
-            flagManager.addFlag("curedNPC2", false);
-            flagManager.addFlag("curedNPC3", false);
-            flagManager.addFlag("curedNPC4", false);
-            flagManager.addFlag("curedNPC5", false);
-            flagManager.addFlag("hasCuredAllNPCs", false);
+        else if (worldNum == 2)
+            this.map = new W2GMap();
 
-            flagManager.addFlag("enteredLibrary", false);
+        else if (worldNum == 3)
+            this.map = new W3GMap();
 
-            flagManager.addFlag("worldOneCleared", false);
-
-
-        }
-
-
-        //setup world two map
-        else if (worldNum == 2) {
-            this.map = new WorldTwoMap();
-
-            flagManager.addFlag("hasTalkedToBeaver", false);
-        }
-
-        //setup world three map
-        else if (worldNum == 3) {
-
-            this.map = new WorldThreeFloors(floorNum);
-
-            flagManager.addFlag("wentUpLevel", false);
-            flagManager.addFlag("wentDownLevel", false);
-            flagManager.addFlag("hasTalkedToRedPanda", WorldThreeFloors.redPandaFlagState());
-            flagManager.addFlag("hasTalkedToDino", WorldThreeFloors.DinoFlagState());
-
-
-
-        }
-
-
-
-        //setup hub world map
-        else if (worldNum == 4) {
+        else if (worldNum == 4)
             this.map = new HubMap();
 
-
-            flagManager.addFlag("beenToWorldOne", false);
-            flagManager.addFlag("beenToWorldTwo", false);
-            flagManager.addFlag("beenToWorldThree", false);
-
-            for (int i = 0; i < 4; i++){
-                if (!HubMap.getTalkedFS(i)){
-                    flagManager.addFlag("hasTalkedToFirefox"+i, false);
-
-                }
-                else if (HubMap.getTalkedFS(i)){
-                    flagManager.addFlag("hasTalkedToFirefox"+i, true);
-
-                }
-            }
-
-
-            flagManager.addFlag("portalOneActivated", false);
-            flagManager.addFlag("portalTwoActivated", false);
-            flagManager.addFlag("portalThreeActivated", false);
-
-            flagManager.addFlag("startWorldThree", false);
-            flagManager.addFlag("sawHubMsg", HubMap.getHubMsgFS());
-
-
-            for (int i = 1; i <= 3; i++){
-                if (!HubMap.getUnlockedPortalFS(i)){
-                    flagManager.addFlag("unlockedPortal"+i, HubMap.getUnlockedPortalFS(i));
-                }
-                else if (HubMap.getUnlockedPortalFS(i)){
-                    flagManager.addFlag("unlockedPortal"+i, HubMap.getUnlockedPortalFS(i));
-                }
-            }
-
-
-
-            flagManager.addFlag("worldOneComplete", false);
-            flagManager.addFlag("worldTwoComplete", false);
-            flagManager.addFlag("worldThreeComplete", false);
-
-        }
-
-        else if (worldNum == 5){
+        else if (worldNum == 5)
             this.map = new EvanTestMap();
-        }
-        else if (worldNum == 6){
+
+        else if (worldNum == 6)
             this.map = new CalvinTestMap();
-        }
-        else if (worldNum == 7){
+
+        else if (worldNum == 7)
             this.map = new ShannonTestMap();
-            flagManager.addFlag("hasTalkedToOMJ", false);
-            flagManager.addFlag("hasFoundDentures", false);
 
-            flagManager.addFlag("hasTalkedToNSE", false);
-
-            flagManager.addFlag("curedNPC1", false);
-            flagManager.addFlag("curedNPC2", false);
-            flagManager.addFlag("curedNPC3", false);
-            flagManager.addFlag("curedNPC4", false);
-            flagManager.addFlag("curedNPC5", false);
-            flagManager.addFlag("hasCuredAllNPCs", false);
-        }
-        else if (worldNum == 8){
+        else if (worldNum == 8)
             this.map = new JulietTestMap();
-        }
-        else if (worldNum == 9){
+
+        else if (worldNum == 9)
             this.map = new AaronTestMap();
-        }
+
+        else if (worldNum == 11)
+            this.map = new W1LibraryMap();
+
+        else
+            this.map = new WorldZeroMap();
 
 
-        else if (worldNum == 11){
-            this.map = new LibraryMap();
-
-            flagManager.addFlag("exitedLibrary", false);
 
 
-        }
 
 
         map.setFlagManager(flagManager);
@@ -318,7 +188,7 @@ public class PlayLevelScreen extends Screen {
         }
 
         //to hub world
-        else if (map.getFlagManager().isFlagSet("worldOneCleared")|| map.getFlagManager().isFlagSet("worldTwoCleared") || map.getFlagManager().isFlagSet("worldThreeCleared") || Keyboard.isKeyDown(Key.FOUR) && !keyLocker.isKeyLocked(Key.FOUR)) {
+        else if (map.getFlagManager().isFlagSet("teleportToHub") || Keyboard.isKeyDown(Key.FOUR) && !keyLocker.isKeyLocked(Key.FOUR)) {
             worldNum = 4;
             initialize();
 
@@ -356,7 +226,7 @@ public class PlayLevelScreen extends Screen {
             }
         }
 
-        //world three floor traversal
+        /* old *********world three floor traversal
         if (worldNum == 3) {
             if (map.getFlagManager().isFlagSet("enteredBuilding")) {
                 flagManager.unsetFlag("enteredBuilding");
@@ -373,8 +243,9 @@ public class PlayLevelScreen extends Screen {
                 WorldThreeFloors.setDownFromFloorTrue();
                 initialize();
             }
-        }
 
+        }
+        */
 
         // if flag is set at any point during gameplay, game is "won" (**from old test map)
         if (map.getFlagManager().isFlagSet("hasFoundBall")) {

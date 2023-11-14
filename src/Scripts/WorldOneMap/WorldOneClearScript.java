@@ -5,7 +5,7 @@ import Game.SoundPlayer.SoundEffects;
 import Level.Script;
 import Level.ScriptState;
 import Level.Textbox.Style;
-import Maps.WorldOneMap;
+import Maps.W1GMap;
 
 
 // trigger script at beginning of game to set that heavy emotional plot
@@ -17,19 +17,14 @@ public class WorldOneClearScript extends Script {
         lockPlayer();
         showTextbox();
 
-        //if
-        ///addTextToTextboxQueue("World One Cleared!");
-        //addTextToTextboxQueue("The Firefox is summoning you.");
 
-
-
-        if (WorldOneMap.FragmentCount < 3) {
+        if (W1GMap.FragmentCount < 3) {
             showTextbox();
-            addTextToTextboxQueue( "FragmentCount is "+WorldOneMap.FragmentCount+".");
+            addTextToTextboxQueue( "FragmentCount is "+W1GMap.FragmentCount+".");
 
 
         }
-        else if (WorldOneMap.FragmentCount == 3){
+        else if (W1GMap.FragmentCount == 3){
             showTextbox();
             addTextToTextboxQueue("Collected All Fragments!");
             addTextToTextboxQueue("The Firefox is summoning you.");
@@ -40,23 +35,24 @@ public class WorldOneClearScript extends Script {
 
     @Override
     protected void cleanup() {
-        if(WorldOneMap.FragmentCount < 3){
+        if(W1GMap.FragmentCount < 3){
             hideTextbox();
             unlockPlayer();
             player.moveX(10);
-        }else if (WorldOneMap.FragmentCount == 3){
+        }else if (W1GMap.FragmentCount == 3){
             hideTextbox();
             unlockPlayer();
-            setFlag("worldOneCleared");
+            setFlag("worldOneComplete");
+            setFlag("teleportToHub");
         }
 
 
-        // WorldOneMap.w1ClearedFS = true;
+
     }
 
     @Override
     public ScriptState execute() {
-        if (!isFlagSet("worldOneCleared")) {
+        if (!isFlagSet("worldOneComplete")) {
             start();
             if (!isTextboxQueueEmpty()) {
                 return ScriptState.RUNNING;
