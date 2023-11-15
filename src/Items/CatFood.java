@@ -1,5 +1,6 @@
 package Items;
 
+import Engine.ImageLoader;
 import GameObject.Item;
 import Level.Player;
 
@@ -11,6 +12,7 @@ public class CatFood extends Item {
         super(player);
         name = "Cat Food";
         usable = true;
+        sprite = ImageLoader.load("CatFood.png");
     }
 
     @Override
