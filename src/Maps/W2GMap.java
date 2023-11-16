@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import Level.Map;
 import Level.NPC;
 import Level.Textbox.Style;
-import NPCs.Beaver;
-import Scripts.WorldTwoMap.BeaverScript;
+import NPCs.Finder1;
+import Scripts.WorldTwoMap.Finder1Script;
 import Tilesets.CommonTileset;
 
 public class W2GMap extends Map {
@@ -20,9 +20,9 @@ public class W2GMap extends Map {
     public ArrayList<NPC> loadNPCs() {
         ArrayList<NPC> npcs = new ArrayList<>();
 
-        Beaver beaver = new Beaver(5, getMapTile(4, 4).getLocation().subtractY(40));
-        beaver.setInteractScript(new BeaverScript());
-        npcs.add(beaver);
+        Finder1 finder1 = new Finder1(5, getMapTile(4, 4).getLocation().subtractY(40));
+        finder1.setInteractScript(new Finder1Script());
+        npcs.add(finder1);
 
         return npcs;
     }

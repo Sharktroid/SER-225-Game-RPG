@@ -5,9 +5,8 @@ import Level.Script;
 import Level.ScriptState;
 import Level.Textbox.Style;
 
-// script for talking to redpanda npc
 
-public class BeaverScript extends Script<NPC> {
+public class Finder1Script extends Script<NPC> {
 
     public static boolean setRedPandaFlagState = false;
 
@@ -16,7 +15,7 @@ public class BeaverScript extends Script<NPC> {
         lockPlayer();
 
         setTextboxStyle(Style.WORLDTWO);
-        setNPCName("Beaver");
+        setNPCName("Finder");
         showTextbox();
 
         //entity.facePlayer(player);
