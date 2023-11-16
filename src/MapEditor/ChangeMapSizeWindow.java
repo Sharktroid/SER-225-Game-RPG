@@ -29,7 +29,7 @@ public class ChangeMapSizeWindow {
         changeMapSizeWindow.setTitle("Change Map Size");
         changeMapSizeWindow.setModal(true);
         changeMapSizeWindow.setLocationRelativeTo(parent);
-        JPanel mainPanel = new JPanel(null);
+         mainPanel = new (null);
         changeMapSizeWindow.setContentPane(mainPanel);
         mainPanel.setBackground(Colors.CORNFLOWER_BLUE);
 

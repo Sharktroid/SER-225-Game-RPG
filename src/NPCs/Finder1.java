@@ -13,13 +13,13 @@ import Utils.Point;
 
 import java.util.HashMap;
 
-// This class is for the Officeworker NPC
-public class Officeworker extends NPC {
+// This class is for the beaver NPC
+public class Finder1 extends NPC {
     protected boolean isInteracting = false;
     protected SpriteFont playGame;
 
-    public Officeworker(int id, Point location) {
-        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("Officeworker.png"), 24, 52), "STAND_LEFT");
+    public Finder1(int id, Point location) {
+        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("finder1.png"), 25, 25), "STAND_LEFT");
     }
 
 
