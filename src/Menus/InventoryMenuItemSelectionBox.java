@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import Engine.Key;
 import GameObject.Item;
 import Level.Menu;
+import Scripts.ItemUseScript;
 import Utils.Point;
 
 public class InventoryMenuItemSelectionBox extends Menu {
@@ -43,6 +44,9 @@ public class InventoryMenuItemSelectionBox extends Menu {
                 if (item.isConsumable()) {
                     inventoryScreen.drop(item);
                 }
+                inventoryScreen.map
+                        .setActiveInteractScript(new ItemUseScript(item, inventoryScreen.player, inventoryScreen.map));
+                inventoryScreen.setActive(false);
                 break;
             case "Drop":
                 inventoryScreen.drop(item);

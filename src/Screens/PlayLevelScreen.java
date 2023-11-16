@@ -130,7 +130,7 @@ public class PlayLevelScreen extends Screen {
         }
 
         //setup inventory menu
-        inventory = new InventoryMenu(player);
+        inventory = new InventoryMenu(map, player);
 
         //setup win screen (**from old test map)
         winScreen = new WinScreen(this);

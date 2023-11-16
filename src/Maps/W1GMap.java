@@ -6,7 +6,6 @@ import EnhancedMapTiles.ItemMapObject;
 import Game.SoundPlayer;
 import Game.SoundPlayer.MusicTracks;
 import Items.CatFood;
-import Items.Fetch;
 import Items.Fragment;
 import Items.Medkit;
 import Level.EnhancedMapTile;
@@ -62,9 +61,6 @@ public class W1GMap extends Map {
 
         ItemMapObject catFood = new ItemMapObject(getMapTile(5, 10).getLocation(), new CatFood(null));
         enhancedMapTiles.add(catFood);
-
-        ItemMapObject fetch = new ItemMapObject(getMapTile(5, 14).getLocation(), new Fetch(null));
-        enhancedMapTiles.add(fetch);
 
         ItemMapObject fragment = new ItemMapObject(getMapTile(6, 3).getLocation(), new Fragment(null));
         fragment.setInteractScript(new BasicFragmentScript());

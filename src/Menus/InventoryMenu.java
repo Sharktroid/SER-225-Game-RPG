@@ -7,6 +7,7 @@ import Engine.Config;
 import Engine.GraphicsHandler;
 import Engine.Key;
 import GameObject.Item;
+import Level.Map;
 import Level.Menu;
 import Level.Player;
 import Level.Textbox;
@@ -15,7 +16,7 @@ import Utils.Point;
 import Level.Panel;
 
 public class InventoryMenu extends Menu {
-    private Player player;
+    protected Player player;
     private final int totalHeight = Config.GAME_WINDOW_HEIGHT - spacer - (top * 2 ) - 39;
     private int descriptionHeight;
     private int descriptionTop;
@@ -23,9 +24,11 @@ public class InventoryMenu extends Menu {
     private Boolean viewingKeyItems = false;
     protected InventoryMenuItemSelectionBox selectionBox;
     private Panel descriptionPanel;
+    protected Map map;
 
-    public InventoryMenu(Player player) {
+    public InventoryMenu(Map map, Player player) {
         super();
+        this.map = map;
         height = (int) (totalHeight * (0.75));
         width = Config.GAME_WINDOW_WIDTH - (left * 2) - 16;
         descriptionHeight = (int) (height * (1.0/3));
@@ -87,7 +90,7 @@ public class InventoryMenu extends Menu {
     public void drop(Item item) {
         getCurrentItems().remove(item);
         if (currentTextItemHovered >= getCurrentItems().size()) {
-            currentTextItemHovered = getCurrentItems().size() - 1;
+            currentTextItemHovered = Math.max(getCurrentItems().size() - 1, 0);
         }
     }
 

@@ -12,7 +12,8 @@ public class Medkit extends Item {
     public Medkit(Player player) {
         super(player);
         name = "Medkit";
-        usable = true;
+        description = String.format("Restores %d health", healingAmount);
+        useText = String.format("%d health restored", healingAmount);
         battleUsable = true;
         sprite = ImageLoader.load("Apple.png");
     }
