@@ -164,6 +164,72 @@ public class ChromeTileset extends Tileset {
 
         mapTiles.add(chromeFlowerTile);
 
+        // top left desk
+        Frame topLeftDeskFrame = new FrameBuilder(getSubImage(1, 3))
+                .withScale(tileScale)
+                .withBounds(0, 10, 16, 6)
+                .build();
+
+        MapTileBuilder topLeftDeskTile = new MapTileBuilder(topLeftDeskFrame)
+                .withTileType(TileType.NOT_PASSABLE);
+
+        mapTiles.add(topLeftDeskTile);
+
+        // top right desk
+        Frame topRightDeskFrame = new FrameBuilder(getSubImage(1, 4))
+                .withScale(tileScale)
+                .withBounds(0, 10, 16, 6)
+                .build();
+
+        MapTileBuilder topRightDeskTile = new MapTileBuilder(topRightDeskFrame)
+                .withTileType(TileType.NOT_PASSABLE);
+
+        mapTiles.add(topRightDeskTile);
+
+        // bottom left desk
+        Frame bottomLeftDeskFrame = new FrameBuilder(getSubImage(2, 3))
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder bottomLeftDeskTile = new MapTileBuilder(bottomLeftDeskFrame)
+                .withTileType(TileType.NOT_PASSABLE);
+
+        mapTiles.add(bottomLeftDeskTile);
+
+        // bottom right desk
+        Frame bottomRightDeskFrame = new FrameBuilder(getSubImage(2, 4))
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder bottomRightDeskTile = new MapTileBuilder(bottomRightDeskFrame)
+                .withTileType(TileType.NOT_PASSABLE);
+
+        mapTiles.add(bottomRightDeskTile);
+
+
+        // fan 
+        Frame[] fanFrames = new Frame[] {
+                new FrameBuilder(getSubImage(4, 4), 65)
+                        .withScale(tileScale)
+                        .build(),
+                new FrameBuilder(getSubImage(3, 4), 65)
+                        .withScale(tileScale)
+                        .build(),
+                new FrameBuilder(getSubImage(5, 4), 65)
+                        .withScale(tileScale)
+                        .build(),
+                new FrameBuilder(getSubImage(3, 4), 65)
+                        .withScale(tileScale)
+                        .build(),
+            };
+    
+            MapTileBuilder fanTile = new MapTileBuilder(fanFrames)
+                    .withTileType(TileType.NOT_PASSABLE);
+    
+            mapTiles.add(fanTile);
+    
+    
+
 
  
 
