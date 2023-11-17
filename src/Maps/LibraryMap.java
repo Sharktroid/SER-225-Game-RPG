@@ -48,7 +48,7 @@ public class LibraryMap extends Map {
 
         PushableRock pushableRock8 = new PushableRock(getMapTile(10, 1).getLocation());
         enhancedMapTiles.add(pushableRock8);
-
+        
         return enhancedMapTiles;
     }
     public ArrayList<NPC> loadNPCs() {
