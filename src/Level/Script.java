@@ -1,7 +1,8 @@
 package Level;
 import GameObject.Rectangle;
 import SpriteFont.SpriteFont;
-import Utils.Direction;
+import Utils.Direction; 
+import Level.Textbox;
 
 // This class is a base class for all scripts in the game -- all scripts should extend from it
 // Scripts can be used to interact with map entities
@@ -34,6 +35,7 @@ public abstract class Script<T extends MapEntity> {
     public Player getPlayer() { return player; }
     public void setPlayer(Player player) { this.player = player; }
     public T getEntity() { return entity; }
+    //public int chosenOption(int choiceNum){return choiceNum;}
     public void setMapEntity(T entity) {
         this.entity = entity;
     }
@@ -77,6 +79,7 @@ public abstract class Script<T extends MapEntity> {
     // reset start in case more setup logic is to be carried out in the case of multistep scripts
     protected void end() {
         cleanup();
+        this.setChoice(-1);
         start = true;
     }
 

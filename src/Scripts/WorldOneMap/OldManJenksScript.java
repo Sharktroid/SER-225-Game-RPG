@@ -94,6 +94,7 @@ public class OldManJenksScript extends Script<NPC> {
         } else {
             addTextToTextboxQueue("Yo hav-nt fin em yet? Go!");
         }
+        
     }
 
 
@@ -150,6 +151,7 @@ public class OldManJenksScript extends Script<NPC> {
                 sequence++;
             }
         }
+    
     }
 
     @Override

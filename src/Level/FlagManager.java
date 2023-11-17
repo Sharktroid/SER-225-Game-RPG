@@ -31,7 +31,7 @@ public class FlagManager {
 
     public void unsetFlag(String flagName) {
         if (flags.containsKey(flagName)) {
-            flags.get(flagName).setState(true);
+            flags.get(flagName).setState(false);
         }
     }
 

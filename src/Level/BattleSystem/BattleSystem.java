@@ -58,7 +58,7 @@ public class BattleSystem {
     private void advance() {
         if (enemy.getHitPoints() <= 0) {
             enemy.kill();
-            map.getTextbox().addText("You Win!!");
+            map.getTextbox().addText("CLOSING NETWORK SECURITY TOOL...");//5
             map.getTextbox().setIsActive(true);
             shuttingDown = true;
         } else {
