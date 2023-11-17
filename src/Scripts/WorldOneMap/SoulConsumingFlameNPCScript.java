@@ -4,6 +4,7 @@ import Combatants.SoulConsumingFlame;
 import Game.SoundPlayer;
 import Game.SoundPlayer.MusicTracks;
 import Level.NPC;
+import Level.Player;
 import Level.Script;
 import Level.ScriptState;
 import Level.Textbox.Style;
@@ -24,6 +25,12 @@ public class SoulConsumingFlameNPCScript extends Script<NPC> {
         unlockPlayer();
         hideTextbox();
         SoundPlayer.playMusic(MusicTracks.WORLDONEBGM);
+    }
+
+    @Override
+    public void setPlayer(Player player) {
+        // TODO Auto-generated method stub
+        super.setPlayer(player);
     }
 
     @Override

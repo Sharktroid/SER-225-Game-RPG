@@ -3,16 +3,19 @@ package GameObject;
 import Level.Combatant;
 import Level.Map;
 import Level.Player;
+import java.awt.image.BufferedImage;
 
 public abstract class Item {
     protected String name;
     protected String description = "What the hey is this?";
-    protected Boolean usable = false;
+    protected String useText = null; // If null item cannot be used
+
     protected Boolean battleUsable = false;
     protected Boolean keyItem = false;
     protected Boolean droppable = true;
     protected Boolean consumable = true;
-    protected Player player;
+    public Player player;
+    protected BufferedImage sprite;
 
     public Item(Player player) {
         this.player = player;
@@ -27,7 +30,7 @@ public abstract class Item {
     }
 
     public Boolean canUse() {
-        return usable;
+        return useText != null;
     }
 
     public Boolean canUseInCombat() {
@@ -48,10 +51,9 @@ public abstract class Item {
 
     public void use() {
         // Meant to be overridden or never used; throws when called.
-        if (usable) {
+        if (canUse()) {
             throw new RuntimeException("An unusable item was used");
-        }
-        else {
+        } else {
             throw new RuntimeException("This item was not given a proper 'Use' command");
         }
     }
@@ -60,9 +62,16 @@ public abstract class Item {
         // Meant to be overridden or never used; throws when called.
         if (battleUsable) {
             throw new RuntimeException("An unusable item was used");
-        }
-        else {
+        } else {
             throw new RuntimeException("This item was not given a proper 'Use' command");
         }
+    }
+
+    public BufferedImage getSprite() {
+        return sprite;
+    }
+
+    public String getUseText() {
+        return useText;
     }
 }

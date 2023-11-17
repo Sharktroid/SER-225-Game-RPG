@@ -1,5 +1,6 @@
 package Items;
 
+import Engine.ImageLoader;
 import GameObject.Item;
 import Level.Player;
 
@@ -10,7 +11,11 @@ public class CatFood extends Item {
     public CatFood(Player player) {
         super(player);
         name = "Cat Food";
-        usable = true;
+        description = String.format("Increases movement speed by %.0f%% for %.0f seconds", speedModifier * 100,
+                (Float) ((float) speedModifierDuration) / 60);
+        useText = String.format("Speed increased by %.0f%% for %.0f seconds", speedModifier * 100,
+                (Float) ((float) speedModifierDuration) / 60);
+        sprite = ImageLoader.load("CatFood.png");
     }
 
     @Override

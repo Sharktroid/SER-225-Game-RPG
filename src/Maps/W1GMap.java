@@ -2,12 +2,12 @@ package Maps;
 
 import java.util.ArrayList;
 
-import EnhancedMapTiles.CatFoodObject;
-import EnhancedMapTiles.FetchObject;
-import EnhancedMapTiles.FragmentObject;
-import EnhancedMapTiles.MedkitObject;
+import EnhancedMapTiles.ItemMapObject;
 import Game.SoundPlayer;
 import Game.SoundPlayer.MusicTracks;
+import Items.CatFood;
+import Items.Fragment;
+import Items.Medkit;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
@@ -25,6 +25,8 @@ import NPCs.Normal1;
 import NPCs.Normal2;
 import NPCs.OldManJenks;
 import Scripts.WorldOneMap.*;
+import NPCs.SoulConsumingFlameNPC;
+import Scripts.BasicFragmentScript;
 import Tilesets.InternetExplorerTileset;
 
 public class W1GMap extends Map {
@@ -43,22 +45,22 @@ public class W1GMap extends Map {
     public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
         ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
 
-        MedkitObject medkit = new MedkitObject(getMapTile(16, 14).getLocation(), 25);
+        ItemMapObject medkit = new ItemMapObject(getMapTile(16, 14).getLocation(), new Medkit(null));
         enhancedMapTiles.add(medkit);
 
-        CatFoodObject catFood = new CatFoodObject(getMapTile(5, 10).getLocation(), 2);
+        ItemMapObject catFood = new ItemMapObject(getMapTile(5, 10).getLocation(), new CatFood(null));
         enhancedMapTiles.add(catFood);
 
-        FetchObject fetch = new FetchObject(getMapTile(5, 14).getLocation(), 1);
-        enhancedMapTiles.add(fetch);
-
-        FragmentObject fragment = new FragmentObject(getMapTile(6, 3).getLocation(), 1);
+        ItemMapObject fragment = new ItemMapObject(getMapTile(6, 3).getLocation(), new Fragment(null));
+        fragment.setInteractScript(new BasicFragmentScript());
         enhancedMapTiles.add(fragment);
 
-        FragmentObject fragment2 = new FragmentObject(getMapTile(6, 3).getLocation(), 1);
+        ItemMapObject fragment2 = new ItemMapObject(getMapTile(6, 3).getLocation(), new Fragment(null));
+        fragment2.setInteractScript(new BasicFragmentScript());
         enhancedMapTiles.add(fragment2);
 
-        FragmentObject fragment3 = new FragmentObject(getMapTile(6, 3).getLocation(), 1);
+        ItemMapObject fragment3 = new ItemMapObject(getMapTile(6, 3).getLocation(), new Fragment(null));
+        fragment3.setInteractScript(new BasicFragmentScript());
         enhancedMapTiles.add(fragment3);
 
         return enhancedMapTiles;

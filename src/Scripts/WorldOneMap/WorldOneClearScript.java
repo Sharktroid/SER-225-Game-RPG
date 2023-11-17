@@ -21,8 +21,8 @@ public class WorldOneClearScript extends Script {
         if (W1GMap.FragmentCount < 3) {
             showTextbox();
             addTextToTextboxQueue( "FragmentCount is "+W1GMap.FragmentCount+".");
-            
-            
+
+
         }
         else if (W1GMap.FragmentCount == 3){
             showTextbox();
@@ -45,9 +45,9 @@ public class WorldOneClearScript extends Script {
             setFlag("worldOneComplete");
             setFlag("teleportToHub");
         }
-        
-        
-        
+
+
+
     }
 
     @Override

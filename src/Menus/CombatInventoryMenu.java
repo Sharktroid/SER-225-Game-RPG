@@ -14,7 +14,7 @@ public class CombatInventoryMenu extends InventoryMenu {
     protected CombatInventoryMenuItemSelectionBox combatSelectionBox;
 
     public CombatInventoryMenu(Player player, PlayerCombatant playerCombatant, BattleMenu battleMenu) {
-        super(player);
+        super(null, player);
         this.battleMenu = battleMenu;
         this.playerCombatant = playerCombatant;
     }

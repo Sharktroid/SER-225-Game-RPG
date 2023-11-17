@@ -1,49 +1,40 @@
 package EnhancedMapTiles;
 
 import Builders.FrameBuilder;
-import Engine.ImageLoader;
-import Game.SoundPlayer;
-import Game.SoundPlayer.SoundEffects;
 import GameObject.Frame;
 import GameObject.GameObject;
+import GameObject.Item;
 import GameObject.SpriteSheet;
-import Items.CatFood;
 import Level.EnhancedMapTile;
 import Level.MapEntityStatus;
 import Level.Player;
 import Level.PlayerState;
 import Level.TileType;
+import Scripts.BasicItemScript;
 import Utils.Point;
 
-public class CatFoodObject extends EnhancedMapTile {
-    // private int healingAmount;
-    // private int speedAmount;
+public class ItemMapObject extends EnhancedMapTile {
 
-    public CatFoodObject(Point location, int speedAmount) {
-        super(location.x, location.y, new SpriteSheet(ImageLoader.load("CatFood.png"), 25, 25),
+    public ItemMapObject(Point location, Item item) {
+        super(location.x, location.y, new SpriteSheet(item.getSprite(), 25, 25),
                 TileType.NOT_PASSABLE);
-        // this.speedAmount = speedAmount;
+        this.interactScript = new BasicItemScript(item);
     }
 
     @Override
     public void update(Player player) {
         super.update(player);
         if (player.overlaps(this) && player.getPlayerState() == PlayerState.WALKING) {
-            SoundPlayer.playSoundEffect(SoundEffects.ITEMGET);
-            player.addItem(new CatFood(player));
+            interactScript.setIsActive(true);
+            map.setActiveInteractScript(interactScript);
             this.mapEntityStatus = MapEntityStatus.REMOVED;
         }
     }
 
-    // increases speed amount by 2
-    // public int getSpeedAmount() {
-    //     return 2;
-    // }
-
     @Override
     protected GameObject loadBottomLayer(SpriteSheet spriteSheet) {
         Frame frame = new FrameBuilder(spriteSheet.getSubImage(0, 0))
-                .withScale(2)// put f after number if a decimil
+                .withScale(2)
                 .build();
         return new GameObject(x, y, frame);
     }
