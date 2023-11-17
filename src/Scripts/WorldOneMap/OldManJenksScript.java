@@ -50,7 +50,7 @@ public class OldManJenksScript extends Script<NPC> {
                 showTextbox();
                 if (responseNum == 0) {
                     if (miniSequence == 0) {
-                        addTextToTextboxQueue("Well, it was bliss before a huge earthquake hit and this portal opened up.");
+                        addTextToTextboxQueue("Well, it was bliss before a huge earthquake hit and this\nportal opened up.");
                         addTextToTextboxQueue("What's your purpose for coming here?");
                     } else if (miniSequence == 1) {
                         setNPCName("T");
@@ -60,9 +60,9 @@ public class OldManJenksScript extends Script<NPC> {
                         addTextToTextboxQueue(answers[1]);
                     }
                 }
-                addTextToTextboxQueue("It might not be an orb, but I did find this purple shard on the ground.");
+                addTextToTextboxQueue("It might not be an orb, but I did find this purple shard on\nthe ground.");
                 addTextToTextboxQueue("It was right near the portal you came out of.");
-                addTextToTextboxQueue("Since you were so kind to find me my dentures, I can give it to you.");
+                addTextToTextboxQueue("Since you were so kind to find me my dentures, I can\ngive it to you.");
             } else if (sequence == 2) {
                 showTextbox();
                 setNPCName("T");

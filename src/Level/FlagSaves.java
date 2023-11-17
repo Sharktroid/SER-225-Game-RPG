@@ -46,8 +46,8 @@ public class FlagSaves {
         // world one flags
 
         // old man jenkins
-        flagManager.addFlag("hasTalkedToOMJ", false, false);
-        flagManager.addFlag("hasFoundDentures", false, false);
+        flagManager.addFlag("hasTalkedToOMJ", false, true);
+        flagManager.addFlag("hasFoundDentures", false, true);
         flagManager.addFlag("hasFinishedOMJ", false, true);
 
         // engineer
@@ -60,8 +60,8 @@ public class FlagSaves {
         flagManager.addFlag("hasRanVirusScanLibrarian", false, false);
         flagManager.addFlag("hasFoundLibraryShard", false, false);
         // normal npcs
-        flagManager.addFlag("hasRanVirusScanNPC1", false);
-        flagManager.addFlag("hasRanVirusScanNPC2", false);
+        flagManager.addFlag("hasRanVirusScanNPC1", false, true);
+        flagManager.addFlag("hasRanVirusScanNPC2", false, true);
         
         // infected npcs
         flagManager.addFlag("w1CuredNPC1", false, true);

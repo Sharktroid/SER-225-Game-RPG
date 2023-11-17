@@ -9,7 +9,6 @@ import NPCs.Firefox;
 import Scripts.HubMap.*;
 import Tilesets.HubTileset;
 
-
 public class HubMap extends Map {
 
     public HubMap() {
