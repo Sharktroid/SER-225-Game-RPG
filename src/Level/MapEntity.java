@@ -93,6 +93,7 @@ public class MapEntity extends GameObject {
         this.existenceFlag = existenceFlag;
     }
 
+
     public boolean isUncollidable() {
         return isUncollidable;
     }

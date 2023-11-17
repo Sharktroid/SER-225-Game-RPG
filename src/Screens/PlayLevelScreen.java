@@ -172,7 +172,7 @@ public class PlayLevelScreen extends Screen {
         //world traversal
 
         //to internet explorer world
-        if (map.getFlagManager().isFlagSet("portalOneActivated")|| (map.getFlagManager().isFlagSet("exitedLibrary")) || Keyboard.isKeyDown(Key.ONE) && !keyLocker.isKeyLocked(Key.ONE)) {
+        if (flagManager.isFlagSet("portalOneActivated")|| (map.getFlagManager().isFlagSet("exitedLibrary")) || Keyboard.isKeyDown(Key.ONE) && !keyLocker.isKeyLocked(Key.ONE)) {
             worldNum = 1;
             initialize();
 
@@ -224,7 +224,16 @@ public class PlayLevelScreen extends Screen {
                 worldNum = 1;
                 initialize();
             }
+
+            if(map.getFlagManager().isFlagSet("w1CuredNPC1") && map.getFlagManager().isFlagSet("w1CuredNPC2") && map.getFlagManager().isFlagSet("w1CuredNPC3") && map.getFlagManager().isFlagSet("w1CuredNPC4") && map.getFlagManager().isFlagSet("w1CuredNPC5")){
+                map.getFlagManager().setFlag("w1CuredAllNPCs");
+                ///System.out.println("All npcs cured: "+map.getFlagManager().getFlagState("w1CuredAllNPCs"));
+            }
+
+
         }
+
+
 
         /* old *********world three floor traversal
         if (worldNum == 3) {
