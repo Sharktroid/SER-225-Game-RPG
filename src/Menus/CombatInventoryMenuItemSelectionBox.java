@@ -7,7 +7,7 @@ public class CombatInventoryMenuItemSelectionBox extends InventoryMenuItemSelect
     private CombatInventoryMenu combatInventoryMenu;
 
     public CombatInventoryMenuItemSelectionBox(CombatInventoryMenu inventoryScreen, Item item, Point position) {
-        super(new InventoryMenu(null), item, position);
+        super(new InventoryMenu(null, null), item, position);
         this.combatInventoryMenu = inventoryScreen;
             choices.remove("Use");
         if (item.canUseInCombat()) {

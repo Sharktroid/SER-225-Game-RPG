@@ -9,7 +9,6 @@ import Level.EnhancedMapTile;
 import Level.MapEntityStatus;
 import Level.Player;
 import Level.PlayerState;
-import Level.Script;
 import Level.TileType;
 import Scripts.BasicItemScript;
 import Utils.Point;
