@@ -2,10 +2,10 @@ package Maps;
 
 import java.util.ArrayList;
 
-import EnhancedMapTiles.CatFoodObject;
-import EnhancedMapTiles.FetchObject;
-import EnhancedMapTiles.FragmentObject;
-import EnhancedMapTiles.MedkitObject;
+//import EnhancedMapTiles.CatFoodObject;
+//import EnhancedMapTiles.FetchObject;
+//import EnhancedMapTiles.FragmentObject;
+//import EnhancedMapTiles.MedkitObject;
 import Game.SoundPlayer;
 import Game.SoundPlayer.MusicTracks;
 import Level.EnhancedMapTile;
@@ -39,7 +39,7 @@ public class OLDWorldOneMap extends Map {
     @Override
     public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
         ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
-
+/* 
         MedkitObject medkit = new MedkitObject(getMapTile(16, 14).getLocation(), 25);
         enhancedMapTiles.add(medkit);
 
@@ -58,7 +58,7 @@ public class OLDWorldOneMap extends Map {
         FragmentObject fragment3 = new FragmentObject(getMapTile(6, 3).getLocation(), 1);
         enhancedMapTiles.add(fragment3);
 
-
+*/
 
 
         return enhancedMapTiles;

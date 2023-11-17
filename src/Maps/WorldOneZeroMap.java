@@ -1,8 +1,8 @@
 package Maps;
 
-import EnhancedMapTiles.MedkitObject;
-import EnhancedMapTiles.CatFoodObject;
-import EnhancedMapTiles.FetchObject;
+//import EnhancedMapTiles.MedkitObject;
+//import EnhancedMapTiles.CatFoodObject;
+//import EnhancedMapTiles.FetchObject;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
@@ -26,7 +26,7 @@ public class WorldOneZeroMap extends Map {
     @Override
     public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
         ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
-
+/* 
         MedkitObject medkit = new MedkitObject(getMapTile(16, 14).getLocation(), 25);
         enhancedMapTiles.add(medkit);
 
@@ -36,7 +36,7 @@ public class WorldOneZeroMap extends Map {
         FetchObject fetch = new FetchObject(getMapTile(5, 14).getLocation(), 1);
         enhancedMapTiles.add(fetch);
 
-
+*/
 
         return enhancedMapTiles;
     }
@@ -45,7 +45,7 @@ public class WorldOneZeroMap extends Map {
     public ArrayList<NPC> loadNPCs() {
         ArrayList<NPC> npcs = new ArrayList<>();
         // remember to import NPC and Scripts for new NPC
-
+/* 
         Walrus walrus = new Walrus(1, getMapTile(4, 28).getLocation().subtractY(40));
         walrus.setInteractScript(new WalrusScript());
         npcs.add(walrus);
@@ -90,7 +90,7 @@ public class WorldOneZeroMap extends Map {
         SoulConsumingFlameNPC soulConsumingFlame = new SoulConsumingFlameNPC(8, getMapTile(11, 16).getLocation().subtractY(40));
         soulConsumingFlame.setInteractScript(new SoulConsumingFlameNPCScript());
         npcs.add(soulConsumingFlame);
-
+*/
         return npcs;
     }
 

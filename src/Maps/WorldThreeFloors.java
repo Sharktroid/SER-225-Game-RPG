@@ -8,8 +8,8 @@ import Scripts.WorldThreeFloors.upLevelScript;
 import Scripts.WorldThreeFloors.downLevelScript;
 import Tilesets.CommonTileset;
 
-import NPCs.Redpanda;
-import NPCs.Dinosaur;
+//import NPCs.Redpanda;
+//import NPCs.Dinosaur;
 import Scripts.WorldThreeFloors.RedpandaScript;
 import Scripts.WorldThreeFloors.DinoScript;
 
@@ -111,7 +111,7 @@ public class WorldThreeFloors extends Map {
     @Override
     public ArrayList<NPC> loadNPCs() {
         ArrayList<NPC> npcs = new ArrayList<>();
-
+/* 
         // floor zero npcs
         if (currentFloorNumber == 0) {
             Redpanda redpanda = new Redpanda(5, getMapTile(1, 11).getLocation().subtractY(40));
@@ -124,7 +124,7 @@ public class WorldThreeFloors extends Map {
             dino.setInteractScript(new DinoScript());
             npcs.add(dino);
         }
-
+*/
         return npcs;
     }
 
