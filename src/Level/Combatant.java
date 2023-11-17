@@ -71,8 +71,15 @@ public abstract class Combatant {
     public abstract String getDeathMessage();
 
     public void kill() {
-        npc.setMapEntityStatus(MapEntityStatus.REMOVED);
+        npc.setMapEntityStatus(MapEntityStatus.INACTIVE);
         map.getTextbox().addText(getDeathMessage());
+    }
+
+    public Boolean isDead(){
+        boolean dead = false;
+        if (npc.getMapEntityStatus()== MapEntityStatus.INACTIVE)
+            dead = true;
+        return dead;
     }
 
     public Boolean statusCheck() {

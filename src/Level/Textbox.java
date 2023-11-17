@@ -46,6 +46,7 @@ public class Textbox {
     protected int currentTextItemHovered = 0;
     protected int compiledCount = 0;
     protected int choice = -1;
+    public static int chosenOption;
 
     private Queue<String> textQueue = new LinkedList<String>();
     private Queue<String> textQueueOnHold = new LinkedList<String>();
@@ -188,6 +189,7 @@ public class Textbox {
                     textQueueOnHold.add(textQueue.poll());
                 }
                 setChoice(currentTextItemHovered);
+                chosenOption = currentTextItemHovered;
                 textQueue.add(responseText[choice]);
                 currentTextItemHovered = 0;
                 while (!textQueueOnHold.isEmpty()) {
@@ -202,7 +204,7 @@ public class Textbox {
         if (Keyboard.isKeyDown(Key.DOWN) && (keyPressTimer == 0) && (selectablesPresent == 1)) {
             keyPressTimer = 14;
             currentTextItemHovered++;
-
+            
         } else if (Keyboard.isKeyDown(Key.UP) && (keyPressTimer == 0) && (selectablesPresent == 1)) {
             keyPressTimer = 14;
             currentTextItemHovered--;
@@ -389,6 +391,16 @@ public class Textbox {
 
     public boolean isActive() {
         return isActive;
+    }
+
+    public int getChosen(){
+        return chosenOption;
+    }
+
+
+
+    public static void resetChosen(){
+        chosenOption = -1;
     }
 
     public void setIsActive(boolean isActive) {

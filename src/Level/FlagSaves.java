@@ -51,22 +51,38 @@ public class FlagSaves {
         flagManager.addFlag("hasFinishedOMJ", false, true);
 
         // engineer
-        flagManager.addFlag("hasTalkedToNSE", false, false);
-        // temp: librarian
+        flagManager.addFlag("hasTalkedToNSE", false, true);
+
+
+
+        // librarian
         flagManager.addFlag("hasTalkedToLibrarian", false, false);
         flagManager.addFlag("hasRanVirusScanLibrarian", false, false);
         flagManager.addFlag("hasFoundLibraryShard", false, false);
-        // temp: normal npcs
+        // normal npcs
         flagManager.addFlag("hasRanVirusScanNPC1", false);
         flagManager.addFlag("hasRanVirusScanNPC2", false);
-        // temp: infected npcs
-        flagManager.addFlag("curedNPC1", false, false);
-        flagManager.addFlag("curedNPC2", false, false);
-        flagManager.addFlag("curedNPC3", false, false);
-        flagManager.addFlag("curedNPC4", false, false);
-        flagManager.addFlag("curedNPC5", false, false);
-        flagManager.addFlag("hasCuredAllNPCs", false, false);
-        // temp: enter library
+        
+        // infected npcs
+        flagManager.addFlag("w1CuredNPC1", false, true);
+        flagManager.addFlag("w1Btl1",false, false);
+        
+        flagManager.addFlag("w1CuredNPC2", false, true);
+        flagManager.addFlag("w1Btl2",false, false);
+
+        flagManager.addFlag("w1CuredNPC3", false, true);
+        flagManager.addFlag("w1Btl3",false, false);
+
+        flagManager.addFlag("w1CuredNPC4", false, true);
+        flagManager.addFlag("w1Btl4",false, false);
+
+        flagManager.addFlag("w1CuredNPC5", false, true);
+        flagManager.addFlag("w1Btl5",false, false);
+
+        flagManager.addFlag("w1CuredAllNPCs", false, true);
+
+
+        // enter library
         flagManager.addFlag("enterLibrary", false);
 
         // world 11/ library flags

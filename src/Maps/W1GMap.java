@@ -13,37 +13,26 @@ import Level.Map;
 import Level.NPC;
 import Level.Trigger;
 import Level.Textbox.Style;
+import NPCs.W1Infected1;
+import NPCs.W1Infected2;
+import NPCs.W1Infected3;
+import NPCs.W1Infected4;
+import NPCs.W1Infected5;
 import NPCs.Engineer;
 import NPCs.EngineerPartner;
-import NPCs.Infected1;
-import NPCs.Infected2;
-import NPCs.Infected3;
-import NPCs.Infected4;
-import NPCs.Infected5;
 import NPCs.Librarian;
 import NPCs.Normal1;
 import NPCs.Normal2;
 import NPCs.OldManJenks;
+import Scripts.WorldOneMap.*;
 import NPCs.SoulConsumingFlameNPC;
 import Scripts.BasicFragmentScript;
-import Scripts.WorldOneMap.EngineerScript;
-import Scripts.WorldOneMap.EnterLibraryScript;
-import Scripts.WorldOneMap.Infected1Script;
-import Scripts.WorldOneMap.Infected2Script;
-import Scripts.WorldOneMap.Infected3Script;
-import Scripts.WorldOneMap.Infected4Script;
-import Scripts.WorldOneMap.Infected5Script;
-import Scripts.WorldOneMap.LibrarianScript;
-import Scripts.WorldOneMap.Normal1Script;
-import Scripts.WorldOneMap.Normal2Script;
-import Scripts.WorldOneMap.OldManJenksScript;
-import Scripts.WorldOneMap.SoulConsumingFlameNPCScript;
-import Scripts.WorldOneMap.WorldOneClearScript;
 import Tilesets.InternetExplorerTileset;
 
 public class W1GMap extends Map {
 
     public static int FragmentCount = 0;
+
 
     public W1GMap() {
         super("w1gmap.txt", new InternetExplorerTileset());
@@ -74,7 +63,6 @@ public class W1GMap extends Map {
         fragment3.setInteractScript(new BasicFragmentScript());
         enhancedMapTiles.add(fragment3);
 
-
         return enhancedMapTiles;
     }
 
@@ -100,57 +88,51 @@ public class W1GMap extends Map {
         librarian.setInteractScript(new LibrarianScript());
         npcs.add(librarian);
 
-        //infected npcs
-        //green
-        Infected1 infected1 = new Infected1(5, getMapTile(20, 8).getLocation());
-        infected1.setInteractScript(new Infected1Script());
-        npcs.add(infected1);
-        //purple
-        Infected2 infected2 = new Infected2(6, getMapTile(23, 21).getLocation());
-        infected2.setInteractScript(new Infected2Script());
-        npcs.add(infected2);
-        //red
-        Infected3 infected3 = new Infected3(7, getMapTile(3, 8).getLocation());
-        infected3.setInteractScript(new Infected3Script());
-        npcs.add(infected3);
-        //pink
-        Infected4 infected4 = new Infected4(8, getMapTile(34, 32).getLocation());
-        infected4.setInteractScript(new Infected4Script());
-        npcs.add(infected4);
-        //green
-        Infected5 infected5 = new Infected5(9, getMapTile(7, 28).getLocation());
-        infected5.setInteractScript(new Infected5Script());
-        npcs.add(infected5);
+        // green
+        W1Infected1 btlInfected1 = new W1Infected1(5, getMapTile(20, 8).getLocation());
+        btlInfected1.setInteractScript(new W1Infected1Script());
+        npcs.add(btlInfected1);
 
-        //normal npcs
-        //red
+        // purple
+        W1Infected2 btlInfected2 = new W1Infected2(6, getMapTile(23, 21).getLocation());
+        btlInfected2.setInteractScript(new W1Infected2Script());
+        npcs.add(btlInfected2);
+
+        // red
+        W1Infected3 btlInfected3 = new W1Infected3(7, getMapTile(3, 8).getLocation());
+        btlInfected3.setInteractScript(new W1Infected3Script());
+        npcs.add(btlInfected3);        
+
+
+        // pink
+        W1Infected4 btlInfected4 = new W1Infected4(8, getMapTile(34, 32).getLocation());
+        btlInfected4.setInteractScript(new W1Infected4Script());
+        npcs.add(btlInfected4);
+
+
+        // green
+        W1Infected5 btlInfected5 = new W1Infected5(9, getMapTile(7, 28).getLocation());
+        btlInfected5.setInteractScript(new W1Infected5Script());
+        npcs.add(btlInfected5);
+
+        // normal npcs
+
+        // red
         Normal1 normal1 = new Normal1(10, getMapTile(14, 30).getLocation());
         normal1.setInteractScript(new Normal1Script());
         npcs.add(normal1);
-        //pink
+        // pink
         Normal2 normal2 = new Normal2(11, getMapTile(1, 17).getLocation());
         normal2.setInteractScript(new Normal2Script());
         npcs.add(normal2);
 
-
-        SoulConsumingFlameNPC soulConsumingFlame = new SoulConsumingFlameNPC(12, getMapTile(11, 16).getLocation().subtractY(40));
-        soulConsumingFlame.setInteractScript(new SoulConsumingFlameNPCScript());
-        npcs.add(soulConsumingFlame);
-
-
-        /*Testfox testfox = new Testfox(1, getMapTile(20, 13).getLocation().subtractY(40));
-        testfox.setInteractScript(new TestfoxScript());
-        npcs.add(testfox);*/
-
         return npcs;
-
     }
-
 
     @Override
     public ArrayList<Trigger> loadTriggers() {
         ArrayList<Trigger> triggers = new ArrayList<>();
-        triggers.add(new Trigger(1130,624, 24, 24, new WorldOneClearScript()));
+        triggers.add(new Trigger(1130, 624, 24, 24, new WorldOneClearScript()));
 
         triggers.add(new Trigger(1820, 300, 100, 20, new EnterLibraryScript()));
 
@@ -158,11 +140,11 @@ public class W1GMap extends Map {
     }
 
     public static void addFragmentCount(int fragmentCount) {
-        FragmentCount = FragmentCount + fragmentCount ;
+        FragmentCount = FragmentCount + fragmentCount;
         System.out.println("Added Fragment count");
     }
 
-     public int getFragmentCount() {
+    public int getFragmentCount() {
         return FragmentCount;
     }
 }
