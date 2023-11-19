@@ -20,7 +20,6 @@ public class EnterLibraryScript extends Script {
         hideTextbox();
         unlockPlayer();
 
-
         setFlag("enterLibrary");
     }
 

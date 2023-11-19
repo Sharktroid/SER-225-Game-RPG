@@ -37,8 +37,13 @@ public class W1GMap extends Map {
     public W1GMap() {
         super("w1gmap.txt", new InternetExplorerTileset());
         this.playerStartPosition = getMapTile(23, 13).getLocation();
-        SoundPlayer.playMusic(MusicTracks.WORLDONEBGM);
         textbox.setStyle(Style.WORLDONE);
+    }
+
+    @Override
+    public void setupMap() {
+        super.setupMap();
+        SoundPlayer.playMusic(MusicTracks.WORLDONE);
     }
 
     @Override
@@ -101,7 +106,7 @@ public class W1GMap extends Map {
         // red
         W1Infected3 btlInfected3 = new W1Infected3(7, getMapTile(3, 8).getLocation());
         btlInfected3.setInteractScript(new W1Infected3Script());
-        npcs.add(btlInfected3);        
+        npcs.add(btlInfected3);
 
 
         // pink

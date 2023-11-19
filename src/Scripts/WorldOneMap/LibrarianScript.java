@@ -13,6 +13,7 @@ public class LibrarianScript extends Script<NPC> {
 
     @Override
     protected void setup() {
+        setFlag("hasCuredAllNPCs");
         lockPlayer();
 
         setTextboxStyle(Style.WORLDONE);
@@ -94,7 +95,7 @@ public class LibrarianScript extends Script<NPC> {
                 end();
                 return ScriptState.COMPLETED;
             }
-            return ScriptState.RUNNING;            
+            return ScriptState.RUNNING;
         } else if (isFlagSet("hasRanVirusScanLibrarian")) {
             start();
             if (!isTextboxQueueEmpty()) {
@@ -129,7 +130,7 @@ public class LibrarianScript extends Script<NPC> {
                     end();
                     return ScriptState.COMPLETED;
                 }
-            } 
+            }
             return ScriptState.RUNNING;
         } else if (isFlagSet("hasTalkedToLibrarian")) {
             start();

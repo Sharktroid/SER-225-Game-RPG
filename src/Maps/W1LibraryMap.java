@@ -1,6 +1,8 @@
 package Maps;
 
 import EnhancedMapTiles.PushableRock;
+import Game.SoundPlayer;
+import Game.SoundPlayer.MusicTracks;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
@@ -19,6 +21,12 @@ public class W1LibraryMap extends Map {
     public W1LibraryMap() {
         super("w1_library_map.txt", new InternetExplorerTileset());
         this.playerStartPosition = getMapTile(6, 1).getLocation().addX(20);
+    }
+
+    @Override
+    public void setupMap() {
+        super.setupMap();
+        SoundPlayer.playMusic(MusicTracks.LIBRARY);
     }
 
     @Override

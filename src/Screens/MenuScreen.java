@@ -3,6 +3,8 @@ package Screens;
 import Engine.*;
 import Game.GameState;
 import Game.ScreenCoordinator;
+import Game.SoundPlayer;
+import Game.SoundPlayer.MusicTracks;
 import Level.Map;
 import Maps.TitleScreenMap;
 import SpriteFont.SpriteFont;
@@ -61,6 +63,7 @@ public class MenuScreen extends Screen {
         keyPressTimer = 0;
         menuItemSelected = -1;
         keyLocker.lockKey(Key.ENTER);
+        SoundPlayer.playMusic(MusicTracks.TITLE);
     }
 
     public void update() {

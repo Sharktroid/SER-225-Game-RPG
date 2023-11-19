@@ -17,6 +17,7 @@ public class SoundPlayer {
     private final static String musicPath = resourcePath + "Music/";
     private final static String soundEffectPath = resourcePath + "SoundEffects/";
     private static Boolean inIntro = false;
+    private static MusicTracks currentTrack;
     // private static AudioInputStream soundEffectStream;
     // private SimpleAudioPlayer audioPlayer = new SimpleAudioPlayer();
 
@@ -42,16 +43,43 @@ public class SoundPlayer {
     }
 
     public static enum MusicTracks {
-        BATTLETHEME,
-        WORLDONEBGM;
+        BATTLE,
+        WORLDONE,
+        TITLE,
+        INTRO,
+        HUBMAP,
+        FIREFOXDIALOGUE,
+        DIALOGUE,
+        LIBRARY,
+        WORLDTWO,
+        WORLDTHREE,
+        SHOP;
 
         @Override
         public String toString() {
             switch (getInternalName()) {
-                case "BATTLETHEME":
+                case "BATTLE":
                     return "Battle 1";
-                case "WORLDONEBGM":
+                case "WORLDONE":
                     return "Onett Theme";
+                case "TITLE":
+                    return "AM2R Title";
+                case "INTRO":
+                    return "Theme of Super Metroid";
+                case "HUBMAP":
+                    return "Item Room";
+                case "FIREFOXDIALOGUE":
+                    return "Prologue ~ Mina's Theme";
+                case "DIALOGUE":
+                    return "Decision 1";
+                case "LIBRARY":
+                    return "Save the Miners!";
+                case "WORLDTWO":
+                    return "Castelia City";
+                case "SHOP":
+                    return "Buy Somethin' Will Ya!";
+                case "WORLDTHREE":
+                    return "Ascent";
                 default:
                     return null;
             }
@@ -59,7 +87,9 @@ public class SoundPlayer {
 
         public Boolean hasIntro() {
             switch (getInternalName()) {
-                case "BATTLETHEME":
+                case "BATTLE":
+                case "INTRO":
+                case "WORLDTHREE":
                     return true;
                 default:
                     return false;
@@ -84,43 +114,47 @@ public class SoundPlayer {
     }
 
     public static void playMusic(MusicTracks musicTrack) {
-        try {
-            if (musicClip != null) {
-                stopMusic();
-            }
-            musicClip = AudioSystem.getClip();
-            String trackName = musicTrack.toString() + ".wav";
-            if (musicTrack.hasIntro()) {
-                trackName = musicTrack.toString() + "-intro.wav";
-            }
-            AudioInputStream stream = AudioSystem.getAudioInputStream(new File(musicPath, trackName));
-            musicClip.open(stream);
-            if (musicTrack.hasIntro()) {
-                inIntro = true;
-                AudioInputStream loopStream = AudioSystem.getAudioInputStream(new File(musicPath, musicTrack.toString() + "-loop.wav"));
-                Clip loopingClip = AudioSystem.getClip();
-                loopingClip.open(loopStream);
-                LineListener listener = new LineListener() {
-                    private Clip loopClip = loopingClip;
-                    @Override
-                    public void update(LineEvent event) {
-                        if (event.getType() == LineEvent.Type.STOP && inIntro) {
-                            inIntro = false;
-                            musicClip.close();
-                            musicClip = loopClip;
-                            musicClip.loop(Clip.LOOP_CONTINUOUSLY);
-                            musicClip.start();
+        if (currentTrack != musicTrack) {
+            try {
+                currentTrack = musicTrack;
+                if (musicClip != null) {
+                    stopMusic();
+                }
+                musicClip = AudioSystem.getClip();
+                String trackName = musicTrack.toString() + ".wav";
+                if (musicTrack.hasIntro()) {
+                    trackName = musicTrack.toString() + "-intro.wav";
+                }
+                AudioInputStream stream = AudioSystem.getAudioInputStream(new File(musicPath, trackName));
+                musicClip.open(stream);
+                if (musicTrack.hasIntro()) {
+                    inIntro = true;
+                    AudioInputStream loopStream = AudioSystem
+                            .getAudioInputStream(new File(musicPath, musicTrack.toString() + "-loop.wav"));
+                    Clip loopingClip = AudioSystem.getClip();
+                    loopingClip.open(loopStream);
+                    LineListener listener = new LineListener() {
+                        private Clip loopClip = loopingClip;
+
+                        @Override
+                        public void update(LineEvent event) {
+                            if (event.getType() == LineEvent.Type.STOP && inIntro) {
+                                inIntro = false;
+                                musicClip.close();
+                                musicClip = loopClip;
+                                musicClip.loop(Clip.LOOP_CONTINUOUSLY);
+                                musicClip.start();
+                            }
                         }
-                    }
-                };
-                musicClip.addLineListener(listener);
+                    };
+                    musicClip.addLineListener(listener);
+                } else {
+                    musicClip.loop(Clip.LOOP_CONTINUOUSLY);
+                }
+                musicClip.start();
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                e.printStackTrace();
             }
-            else {
-                musicClip.loop(Clip.LOOP_CONTINUOUSLY);
-            }
-            musicClip.start();
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            e.printStackTrace();
         }
     }
 

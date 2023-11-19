@@ -55,6 +55,7 @@ public class OldManJenksScript extends Script<NPC> {
         } else if (isFlagSet("hasFoundDentures")) {
             entity.setIsHidden(true);
             setFlag("hasFinishedOMJ");
+            SoundPlayer.playMusic(MusicTracks.WORLDONE);
         }
 
     }
@@ -86,6 +87,7 @@ public class OldManJenksScript extends Script<NPC> {
                 if (isTextboxQueueEmpty()) {
                     miniSequence = getChoice();
                     sequence++;
+                    SoundPlayer.playMusic(MusicTracks.DIALOGUE);
                     if (miniSequence == 0) {
                         setNPCName("Old Man Jenkins");
                         addTextToTextboxQueue(
