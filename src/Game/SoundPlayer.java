@@ -85,10 +85,10 @@ public class SoundPlayer {
 
     public static void playMusic(MusicTracks musicTrack) {
         try {
-            if (musicClip == null) {
-                musicClip = AudioSystem.getClip();
+            if (musicClip != null) {
+                stopMusic();
             }
-            stopMusic();
+            musicClip = AudioSystem.getClip();
             String trackName = musicTrack.toString() + ".wav";
             if (musicTrack.hasIntro()) {
                 trackName = musicTrack.toString() + "-intro.wav";
