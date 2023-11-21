@@ -16,12 +16,12 @@ import java.awt.Color;
 import java.util.HashMap;
 
 // red
-public class Normal1 extends NPC {
+public class W1Normal1 extends NPC {
     protected boolean isInteracting = false;
     protected SpriteFont playGame;
 
 
-    public Normal1(int id, Point location) {
+    public W1Normal1(int id, Point location) {
         super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("Noface3.png"), 25, 25), "STAND_RIGHT");
 
     }

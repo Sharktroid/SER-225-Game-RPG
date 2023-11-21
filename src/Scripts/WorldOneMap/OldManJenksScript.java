@@ -33,7 +33,7 @@ public class OldManJenksScript extends Script<NPC> {
         String[] answers = { "This is Bliss.", "Purple orb?" };
 
         entity.facePlayer(player);
-        showTextbox();
+
         if (!isFlagSet("hasTalkedToOMJ") && !isFlagSet("hasFoundDentures")) {
             addTextToTextboxQueue("Hewlo?", selections, answersBefore);
         } else if (isFlagSet("hasFoundDentures")) {

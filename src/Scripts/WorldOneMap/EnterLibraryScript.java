@@ -9,23 +9,34 @@ public class EnterLibraryScript extends Script {
     @Override
     protected void setup() {
         lockPlayer();
+        
         setTextboxStyle(Style.WORLDONE);
         showTextbox();
 
-        addTextToTextboxQueue("entering library");
+        if (!isFlagSet("hasTalkedToLibrarian")){
+            addTextToTextboxQueue("The window is shattered...");
+
+        }else{
+            addTextToTextboxQueue("entering library");
+        }
+        
     }
 
     @Override
     protected void cleanup() {
         hideTextbox();
         unlockPlayer();
-
-        setFlag("enterLibrary");
+        if (!isFlagSet("hasTalkedToLibrarian")){
+            player.moveX(-2);
+            player.moveY(-2);
+        }else{
+            setFlag("enterLibrary");
+        }
+        
     }
 
     @Override
     public ScriptState execute() {
-
         if (!isFlagSet("enterLibrary")) {
             start();
             if (!isTextboxQueueEmpty()) {
