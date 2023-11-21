@@ -21,22 +21,32 @@ import NPCs.W1Infected5;
 import NPCs.Engineer;
 import NPCs.EngineerPartner;
 import NPCs.Librarian;
-import NPCs.Normal1;
-import NPCs.Normal2;
+import NPCs.W1Normal1;
+import NPCs.W1Normal2;
 import NPCs.OldManJenks;
 import Scripts.WorldOneMap.*;
-import NPCs.SoulConsumingFlameNPC;
 import Scripts.BasicFragmentScript;
 import Tilesets.InternetExplorerTileset;
 
 public class W1GMap extends Map {
 
     public static int FragmentCount = 0;
+    public static boolean exitedLib = false;
 
 
     public W1GMap() {
         super("w1gmap.txt", new InternetExplorerTileset());
-        this.playerStartPosition = getMapTile(23, 13).getLocation();
+        
+        exitedLib = ExitLibraryScript.exitedLib;
+        
+        if (exitedLib == false){
+            this.playerStartPosition = getMapTile(23, 13).getLocation();
+        }else {
+            this.playerStartPosition = getMapTile(38, 6).getLocation();
+        }
+        
+        
+        
         SoundPlayer.playMusic(MusicTracks.WORLDONEBGM);
         textbox.setStyle(Style.WORLDONE);
     }
@@ -59,10 +69,6 @@ public class W1GMap extends Map {
         fragment2.setInteractScript(new BasicFragmentScript());
         enhancedMapTiles.add(fragment2);
 
-        ItemMapObject fragment3 = new ItemMapObject(getMapTile(6, 3).getLocation(), new Fragment(null));
-        fragment3.setInteractScript(new BasicFragmentScript());
-        enhancedMapTiles.add(fragment3);
-
         return enhancedMapTiles;
     }
 
@@ -77,11 +83,11 @@ public class W1GMap extends Map {
         npcs.add(oldManJenks);
 
         Engineer engineer = new Engineer(2, getMapTile(35, 24).getLocation());
-        engineer.setInteractScript(new EngineerScript());
+        engineer.setInteractScript(new W1EngineerScript());
         npcs.add(engineer);
 
         EngineerPartner engineerPartner = new EngineerPartner(3, getMapTile(36, 24).getLocation());
-        engineerPartner.setInteractScript(new EngineerScript());
+        engineerPartner.setInteractScript(new W1EngineerScript());
         npcs.add(engineerPartner);
 
         Librarian librarian = new Librarian(4, getMapTile(36, 9).getLocation());
@@ -118,12 +124,12 @@ public class W1GMap extends Map {
         // normal npcs
 
         // red
-        Normal1 normal1 = new Normal1(10, getMapTile(14, 30).getLocation());
-        normal1.setInteractScript(new Normal1Script());
+        W1Normal1 normal1 = new W1Normal1(10, getMapTile(14, 30).getLocation());
+        normal1.setInteractScript(new W1Normal1Script());
         npcs.add(normal1);
         // pink
-        Normal2 normal2 = new Normal2(11, getMapTile(1, 17).getLocation());
-        normal2.setInteractScript(new Normal2Script());
+        W1Normal2 normal2 = new W1Normal2(11, getMapTile(1, 17).getLocation());
+        normal2.setInteractScript(new W1Normal2Script());
         npcs.add(normal2);
 
         return npcs;
@@ -133,8 +139,7 @@ public class W1GMap extends Map {
     public ArrayList<Trigger> loadTriggers() {
         ArrayList<Trigger> triggers = new ArrayList<>();
         triggers.add(new Trigger(1130, 624, 24, 24, new WorldOneClearScript()));
-
-        triggers.add(new Trigger(1820, 300, 100, 20, new EnterLibraryScript()));
+        triggers.add(new Trigger(1752, 72, 24, 24, new EnterLibraryScript()));
 
         return triggers;
     }

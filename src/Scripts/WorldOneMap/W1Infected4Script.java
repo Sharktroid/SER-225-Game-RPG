@@ -11,11 +11,12 @@ import Level.Textbox.Style;
 //infected NPC 4 script
 public class W1Infected4Script extends Script<NPC> {
 
+    private String npcName = "User 4";
     @Override
     protected void setup() {
         lockPlayer();
         setTextboxStyle(Style.WORLDONE);
-        setNPCName("NPC 4");
+        setNPCName(npcName);
         showTextbox();
         entity.facePlayer(player);
         String[] selections = { "RUN VIRUS SCAN", "LEAVE" };
@@ -23,7 +24,7 @@ public class W1Infected4Script extends Script<NPC> {
 
         if (isFlagSet("hasTalkedToNSE")) {
             if (!isFlagSet("w1CuredNPC4") && !isFlagSet("w1Btl4")) {
-                setNPCName("NPC 4");
+                setNPCName(npcName);
                 addTextToTextboxQueue("I'm a little busy right now...", selections, answers);
             } else if (!isFlagSet("w1CuredNPC4") && isFlagSet("w1Btl4")) {
                 setNPCName("SYSTEM");
@@ -31,7 +32,8 @@ public class W1Infected4Script extends Script<NPC> {
                 SoundPlayer.playMusic(MusicTracks.BATTLETHEME);
                 map.initiateCombat(player, new W1Combatant4(entity, map));
             } else if (isFlagSet("w1CuredNPC4") && !isFlagSet("w1Btl4")) {
-                setNPCName("NPC 4");
+                SoundPlayer.playMusic(MusicTracks.WORLDONEBGM);
+                setNPCName(npcName);
                 addTextToTextboxQueue("The virus is gone!");
                 addTextToTextboxQueue("You're my hero!");
             } else if (isFlagSet("w1CuredNPC4") && isFlagSet("w1Btl4")) {

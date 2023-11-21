@@ -6,28 +6,31 @@ import Level.ScriptState;
 import Level.Textbox.Style;
 
 // script for talking to giraffe npc
-public class Normal1Script extends Script<NPC> {
+public class W1Normal2Script extends Script<NPC> {
 
-    private int responseNum = -1;
+    
 
     @Override
     protected void setup() {
         lockPlayer();
 
         setTextboxStyle(Style.WORLDONE);
-        setNPCName("Normal NPC 1");
+        setNPCName("User 7");
         showTextbox();
 
         String[] selections = {"RUN VIRUS SCAN", "LEAVE"};
-        String[] answers = {"NO VIRUS DETECTED", "Please fix all of this..."};
+        String[] answers = {"NO VIRUS DETECTED", "Yes! Leave me alone!"};
 
         entity.facePlayer(player);
-        if (!isFlagSet("hasRanVirusScanNPC1")) {
-            addTextToTextboxQueue( "Are you here to help? Everyone's acting so weird...", selections, answers);
+        if (!isFlagSet("hasTalkedToNSE")){
+            addTextToTextboxQueue("A virus! Don't attack me!");
+        }
+        else if (!isFlagSet("hasRanVirusScanNPC2")) {
+            addTextToTextboxQueue( "A virus! Don't attack me!", selections, answers);
         } else if (isFlagSet("hasCuredAllNPCs")) {
-            addTextToTextboxQueue("Thanks for helping out and saving our world!");
-        } else if (isFlagSet("hasRanVirusScanNPC1")) {
-            addTextToTextboxQueue( "I hope this can all be fixed soon.");
+            addTextToTextboxQueue("Thanks for helping us out.");
+        } else if (isFlagSet("hasRanVirusScanNPC2")) {
+            addTextToTextboxQueue( "Sorry about mistaking you as a virus.");
         } 
     }
 
@@ -35,11 +38,10 @@ public class Normal1Script extends Script<NPC> {
     protected void cleanup() {
         unlockPlayer();
         hideTextbox();
-
-        if (!isFlagSet("hasRanVirusScanNPC1")) {
-            responseNum = getChoice();
-            if (responseNum == 0) {
-                setFlag("hasRanVirusScanNPC1");
+        
+        if (!isFlagSet("hasRanVirusScanNPC2")) {
+            if (getChoice() == 0) {
+                setFlag("hasRanVirusScanNPC2");
             }
         }
     }

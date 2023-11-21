@@ -31,6 +31,8 @@ public class OldManJenksScript extends Script<NPC> {
         String[] answers = {"This is Bliss. Well, it was bliss before a huge earthquake hit and this portal opened up.", "Purple orb?"};
 
         entity.facePlayer(player);
+
+        
         if (!isFlagSet("hasTalkedToOMJ") && !isFlagSet("hasFoundDentures")) {
             showTextbox();
             if (sequence == 0) {
