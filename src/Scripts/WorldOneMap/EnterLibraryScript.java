@@ -33,7 +33,6 @@ public class EnterLibraryScript extends Script {
             setFlag("enterLibrary");
         }
         
-        
     }
 
     @Override

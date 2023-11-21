@@ -22,7 +22,7 @@ public class W1Infected3Script extends Script<NPC> {
         entity.facePlayer(player);
         String[] selections = { "RUN VIRUS SCAN", "LEAVE" };
         String[] answers = { "Y0U'R3 F1N1Sh3D!", "Bye." };
-            
+
         if (isFlagSet("hasTalkedToNSE")) {
             if (!isFlagSet("w1CuredNPC3") && !isFlagSet("w1Btl3")) {
                 setNPCName(npcName);
@@ -30,7 +30,7 @@ public class W1Infected3Script extends Script<NPC> {
             } else if (!isFlagSet("w1CuredNPC3") && isFlagSet("w1Btl3")) {
                 setNPCName("SYSTEM");
                 addTextToTextboxQueue("VIRUS DETECTED!");
-                SoundPlayer.playMusic(MusicTracks.BATTLETHEME);
+                SoundPlayer.playMusic(MusicTracks.BATTLE);
                 map.initiateCombat(player, new W1Combatant3(entity, map));
             } else if (isFlagSet("w1CuredNPC3") && !isFlagSet("w1Btl3")) {
                 SoundPlayer.playMusic(MusicTracks.WORLDONEBGM);
@@ -106,6 +106,7 @@ public class W1Infected3Script extends Script<NPC> {
             }
             end();
         }
+        SoundPlayer.playMusic(MusicTracks.WORLDONE);
         return ScriptState.COMPLETED;
     }
 }

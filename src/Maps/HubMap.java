@@ -2,6 +2,8 @@ package Maps;
 
 import java.util.ArrayList;
 
+import Game.SoundPlayer;
+import Game.SoundPlayer.MusicTracks;
 import Level.Map;
 import Level.NPC;
 import Level.Trigger;
@@ -14,6 +16,12 @@ public class HubMap extends Map {
     public HubMap() {
         super("hub_map.txt", new HubTileset());
         this.playerStartPosition = getMapTile(8, 10).getLocation();
+    }
+
+    @Override
+    public void setupMap() {
+        super.setupMap();
+        SoundPlayer.playMusic(MusicTracks.HUBMAP);
     }
 
     @Override

@@ -12,6 +12,7 @@ public class LibrarianScript extends Script<NPC> {
 
     @Override
     protected void setup() {
+        setFlag("hasCuredAllNPCs");
         lockPlayer();
         setTextboxStyle(Style.WORLDONE);
         showTextbox();
@@ -107,6 +108,7 @@ public class LibrarianScript extends Script<NPC> {
                     end();
                     return ScriptState.COMPLETED;
                 }
+
             }
             return ScriptState.RUNNING;
 

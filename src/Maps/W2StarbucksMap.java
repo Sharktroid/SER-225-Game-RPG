@@ -2,6 +2,8 @@ package Maps;
 
 import java.util.ArrayList;
 
+import Game.SoundPlayer;
+import Game.SoundPlayer.MusicTracks;
 import Level.Map;
 import Level.NPC;
 import Level.Textbox.Style;
@@ -12,5 +14,11 @@ public class W2StarbucksMap extends Map {
         super("w2_starbucks_map.txt", new CommonTileset());
         this.playerStartPosition = getMapTile(0, 0).getLocation();
         textbox.setStyle(Style.WORLDTWO);
+    }
+
+    @Override
+    public void setupMap() {
+        super.setupMap();
+        SoundPlayer.playMusic(MusicTracks.SHOP);
     }
 }

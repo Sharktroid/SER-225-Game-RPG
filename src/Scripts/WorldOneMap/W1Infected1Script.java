@@ -30,7 +30,7 @@ public class W1Infected1Script extends Script<NPC> {
             } else if (!isFlagSet("w1CuredNPC1") && isFlagSet("w1Btl1")) {
                 setNPCName("SYSTEM");
                 addTextToTextboxQueue("VIRUS DETECTED!");
-                SoundPlayer.playMusic(MusicTracks.BATTLETHEME);
+                SoundPlayer.playMusic(MusicTracks.BATTLE);
                 map.initiateCombat(player, new W1Combatant1(entity, map));
             } else if (isFlagSet("w1CuredNPC1") && !isFlagSet("w1Btl1")) {
                 SoundPlayer.playMusic(MusicTracks.WORLDONEBGM);
@@ -106,6 +106,7 @@ public class W1Infected1Script extends Script<NPC> {
             }
             end();
         }
+        SoundPlayer.playMusic(MusicTracks.WORLDONE);
         return ScriptState.COMPLETED;
     }
 }
