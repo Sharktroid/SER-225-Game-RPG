@@ -5,6 +5,7 @@ import Level.Map;
 import Level.NPC;
 import Level.Textbox.Style;
 import Level.Trigger;
+import Tilesets.ChromeTileset;
 import Tilesets.CommonTileset;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class W31Map extends Map {
 
     // setup maps
     public W31Map() {
-        super("w31map.txt", new CommonTileset());
+        super("w31map.txt", new ChromeTileset());
 
         this.playerStartPosition = getMapTile(8, 15).getLocation();
         textbox.setStyle(Style.WORLDTHREE);
