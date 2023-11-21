@@ -26,7 +26,7 @@ public class OldManJenksScript extends Script<NPC> {
 
         setTextboxStyle(Style.WORLDONE);
         setNPCName("Old Man Jenkins");
-        // showTextbox();
+        showTextbox();
 
         String[] selections = { "Where am I?", "Have you seen a purple\norb around here?" };
         String[] answersBefore = { "A can til yo if yo can fin ma den-ers", "A can til yo if yo can fin ma den-ers" };

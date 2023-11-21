@@ -32,7 +32,7 @@ public class W1Infected4Script extends Script<NPC> {
                 SoundPlayer.playMusic(MusicTracks.BATTLE);
                 map.initiateCombat(player, new W1Combatant4(entity, map));
             } else if (isFlagSet("w1CuredNPC4") && !isFlagSet("w1Btl4")) {
-                SoundPlayer.playMusic(MusicTracks.WORLDONEBGM);
+                SoundPlayer.playMusic(MusicTracks.WORLDONE);
                 setNPCName(npcName);
                 addTextToTextboxQueue("The virus is gone!");
                 addTextToTextboxQueue("You're my hero!");
