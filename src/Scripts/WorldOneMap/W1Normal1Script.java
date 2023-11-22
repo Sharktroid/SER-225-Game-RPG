@@ -5,7 +5,6 @@ import Level.Script;
 import Level.ScriptState;
 import Level.Textbox.Style;
 
-// script for talking to giraffe npc
 public class W1Normal1Script extends Script<NPC> {
 
     private int responseNum = -1;

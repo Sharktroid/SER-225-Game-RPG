@@ -39,7 +39,7 @@ public class W1GMap extends Map {
         
         SoundPlayer.playMusic(MusicTracks.WORLDONE);
         
-        exitedLib = ExitLibraryScript.exitedLib;
+        exitedLib = W1ExitLibraryScript.exitedLib;
         
         if (exitedLib == false){
             this.playerStartPosition = getMapTile(23, 13).getLocation();
@@ -84,7 +84,7 @@ public class W1GMap extends Map {
 
         OldManJenks oldManJenks = new OldManJenks(1, getMapTile(25, 14).getLocation());
         oldManJenks.setExistenceFlag("hasFinishedOMJ");
-        oldManJenks.setInteractScript(new OldManJenksScript());
+        oldManJenks.setInteractScript(new W1OldManJenksScript());
         npcs.add(oldManJenks);
 
         Engineer engineer = new Engineer(2, getMapTile(35, 24).getLocation());
@@ -144,7 +144,7 @@ public class W1GMap extends Map {
     public ArrayList<Trigger> loadTriggers() {
         ArrayList<Trigger> triggers = new ArrayList<>();
         triggers.add(new Trigger(1130, 624, 24, 24, new WorldOneClearScript()));
-        triggers.add(new Trigger(1752, 72, 24, 24, new EnterLibraryScript()));
+        triggers.add(new Trigger(1752, 72, 24, 24, new W1EnterLibraryScript()));
 
         return triggers;
     }

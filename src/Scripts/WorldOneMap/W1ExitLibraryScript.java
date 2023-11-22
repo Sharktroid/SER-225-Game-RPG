@@ -4,7 +4,7 @@ import Level.Script;
 import Level.ScriptState;
 import Level.Textbox.Style;
 
-public class ExitLibraryScript extends Script {
+public class W1ExitLibraryScript extends Script {
 
     public static boolean exitedLib = false;
 
