@@ -16,11 +16,6 @@ public class GarfunkleScript extends Script<NPC> {
         showTextbox();
         String[] selections1 = {"Are you Garfunkle?"};
         String[] answers1 = {"Depends whose asking"};
-        String[] selections2 = {""};
-        String[] answers2 = {""};
-
-
-
 
         if (!isFlagSet("hasTalkedToGarfunkle")) {
             showTextbox();

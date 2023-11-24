@@ -1,8 +1,6 @@
 package Maps;
 
-import EnhancedMapTiles.ItemMapObject;
 import EnhancedMapTiles.PushableRock;
-import Items.Fragment;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;

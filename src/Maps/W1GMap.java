@@ -24,8 +24,8 @@ import NPCs.W1Librarian;
 import NPCs.W1Normal1;
 import NPCs.W1Normal2;
 import NPCs.W1OldManJenks;
-import Scripts.WorldOneMap.*;
 import Scripts.BasicFragmentScript;
+import Scripts.WorldOneMap.*;
 import Tilesets.InternetExplorerTileset;
 
 public class W1GMap extends Map {
@@ -36,11 +36,11 @@ public class W1GMap extends Map {
 
     public W1GMap() {
         super("w1gmap.txt", new InternetExplorerTileset());
-        
+
         SoundPlayer.playMusic(MusicTracks.WORLDONE);
-        
+
         exitedLib = W1ExitLibraryScript.exitedLib;
-        
+
         if (exitedLib == false){
             this.playerStartPosition = getMapTile(23, 13).getLocation();
         }else {
