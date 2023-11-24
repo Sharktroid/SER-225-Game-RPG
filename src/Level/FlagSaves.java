@@ -45,41 +45,40 @@ public class FlagSaves {
 
         // world one flags
 
-        // old man jenkins
-        flagManager.addFlag("hasTalkedToOMJ", false, false);
-        flagManager.addFlag("hasFoundDentures", false, false);
-        flagManager.addFlag("hasFinishedOMJ", false, true);
+        // Dentures ques
+        flagManager.addFlag("hasTalkedToOMJ", false, true);  // DEBUG set startting value to false
+        flagManager.addFlag("hasFoundDentures", false, false);// DEBUG set startting value to false
+        flagManager.addFlag("hasFinishedOMJ", false, true);// DEBUG set startting value to false
 
-        // engineer
+        // Virus quest
         flagManager.addFlag("hasTalkedToNSE", false, true);
-
-
-
-        // librarian
-        flagManager.addFlag("hasTalkedToLibrarian", false, false);
-        flagManager.addFlag("hasRanVirusScanLibrarian", false, false);
-        flagManager.addFlag("hasFoundLibraryShard", false, false);
-        // normal npcs
-        flagManager.addFlag("hasRanVirusScanNPC1", false);
-        flagManager.addFlag("hasRanVirusScanNPC2", false);
-        
-        // infected npcs
+        flagManager.addFlag("hasFinishedNSE",false, true);
+        flagManager.addFlag("hasScanner", false, true);
+        flagManager.addFlag("hasRanVirusScanNPC1", false, true);
+        flagManager.addFlag("hasRanVirusScanNPC2", false, true);
         flagManager.addFlag("w1CuredNPC1", false, true);
         flagManager.addFlag("w1Btl1",false, false);
-        
         flagManager.addFlag("w1CuredNPC2", false, true);
         flagManager.addFlag("w1Btl2",false, false);
-
         flagManager.addFlag("w1CuredNPC3", false, true);
         flagManager.addFlag("w1Btl3",false, false);
-
         flagManager.addFlag("w1CuredNPC4", false, true);
         flagManager.addFlag("w1Btl4",false, false);
-
         flagManager.addFlag("w1CuredNPC5", false, true);
         flagManager.addFlag("w1Btl5",false, false);
-
         flagManager.addFlag("w1CuredAllNPCs", false, true);
+
+        // Library quest
+        flagManager.addFlag("hasTalkedToLibrarian", false, true);
+        flagManager.addFlag("scannedLibrarian", false, true);
+        flagManager.addFlag("unlockedLibWindow", false, true);
+        flagManager.addFlag("hasFinishedLib",false,true);
+
+
+        flagManager.addFlag("w1FoundFrag1", false, true);
+        flagManager.addFlag("w1FoundFrag2", false, true);
+        flagManager.addFlag("w1FoundFrag3", false, true);
+        
 
 
         // enter library
@@ -87,7 +86,7 @@ public class FlagSaves {
 
         // world 11/ library flags
         // temp: exit library
-        flagManager.addFlag("exitLibrary", false);
+        flagManager.addFlag("exitLibrary", false, false);
 
         // world two flags
 
@@ -107,18 +106,6 @@ public class FlagSaves {
         // test world flags
 
         // shannon test world
-        flagManager.addFlag("hasTalkedToOMJ", false);
-        flagManager.addFlag("hasFoundDentures", false);
-
-        flagManager.addFlag("hasTalkedToNSE", false);
-
-        flagManager.addFlag("curedNPC1", false);
-        flagManager.addFlag("curedNPC2", false);
-        flagManager.addFlag("curedNPC3", false);
-        flagManager.addFlag("curedNPC4", false);
-        flagManager.addFlag("curedNPC5", false);
-        flagManager.addFlag("hasCuredAllNPCs", false);
-
     }
 
     /**

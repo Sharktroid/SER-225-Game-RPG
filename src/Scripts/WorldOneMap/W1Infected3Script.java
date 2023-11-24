@@ -11,27 +11,30 @@ import Level.Textbox.Style;
 //infected npc 3 script
 public class W1Infected3Script extends Script<NPC> {
 
+    private String npcName = "User 3";
+
     @Override
     protected void setup() {
         lockPlayer();
         setTextboxStyle(Style.WORLDONE);
-        setNPCName("NPC 3");
+        setNPCName(npcName);
         showTextbox();
         entity.facePlayer(player);
         String[] selections = { "RUN VIRUS SCAN", "LEAVE" };
         String[] answers = { "Y0U'R3 F1N1Sh3D!", "Bye." };
-            
+
         if (isFlagSet("hasTalkedToNSE")) {
             if (!isFlagSet("w1CuredNPC3") && !isFlagSet("w1Btl3")) {
-                setNPCName("NPC 3");
+                setNPCName(npcName);
                 addTextToTextboxQueue("Virus? What Virus?", selections, answers);
             } else if (!isFlagSet("w1CuredNPC3") && isFlagSet("w1Btl3")) {
                 setNPCName("SYSTEM");
                 addTextToTextboxQueue("VIRUS DETECTED!");
-                SoundPlayer.playMusic(MusicTracks.BATTLETHEME);
+                SoundPlayer.playMusic(MusicTracks.BATTLE);
                 map.initiateCombat(player, new W1Combatant3(entity, map));
             } else if (isFlagSet("w1CuredNPC3") && !isFlagSet("w1Btl3")) {
-                setNPCName("NPC 3");
+                SoundPlayer.playMusic(MusicTracks.WORLDONE);
+                setNPCName(npcName);
                 addTextToTextboxQueue("Woah, what happened? I was infected?");
                 addTextToTextboxQueue("Thanks for helping!");
             } else if (isFlagSet("w1CuredNPC3") && isFlagSet("w1Btl3")) {
@@ -103,6 +106,7 @@ public class W1Infected3Script extends Script<NPC> {
             }
             end();
         }
+        SoundPlayer.playMusic(MusicTracks.WORLDONE);
         return ScriptState.COMPLETED;
     }
 }

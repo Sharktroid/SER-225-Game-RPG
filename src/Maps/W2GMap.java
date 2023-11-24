@@ -2,18 +2,27 @@ package Maps;
 
 import java.util.ArrayList;
 
+import Game.SoundPlayer;
+import Game.SoundPlayer.MusicTracks;
 import Level.Map;
 import Level.NPC;
 import Level.Textbox.Style;
 import NPCs.Finder1;
 import Scripts.WorldTwoMap.Finder1Script;
 import Tilesets.CommonTileset;
+import Tilesets.SafariTileset;
 
 public class W2GMap extends Map {
     public W2GMap() {
-        super("w2gmap.txt", new CommonTileset());
+        super("w2gmap.txt", new SafariTileset());
         this.playerStartPosition = getMapTile(0, 6).getLocation();
         textbox.setStyle(Style.WORLDTWO);
+    }
+
+    @Override
+    public void setupMap() {
+        super.setupMap();
+        SoundPlayer.playMusic(MusicTracks.WORLDTWO);
     }
 
     @Override

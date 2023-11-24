@@ -13,18 +13,11 @@ public class WorldOneClearScript extends Script {
 
     @Override
     protected void setup() {
+        setNPCName("System");
         setTextboxStyle(Style.WORLDONE);
-        lockPlayer();
-        showTextbox();
 
-
-        if (W1GMap.FragmentCount < 3) {
-            showTextbox();
-            addTextToTextboxQueue( "FragmentCount is "+W1GMap.FragmentCount+".");
-
-
-        }
-        else if (W1GMap.FragmentCount == 3){
+        if (isFlagSet("worldOneComplete")) {
+            lockPlayer();
             showTextbox();
             addTextToTextboxQueue("Collected All Fragments!");
             addTextToTextboxQueue("The Firefox is summoning you.");
@@ -35,14 +28,10 @@ public class WorldOneClearScript extends Script {
 
     @Override
     protected void cleanup() {
-        if(W1GMap.FragmentCount < 3){
+      
+        if (isFlagSet("worldOneComplete")){
             hideTextbox();
             unlockPlayer();
-            player.moveX(10);
-        }else if (W1GMap.FragmentCount == 3){
-            hideTextbox();
-            unlockPlayer();
-            setFlag("worldOneComplete");
             setFlag("teleportToHub");
         }
 
@@ -52,13 +41,11 @@ public class WorldOneClearScript extends Script {
 
     @Override
     public ScriptState execute() {
-        if (!isFlagSet("worldOneComplete")) {
             start();
             if (!isTextboxQueueEmpty()) {
                 return ScriptState.RUNNING;
             }
             end();
-        }
         return ScriptState.COMPLETED;
     }
 }

@@ -1,6 +1,5 @@
 package Maps;
 
-//import EnhancedMapTiles.MedkitObject;
 import EnhancedMapTiles.PushableRock;
 import Level.EnhancedMapTile;
 import Level.Map;
@@ -49,14 +48,7 @@ public class LibraryMap extends Map {
 
         PushableRock pushableRock8 = new PushableRock(getMapTile(10, 1).getLocation());
         enhancedMapTiles.add(pushableRock8);
-
-/* 
-        MedkitObject medkit = new MedkitObject(getMapTile(7, 3).getLocation(), 25);
-        enhancedMapTiles.add(medkit);
-*/
-
-
-
+        
         return enhancedMapTiles;
     }
     public ArrayList<NPC> loadNPCs() {

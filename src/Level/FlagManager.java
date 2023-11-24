@@ -6,8 +6,6 @@ import java.util.Map.Entry;
 public class FlagManager {
     protected HashMap<String, Flag> flags = new HashMap<>();
 
-
-
     public void addFlag(String flagName) {
         Flag flag = new Flag(flagName, false, false);
         flags.put(flagName, flag);
@@ -35,7 +33,6 @@ public class FlagManager {
         }
     }
 
-    
     public void reset() {
         for (Entry<String, Flag> entry : flags.entrySet()) {
             if (entry.getValue().getPersitence() == false)
@@ -43,8 +40,17 @@ public class FlagManager {
         }
     }
 
+    public void debugAll() {
+        for (Entry<String, Flag> entry : flags.entrySet()) {
+            System.out.println("Name: "+entry.getValue().getName()+", Starting Value: "+entry.getValue().getState()+", Persistence: "+entry.getValue().getPersitence());
+        }
+    }
 
-    
+    public void debugFlag(String flagname){
+        if (flags.containsKey(flagname)){
+            System.out.println(flagname+" | Current State ("+flags.get(flagname).getState()+")| Initial State ("+flags.get(flagname).getInitialState()+")| Persistence ("+flags.get(flagname).getPersitence()+")");
+        }
+    }
 
     public boolean isFlagSet(String flagName) {
         if (flags.containsKey(flagName)) {
@@ -55,14 +61,12 @@ public class FlagManager {
     }
 
     public boolean getFlagState(String flagname) {
-        if (isFlagSet(flagname)){
+        if (isFlagSet(flagname)) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
-        
-    } 
 
-    
+    }
+
 }

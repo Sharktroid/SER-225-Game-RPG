@@ -1,5 +1,7 @@
 package Scripts.HubMap;
 
+import Game.SoundPlayer;
+import Game.SoundPlayer.MusicTracks;
 import Level.NPC;
 import Level.Script;
 import Level.ScriptState;
@@ -19,27 +21,9 @@ public class FirefoxScript extends Script<NPC> {
         setNPCName("Firefox");
         showTextbox();
 
-        /*Debugging
-        System.out.println("hasTalkedToFirefox0: " + isFlagSet("hasTalkedToFirefox0"));
-        System.out.println("HubMap.getTalkedFS(0): " + HubMap.getTalkedFS(0));
-        System.out.println("\nhasTalkedToFirefox1: " + isFlagSet("hasTalkedToFirefox1"));
-        System.out.println("HubMap.getTalkedFS(0): " + HubMap.getTalkedFS(1));
-        System.out.println("\nhasTalkedToFirefox2: " + isFlagSet("hasTalkedToFirefox2"));
-        System.out.println("HubMap.getTalkedFS(0): " + HubMap.getTalkedFS(2));
-
-        System.out.println("\nunlockedPortal1: "+ isFlagSet("unlockedPortal1"));
-        System.out.println("HubMap.getUnlockedPortalFS(1): " + HubMap.getUnlockedPortalFS(1));
-        System.out.println("\nunlockedPortal2: "+ isFlagSet("unlockedPortal2"));
-        System.out.println("HubMap.getUnlockedPortalFS(1): " + HubMap.getUnlockedPortalFS(2));
-
-
-        System.out.println("\nworldOneComplete: " + isFlagSet("worldOneComplete"));
-        System.out.println("WorldOneMap.getW1ClearedFS(): "+ WorldOneMap.getW1ClearedFS());
-        System.out.println("------------------------------------------------");
-        */
-
         if (!isFlagSet("hasTalkedToFirefox0")) {
             if (sequence == 0) {
+            SoundPlayer.playMusic(MusicTracks.FIREFOXDIALOGUE);
                 setNPCName("Firefox");
                 addTextToTextboxQueue("My orb! Where did it go?");
                 addTextToTextboxQueue("You! Do you know where my orb went?");
@@ -81,6 +65,7 @@ public class FirefoxScript extends Script<NPC> {
     protected void cleanup() {
         unlockPlayer();
         hideTextbox();
+        SoundPlayer.playMusic(MusicTracks.HUBMAP);
 
         if (!isFlagSet("hasTalkedToFirefox0")) {
             if (sequence == 0) {

@@ -9,28 +9,36 @@ import Level.Textbox.Style;
 public class LibrarianScript extends Script<NPC> {
 
     private int sequence = 0;
-    // private int responseNum = -1;
 
     @Override
     protected void setup() {
+        setFlag("hasCuredAllNPCs");
         lockPlayer();
-
         setTextboxStyle(Style.WORLDONE);
         showTextbox();
 
         String npcName = "Librarian";
         String playerName = "T";
 
-        String[] selections = {"RUN VIRUS SCAN", "LEAVE"};
-        String[] answers = {"NO VIRUS DETECTED", "Please come again once the library is back in top shape!"};
+        String[] selections = { "RUN VIRUS SCAN", "LEAVE" };
+        String[] answers = { "NO VIRUS DETECTED", "Please come again once the library is back in top shape!" };
 
         entity.facePlayer(player);
-        if (isFlagSet("hasRanVirusScanLibrarian")) {
-            addTextToTextboxQueue( "Please come back once everything is fixed.");
-        } else if (!isFlagSet("hasCuredAllNPCs")) {
+
+        if (!isFlagSet("hasTalkedToNSE")) {
             setNPCName(npcName);
-            addTextToTextboxQueue("Sorry, the library is currently closed right now due to\ntraumatic events.", selections, answers);
-        } else if (!isFlagSet("hasTalkedToLibrarian") && isFlagSet("hasCuredAllNPCs")) {
+            addTextToTextboxQueue("Sorry, the library is currently closed right now due to\ntraumatic events.");
+
+        } else if (!isFlagSet("scannedLibrarian")) {
+            setNPCName(npcName);
+            addTextToTextboxQueue("Sorry, the library is currently closed right now due to\ntraumatic events.",
+                    selections, answers);
+            System.out.println(this.getChoice());
+        } else if (!isFlagSet("hasFinishedNSE")) {
+            setNPCName(npcName);
+            addTextToTextboxQueue("Thanks for checking to see if I was infected.");
+            addTextToTextboxQueue("Please come again once this virus is taken care of.");
+        } else if (!isFlagSet("hasTalkedToLibrarian")) {
             if (sequence == 0) {
                 setNPCName(npcName);
                 addTextToTextboxQueue("Hello!");
@@ -49,110 +57,68 @@ public class LibrarianScript extends Script<NPC> {
                 setNPCName(npcName);
                 addTextToTextboxQueue("Go right ahead!");
             }
-            //set flag
-        } else if (isFlagSet("hasTalkedToLibrarian")) {
+        } else if (!isFlagSet("w1FoundFrag3")) {
             setNPCName(npcName);
             addTextToTextboxQueue("How are we going to afford these repairs...");
-        } else if (isFlagSet("hasFoundLibraryShard")) {
+        } else if (isFlagSet("w1FoundFrag3")) {
             setNPCName(npcName);
             addTextToTextboxQueue("You were able to find it and safely remove it? Good job!");
-        } else {
+        } else if (isFlagSet("hasFinishedLib")) {
+            setNPCName(npcName);
             addTextToTextboxQueue("Please come again once the library is more presentable.");
         }
-    }
 
+    }
 
     @Override
     protected void cleanup() {
-        unlockPlayer();
         hideTextbox();
+        unlockPlayer();
 
-        if (!isFlagSet("hasCuredAllNPCs")) {
-            setFlag("hasRanVirusScanLibrarian");
+        if (isFlagSet("hasTalkedToNSE") && !isFlagSet("scannedLibrarian")) {
+            if (this.getChoice() == 0) {
+                setFlag("scannedLibrarian");
+            }
+
         }
-        if (!isFlagSet("hasTalkedToLibrarian")) {
-            if (sequence == 0) {
-                sequence++;
-            } else if (sequence == 1) {
-                sequence++;
-            } else if (sequence == 2) {
-                sequence++;
-            } else if (sequence == 3) {
+        if (isFlagSet("scannedLibrarian") && isFlagSet("hasFinishedNSE") && !isFlagSet("hasTalkedToLibrarian")) {
+            if (sequence < 4) {
                 sequence++;
             } else if (sequence == 4) {
                 setFlag("hasTalkedToLibrarian");
                 sequence++;
             }
+        }else if (isFlagSet("w1FoundFrag3")){
+            setFlag("hasFinishedLib");
         }
+
     }
 
     @Override
     public ScriptState execute() {
-        if (!isFlagSet("hasCuredAllNPCs")) {
-            start();
-            if (isTextboxQueueEmpty()) {
-                end();
-                return ScriptState.COMPLETED;
-            }
-            return ScriptState.RUNNING;            
-        } else if (isFlagSet("hasRanVirusScanLibrarian")) {
-            start();
-            if (!isTextboxQueueEmpty()) {
-                return ScriptState.RUNNING;
-            }
-            end();
-            return ScriptState.COMPLETED;
-        } else if (!isFlagSet("hasTalkedToLibrarian") && isFlagSet("hasCuredAllNPCs")) {
-            if (sequence == 0) {
+        if (isFlagSet("scannedLibrarian") && isFlagSet("hasFinishedNSE") && !isFlagSet("hasTalkedToLibrarian")) {
+            if (sequence < 4) {
                 start();
                 if (isTextboxQueueEmpty()) {
                     end();
                 }
-            } else if (sequence == 1) {
-                start();
-                if (isTextboxQueueEmpty()) {
-                    end();
-                }
-            } else if (sequence == 2) {
-                start();
-                if (isTextboxQueueEmpty()) {
-                    end();
-                }
-            } else if (sequence == 3) {
-                start();
-                if (isTextboxQueueEmpty()) {
-                    end();
-                }
-            } else if (sequence == 4) {
+            } else {
                 start();
                 if (isTextboxQueueEmpty()) {
                     end();
                     return ScriptState.COMPLETED;
                 }
-            } 
-            return ScriptState.RUNNING;
-        } else if (isFlagSet("hasTalkedToLibrarian")) {
-            start();
-            if (isTextboxQueueEmpty()) {
-                end();
-                return ScriptState.COMPLETED;
+
             }
             return ScriptState.RUNNING;
-        } else if (isFlagSet("hasFoundLibraryShard")) {
-            start();
-            if (isTextboxQueueEmpty()) {
-                end();
-                return ScriptState.COMPLETED;
-            }
-            return ScriptState.RUNNING;
+
         } else {
             start();
-            if (isTextboxQueueEmpty()) {
-                end();
-                return ScriptState.COMPLETED;
+            if (!isTextboxQueueEmpty()) {
+                return ScriptState.RUNNING;
             }
-            return ScriptState.RUNNING;
+            end();
         }
-        // return ScriptState.COMPLETED;
+        return ScriptState.COMPLETED;
     }
 }

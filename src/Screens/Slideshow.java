@@ -3,6 +3,8 @@ package Screens;
 import Engine.*;
 import Game.GameState;
 import Game.ScreenCoordinator;
+import Game.SoundPlayer;
+import Game.SoundPlayer.MusicTracks;
 import Level.Map;
 import Maps.TitleScreenMap;
 import SpriteFont.SpriteFont;
@@ -51,6 +53,7 @@ public class Slideshow extends Screen
         background.setAdjustCamera(false);
 
         spaceToContinue = new SpriteFont("PRESS SPACE TO CONTINUE", 200, 519, "Comic Sans", 30, new Color(49, 207, 240));
+        SoundPlayer.playMusic(MusicTracks.INTRO);
 
     }
 
@@ -90,7 +93,7 @@ public class Slideshow extends Screen
         {
             image = ImageLoader.load("SlideshowFive.png"); //fifth image in slideshow
             counter ++;
-            
+
         }else if (counter == 5)
         {
             screenCoordinator.setGameState(GameState.LEVEL);

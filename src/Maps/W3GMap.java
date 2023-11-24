@@ -1,6 +1,8 @@
 package Maps;
 
 import Level.EnhancedMapTile;
+import Game.SoundPlayer;
+import Game.SoundPlayer.MusicTracks;
 import Level.Map;
 import Level.NPC;
 import Level.Textbox.Style;
@@ -19,6 +21,12 @@ public class W3GMap extends Map {
 
         this.playerStartPosition = getMapTile(8, 11).getLocation();
         textbox.setStyle(Style.WORLDTHREE);
+    }
+
+    @Override
+    public void setupMap() {
+        super.setupMap();
+        SoundPlayer.playMusic(MusicTracks.WORLDTHREE);
     }
     /*
     @Override
@@ -42,8 +50,8 @@ public class W3GMap extends Map {
         return triggers;
     }
 
-    
-    /* 
+
+    /*
         if (downFromFloor == false){
             //starting positon when teleported to world three
                 this.playerStartPosition = getMapTile(8, 11).getLocation();
@@ -56,7 +64,7 @@ public class W3GMap extends Map {
 
     }
 
-    
+
     // player starting position floors 1-4
     else {
             this.playerStartPosition = getMapTile(8, 15).getLocation();
@@ -129,5 +137,5 @@ public class W3GMap extends Map {
 
     */
 
-    
+
 }

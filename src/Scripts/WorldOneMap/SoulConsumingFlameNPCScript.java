@@ -15,7 +15,7 @@ public class SoulConsumingFlameNPCScript extends Script<NPC> {
     @Override
     protected void setup() {
         lockPlayer();
-        SoundPlayer.playMusic(MusicTracks.BATTLETHEME);
+        SoundPlayer.playMusic(MusicTracks.BATTLE);
         setTextboxStyle(Style.WORLDONE);
         map.initiateCombat(player, new SoulConsumingFlame(entity, map));
     }
@@ -24,12 +24,11 @@ public class SoulConsumingFlameNPCScript extends Script<NPC> {
     protected void cleanup() {
         unlockPlayer();
         hideTextbox();
-        SoundPlayer.playMusic(MusicTracks.WORLDONEBGM);
+        SoundPlayer.playMusic(MusicTracks.WORLDONE);
     }
 
     @Override
     public void setPlayer(Player player) {
-        // TODO Auto-generated method stub
         super.setPlayer(player);
     }
 
