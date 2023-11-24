@@ -13,7 +13,7 @@ import Utils.Direction;
 // import Utils.Point;
 
 // old man
-public class OldManJenksScript extends Script<NPC> {
+public class W1OldManJenksScript extends Script<NPC> {
 
     private int sequence = 0;
     private int miniSequence = 0;

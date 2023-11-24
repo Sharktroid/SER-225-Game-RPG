@@ -1,7 +1,3 @@
-
-
-
-
 package NPCs;
 
 import Builders.FrameBuilder;
@@ -20,13 +16,13 @@ import java.awt.Color;
 import java.util.HashMap;
 
 // This class is for the walrus NPC
-public class Librarian extends NPC {
+public class W1OldManJenks extends NPC {
     protected boolean isInteracting = false;
     protected SpriteFont playGame;
 
 
-    public Librarian(int id, Point location) {
-        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("Noface5.png"), 25, 25), "STAND_LEFT");
+    public W1OldManJenks(int id, Point location) {
+        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("OldManJenks.png"), 25, 25), "STAND_LEFT");
 
     }
 
@@ -50,16 +46,40 @@ public class Librarian extends NPC {
             put("STAND_LEFT", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(0, 0))
                             .withScale(3)
-                            .withBounds(2, 0, 20, 20)
+                            .withBounds(7, 0, 11, 20)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                             .build()
             });
             put("STAND_RIGHT", new Frame[] {
                    new FrameBuilder(spriteSheet.getSprite(0, 0))
                            .withScale(3)
-                           .withBounds(2, 0, 20, 20)
+                           .withBounds(7, 0, 11, 20)
                            .build()
            });
+
+            put("WALK_LEFT", new Frame[]{
+                    new FrameBuilder(spriteSheet.getSprite(0, 0), 14)
+                            .withScale(3)
+                            .withBounds(7, 0, 11, 20)
+                            .build(),
+                    new FrameBuilder(spriteSheet.getSprite(0, 0), 14)
+                            .withScale(3)
+                            .withBounds(7, 0, 11, 20)
+                            .build()
+            });
+
+            put("WALK_RIGHT", new Frame[]{
+                    new FrameBuilder(spriteSheet.getSprite(0, 0), 14)
+                            .withScale(3)
+                            .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                            .withBounds(7, 0, 11, 20)
+                            .build(),
+                    new FrameBuilder(spriteSheet.getSprite(0, 0), 14)
+                            .withScale(3)
+                            .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                            .withBounds(7, 0, 11, 20)
+                            .build()
+            });
         }};
     }
 
@@ -71,6 +91,9 @@ public class Librarian extends NPC {
         if (isInteracting == true)
         {
             playGame = new SpriteFont("ENTER", getCalibratedXLocation()+2, getCalibratedYLocation()-12, "Comic Sans", 15, Color.black);
+
+
+            //textbox.draw(graphicsHandler);
             graphicsHandler.drawFilledRectangle(getCalibratedXLocation(), getCalibratedYLocation()-10,50,15, java.awt.Color.white);
             playGame.draw(graphicsHandler);
         }

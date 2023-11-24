@@ -1,8 +1,7 @@
 package Level;
 import GameObject.Rectangle;
 import SpriteFont.SpriteFont;
-import Utils.Direction; 
-import Level.Textbox;
+import Utils.Direction;
 
 // This class is a base class for all scripts in the game -- all scripts should extend from it
 // Scripts can be used to interact with map entities

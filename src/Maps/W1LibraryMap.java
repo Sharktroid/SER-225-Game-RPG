@@ -9,11 +9,8 @@ import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
 import Level.Trigger;
-import NPCs.Testfox;
-import Scripts.BasicFragmentScript;
-import Scripts.WorldOneMap.ExitLibraryScript;
-import Scripts.WorldOneMap.TestfoxScript;
-import Scripts.WorldOneMap.w1Frag3Script;
+import Scripts.WorldOneMap.W1ExitLibraryScript;
+import Scripts.WorldOneMap.W1Frag3Script;
 import Tilesets.InternetExplorerTileset;
 import java.util.ArrayList;
 
@@ -63,7 +60,7 @@ public class W1LibraryMap extends Map {
         enhancedMapTiles.add(pushableRock8);
 
         ItemMapObject fragment3 = new ItemMapObject(getMapTile(13, 8).getLocation(), new Fragment(null));
-        fragment3.setInteractScript(new w1Frag3Script());
+        fragment3.setInteractScript(new W1Frag3Script());
         enhancedMapTiles.add(fragment3);
 
         return enhancedMapTiles;
@@ -77,7 +74,7 @@ public class W1LibraryMap extends Map {
     public ArrayList<Trigger> loadTriggers() {
         ArrayList<Trigger> triggers = new ArrayList<>();
 
-        triggers.add(new Trigger(384, 672, 96,48, new ExitLibraryScript()));
+        triggers.add(new Trigger(384, 672, 96,48, new W1ExitLibraryScript()));
 
         return triggers;
     }

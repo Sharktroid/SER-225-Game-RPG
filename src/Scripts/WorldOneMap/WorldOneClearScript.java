@@ -5,7 +5,6 @@ import Game.SoundPlayer.SoundEffects;
 import Level.Script;
 import Level.ScriptState;
 import Level.Textbox.Style;
-import Maps.W1GMap;
 
 
 // trigger script at beginning of game to set that heavy emotional plot
@@ -28,7 +27,7 @@ public class WorldOneClearScript extends Script {
 
     @Override
     protected void cleanup() {
-      
+
         if (isFlagSet("worldOneComplete")){
             hideTextbox();
             unlockPlayer();

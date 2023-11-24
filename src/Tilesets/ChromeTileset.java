@@ -4,7 +4,6 @@ import Builders.FrameBuilder;
 import Builders.MapTileBuilder;
 import Engine.ImageLoader;
 import GameObject.Frame;
-import GameObject.ImageEffect;
 import Level.TileType;
 import Level.Tileset;
 
@@ -102,7 +101,7 @@ public class ChromeTileset extends Tileset {
 
         mapTiles.add(brickTile);
 
-        // exterior wall 
+        // exterior wall
         Frame exteriorWallFrame = new FrameBuilder(getSubImage(0, 4))
                 .withScale(tileScale)
                 .build();
@@ -112,7 +111,7 @@ public class ChromeTileset extends Tileset {
 
         mapTiles.add(exteriorWallTile);
 
-        // top window wall 
+        // top window wall
         Frame topWindowFrame = new FrameBuilder(getSubImage(0, 3))
                 .withScale(tileScale)
                 .build();
@@ -122,7 +121,7 @@ public class ChromeTileset extends Tileset {
 
         mapTiles.add(topWindowTile);
 
-        // bottom window wall 
+        // bottom window wall
         Frame bottomWindowFrame = new FrameBuilder(getSubImage(0, 2))
                 .withScale(tileScale)
                 .build();
@@ -207,7 +206,7 @@ public class ChromeTileset extends Tileset {
         mapTiles.add(bottomRightDeskTile);
 
 
-        // fan 
+        // fan
         Frame[] fanFrames = new Frame[] {
                 new FrameBuilder(getSubImage(4, 4), 65)
                         .withScale(tileScale)
@@ -222,16 +221,16 @@ public class ChromeTileset extends Tileset {
                         .withScale(tileScale)
                         .build(),
             };
-    
+
             MapTileBuilder fanTile = new MapTileBuilder(fanFrames)
                     .withTileType(TileType.NOT_PASSABLE);
-    
+
             mapTiles.add(fanTile);
-    
-    
 
 
- 
+
+
+
 
         // top water
         Frame[] topWaterFrames = new Frame[] {

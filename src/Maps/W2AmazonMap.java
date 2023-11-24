@@ -1,11 +1,8 @@
 package Maps;
 
-import java.util.ArrayList;
-
 import Game.SoundPlayer;
 import Game.SoundPlayer.MusicTracks;
 import Level.Map;
-import Level.NPC;
 import Level.Textbox.Style;
 import Tilesets.CommonTileset;
 

@@ -4,7 +4,7 @@ import Level.Script;
 import Level.ScriptState;
 import Level.Textbox.Style;
 
-public class EnterLibraryScript extends Script {
+public class W1EnterLibraryScript extends Script {
 
     @Override
     protected void setup() {

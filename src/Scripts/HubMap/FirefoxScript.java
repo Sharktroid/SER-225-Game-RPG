@@ -6,8 +6,6 @@ import Level.NPC;
 import Level.Script;
 import Level.ScriptState;
 import Level.Textbox.Style;
-import Maps.HubMap;
-import Maps.W1GMap;
 
 // script for talking to sloth npc
 public class FirefoxScript extends Script<NPC> {
