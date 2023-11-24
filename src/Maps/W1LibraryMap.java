@@ -10,7 +10,8 @@ import Level.Map;
 import Level.NPC;
 import Level.Trigger;
 import Scripts.WorldOneMap.W1ExitLibraryScript;
-import Scripts.WorldOneMap.W1Frag3Script;
+//import Scripts.WorldOneMap.W1Frag3Script;
+import Scripts.WorldOneMap.w1Frag3Script;
 import Tilesets.InternetExplorerTileset;
 import java.util.ArrayList;
 
@@ -60,7 +61,7 @@ public class W1LibraryMap extends Map {
         enhancedMapTiles.add(pushableRock8);
 
         ItemMapObject fragment3 = new ItemMapObject(getMapTile(13, 8).getLocation(), new Fragment(null));
-        fragment3.setInteractScript(new W1Frag3Script());
+        fragment3.setInteractScript(new w1Frag3Script());
         enhancedMapTiles.add(fragment3);
 
         return enhancedMapTiles;

@@ -5,9 +5,9 @@ import Game.SoundPlayer;
 import Game.SoundPlayer.SoundEffects;
 import Items.Fragment;
 
-public class W1Frag3Script extends BasicItemScript {
+public class w1Frag3Script extends BasicItemScript {
 
-    public W1Frag3Script() {
+    public w1Frag3Script() {
         super(new Fragment(null));
     }
 

@@ -5,10 +5,11 @@ import Game.SoundPlayer.MusicTracks;
 import Level.Map;
 import Level.Textbox.Style;
 import Tilesets.CommonTileset;
+import Tilesets.SafariTileset;
 
 public class W2AmazonMap extends Map {
     public W2AmazonMap() {
-        super("w2_amazon_map.txt", new CommonTileset());
+        super("w2_amazon_map.txt", new SafariTileset());
         this.playerStartPosition = getMapTile(0, 0).getLocation();
         textbox.setStyle(Style.WORLDTWO);
     }
