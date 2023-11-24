@@ -16,12 +16,12 @@ import java.awt.Color;
 import java.util.HashMap;
 
 // This class is for the walrus NPC
-public class OldManJenks extends NPC {
+public class W1OldManJenks extends NPC {
     protected boolean isInteracting = false;
     protected SpriteFont playGame;
 
 
-    public OldManJenks(int id, Point location) {
+    public W1OldManJenks(int id, Point location) {
         super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("OldManJenks.png"), 25, 25), "STAND_LEFT");
 
     }

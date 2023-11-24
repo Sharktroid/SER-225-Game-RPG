@@ -16,12 +16,12 @@ import Utils.Point;
 import java.util.HashMap;
 
 // blue shirt
-public class EngineerPartner extends NPC {
+public class W1EngineerPartner extends NPC {
     protected boolean isInteracting = false;
     protected SpriteFont playGame;
 
 
-    public EngineerPartner(int id, Point location) {
+    public W1EngineerPartner(int id, Point location) {
         super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("Noface1.png"), 25, 25), "STAND_LEFT");
 
     }

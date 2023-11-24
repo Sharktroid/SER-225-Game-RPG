@@ -16,12 +16,12 @@ import java.awt.Color;
 import java.util.HashMap;
 
 // blue shirt
-public class Engineer extends NPC {
+public class W1Engineer extends NPC {
     protected boolean isInteracting = false;
     protected SpriteFont playGame;
 
 
-    public Engineer(int id, Point location) {
+    public W1Engineer(int id, Point location) {
         super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("Noface1.png"), 25, 25), "STAND_LEFT");
 
     }

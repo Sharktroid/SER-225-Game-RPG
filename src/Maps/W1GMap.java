@@ -18,12 +18,12 @@ import NPCs.W1Infected2;
 import NPCs.W1Infected3;
 import NPCs.W1Infected4;
 import NPCs.W1Infected5;
-import NPCs.Engineer;
-import NPCs.EngineerPartner;
-import NPCs.Librarian;
+import NPCs.W1Engineer;
+import NPCs.W1EngineerPartner;
+import NPCs.W1Librarian;
 import NPCs.W1Normal1;
 import NPCs.W1Normal2;
-import NPCs.OldManJenks;
+import NPCs.W1OldManJenks;
 import Scripts.WorldOneMap.*;
 import Scripts.BasicFragmentScript;
 import Tilesets.InternetExplorerTileset;
@@ -82,20 +82,20 @@ public class W1GMap extends Map {
         ArrayList<NPC> npcs = new ArrayList<>();
         // remember to import NPC and Scripts for new NPC
 
-        OldManJenks oldManJenks = new OldManJenks(1, getMapTile(25, 14).getLocation());
+        W1OldManJenks oldManJenks = new W1OldManJenks(1, getMapTile(25, 14).getLocation());
         oldManJenks.setExistenceFlag("hasFinishedOMJ");
         oldManJenks.setInteractScript(new W1OldManJenksScript());
         npcs.add(oldManJenks);
 
-        Engineer engineer = new Engineer(2, getMapTile(35, 24).getLocation());
+        W1Engineer engineer = new W1Engineer(2, getMapTile(35, 24).getLocation());
         engineer.setInteractScript(new W1EngineerScript());
         npcs.add(engineer);
 
-        EngineerPartner engineerPartner = new EngineerPartner(3, getMapTile(36, 24).getLocation());
+        W1EngineerPartner engineerPartner = new W1EngineerPartner(3, getMapTile(36, 24).getLocation());
         engineerPartner.setInteractScript(new W1EngineerScript());
         npcs.add(engineerPartner);
 
-        Librarian librarian = new Librarian(4, getMapTile(36, 9).getLocation());
+        W1Librarian librarian = new W1Librarian(4, getMapTile(36, 9).getLocation());
         librarian.setInteractScript(new LibrarianScript());
         npcs.add(librarian);
 

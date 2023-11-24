@@ -20,12 +20,12 @@ import java.awt.Color;
 import java.util.HashMap;
 
 // This class is for the walrus NPC
-public class Librarian extends NPC {
+public class W1Librarian extends NPC {
     protected boolean isInteracting = false;
     protected SpriteFont playGame;
 
 
-    public Librarian(int id, Point location) {
+    public W1Librarian(int id, Point location) {
         super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("Noface5.png"), 25, 25), "STAND_LEFT");
 
     }
