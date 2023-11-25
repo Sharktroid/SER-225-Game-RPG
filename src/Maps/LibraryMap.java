@@ -17,7 +17,7 @@ public class LibraryMap extends Map {
     public static boolean entered = true;
 
     public LibraryMap() {
-        super("library_map.txt", new InternetExplorerTileset());
+        super("library_map.txt", new InternetExplorerTileset(), 0);
         this.playerStartPosition = getMapTile(6, 1).getLocation().addX(20);
     }
 

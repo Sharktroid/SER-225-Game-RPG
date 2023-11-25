@@ -7,7 +7,7 @@ import Tilesets.CommonTileset;
 
 public class CalvinTestMap extends Map {
     public CalvinTestMap() {
-        super("calvin_map.txt", new CommonTileset());
+        super("calvin_map.txt", new CommonTileset(), 0);
         this.playerStartPosition = getMapTile(0, 0).getLocation();
     }
 

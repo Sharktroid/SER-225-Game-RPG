@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class EvanTestMap extends Map {
     public EvanTestMap() {
-        super("evan_map.txt", new InternetExplorerTileset());
+        super("evan_map.txt", new InternetExplorerTileset(), 0);
         this.playerStartPosition = getMapTile(0, 0).getLocation();
     }
 

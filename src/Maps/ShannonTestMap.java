@@ -10,7 +10,7 @@ import Tilesets.InternetExplorerTileset;
 
 public class ShannonTestMap extends Map {
     public ShannonTestMap() {
-        super("shannon_map.txt", new InternetExplorerTileset());
+        super("shannon_map.txt", new InternetExplorerTileset(), 0);
         this.playerStartPosition = getMapTile(23, 13).getLocation();
     }
 

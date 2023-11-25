@@ -9,7 +9,7 @@ import Tilesets.SafariTileset;
 
 public class JulietTestMap extends Map {
     public JulietTestMap() {
-        super("juliet_map.txt", new SafariTileset());
+        super("juliet_map.txt", new SafariTileset(), 0);
         this.playerStartPosition = getMapTile(0, 0).getLocation();
     }
 

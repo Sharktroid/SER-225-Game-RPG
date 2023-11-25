@@ -33,6 +33,9 @@ public abstract class Map {
     protected int width;
     protected int height;
 
+    // assigns a player to this map
+    protected Player player;
+
     // the tileset this map uses for its map tiles
     protected Tileset tileset;
 
@@ -77,9 +80,13 @@ public abstract class Map {
 
     private BattleSystem currentBattleSystem;
 
-    public Map(String mapFileName, Tileset tileset) {
+    //
+    protected int submapNum;
+
+    public Map(String mapFileName, Tileset tileset, int submapNum) {
         this.mapFileName = mapFileName;
         this.tileset = tileset;
+        this.submapNum = submapNum;
         setupMap();
         this.startBoundX = 0;
         this.startBoundY = 0;
@@ -88,6 +95,7 @@ public abstract class Map {
         this.xMidPoint = ScreenManager.getScreenWidth() / 2;
         this.yMidPoint = (ScreenManager.getScreenHeight() / 2);
         this.playerStartPosition = new Point(0, 0);
+        this.player = null;
     }
 
     // sets up map by reading in the map file to create the tile map
@@ -588,6 +596,10 @@ public abstract class Map {
         this.flagManager = flagManager;
     }
 
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
     public Textbox getTextbox() { return textbox; }
     // public TextboxSmall getTextboxSmall() { return textboxSmall; }
 
@@ -613,4 +625,6 @@ public abstract class Map {
     public Boolean inCombat() {
         return currentBattleSystem != null;
     }
+
+    public int getSubmapNum() { return submapNum; }
 }

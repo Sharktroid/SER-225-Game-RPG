@@ -7,7 +7,7 @@ import Tilesets.CommonTileset;
 
 public class AaronTestMap extends Map {
     public AaronTestMap() {
-        super("aaron_map.txt", new CommonTileset());
+        super("aaron_map.txt", new CommonTileset(), 0);
         this.playerStartPosition = getMapTile(0, 0).getLocation();
     }
 
