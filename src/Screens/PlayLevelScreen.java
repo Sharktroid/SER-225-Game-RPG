@@ -289,6 +289,10 @@ public class PlayLevelScreen extends Screen {
         }
     }
 
+    public void resetLevel() {
+        initialize();
+    }
+
     public PlayLevelScreenState getPlayLevelScreenState() {
         return playLevelScreenState;
     }
