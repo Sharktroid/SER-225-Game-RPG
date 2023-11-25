@@ -14,7 +14,7 @@ import Tilesets.HubTileset;
 public class HubMap extends Map {
 
     public HubMap() {
-        super("hub_map.txt", new HubTileset());
+        super("hub_map.txt", new HubTileset(), 0);
         this.playerStartPosition = getMapTile(8, 10).getLocation();
     }
 

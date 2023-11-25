@@ -22,7 +22,7 @@ public class W1LibraryMap extends Map {
     public static boolean entered = true;
 
     public W1LibraryMap() {
-        super("w1_library_map.txt", new InternetExplorerTileset());
+        super("w1_library_map.txt", new InternetExplorerTileset(), 1);
         this.playerStartPosition = getMapTile(6, 1).getLocation().addX(20);
     }
 

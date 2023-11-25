@@ -96,8 +96,10 @@ public class FlagSaves {
         // world three flags
 
         // temp: used to go up and down levels
-        flagManager.addFlag("wentUpLevel", false, false);
-        flagManager.addFlag("wentDownLevel", false, false);
+        flagManager.addFlag("goUpLevel", false, false); 
+        flagManager.addFlag("goDownLevel", false, false);
+        flagManager.addFlag("wentUpLevel", false, true);
+        flagManager.addFlag("wentDownLevel", false, true);
 
         // persistent: test flags. **remove**
         flagManager.addFlag("hasTalkedToRedPanda", false, true);

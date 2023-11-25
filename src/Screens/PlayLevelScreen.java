@@ -21,17 +21,11 @@ public class PlayLevelScreen extends Screen {
     protected Player player;
     protected PlayLevelScreenState playLevelScreenState;
     protected WinScreen winScreen;
-    protected FlagManager flagManager;
+    protected static FlagManager flagManager;
     protected FlagSaves flagSaves;
-    protected int worldNum = -1;
-    protected int floorNum = 0;
+    protected int worldNum = -1; // **temp: set default to 4 once other menu options removed**/
     private InventoryMenu inventory;
-
     private KeyLocker keyLocker = new KeyLocker();
-
-    // public String[] persistentFlags =
-    // {"sawHubMsg","hasTalkedToFirefox0","hasTalkedToFirefox1",
-    // "hasTalkedToFirefox2","hasTalkedToFirefox3","unlockedPortal1","unlockedPortal2","unlockedPortal2","unlockedPortal3","worldOneComplete","worldTwoComplete","worldThreeComplete"};
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -41,58 +35,17 @@ public class PlayLevelScreen extends Screen {
     }
 
     public void initialize() {
+        // **temp: remove this if statement once other menu items are removed**
+        if (worldNum == -1) worldNum = Screens.MenuScreen.worldNumber;
 
-        // flagManager.debugAll();
         flagSaves.loadFlags(flagManager);
-
-        if (worldNum == -1)
-            worldNum = Screens.MenuScreen.worldNumber;
-
-        if (worldNum == 0)
-            this.map = new WorldZeroMap();
-
-        else if (worldNum == 1)
-            this.map = new W1GMap();
-
-        else if (worldNum == 2)
-            this.map = new W2GMap();
-
-        else if (worldNum == 3)
-            this.map = new W3GMap();
-
-        else if (worldNum == 4)
-            this.map = new HubMap();
-
-        else if (worldNum == 5)
-            this.map = new EvanTestMap();
-
-        else if (worldNum == 6)
-            this.map = new CalvinTestMap();
-
-        else if (worldNum == 7)
-            this.map = new ShannonTestMap();
-
-        else if (worldNum == 8)
-            this.map = new JulietTestMap();
-
-        else if (worldNum == 9)
-            this.map = new AaronTestMap();
-
-        else if (worldNum == 11)
-            this.map = new W1LibraryMap();
-
-        else
-            this.map = new WorldZeroMap();
-
+        this.map = newMap();
         map.setFlagManager(flagManager);
-
-        // setup player
         this.player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
         this.player.setMap(map);
         Point playerStartPosition = map.getPlayerStartPosition();
         this.player.setLocation(playerStartPosition.x, playerStartPosition.y);
         this.playLevelScreenState = PlayLevelScreenState.RUNNING;
-        this.player.setFacingDirection(Direction.LEFT);
 
         // let pieces of map know which button to listen for as the "interact" button
         map.getTextbox().setInteractKey(player.getInteractKey());
@@ -146,160 +99,196 @@ public class PlayLevelScreen extends Screen {
                     keyLocker.unlockKey(Key.E);
                 }
                 if (inventory.isActive()) {
-
                     inventory.update();
                 }
-
                 else {
                     player.update();
                 }
 
+                checkForTraversal();
                 map.update(player);
+
                 break;
 
-            // if level has been completed, bring up level cleared screen (**from old test
-            // map)
+            // if level has been completed, bring up level cleared screen (**from old test map
             case LEVEL_COMPLETED:
                 winScreen.update();
                 break;
         }
 
-        // world traversal
-
-        // to internet explorer world
-        if (flagManager.isFlagSet("portalOneActivated") || (map.getFlagManager().isFlagSet("exitedLibrary"))
-                || Keyboard.isKeyDown(Key.ONE) && !keyLocker.isKeyLocked(Key.ONE)) {
-            worldNum = 1;
-            initialize();
-
-            // to safari world
-        } else if ((map.getFlagManager().isFlagSet("portalTwoActivated"))
-                || Keyboard.isKeyDown(Key.TWO) && !keyLocker.isKeyLocked(Key.TWO)) {
-            worldNum = 2;
-            initialize();
-
-            // to chrome word
-        } else if (map.getFlagManager().isFlagSet("portalThreeActivated")
-                || Keyboard.isKeyDown(Key.THREE) && !keyLocker.isKeyLocked(Key.THREE)) {
-            worldNum = 3;
-            initialize();
-        }
-
-        // to hub world
-        else if (map.getFlagManager().isFlagSet("teleportToHub")
-                || (Keyboard.isKeyDown(Key.FOUR) && !keyLocker.isKeyLocked(Key.FOUR))) {
-            worldNum = 4;
-            initialize();
-
-            // to world zero -> nine
-        } else if (Keyboard.isKeyDown(Key.ZERO) && !keyLocker.isKeyLocked(Key.ZERO)) {
-            worldNum = 0;
-            initialize();
-        } else if (Keyboard.isKeyDown(Key.FIVE) && !keyLocker.isKeyLocked(Key.FIVE)) { // Evan
-            worldNum = 5;
-            initialize();
-        } else if (Keyboard.isKeyDown(Key.SIX) && !keyLocker.isKeyLocked(Key.SIX)) { // Calvin
-            worldNum = 6;
-            initialize();
-        } else if (Keyboard.isKeyDown(Key.SEVEN) && !keyLocker.isKeyLocked(Key.SEVEN)) { // Shannon
-            worldNum = 7;
-            initialize();
-        } else if (Keyboard.isKeyDown(Key.EIGHT) && !keyLocker.isKeyLocked(Key.EIGHT)) { // Juliet
-            worldNum = 8;
-            initialize();
-        } else if (Keyboard.isKeyDown(Key.NINE) && !keyLocker.isKeyLocked(Key.NINE)) { // Aaron
-            worldNum = 9;
-            initialize();
-        } else if (Keyboard.isKeyDown(Key.M) && !keyLocker.isKeyLocked(Key.M)) {  //DEBUG
-            if (worldNum == 1){
-                System.out.println("\nOMJ");
-                flagManager.debugFlag("hasTalkedToOMJ");  
-                flagManager.debugFlag("hasFoundDentures");
-                flagManager.debugFlag("hasFinishedOMJ");
-                System.out.println("\nNSE");
-                flagManager.debugFlag("hasTalkedToNSE");
-                flagManager.debugFlag("w1CuredNPC1");
-                //flagManager.debugFlag("w1Btl1");
-                flagManager.debugFlag("w1CuredNPC2");
-                //flagManager.debugFlag("w1Btl2");
-                flagManager.debugFlag("w1CuredNPC3");
-                //flagManager.debugFlag("w1Btl3");
-                flagManager.debugFlag("w1CuredNPC4");
-                //flagManager.debugFlag("w1Btl4");
-                flagManager.debugFlag("w1CuredNPC5");
-                //flagManager.debugFlag("w1Btl5");
-                flagManager.debugFlag("w1CuredAllNPCS");
-                flagManager.debugFlag("hasFinishedNSE");
-                System.out.println("\nLIB");
-                flagManager.debugFlag("hasTalkedToNSE");
-                flagManager.debugFlag("scannedLibrarian");
-                flagManager.debugFlag("hasFinishedNSE");
-                flagManager.debugFlag("hasTalkedToLibrarian");
-                flagManager.debugFlag("w1FoundFrag3");
-                flagManager.debugFlag("hasFinishedLib");
-            }  
+        // **DEBUGING KEY**
+        if (Keyboard.isKeyDown(Key.M) && !keyLocker.isKeyLocked(Key.M)) {
             keyLocker.lockKey(Key.M);
+            flagDebugger();
         } else if (Keyboard.isKeyUp(Key.M)) {
             keyLocker.unlockKey(Key.M);
         }
 
-        
-            
-        
-
-        // world one area traversal
         if (worldNum == 1 || worldNum == 11) {
-            if (map.getFlagManager().isFlagSet("enterLibrary")) {
-                worldNum = 11;
-                initialize();
+            if (flagManager.isFlagSet("w1CuredNPC1") && flagManager.isFlagSet("w1CuredNPC2")
+                    && flagManager.isFlagSet("w1CuredNPC3")
+                    && flagManager.isFlagSet("w1CuredNPC4")
+                    && flagManager.isFlagSet("w1CuredNPC5")) {
+                flagManager.setFlag("w1CuredAllNPCs");
             }
 
-            if (map.getFlagManager().isFlagSet("exitLibrary")) {
-                worldNum = 1;
-                initialize();
+            if (flagManager.isFlagSet("hasFinishedOMJ") && flagManager.isFlagSet("hasFinishedNSE")
+                    && flagManager.isFlagSet("hasFinishedLib")
+                    && !flagManager.isFlagSet("worldOneComlete")) {
+                flagManager.setFlag("worldOneComplete");
             }
-
-            if (map.getFlagManager().isFlagSet("w1CuredNPC1") && map.getFlagManager().isFlagSet("w1CuredNPC2")
-                    && map.getFlagManager().isFlagSet("w1CuredNPC3") && map.getFlagManager().isFlagSet("w1CuredNPC4")
-                    && map.getFlagManager().isFlagSet("w1CuredNPC5")) {
-                map.getFlagManager().setFlag("w1CuredAllNPCs");
-            }
-
-            if (map.getFlagManager().isFlagSet("hasFinishedOMJ") && map.getFlagManager().isFlagSet("hasFinishedNSE") && map.getFlagManager().isFlagSet("hasFinishedLib") && !map.getFlagManager().isFlagSet("worldOneComlete")){
-                map.getFlagManager().setFlag("worldOneComplete");
-            }
-
-
-            
 
         }
 
-        /*
-         * old *********world three floor traversal
-         * if (worldNum == 3) {
-         * if (map.getFlagManager().isFlagSet("enteredBuilding")) {
-         * flagManager.unsetFlag("enteredBuilding");
-         * initialize();
-         * }
-         * 
-         * if (map.getFlagManager().isFlagSet("wentUpLevel")) {
-         * floorNum = WorldThreeFloors.getCurrentFloorNumber();
-         * initialize();
-         * }
-         * 
-         * if (map.getFlagManager().isFlagSet("wentDownLevel")) {
-         * floorNum = WorldThreeFloors.getCurrentFloorNumber();
-         * WorldThreeFloors.setDownFromFloorTrue();
-         * initialize();
-         * }
-         * }
-         */
-
-        // if flag is set at any point during gameplay, game is "won" (**from old test
-        // map)
-        if (map.getFlagManager().isFlagSet("hasFoundBall")) {
+        if (flagManager.isFlagSet("hasFoundBall")) {
             playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
         }
+
+    }
+
+    // changes map if certain conditions are met
+    public void checkForTraversal() {
+        // to world 1 overworld (internet explorer)
+        if (flagManager.isFlagSet("portalOneActivated") || (flagManager.isFlagSet("exitLibrary"))
+                || (Keyboard.isKeyDown(Key.ONE) && !keyLocker.isKeyLocked(Key.ONE))) {
+            worldNum = 1;
+            initialize();
+        }
+
+        // to world 1 library
+        if (flagManager.isFlagSet("enterLibrary")) {
+            worldNum = 11;
+            initialize();
+        }
+
+        // to world 2 overworld (Safari)
+        if ((flagManager.isFlagSet("portalTwoActivated"))
+                || (Keyboard.isKeyDown(Key.TWO) && !keyLocker.isKeyLocked(Key.TWO))) {
+            worldNum = 2;
+            initialize();
+        }
+
+        // to amazon
+        // to apple
+        // to spotify
+        // to starbucks
+
+        // to world 3 ground (Chrome)
+        if (flagManager.isFlagSet("portalThreeActivated")
+                || (map.getSubmapNum() == 1 && flagManager.isFlagSet("goDownLevel"))
+                || (Keyboard.isKeyDown(Key.THREE) && !keyLocker.isKeyLocked(Key.THREE))) {
+            worldNum = 3;
+            initialize();
+        }
+
+        // to world 3 level 1
+        if ((map.getSubmapNum() == 0 && flagManager.isFlagSet("goUpLevel"))
+                || (map.getSubmapNum() == 2 && flagManager.isFlagSet("goDownLevel"))) {
+            worldNum = 31;
+            initialize();
+        }
+
+        // to world 3 level 2
+        if ((map.getSubmapNum() == 1 && flagManager.isFlagSet("goUpLevel"))
+                || (map.getSubmapNum() == 3 && flagManager.isFlagSet("goDownLevel"))) {
+            worldNum = 32;
+            initialize();
+        }
+
+        // to world 3 level 3
+        if ((map.getSubmapNum() == 2 && flagManager.isFlagSet("goUpLevel"))
+                || (map.getSubmapNum() == 4 && flagManager.isFlagSet("goDownLevel"))) {
+            worldNum = 33;
+            initialize();
+        }
+
+        // to world 3 level 4
+        if (map.getSubmapNum() == 3 && flagManager.isFlagSet("goUpLevel")) {
+            worldNum = 34;
+            initialize();
+        }
+
+        // to world 4 (hub)
+        if (flagManager.isFlagSet("teleportToHub")
+                || (Keyboard.isKeyDown(Key.FOUR) && !keyLocker.isKeyLocked(Key.FOUR))) {
+            worldNum = 4;
+            initialize();
+        }
+
+        // to world 0 (**temp**)
+        if (Keyboard.isKeyDown(Key.ZERO) && !keyLocker.isKeyLocked(Key.ZERO)) {
+            worldNum = 0;
+            initialize();
+        }
+
+        // to world 5 (**temp**)
+        if (Keyboard.isKeyDown(Key.FIVE) && !keyLocker.isKeyLocked(Key.FIVE)) { // Evan
+            worldNum = 5;
+            initialize();
+        }
+
+        // to world 6 (**temp**)
+        if (Keyboard.isKeyDown(Key.SIX) && !keyLocker.isKeyLocked(Key.SIX)) { // Calvin
+            worldNum = 6;
+            initialize();
+        }
+
+        // to world 7 (**temp**)
+        if (Keyboard.isKeyDown(Key.SEVEN) && !keyLocker.isKeyLocked(Key.SEVEN)) { // Shannon
+            worldNum = 7;
+            initialize();
+        }
+
+        // to world 8 (**temp**)
+        if (Keyboard.isKeyDown(Key.EIGHT) && !keyLocker.isKeyLocked(Key.EIGHT)) { // Juliet
+            worldNum = 8;
+            initialize();
+        }
+
+        // to world 9 (**temp**)
+        if (Keyboard.isKeyDown(Key.NINE) && !keyLocker.isKeyLocked(Key.NINE)) { // Aaron
+            worldNum = 9;
+            initialize();
+        }
+
+    }
+
+    // choses map based on world number
+    public Map newMap() {
+        Map newMap;
+        if (worldNum == 0)
+            newMap = new WorldZeroMap();
+        else if (worldNum == 1)
+            newMap = new W1GMap();
+        else if (worldNum == 2)
+            newMap = new W2GMap();
+        else if (worldNum == 3)
+            newMap = new W3GMap();
+        else if (worldNum == 31)
+            newMap = new W31Map();
+        else if (worldNum == 32)
+            newMap = new W32Map();
+        else if (worldNum == 33)
+            newMap = new W33Map();
+        else if (worldNum == 34)
+            newMap = new W34Map();
+        else if (worldNum == 4)
+            newMap = new HubMap();
+        else if (worldNum == 5)
+            newMap = new EvanTestMap();
+        else if (worldNum == 6)
+            newMap = new CalvinTestMap();
+        else if (worldNum == 7)
+            newMap = new ShannonTestMap();
+        else if (worldNum == 8)
+            newMap = new JulietTestMap();
+        else if (worldNum == 9)
+            newMap = new AaronTestMap();
+        else if (worldNum == 11)
+            newMap = new W1LibraryMap();
+        else
+            newMap = new WorldZeroMap();
+        return newMap;
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
@@ -321,6 +310,10 @@ public class PlayLevelScreen extends Screen {
         return playLevelScreenState;
     }
 
+    public static FlagManager getFlagManager() {
+        return flagManager;
+    }
+
     public void resetLevel() {
         initialize();
     }
@@ -328,10 +321,42 @@ public class PlayLevelScreen extends Screen {
     public void goBackToMenu() {
         screenCoordinator.setGameState(GameState.MENU);
     }
-
-    public boolean getFlagState(boolean flagState) {
-
-        return flagState;
+    
+    public void flagDebugger(){
+        if (worldNum == 1) {
+                System.out.println("\nOMJ");
+                flagManager.debugFlag("hasTalkedToOMJ");
+                flagManager.debugFlag("hasFoundDentures");
+                flagManager.debugFlag("hasFinishedOMJ");
+                System.out.println("\nNSE");
+                flagManager.debugFlag("hasTalkedToNSE");
+                flagManager.debugFlag("w1CuredNPC1");
+                flagManager.debugFlag("w1CuredNPC2");
+                flagManager.debugFlag("w1CuredNPC3");
+                flagManager.debugFlag("w1CuredNPC4");
+                flagManager.debugFlag("w1CuredNPC5");
+                flagManager.debugFlag("w1Btl1");
+                flagManager.debugFlag("w1Btl2");
+                flagManager.debugFlag("w1Btl3");
+                flagManager.debugFlag("w1Btl4");
+                flagManager.debugFlag("w1Btl5");
+                flagManager.debugFlag("w1CuredAllNPCS");
+                flagManager.debugFlag("hasFinishedNSE");
+                System.out.println("\nLIB");
+                flagManager.debugFlag("hasTalkedToNSE");
+                flagManager.debugFlag("scannedLibrarian");
+                flagManager.debugFlag("hasFinishedNSE");
+                flagManager.debugFlag("hasTalkedToLibrarian");
+                flagManager.debugFlag("w1FoundFrag3");
+                flagManager.debugFlag("hasFinishedLib");
+                System.out.println();
+            }else if (worldNum == 3 || worldNum == 31 || worldNum == 32 || worldNum == 33 || worldNum == 34){
+                flagManager.debugFlag("goUpLevel");
+                flagManager.debugFlag("goDownLevel");
+                flagManager.debugFlag("wentUpLevel");
+                flagManager.debugFlag("wentDownLevel"); 
+                System.out.println();
+            }
     }
 
     // This enum represents the different states this screen can be in

@@ -34,5 +34,9 @@ public class Point {
         return new Point(this.x, this.y - y);
     }
 
+    public Point adjustXY(int x, int y) {
+        return new Point(this.x + x, this.y + y);
+    }
+
     public String toString() { return String.format("(%s, %s)", this.x, this.y); }
 }

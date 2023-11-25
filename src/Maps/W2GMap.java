@@ -14,7 +14,7 @@ import Tilesets.SafariTileset;
 
 public class W2GMap extends Map {
     public W2GMap() {
-        super("w2gmap.txt", new SafariTileset());
+        super("w2gmap.txt", new SafariTileset(), 0);
         this.playerStartPosition = getMapTile(0, 6).getLocation();
         textbox.setStyle(Style.WORLDTWO);
     }

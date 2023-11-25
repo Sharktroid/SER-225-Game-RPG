@@ -35,7 +35,7 @@ public class W1GMap extends Map {
 
 
     public W1GMap() {
-        super("w1gmap.txt", new InternetExplorerTileset());
+        super("w1gmap.txt", new InternetExplorerTileset(), 0);
 
         SoundPlayer.playMusic(MusicTracks.WORLDONE);
 
