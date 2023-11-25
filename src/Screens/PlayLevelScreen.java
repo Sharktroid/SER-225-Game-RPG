@@ -11,7 +11,6 @@ import Level.*;
 import Maps.*;
 import Menus.InventoryMenu;
 import Players.Cat;
-import Utils.Direction;
 import Utils.Point;
 
 // This class is for when the platformer game is actually being played
@@ -110,7 +109,7 @@ public class PlayLevelScreen extends Screen {
 
                 break;
 
-            // if level has been completed, bring up level cleared screen (**from old test map
+            // if level has been completed, bring up level cleared screen (**OLD TEST MAP
             case LEVEL_COMPLETED:
                 winScreen.update();
                 break;
@@ -131,19 +130,17 @@ public class PlayLevelScreen extends Screen {
                     && flagManager.isFlagSet("w1CuredNPC5")) {
                 flagManager.setFlag("w1CuredAllNPCs");
             }
-
             if (flagManager.isFlagSet("hasFinishedOMJ") && flagManager.isFlagSet("hasFinishedNSE")
                     && flagManager.isFlagSet("hasFinishedLib")
                     && !flagManager.isFlagSet("worldOneComlete")) {
                 flagManager.setFlag("worldOneComplete");
             }
-
         }
 
+        // **OLD TEST MAP CODE**
         if (flagManager.isFlagSet("hasFoundBall")) {
             playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
         }
-
     }
 
     // changes map if certain conditions are met
@@ -154,20 +151,17 @@ public class PlayLevelScreen extends Screen {
             worldNum = 1;
             initialize();
         }
-
         // to world 1 library
         if (flagManager.isFlagSet("enterLibrary")) {
             worldNum = 11;
             initialize();
         }
-
         // to world 2 overworld (Safari)
         if ((flagManager.isFlagSet("portalTwoActivated"))
                 || (Keyboard.isKeyDown(Key.TWO) && !keyLocker.isKeyLocked(Key.TWO))) {
             worldNum = 2;
             initialize();
         }
-
         // to amazon
         // to apple
         // to spotify
@@ -180,71 +174,60 @@ public class PlayLevelScreen extends Screen {
             worldNum = 3;
             initialize();
         }
-
         // to world 3 level 1
         if ((map.getSubmapNum() == 0 && flagManager.isFlagSet("goUpLevel"))
                 || (map.getSubmapNum() == 2 && flagManager.isFlagSet("goDownLevel"))) {
             worldNum = 31;
             initialize();
         }
-
         // to world 3 level 2
         if ((map.getSubmapNum() == 1 && flagManager.isFlagSet("goUpLevel"))
                 || (map.getSubmapNum() == 3 && flagManager.isFlagSet("goDownLevel"))) {
             worldNum = 32;
             initialize();
         }
-
         // to world 3 level 3
         if ((map.getSubmapNum() == 2 && flagManager.isFlagSet("goUpLevel"))
                 || (map.getSubmapNum() == 4 && flagManager.isFlagSet("goDownLevel"))) {
             worldNum = 33;
             initialize();
         }
-
         // to world 3 level 4
         if (map.getSubmapNum() == 3 && flagManager.isFlagSet("goUpLevel")) {
             worldNum = 34;
             initialize();
         }
-
         // to world 4 (hub)
         if (flagManager.isFlagSet("teleportToHub")
                 || (Keyboard.isKeyDown(Key.FOUR) && !keyLocker.isKeyLocked(Key.FOUR))) {
             worldNum = 4;
             initialize();
         }
-
         // to world 0 (**temp**)
         if (Keyboard.isKeyDown(Key.ZERO) && !keyLocker.isKeyLocked(Key.ZERO)) {
             worldNum = 0;
             initialize();
         }
-
         // to world 5 (**temp**)
         if (Keyboard.isKeyDown(Key.FIVE) && !keyLocker.isKeyLocked(Key.FIVE)) { // Evan
             worldNum = 5;
             initialize();
         }
-
         // to world 6 (**temp**)
         if (Keyboard.isKeyDown(Key.SIX) && !keyLocker.isKeyLocked(Key.SIX)) { // Calvin
             worldNum = 6;
             initialize();
         }
-
         // to world 7 (**temp**)
         if (Keyboard.isKeyDown(Key.SEVEN) && !keyLocker.isKeyLocked(Key.SEVEN)) { // Shannon
             worldNum = 7;
             initialize();
         }
-
         // to world 8 (**temp**)
         if (Keyboard.isKeyDown(Key.EIGHT) && !keyLocker.isKeyLocked(Key.EIGHT)) { // Juliet
             worldNum = 8;
             initialize();
         }
-
         // to world 9 (**temp**)
         if (Keyboard.isKeyDown(Key.NINE) && !keyLocker.isKeyLocked(Key.NINE)) { // Aaron
             worldNum = 9;
@@ -312,10 +295,6 @@ public class PlayLevelScreen extends Screen {
 
     public static FlagManager getFlagManager() {
         return flagManager;
-    }
-
-    public void resetLevel() {
-        initialize();
     }
 
     public void goBackToMenu() {
