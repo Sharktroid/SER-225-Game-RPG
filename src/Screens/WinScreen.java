@@ -9,7 +9,6 @@ import java.awt.*;
 public class WinScreen extends Screen {
     protected SpriteFont winMessage;
     protected SpriteFont instructions;
-    protected KeyLocker keyLocker = new KeyLocker();
     protected PlayLevelScreen playLevelScreen;
 
     public WinScreen(PlayLevelScreen playLevelScreen) {
@@ -21,23 +20,23 @@ public class WinScreen extends Screen {
     public void initialize() {
         winMessage = new SpriteFont("You win!", 350, 239, "Comic Sans", 30, Color.white);
         instructions = new SpriteFont("Press Enter to play again or Escape to go back to the main menu", 120, 279,"Comic Sans", 20, Color.white);
-        keyLocker.lockKey(Key.ENTER);
-        keyLocker.lockKey(Key.ESC);
+        KeyLocker.lockKey(Key.ENTER);
+        KeyLocker.lockKey(Key.ESC);
     }
 
     @Override
     public void update() {
         if (Keyboard.isKeyUp(Key.ENTER)) {
-            keyLocker.unlockKey(Key.ENTER);
+            KeyLocker.unlockKey(Key.ENTER);
         }
         if (Keyboard.isKeyUp(Key.ESC)) {
-            keyLocker.unlockKey(Key.ESC);
+            KeyLocker.unlockKey(Key.ESC);
         }
 
         // if space is pressed, reset level. if escape is pressed, go back to main menu
-        if (Keyboard.isKeyDown(Key.ENTER) && !keyLocker.isKeyLocked(Key.ENTER)) {
+        if (Keyboard.isKeyDown(Key.ENTER) && !KeyLocker.isKeyLocked(Key.ENTER)) {
             playLevelScreen.resetLevel();
-        } else if (Keyboard.isKeyDown(Key.ESC) && !keyLocker.isKeyLocked(Key.ESC)) {
+        } else if (Keyboard.isKeyDown(Key.ESC) && !KeyLocker.isKeyLocked(Key.ESC)) {
             playLevelScreen.goBackToMenu();
         }
     }

@@ -24,7 +24,6 @@ public abstract class Menu {
     private Boolean active = false;
     protected ArrayList<SpriteFont> spriteFonts = new ArrayList<SpriteFont>();
     protected int currentTextItemHovered = 0;
-    private KeyLocker keyLocker = new KeyLocker();
     private int currentRow;
     protected Panel panel;
 
@@ -113,8 +112,8 @@ public abstract class Menu {
     }
 
     protected Boolean lockKey(Key key) {
-        if (Keyboard.isKeyDown(key) && !keyLocker.isKeyLocked(key)) {
-            keyLocker.lockKey(key);
+        if (Keyboard.isKeyDown(key) && !KeyLocker.isKeyLocked(key)) {
+            KeyLocker.lockKey(key);
             return true;
         } else {
             return false;
@@ -122,8 +121,8 @@ public abstract class Menu {
     }
 
     protected void unlockKey(Key key) {
-        if (keyLocker.isKeyLocked(key) && Keyboard.isKeyUp(key)) {
-            keyLocker.unlockKey(key);
+        if (KeyLocker.isKeyLocked(key) && Keyboard.isKeyUp(key)) {
+            KeyLocker.unlockKey(key);
         }
     }
 

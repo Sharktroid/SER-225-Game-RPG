@@ -25,7 +25,6 @@ public class Slideshow extends Screen
     protected Map background;
     protected int keyPressTimer;
     protected int pointerLocationX, pointerLocationY;
-    protected KeyLocker keyLocker = new KeyLocker();
 
     protected Rectangle rect;
     protected int counter = 1;
@@ -63,11 +62,11 @@ public class Slideshow extends Screen
 
     // if space key is released, unlock space key
     if (Keyboard.isKeyUp(Key.SPACE)) {
-        keyLocker.unlockKey(Key.SPACE);
+        KeyLocker.unlockKey(Key.SPACE);
     }
 
     // if space is pressed and space is not locked
-    if (Keyboard.isKeyDown(Key.SPACE) && !keyLocker.isKeyLocked(Key.SPACE)) {
+    if (Keyboard.isKeyDown(Key.SPACE) && !KeyLocker.isKeyLocked(Key.SPACE)) {
 
         if(counter == 1)
         {
@@ -103,7 +102,7 @@ public class Slideshow extends Screen
 
 
         // lock space key
-        keyLocker.lockKey(Key.SPACE);
+        KeyLocker.lockKey(Key.SPACE);
     }
     }
 

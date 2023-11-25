@@ -4,7 +4,6 @@ import Game.SoundPlayer;
 import Game.SoundPlayer.MusicTracks;
 import Level.Map;
 import Level.Textbox.Style;
-import Tilesets.CommonTileset;
 import Tilesets.SafariTileset;
 
 public class W2StarbucksMap extends Map {

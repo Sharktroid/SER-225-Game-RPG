@@ -24,7 +24,6 @@ public class PlayLevelScreen extends Screen {
     protected FlagSaves flagSaves;
     protected int worldNum = -1; // **temp: set default to 4 once other menu options removed**/
     private InventoryMenu inventory;
-    private KeyLocker keyLocker = new KeyLocker();
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -90,12 +89,12 @@ public class PlayLevelScreen extends Screen {
             // if level is "running" update player and map to keep game logic for the level
             // going
             case RUNNING:
-                if (Keyboard.isKeyDown(Key.E) && !keyLocker.isKeyLocked(Key.E) && !map.getTextbox().isActive()) {
+                if (Keyboard.isKeyDown(Key.E) && !KeyLocker.isKeyLocked(Key.E) && !map.getTextbox().isActive()) {
                     inventory.setActive(!inventory.isActive());
-                    keyLocker.lockKey(Key.E);
+                    KeyLocker.lockKey(Key.E);
 
-                } else if (Keyboard.isKeyUp(Key.E) && keyLocker.isKeyLocked(Key.E)) {
-                    keyLocker.unlockKey(Key.E);
+                } else if (Keyboard.isKeyUp(Key.E) && KeyLocker.isKeyLocked(Key.E)) {
+                    KeyLocker.unlockKey(Key.E);
                 }
                 if (inventory.isActive()) {
                     inventory.update();
@@ -116,11 +115,11 @@ public class PlayLevelScreen extends Screen {
         }
 
         // **DEBUGING KEY**
-        if (Keyboard.isKeyDown(Key.M) && !keyLocker.isKeyLocked(Key.M)) {
-            keyLocker.lockKey(Key.M);
+        if (Keyboard.isKeyDown(Key.M) && !KeyLocker.isKeyLocked(Key.M)) {
+            KeyLocker.lockKey(Key.M);
             flagDebugger();
         } else if (Keyboard.isKeyUp(Key.M)) {
-            keyLocker.unlockKey(Key.M);
+            KeyLocker.unlockKey(Key.M);
         }
 
         if (worldNum == 1 || worldNum == 11) {
@@ -147,7 +146,7 @@ public class PlayLevelScreen extends Screen {
     public void checkForTraversal() {
         // to world 1 overworld (internet explorer)
         if (flagManager.isFlagSet("portalOneActivated") || (flagManager.isFlagSet("exitLibrary"))
-                || (Keyboard.isKeyDown(Key.ONE) && !keyLocker.isKeyLocked(Key.ONE))) {
+                || (Keyboard.isKeyDown(Key.ONE) && !KeyLocker.isKeyLocked(Key.ONE))) {
             worldNum = 1;
             initialize();
         }
@@ -158,7 +157,7 @@ public class PlayLevelScreen extends Screen {
         }
         // to world 2 overworld (Safari)
         if ((flagManager.isFlagSet("portalTwoActivated"))
-                || (Keyboard.isKeyDown(Key.TWO) && !keyLocker.isKeyLocked(Key.TWO))) {
+                || (Keyboard.isKeyDown(Key.TWO) && !KeyLocker.isKeyLocked(Key.TWO))) {
             worldNum = 2;
             initialize();
         }
@@ -170,7 +169,7 @@ public class PlayLevelScreen extends Screen {
         // to world 3 ground (Chrome)
         if (flagManager.isFlagSet("portalThreeActivated")
                 || (map.getSubmapNum() == 1 && flagManager.isFlagSet("goDownLevel"))
-                || (Keyboard.isKeyDown(Key.THREE) && !keyLocker.isKeyLocked(Key.THREE))) {
+                || (Keyboard.isKeyDown(Key.THREE) && !KeyLocker.isKeyLocked(Key.THREE))) {
             worldNum = 3;
             initialize();
         }
@@ -199,37 +198,37 @@ public class PlayLevelScreen extends Screen {
         }
         // to world 4 (hub)
         if (flagManager.isFlagSet("teleportToHub")
-                || (Keyboard.isKeyDown(Key.FOUR) && !keyLocker.isKeyLocked(Key.FOUR))) {
+                || (Keyboard.isKeyDown(Key.FOUR) && !KeyLocker.isKeyLocked(Key.FOUR))) {
             worldNum = 4;
             initialize();
         }
         // to world 0 (**temp**)
-        if (Keyboard.isKeyDown(Key.ZERO) && !keyLocker.isKeyLocked(Key.ZERO)) {
+        if (Keyboard.isKeyDown(Key.ZERO) && !KeyLocker.isKeyLocked(Key.ZERO)) {
             worldNum = 0;
             initialize();
         }
         // to world 5 (**temp**)
-        if (Keyboard.isKeyDown(Key.FIVE) && !keyLocker.isKeyLocked(Key.FIVE)) { // Evan
+        if (Keyboard.isKeyDown(Key.FIVE) && !KeyLocker.isKeyLocked(Key.FIVE)) { // Evan
             worldNum = 5;
             initialize();
         }
         // to world 6 (**temp**)
-        if (Keyboard.isKeyDown(Key.SIX) && !keyLocker.isKeyLocked(Key.SIX)) { // Calvin
+        if (Keyboard.isKeyDown(Key.SIX) && !KeyLocker.isKeyLocked(Key.SIX)) { // Calvin
             worldNum = 6;
             initialize();
         }
         // to world 7 (**temp**)
-        if (Keyboard.isKeyDown(Key.SEVEN) && !keyLocker.isKeyLocked(Key.SEVEN)) { // Shannon
+        if (Keyboard.isKeyDown(Key.SEVEN) && !KeyLocker.isKeyLocked(Key.SEVEN)) { // Shannon
             worldNum = 7;
             initialize();
         }
         // to world 8 (**temp**)
-        if (Keyboard.isKeyDown(Key.EIGHT) && !keyLocker.isKeyLocked(Key.EIGHT)) { // Juliet
+        if (Keyboard.isKeyDown(Key.EIGHT) && !KeyLocker.isKeyLocked(Key.EIGHT)) { // Juliet
             worldNum = 8;
             initialize();
         }
         // to world 9 (**temp**)
-        if (Keyboard.isKeyDown(Key.NINE) && !keyLocker.isKeyLocked(Key.NINE)) { // Aaron
+        if (Keyboard.isKeyDown(Key.NINE) && !KeyLocker.isKeyLocked(Key.NINE)) { // Aaron
             worldNum = 9;
             initialize();
         }
@@ -300,7 +299,7 @@ public class PlayLevelScreen extends Screen {
     public void goBackToMenu() {
         screenCoordinator.setGameState(GameState.MENU);
     }
-    
+
     public void flagDebugger(){
         if (worldNum == 1) {
                 System.out.println("\nOMJ");
@@ -333,7 +332,7 @@ public class PlayLevelScreen extends Screen {
                 flagManager.debugFlag("goUpLevel");
                 flagManager.debugFlag("goDownLevel");
                 flagManager.debugFlag("wentUpLevel");
-                flagManager.debugFlag("wentDownLevel"); 
+                flagManager.debugFlag("wentDownLevel");
                 System.out.println();
             }
     }

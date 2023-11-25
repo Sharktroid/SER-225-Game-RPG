@@ -13,7 +13,6 @@ import java.awt.*;
 public class CreditsScreen extends Screen {
     protected ScreenCoordinator screenCoordinator;
     protected Map background;
-    protected KeyLocker keyLocker = new KeyLocker();
     protected SpriteFont creditsLabel;
     protected SpriteFont createdByLabel;
     protected SpriteFont returnInstructionsLabel;
@@ -30,18 +29,18 @@ public class CreditsScreen extends Screen {
         creditsLabel = new SpriteFont("Credits", 15, 7, "Times New Roman", 30, Color.white);
         createdByLabel = new SpriteFont("Created by Alex Thimineur", 130, 121, "Times New Roman", 20, Color.white);
         returnInstructionsLabel = new SpriteFont("Press Space to return to the menu", 20, 532, "Times New Roman", 30, Color.white);
-        keyLocker.lockKey(Key.ENTER);
+        KeyLocker.lockKey(Key.ENTER);
     }
 
     public void update() {
         background.update(null);
 
         if (Keyboard.isKeyUp(Key.ENTER)) {
-            keyLocker.unlockKey(Key.ENTER);
+            KeyLocker.unlockKey(Key.ENTER);
         }
 
         // if space is pressed, go back to main menu
-        if (!keyLocker.isKeyLocked(Key.ENTER) && Keyboard.isKeyDown(Key.ENTER)) {
+        if (!KeyLocker.isKeyLocked(Key.ENTER) && Keyboard.isKeyDown(Key.ENTER)) {
             screenCoordinator.setGameState(GameState.MENU);
         }
     }

@@ -26,7 +26,6 @@ public class MenuScreen extends Screen {
     protected Map background;
     protected int keyPressTimer;
     protected int pointerLocationX, pointerLocationY;
-    protected KeyLocker keyLocker = new KeyLocker();
 
     public static int worldNumber;
 
@@ -62,7 +61,7 @@ public class MenuScreen extends Screen {
         background.setAdjustCamera(false);
         keyPressTimer = 0;
         menuItemSelected = -1;
-        keyLocker.lockKey(Key.ENTER);
+        KeyLocker.lockKey(Key.ENTER);
         SoundPlayer.playMusic(MusicTracks.TITLE);
     }
 
@@ -169,9 +168,9 @@ public class MenuScreen extends Screen {
         // if space is pressed on menu item, change to appropriate screen based on which
         // menu item was chosen
         if (Keyboard.isKeyUp(Key.ENTER)) {
-            keyLocker.unlockKey(Key.ENTER);
+            KeyLocker.unlockKey(Key.ENTER);
         }
-        if (!keyLocker.isKeyLocked(Key.ENTER) && Keyboard.isKeyDown(Key.ENTER)) {
+        if (!KeyLocker.isKeyLocked(Key.ENTER) && Keyboard.isKeyDown(Key.ENTER)) {
             menuItemSelected = currentMenuItemHovered;
             if (menuItemSelected == 0) {
                 worldNumber = 4;

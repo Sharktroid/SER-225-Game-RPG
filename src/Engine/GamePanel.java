@@ -20,7 +20,6 @@ public class GamePanel extends JPanel {
 
 	private boolean isGamePaused = false;
 	private SpriteFont pauseLabel;
-	private KeyLocker keyLocker = new KeyLocker();
 	private final Key pauseKey = Key.P;
 	private Thread gameLoopProcess;
 
@@ -85,24 +84,24 @@ public class GamePanel extends JPanel {
 	}
 
 	private void updatePauseState() {
-		if (Keyboard.isKeyDown(pauseKey) && !keyLocker.isKeyLocked(pauseKey)) {
+		if (Keyboard.isKeyDown(pauseKey) && !KeyLocker.isKeyLocked(pauseKey)) {
 			isGamePaused = !isGamePaused;
-			keyLocker.lockKey(pauseKey);
+			KeyLocker.lockKey(pauseKey);
 		}
 
 		if (Keyboard.isKeyUp(pauseKey)) {
-			keyLocker.unlockKey(pauseKey);
+			KeyLocker.unlockKey(pauseKey);
 		}
 	}
 
 	private void updateShowFPSState() {
-		if (Keyboard.isKeyDown(showFPSKey) && !keyLocker.isKeyLocked(showFPSKey)) {
+		if (Keyboard.isKeyDown(showFPSKey) && !KeyLocker.isKeyLocked(showFPSKey)) {
 			showFPS = !showFPS;
-			keyLocker.lockKey(showFPSKey);
+			KeyLocker.lockKey(showFPSKey);
 		}
 
 		if (Keyboard.isKeyUp(showFPSKey)) {
-			keyLocker.unlockKey(showFPSKey);
+			KeyLocker.unlockKey(showFPSKey);
 		}
 
 		fpsDisplayLabel.setText("FPS: " + currentFPS);

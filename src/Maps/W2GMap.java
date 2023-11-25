@@ -9,7 +9,6 @@ import Level.NPC;
 import Level.Textbox.Style;
 import NPCs.Finder1;
 import Scripts.WorldTwoMap.Finder1Script;
-import Tilesets.CommonTileset;
 import Tilesets.SafariTileset;
 
 public class W2GMap extends Map {

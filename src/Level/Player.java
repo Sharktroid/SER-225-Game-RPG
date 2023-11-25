@@ -45,7 +45,6 @@ public abstract class Player extends GameObject {
     protected ArrayList<PlayerListener> listeners = new ArrayList<>();
 
     // define keys
-    protected KeyLocker keyLocker = new KeyLocker();
     protected Key MOVE_LEFT_KEY = Key.LEFT;
     protected Key MOVE_RIGHT_KEY = Key.RIGHT;
     protected Key MOVE_UP_KEY = Key.UP;
@@ -96,7 +95,7 @@ public abstract class Player extends GameObject {
 
     // based on player's current state, call appropriate player state handling
     // method
-    
+
     protected void handlePlayerState() {
         switch (playerState) {
             case STANDING:
@@ -113,8 +112,8 @@ public abstract class Player extends GameObject {
 
     // player STANDING state logic
     protected void playerStanding() {
-        if (!keyLocker.isKeyLocked(INTERACT_KEY) && Keyboard.isKeyDown(INTERACT_KEY)) {
-            keyLocker.lockKey(INTERACT_KEY);
+        if (!KeyLocker.isKeyLocked(INTERACT_KEY) && Keyboard.isKeyDown(INTERACT_KEY)) {
+            KeyLocker.lockKey(INTERACT_KEY);
             map.entityInteract(this);
         }
 
@@ -127,16 +126,16 @@ public abstract class Player extends GameObject {
 
     // player WALKING state logic
     protected void playerWalking() {
-        if (!keyLocker.isKeyLocked(INTERACT_KEY) && Keyboard.isKeyDown(INTERACT_KEY)) {
-            keyLocker.lockKey(INTERACT_KEY);
+        if (!KeyLocker.isKeyLocked(INTERACT_KEY) && Keyboard.isKeyDown(INTERACT_KEY)) {
+            KeyLocker.lockKey(INTERACT_KEY);
             map.entityInteract(this);
         }
 
-        if (Keyboard.isKeyDown(RUN_KEY) && !keyLocker.isKeyLocked(RUN_KEY)) {
+        if (Keyboard.isKeyDown(RUN_KEY) && !KeyLocker.isKeyLocked(RUN_KEY)) {
             running = !running;
-            keyLocker.lockKey(RUN_KEY);
-        } else if (keyLocker.isKeyLocked(RUN_KEY) && Keyboard.isKeyUp(RUN_KEY)) {
-            keyLocker.unlockKey(RUN_KEY);
+            KeyLocker.lockKey(RUN_KEY);
+        } else if (KeyLocker.isKeyLocked(RUN_KEY) && Keyboard.isKeyUp(RUN_KEY)) {
+            KeyLocker.unlockKey(RUN_KEY);
         }
 
         // if walk left key is pressed, move player to the left
@@ -199,7 +198,7 @@ public abstract class Player extends GameObject {
 
     protected void updateLockedKeys() {
         if (Keyboard.isKeyUp(INTERACT_KEY) && playerState != PlayerState.INTERACTING) {
-            keyLocker.unlockKey(INTERACT_KEY);
+            KeyLocker.unlockKey(INTERACT_KEY);
         }
     }
 
@@ -333,7 +332,7 @@ public abstract class Player extends GameObject {
 
     public void setCurrentFetch(float fetchCount) {
         currentFetch = currentFetch + fetchCount;
-        
+
 
     }
 
@@ -342,7 +341,7 @@ public abstract class Player extends GameObject {
     }
 
     public int getCurrentFetch() {
-        
+
         return (int) fetchCount;
     }
 
@@ -377,7 +376,7 @@ public abstract class Player extends GameObject {
         }
         return walkSpeed * runModifier * speedModifier;
     }
-  
+
     public String getName() {
         return name;
     }

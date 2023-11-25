@@ -7,20 +7,20 @@ import java.util.HashSet;
 // This way, that "key press" will only be counted once per press.
 // This class does NOT do anything to the keyboard class to prevent a key from actually being detected -- that is not advisable as multiple classes may be detecting key presses separately
 public class KeyLocker {
-    private HashSet<Key> lockedKeys = new HashSet<>();
+    static private HashSet<Key> lockedKeys = new HashSet<>();
 
     // lock a key
-    public void lockKey(Key key) {
+    static public void lockKey(Key key) {
         lockedKeys.add(key);
     }
 
     // unlock a key
-    public void unlockKey(Key key) {
+    static public void unlockKey(Key key) {
         lockedKeys.remove(key);
     }
 
     // check if a key is currently locked
-    public boolean isKeyLocked(Key key) {
+    static public boolean isKeyLocked(Key key) {
         return lockedKeys.contains(key);
     }
 }

@@ -57,7 +57,6 @@ public class Textbox {
     private SpriteFont text = null;
     private int fontY;
     private int fontYSelect;
-    private KeyLocker keyLocker = new KeyLocker();
     private Map map;
     private Key interactKey = Key.ENTER;
     private int keyPressTimer;
@@ -92,14 +91,14 @@ public class Textbox {
 
     public void addText(String text) {
         if (textQueue.isEmpty()) {
-            keyLocker.lockKey(interactKey);
+            KeyLocker.lockKey(interactKey);
         }
         textQueue.add(text);
     }
 
     public void addText(String[] text) {
         if (textQueue.isEmpty()) {
-            keyLocker.lockKey(interactKey);
+            KeyLocker.lockKey(interactKey);
         }
         for (String textItem : text) {
             textQueue.add(textItem);
@@ -112,7 +111,7 @@ public class Textbox {
         compiledCount = 0;
 
         if (textQueue.isEmpty()) {
-            keyLocker.lockKey(interactKey);
+            KeyLocker.lockKey(interactKey);
         }
         textQueue.add(textChat);
 
@@ -145,10 +144,10 @@ public class Textbox {
 
     // creates spriteFont for each string in a queue
     public SpriteFont spriteFontCompile(Queue<String> selectionQueue) {
-        if (!selectionQueue.isEmpty() && keyLocker.isKeyLocked(interactKey)) {
+        if (!selectionQueue.isEmpty() && KeyLocker.isKeyLocked(interactKey)) {
             String next = selectionQueue.poll();
             return new SpriteFont(next, fontX, fontY, font, getFontColor());
-        } else if (selectionQueue.isEmpty() && keyLocker.isKeyLocked(interactKey)) {
+        } else if (selectionQueue.isEmpty() && KeyLocker.isKeyLocked(interactKey)) {
             return new SpriteFont("", fontX, fontY, font, getFontColor());
         }
         return null;
@@ -163,7 +162,7 @@ public class Textbox {
     public void update() {
 
         // if textQueue has more text to display and the interact key button was pressed previously, display new text
-        if (!textQueue.isEmpty() && keyLocker.isKeyLocked(interactKey)) {
+        if (!textQueue.isEmpty() && KeyLocker.isKeyLocked(interactKey)) {
             String next = textQueue.peek();
 
             // if camera is at bottom of screen, text is drawn at top of screen instead of the bottom like usual
@@ -181,8 +180,8 @@ public class Textbox {
         }
 
         // if interact key is pressed, remove the current text from the queue to prepare for the next text item to be displayed
-        if (Keyboard.isKeyDown(interactKey) && !keyLocker.isKeyLocked(interactKey)) {
-            keyLocker.lockKey(interactKey);
+        if (Keyboard.isKeyDown(interactKey) && !KeyLocker.isKeyLocked(interactKey)) {
+            KeyLocker.lockKey(interactKey);
             textQueue.poll();
             if (selectablesPresent == 1) {
                 while (!textQueue.isEmpty()) {
@@ -198,13 +197,13 @@ public class Textbox {
             }
             selectablesPresent = 0;
         } else if (Keyboard.isKeyUp(interactKey)) {
-            keyLocker.unlockKey(interactKey);
+            KeyLocker.unlockKey(interactKey);
         }
 
         if (Keyboard.isKeyDown(Key.DOWN) && (keyPressTimer == 0) && (selectablesPresent == 1)) {
             keyPressTimer = 14;
             currentTextItemHovered++;
-            
+
         } else if (Keyboard.isKeyDown(Key.UP) && (keyPressTimer == 0) && (selectablesPresent == 1)) {
             keyPressTimer = 14;
             currentTextItemHovered--;
