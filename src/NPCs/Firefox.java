@@ -21,7 +21,7 @@ public class Firefox extends NPC {
 
 
     public Firefox(int id, Point location) {
-        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("Firefox.png"), 32, 32), "STAND_RIGHT");
+        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("firefox_noOrb.png"), 32, 32), "STAND_RIGHT");
 
     }
 
@@ -37,6 +37,7 @@ public class Firefox extends NPC {
         {
             isInteracting = false;
         }
+
     }
 
     @Override
@@ -65,11 +66,12 @@ public class Firefox extends NPC {
 
         if (isInteracting == true)
         {
-            playGame = new SpriteFont("ENTER", getCalibratedXLocation()+2, getCalibratedYLocation()-12, "Comic Sans", 15, Color.black);
+            graphicsHandler.drawFilledRectangle(getCalibratedXLocation()+18, getCalibratedYLocation()-12,54,19, Color.black);
+            playGame = new SpriteFont("...", getCalibratedXLocation()+35, getCalibratedYLocation()-20, "Comic Sans", 20, Color.black);
 
 
             //textbox.draw(graphicsHandler);
-            graphicsHandler.drawFilledRectangle(getCalibratedXLocation(), getCalibratedYLocation()-10,50,15, java.awt.Color.white);
+            graphicsHandler.drawFilledRectangle(getCalibratedXLocation()+20, getCalibratedYLocation()-10,50,15, Color.white);
             playGame.draw(graphicsHandler);
         }
 
