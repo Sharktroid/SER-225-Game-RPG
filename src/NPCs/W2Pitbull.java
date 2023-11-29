@@ -49,15 +49,15 @@ public class W2Pitbull extends NPC {
         return new HashMap<String, Frame[]>() {{
             put("STAND_LEFT", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(0, 0))
-                            .withScale(2)
-                            .withBounds(2, 0, 20, 20)
+                            .withScale((float) 2.5)
+                            .withBounds(2, 0, 21, 20)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                             .build()
             });
             put("STAND_RIGHT", new Frame[] {
                    new FrameBuilder(spriteSheet.getSprite(0, 0))
-                           .withScale(2)
-                           .withBounds(2, 0, 20, 20)
+                           .withScale((float) 2.5)
+                           .withBounds(2, 0, 21, 20)
                            .build()
            });
         }};

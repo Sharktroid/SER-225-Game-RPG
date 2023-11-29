@@ -50,14 +50,14 @@ public class W2PB2 extends NPC {
             put("STAND_LEFT", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(0, 0))
                             .withScale((float) 2)
-                            .withBounds(2, 0, 20, 20)
+                            .withBounds(2, 0, 27, 43)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                             .build()
             });
             put("STAND_RIGHT", new Frame[] {
                    new FrameBuilder(spriteSheet.getSprite(0, 0))
                            .withScale((float) 2)
-                           .withBounds(2, 0, 20, 20)
+                           .withBounds(2, 0, 27, 43)
                            .build()
            });
         }};
