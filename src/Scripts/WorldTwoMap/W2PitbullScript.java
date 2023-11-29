@@ -4,7 +4,6 @@ import Level.NPC;
 import Level.Script;
 import Level.ScriptState;
 import Level.Textbox.Style;
-import Level.Player;
 
 // script for talking to sloth npc
 public class W2PitbullScript extends Script<NPC> {
@@ -17,11 +16,11 @@ public class W2PitbullScript extends Script<NPC> {
         setNPCName("Mr Worldwide");
         showTextbox();
 
-        
+
         String[] selections = {"uhhhh Mr. Pitbull?\n Are you seriously a dog?", "\nI'm a really big fan"};
         String[] answers = {"..did he really tell you? ... one job", "...woof"};
 
-       
+
          if ((isFlagSet("hasTalkedToDJ")) && (!isFlagSet("hasTalkedToPitbull"))  ){
             entity.facePlayer(player);
             addTextToTextboxQueue( "woof", selections, answers);
@@ -30,33 +29,33 @@ public class W2PitbullScript extends Script<NPC> {
             addTextToTextboxQueue( "Do me a solid and act like none of this happened");
 
             setFlag("hasTalkedToPitbull");
-        } 
-        
+        }
 
-       /*  leave as comment for now 
+
+       /*  leave as comment for now
         else if (isFlagSet("friendOfGarfunkle")){
 
         }   */
-       
-        
+
+
         else {
             entity.facePlayer(player);
             addTextToTextboxQueue( "woof");
         }
-        
+
     }
 
-   
+
 
     @Override
     protected void cleanup() {
         unlockPlayer();
         hideTextbox();
 
-       
-        
+
+
     }
-   
+
 
     @Override
     public ScriptState execute() {

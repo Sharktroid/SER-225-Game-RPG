@@ -23,25 +23,26 @@ public class BattleMenu extends Menu {
     private CombatInventoryMenu inventoryMenu;
     private Panel descriptionPanel;
     private int descriptionTop;
-    private int descriptionHeight = 100;
+    private int descriptionHeight = 110;
 
     public BattleMenu(BattleSystem battleSystem, PlayerCombatant combatant) {
         this.battleSystem = battleSystem;
-        top = 300;
+        top = 290;
         width = Config.GAME_WINDOW_WIDTH - left * 2 - 16;
-        height = Config.GAME_WINDOW_HEIGHT - top - descriptionHeight - 25 - 39;
+        height = Config.GAME_WINDOW_HEIGHT - top - descriptionHeight - 35 - 39;
         rows = 2;
         columns = 4;
-        descriptionTop = top + height + 10;
+        descriptionTop = top + height + 15;
         ArrayList<String> actionNames = new ArrayList<String>();
         for (PlayerCombatant.Actions action : actions) {
             actionNames.add(action.toString());
         }
         setText(actionNames);
+        name = "Battle";
         updatePanel();
         this.combatant = combatant;
         inventoryMenu = new CombatInventoryMenu(battleSystem.player, combatant, this);
-        descriptionPanel = new Panel(left, descriptionTop, width, descriptionHeight, false);
+        descriptionPanel = new Panel(left, descriptionTop, width, descriptionHeight, "Description");
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
@@ -93,7 +94,7 @@ public class BattleMenu extends Menu {
             }
             SpriteFont descriptionSpriteFont = new SpriteFont(description, 0, 0, Textbox.getFont(), Color.black);
             descriptionSpriteFont.setX(left + border);
-            descriptionSpriteFont.setY(descriptionTop + border);
+            descriptionSpriteFont.setY(descriptionTop + border + 5);
             descriptionSpriteFont.drawWithParsedNewLines(graphicsHandler, 10);
         }
     }
@@ -162,6 +163,6 @@ public class BattleMenu extends Menu {
 
     @Override
     protected void updatePanel() {
-        panel = new Panel(left, top - 64, width, height + 64, false);
+        panel = new Panel(left, top - 64, width, height + 64, name);
     }
 }
