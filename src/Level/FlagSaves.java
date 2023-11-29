@@ -47,7 +47,7 @@ public class FlagSaves {
 
         // Dentures ques
         flagManager.addFlag("hasTalkedToOMJ", false, true);  // DEBUG set startting value to false
-        flagManager.addFlag("hasFoundDentures", false, false);// DEBUG set startting value to false
+        flagManager.addFlag("hasFoundDentures", false, true);// DEBUG set startting value to false
         flagManager.addFlag("hasFinishedOMJ", false, true);// DEBUG set startting value to false
 
         // Virus quest
@@ -115,6 +115,24 @@ public class FlagSaves {
 
         // test flags. **remove**
         flagManager.addFlag("hasTalkedToBeaver", false);
+
+        //for Spotify Quest:Pitball and Mr. WW
+        flagManager.addFlag("hasTalkedToDJ", false, true);
+        flagManager.addFlag("gaveSamples", false, true);
+        flagManager.addFlag("returnToDJ", false, true);
+        flagManager.addFlag("gaveToPitbull", false, true);
+        flagManager.addFlag("hasTalkedToPitbull", false, true);
+        //for Spotify Quest:Customers
+        flagManager.addFlag("hasTalkedToPB1", false, true);
+        flagManager.addFlag("gaveToPB1", false, true);
+        flagManager.addFlag("hasTalkedToPB2", false, true);
+        flagManager.addFlag("gaveToPB2", false, true);
+        flagManager.addFlag("hasTalkedToPB3", false, true);
+        flagManager.addFlag("gaveToPB3", false, true);
+        flagManager.addFlag("hasTalkedToPB4", false, true);
+        flagManager.addFlag("gaveToPB4", false, true);
+        flagManager.addFlag("hasTalkedToPB5", false, true);
+        flagManager.addFlag("gaveToPB5", false, true);
 
         // world three flags
 
