@@ -13,7 +13,7 @@ import Tilesets.SafariTileset;
 public class W2AmazonMap extends Map {
     public W2AmazonMap() {
         super("w2_amazon_map.txt", new SafariTileset(), 1);
-        this.playerStartPosition = getMapTile(19, 48).getLocation();
+        this.playerStartPosition = getMapTile(19, 48).getLocation().adjustXY(12, -12);
         textbox.setStyle(Style.WORLDTWO);
     }
 

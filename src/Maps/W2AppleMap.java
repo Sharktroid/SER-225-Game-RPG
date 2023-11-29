@@ -13,7 +13,7 @@ import Tilesets.SafariTileset;
 public class W2AppleMap extends Map {
     public W2AppleMap() {
         super("w2_apple_map.txt", new SafariTileset(), 2);
-        this.playerStartPosition = getMapTile(8, 10).getLocation();
+        this.playerStartPosition = getMapTile(8, 10).getLocation().adjustXY(12, -12);
         textbox.setStyle(Style.WORLDTWO);
     }
 

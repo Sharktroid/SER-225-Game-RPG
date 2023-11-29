@@ -69,7 +69,7 @@ public class FlagSaves {
         flagManager.addFlag("w1CuredAllNPCs", false, true);
 
         // Library quest
-        flagManager.addFlag("hasTalkedToLibrarian", false, true);
+        flagManager.addFlag("hasTalkedToLibrarian", true, true);
         flagManager.addFlag("scannedLibrarian", false, true);
         flagManager.addFlag("unlockedLibWindow", false, true);
         flagManager.addFlag("hasFinishedLib",false,true);
@@ -84,10 +84,10 @@ public class FlagSaves {
         // enter library
         flagManager.addFlag("enterLibrary", false, false);
         flagManager.addFlag("exitLibrary", false, false);
+        flagManager.addFlag("wentIntoLibrary", false, true);
+        flagManager.addFlag("wentOutOfLibrary", false, true);
 
         // world two flags
-
-        // used to enter and exit buildings
 
         // Amazon
         flagManager.addFlag("enterBuilding1", false, false);

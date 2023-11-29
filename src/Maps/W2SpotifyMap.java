@@ -13,7 +13,7 @@ import Tilesets.SafariTileset;
 public class W2SpotifyMap extends Map {
     public W2SpotifyMap() {
         super("w2_spotify_map.txt", new SafariTileset(), 4);
-        this.playerStartPosition = getMapTile(7, 10).getLocation();
+        this.playerStartPosition = getMapTile(7, 10).getLocation().adjustXY(12, -12);
         textbox.setStyle(Style.WORLDTWO);
     }
 

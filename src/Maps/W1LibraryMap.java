@@ -9,6 +9,7 @@ import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
 import Level.Trigger;
+import Screens.PlayLevelScreen;
 import Scripts.WorldOneMap.W1ExitLibraryScript;
 //import Scripts.WorldOneMap.W1Frag3Script;
 import Scripts.WorldOneMap.w1Frag3Script;
@@ -17,9 +18,6 @@ import java.util.ArrayList;
 
 
 public class W1LibraryMap extends Map {
-
-    public static int currentArea = 1;
-    public static boolean entered = true;
 
     public W1LibraryMap() {
         super("w1_library_map.txt", new InternetExplorerTileset(), 1);

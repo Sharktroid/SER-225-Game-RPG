@@ -6,8 +6,6 @@ import Level.Textbox.Style;
 
 public class W1ExitLibraryScript extends Script {
 
-    public static boolean exitedLib = false;
-
     @Override
     protected void setup() {
         lockPlayer();
@@ -32,7 +30,8 @@ public class W1ExitLibraryScript extends Script {
             player.moveY(-2);
         } else {
             setFlag("exitLibrary");
-            exitedLib = true;
+            setFlag("wentOutOfLibrary");
+            unsetFlag("wentIntoLibrary");
         }
 
     }
