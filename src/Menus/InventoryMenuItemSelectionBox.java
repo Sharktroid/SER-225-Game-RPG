@@ -34,6 +34,7 @@ public class InventoryMenuItemSelectionBox extends Menu {
         height = ((choices.size()) * (fontSize + border));
         setText(choices);
         updatePanel();
+        name = "Option";
     }
 
     @Override

@@ -6,9 +6,7 @@ import Level.ScriptState;
 import Level.Textbox.Style;
 
 
-public class Finder1Script extends Script<NPC> {
-
-    public static boolean setRedPandaFlagState = false;
+public class W2FrontDeskScript extends Script<NPC> {
 
     @Override
     protected void setup() {
@@ -38,7 +36,6 @@ public class Finder1Script extends Script<NPC> {
         unlockPlayer();
         hideTextbox();
         setFlag("hasTalkedToBeaver");
-        setRedPandaFlagState = isFlagSet("hasTalkedToBeaver");
     }
 
 
@@ -46,11 +43,8 @@ public class Finder1Script extends Script<NPC> {
     public ScriptState execute() {
         if (!isFlagSet("hasTalkedToBeaver")){
             start();
-
-
             if (!isTextboxQueueEmpty()) {
                 return ScriptState.RUNNING;
-
             }
             end();
             return ScriptState.COMPLETED;

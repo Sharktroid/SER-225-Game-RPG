@@ -12,7 +12,7 @@ import Utils.Point;
 
 public abstract class Menu {
     protected int left = 20;
-    protected int top = left + 20;
+    protected int top = left;
     protected int spacer = left;
     protected int border = 25;
     protected int rows = 1;
@@ -26,6 +26,7 @@ public abstract class Menu {
     protected int currentTextItemHovered = 0;
     private int currentRow;
     protected Panel panel;
+    protected String name;
 
     public Menu() {
         updatePanel();
@@ -137,7 +138,7 @@ public abstract class Menu {
     protected void setText(String[] stringArray) {
         spriteFonts.clear();
         for (int i = 0; i < stringArray.length; i++) {
-            spriteFonts.add(new SpriteFont(stringArray[i], 0, 0, Textbox.getFont(), Color.black));
+            spriteFonts.add(new SpriteFont(stringArray[i], 0, 0, Textbox.getFont(), Textbox.getFontColor()));
         }
     }
 
@@ -153,6 +154,6 @@ public abstract class Menu {
     }
 
     protected void updatePanel() {
-        panel = new Panel(left, top, width, height, false);
+        panel = new Panel(left, top, width, height, name);
     }
 }

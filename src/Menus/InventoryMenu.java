@@ -36,6 +36,7 @@ public class InventoryMenu extends Menu {
         columns = 2;
         rows = 5;
         descriptionTop = top + height + spacer;
+        name = "Inventory";
         updatePanel();
     }
 
@@ -127,6 +128,6 @@ public class InventoryMenu extends Menu {
     @Override
     protected void updatePanel() {
         super.updatePanel();
-        descriptionPanel = new Panel(left, descriptionTop, width, descriptionHeight, false);
+        descriptionPanel = new Panel(left, descriptionTop, width, descriptionHeight, "Description");
     }
 }

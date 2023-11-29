@@ -1,11 +1,8 @@
 package Maps;
 
 import EnhancedMapTiles.ItemMapObject;
-import EnhancedMapTiles.PushableRock;
-import Items.CatFood;
 import Items.Denture;
 import Items.Fragment;
-import Items.Medkit;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
@@ -29,7 +26,6 @@ import Scripts.WorldTwoMap.W2PB3Script;
 import Scripts.WorldTwoMap.W2PB4Script;
 import Scripts.WorldTwoMap.W2PB5Script;
 import Scripts.WorldTwoMap.W2PitbullScript;
-import Tilesets.InternetExplorerTileset;
 import Tilesets.SafariTileset;
 
 import java.util.ArrayList;
@@ -90,9 +86,9 @@ public class EvanTestMap extends Map {
         W2PB5.setInteractScript(new W2PB5Script());
         npcs.add(W2PB5);
 
-        
 
-        
+
+
 
         return npcs;
     }
