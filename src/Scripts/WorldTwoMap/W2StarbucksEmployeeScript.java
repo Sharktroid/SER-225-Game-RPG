@@ -24,6 +24,11 @@ public class W2StarbucksEmployeeScript extends Script<NPC> {
             if (sequence == 0) {
                 setNPCName("Starbucks Employee");
                 addTextToTextboxQueue("Hi! How can I help you today?");
+            } else if (sequence == 1) {
+                setNPCName("T");
+                addTextToTextboxQueue("Have you seen anything purple around here?");
+            } else if (sequence == 2) {
+                
             }
         }
 
