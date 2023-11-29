@@ -89,6 +89,12 @@ public class FlagSaves {
 
         // world two flags
 
+        //Fragment Flags
+        flagManager.addFlag("w2FoundFrag1", false, true);
+        flagManager.addFlag("w2FoundFrag2", false, true);
+        //Spotify Quest Frag
+        flagManager.addFlag("w2FoundFrag3", false, true);
+
         // Amazon
         flagManager.addFlag("enterBuilding1", false, false);
         flagManager.addFlag("exitBuilding1", false, false);
