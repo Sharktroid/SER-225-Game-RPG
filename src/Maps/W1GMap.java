@@ -24,6 +24,7 @@ import NPCs.W1Librarian;
 import NPCs.W1Normal1;
 import NPCs.W1Normal2;
 import NPCs.W1OldManJenks;
+import Screens.PlayLevelScreen;
 import Scripts.BasicFragmentScript;
 import Scripts.WorldOneMap.*;
 import Tilesets.InternetExplorerTileset;
@@ -39,12 +40,12 @@ public class W1GMap extends Map {
 
         SoundPlayer.playMusic(MusicTracks.WORLDONE);
 
-        exitedLib = W1ExitLibraryScript.exitedLib;
-
-        if (exitedLib == false){
+        if(PlayLevelScreen.getFlagManager() == null){
+            this.playerStartPosition = getMapTile(0, 0).getLocation();
+        }else if (!PlayLevelScreen.getFlagManager().isFlagSet("wentOutOfLibrary")) {
             this.playerStartPosition = getMapTile(23, 13).getLocation();
-        }else {
-            this.playerStartPosition = getMapTile(38, 6).getLocation();
+        } else if (PlayLevelScreen.getFlagManager().isFlagSet("wentOutOfLibrary")) {
+            this.playerStartPosition = getMapTile(38, 6).getLocation().adjustXY(-12, -12);
         }
 
         textbox.setStyle(Style.WORLDONE);

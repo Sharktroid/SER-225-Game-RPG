@@ -47,7 +47,7 @@ public class FlagSaves {
 
         // Dentures ques
         flagManager.addFlag("hasTalkedToOMJ", false, true);  // DEBUG set startting value to false
-        flagManager.addFlag("hasFoundDentures", false, false);// DEBUG set startting value to false
+        flagManager.addFlag("hasFoundDentures", false, true);// DEBUG set startting value to false
         flagManager.addFlag("hasFinishedOMJ", false, true);// DEBUG set startting value to false
 
         // Virus quest
@@ -69,7 +69,7 @@ public class FlagSaves {
         flagManager.addFlag("w1CuredAllNPCs", false, true);
 
         // Library quest
-        flagManager.addFlag("hasTalkedToLibrarian", false, true);
+        flagManager.addFlag("hasTalkedToLibrarian", true, true);
         flagManager.addFlag("scannedLibrarian", false, true);
         flagManager.addFlag("unlockedLibWindow", false, true);
         flagManager.addFlag("hasFinishedLib",false,true);
@@ -82,28 +82,71 @@ public class FlagSaves {
 
 
         // enter library
-        flagManager.addFlag("enterLibrary", false);
-
-        // world 11/ library flags
-        // temp: exit library
+        flagManager.addFlag("enterLibrary", false, false);
         flagManager.addFlag("exitLibrary", false, false);
+        flagManager.addFlag("wentIntoLibrary", false, true);
+        flagManager.addFlag("wentOutOfLibrary", false, true);
 
         // world two flags
 
-        // beaver
+        // Amazon
+        flagManager.addFlag("enterBuilding1", false, false);
+        flagManager.addFlag("exitBuilding1", false, false);
+        flagManager.addFlag("wentIntoBuilding1", false, true);
+        flagManager.addFlag("wentOutOfBuilding1", false, true);
+
+        // Apple
+        flagManager.addFlag("enterBuilding2", false, false);
+        flagManager.addFlag("exitBuilding2", false, false);
+        flagManager.addFlag("wentIntoBuilding2", false, true);
+        flagManager.addFlag("wentOutOfBuilding2", false, true);
+
+        //Spotify
+        flagManager.addFlag("enterBuilding3", false, false);
+        flagManager.addFlag("exitBuilding3", false, false);
+        flagManager.addFlag("wentIntoBuilding3", false, true);
+        flagManager.addFlag("wentOutOfBuilding3", false, true);
+
+        //Starbucks
+        flagManager.addFlag("enterBuilding4", false, false);
+        flagManager.addFlag("exitBuilding4", false, false);
+        flagManager.addFlag("wentIntoBuilding4", false, true);
+        flagManager.addFlag("wentOutOfBuilding4", false, true);
+
+        // test flags. **remove**
         flagManager.addFlag("hasTalkedToBeaver", false);
+
+        //for Spotify Quest:Pitball and Mr. WW
+        flagManager.addFlag("hasTalkedToDJ", false, true);
+        flagManager.addFlag("gaveSamples", false, true);
+        flagManager.addFlag("returnToDJ", false, true);
+        flagManager.addFlag("gaveToPitbull", false, true);
+        flagManager.addFlag("hasTalkedToPitbull", false, true);
+        //for Spotify Quest:Customers
+        flagManager.addFlag("hasTalkedToPB1", false, true);
+        flagManager.addFlag("gaveToPB1", false, true);
+        flagManager.addFlag("hasTalkedToPB2", false, true);
+        flagManager.addFlag("gaveToPB2", false, true);
+        flagManager.addFlag("hasTalkedToPB3", false, true);
+        flagManager.addFlag("gaveToPB3", false, true);
+        flagManager.addFlag("hasTalkedToPB4", false, true);
+        flagManager.addFlag("gaveToPB4", false, true);
+        flagManager.addFlag("hasTalkedToPB5", false, true);
+        flagManager.addFlag("gaveToPB5", false, true);
 
         // world three flags
 
-        // temp: used to go up and down levels
+        // used to go up and down levels
         flagManager.addFlag("goUpLevel", false, false); 
         flagManager.addFlag("goDownLevel", false, false);
         flagManager.addFlag("wentUpLevel", false, true);
         flagManager.addFlag("wentDownLevel", false, true);
 
-        // persistent: test flags. **remove**
+        // test flags. **remove**
         flagManager.addFlag("hasTalkedToRedPanda", false, true);
         flagManager.addFlag("hasTalkedToDino", false, true);
+
+
 
         // test world flags
 

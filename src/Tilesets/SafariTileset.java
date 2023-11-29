@@ -303,7 +303,7 @@ public class SafariTileset extends Tileset{
                 .build();
 
         MapTileBuilder doorLeftTile = new MapTileBuilder(doorLeftFrame)
-                .withTileType(TileType.NOT_PASSABLE);
+                .withTileType(TileType.PASSABLE);
 
         mapTiles.add(doorLeftTile);
 
@@ -314,7 +314,7 @@ public class SafariTileset extends Tileset{
                 .build();
 
         MapTileBuilder doorRightTile = new MapTileBuilder(doorRightFrame)
-                .withTileType(TileType.NOT_PASSABLE);
+                .withTileType(TileType.PASSABLE);
 
         mapTiles.add(doorRightTile);
 
@@ -408,6 +408,27 @@ public class SafariTileset extends Tileset{
                 .withTileType(TileType.NOT_PASSABLE);
 
         mapTiles.add(appleWallThreeFlippedTile);
+
+        // door left wall locked
+        Frame doorLockedLeftFrame = new FrameBuilder(getSubImage(5, 2))
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder doorLockedLeftTile = new MapTileBuilder(doorLockedLeftFrame)
+                .withTileType(TileType.NOT_PASSABLE);
+
+        mapTiles.add(doorLockedLeftTile);
+
+        // door right wall locked
+        Frame doorLockedRightFrame = new FrameBuilder(getSubImage(5, 2))
+                .withScale(tileScale)
+                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                .build();
+
+        MapTileBuilder doorLockedRightTile = new MapTileBuilder(doorLockedRightFrame)
+                .withTileType(TileType.NOT_PASSABLE);
+
+        mapTiles.add(doorLockedRightTile);
 
 
  

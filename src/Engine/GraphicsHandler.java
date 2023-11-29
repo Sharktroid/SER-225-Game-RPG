@@ -66,6 +66,7 @@ public class GraphicsHandler {
         g.drawRect(x, y, width, height);
     }
 
+
     //draw filled rectangle
     public void drawFilledRectangle(int x, int y, int width, int height, int arcWidth, int arcHeight, Color color) {
         g.setColor(color);
@@ -96,6 +97,7 @@ public class GraphicsHandler {
         drawFilledRectangle(x, y, width, height, fillColor);
         drawRectangle(x, y, width, height, borderColor, borderThickness);
     }
+
 
     //gradient
     public void drawRectangleGradient(int x, int y, int width, int height, int arcWidth, int arcHeight, Color color1, Color color2, Color borderColor, int borderThickness) {

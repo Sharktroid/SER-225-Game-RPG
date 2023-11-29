@@ -16,7 +16,7 @@ import Utils.Point;
 public class ItemMapObject extends EnhancedMapTile {
 
     public ItemMapObject(Point location, Item item) {
-        super(location.x, location.y, new SpriteSheet(item.getSprite(), 25, 25),
+        super(location.x, location.y, new SpriteSheet(item.getSprite(), item.getSpriteWidth(), item.getSpriteHeight()),
                 TileType.NOT_PASSABLE);
         this.interactScript = new BasicItemScript(item);
     }
@@ -34,7 +34,7 @@ public class ItemMapObject extends EnhancedMapTile {
     @Override
     protected GameObject loadBottomLayer(SpriteSheet spriteSheet) {
         Frame frame = new FrameBuilder(spriteSheet.getSubImage(0, 0))
-                .withScale(2)
+                .withScale(1)
                 .build();
         return new GameObject(x, y, frame);
     }
