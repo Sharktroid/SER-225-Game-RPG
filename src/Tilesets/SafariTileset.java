@@ -430,8 +430,69 @@ public class SafariTileset extends Tileset{
 
         mapTiles.add(doorLockedRightTile);
 
+        // portal tiles
+        Frame[] portalFrames = new Frame[] {
+                new FrameBuilder(getSubImage(8, 0), 65)
+                        .withScale(tileScale)
+                        .build(),
+                new FrameBuilder(getSubImage(8, 1), 65)
+                        .withScale(tileScale)
+                        .build(),
+                new FrameBuilder(getSubImage(8, 2), 65)
+                        .withScale(tileScale)
+                        .build(),
+                new FrameBuilder(getSubImage(8, 3), 65)
+                        .withScale(tileScale)
+                        .build(),
+    
+            };
+    
+            MapTileBuilder portalTile = new MapTileBuilder(portalFrames)
+                    .withTileType(TileType.NOT_PASSABLE);
+    
+            mapTiles.add(portalTile);
 
- 
+
+        // table
+        Frame tableFrame = new FrameBuilder(getSubImage(6, 4))
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder tableTile = new MapTileBuilder(tableFrame)
+                .withTileType(TileType.NOT_PASSABLE);
+
+        mapTiles.add(tableTile);
+
+        // white square floor
+        Frame whiteSquareFloorFrame = new FrameBuilder(getSubImage(1, 0))
+                .withScale(tileScale)
+                .withImageEffect(ImageEffect.FLIP_VERTICAL)
+                .build();
+
+        MapTileBuilder whiteSquareFloorTile = new MapTileBuilder(whiteSquareFloorFrame);
+
+        mapTiles.add(whiteSquareFloorTile);
+
+        // white square floor
+        Frame brickFloorFrame = new FrameBuilder(getSubImage(3, 0))
+                .withScale(tileScale)
+                .withImageEffect(ImageEffect.FLIP_VERTICAL)
+                .build();
+
+        MapTileBuilder brickFloorTile = new MapTileBuilder(brickFloorFrame);
+
+        mapTiles.add(brickFloorTile);
+
+        // table
+        Frame wallFrame = new FrameBuilder(getSubImage(0, 1))
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder wallTile = new MapTileBuilder(wallFrame)
+                .withTileType(TileType.NOT_PASSABLE);
+
+        mapTiles.add(wallTile);
+   
 
 
 

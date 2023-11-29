@@ -232,7 +232,7 @@ public class ChromeTileset extends Tileset {
 
 
 
-        // top water
+        // portal tiles
         Frame[] topWaterFrames = new Frame[] {
             new FrameBuilder(getSubImage(5, 0), 65)
                     .withScale(tileScale)
@@ -243,21 +243,10 @@ public class ChromeTileset extends Tileset {
             new FrameBuilder(getSubImage(5, 2), 65)
                     .withScale(tileScale)
                     .build(),
-            new FrameBuilder(getSubImage(5, 1), 65)
-                    .withScale(tileScale)
-                    .build(),
-            new FrameBuilder(getSubImage(5, 0), 65)
-                    .withScale(tileScale)
-                    .build(),
             new FrameBuilder(getSubImage(5, 3), 65)
                     .withScale(tileScale)
                     .build(),
-            new FrameBuilder(getSubImage(5, 4), 65)
-                    .withScale(tileScale)
-                    .build(),
-            new FrameBuilder(getSubImage(5, 3), 65)
-                    .withScale(tileScale)
-                    .build()
+
         };
 
         MapTileBuilder topWaterTile = new MapTileBuilder(topWaterFrames)
