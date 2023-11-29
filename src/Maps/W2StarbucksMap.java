@@ -71,6 +71,7 @@ public class W2StarbucksMap extends Map {
 
         return triggers;
     }
+/* 
     public ArrayList<NPC> loadNPCs() {
         ArrayList<NPC> npcs = new ArrayList<>();
         // remember to import NPC and Scripts for new NPC
@@ -80,5 +81,5 @@ public class W2StarbucksMap extends Map {
         npcs.add(W2PB3);
 
         return npcs;
-    }
+    }*/
 }

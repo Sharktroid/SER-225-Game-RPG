@@ -77,7 +77,7 @@ public class W2AppleMap extends Map {
 
         return triggers;
     }
-
+/* 
     public ArrayList<NPC> loadNPCs() {
         ArrayList<NPC> npcs = new ArrayList<>();
         // remember to import NPC and Scripts for new NPC
@@ -89,6 +89,6 @@ public class W2AppleMap extends Map {
         
 
         return npcs;
-    }
+    } */
 
 }

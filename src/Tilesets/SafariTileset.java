@@ -483,7 +483,7 @@ public class SafariTileset extends Tileset{
 
         mapTiles.add(brickFloorTile);
 
-        // table
+        // dark wall
         Frame wallFrame = new FrameBuilder(getSubImage(0, 1))
                 .withScale(tileScale)
                 .build();
@@ -492,6 +492,26 @@ public class SafariTileset extends Tileset{
                 .withTileType(TileType.NOT_PASSABLE);
 
         mapTiles.add(wallTile);
+
+        // phone on table
+        Frame phoneOnTableFrame = new FrameBuilder(getSubImage(7, 3))
+                .withScale(tileScale)
+                .build();
+
+        MapTileBuilder phoneOnTableTile = new MapTileBuilder(phoneOnTableFrame)
+                .withTileType(TileType.NOT_PASSABLE);
+
+        mapTiles.add(phoneOnTableTile);
+
+       // lost and found
+       Frame lostAndFoundFrame = new FrameBuilder(getSubImage(7, 4))
+       .withScale(tileScale)
+       .build();
+
+        MapTileBuilder lostAndFoundTile = new MapTileBuilder(lostAndFoundFrame)
+                .withTileType(TileType.NOT_PASSABLE);
+
+        mapTiles.add(lostAndFoundTile);
    
 
 
