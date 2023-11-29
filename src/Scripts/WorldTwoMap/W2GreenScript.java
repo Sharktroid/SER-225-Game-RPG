@@ -6,7 +6,7 @@ import Level.ScriptState;
 import Level.Textbox.Style;
 
 
-public class W2Outside1Script extends Script<NPC> {
+public class W2GreenScript extends Script<NPC> {
 
     @Override
     protected void setup() {

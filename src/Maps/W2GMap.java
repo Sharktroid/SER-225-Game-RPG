@@ -7,16 +7,16 @@ import Game.SoundPlayer.MusicTracks;
 import Level.Map;
 import Level.NPC;
 import Level.Textbox.Style;
-import NPCs.World2.W2Outside1;
-import NPCs.World2.W2Outside2;
-import NPCs.World2.W2Outside3;
-import NPCs.World2.W2Outside4;
-import NPCs.World2.W2Outside5;
-import Scripts.WorldTwoMap.W2Outside1Script;
-import Scripts.WorldTwoMap.W2Outside2Script;
-import Scripts.WorldTwoMap.W2Outside3Script;
-import Scripts.WorldTwoMap.W2Outside4Script;
-import Scripts.WorldTwoMap.W2Outside5Script;
+import NPCs.World2.W2Green;
+import NPCs.World2.W2Orange;
+import NPCs.World2.W2Purple;
+import NPCs.World2.W2Red;
+import NPCs.World2.W2Yellow;
+import Scripts.WorldTwoMap.W2GreenScript;
+import Scripts.WorldTwoMap.W2OrangeScript;
+import Scripts.WorldTwoMap.W2PurpleScript;
+import Scripts.WorldTwoMap.W2RedScript;
+import Scripts.WorldTwoMap.W2YellowScript;
 import Tilesets.SafariTileset;
 
 public class W2GMap extends Map {
@@ -37,29 +37,29 @@ public class W2GMap extends Map {
         ArrayList<NPC> npcs = new ArrayList<>();
 
         //green
-        W2Outside1 outside1 = new W2Outside1(1, getMapTile(20, 7).getLocation());
-        outside1.setInteractScript(new W2Outside1Script());
-        npcs.add(outside1);
+        W2Green green = new W2Green(1, getMapTile(20, 7).getLocation());
+        green.setInteractScript(new W2GreenScript());
+        npcs.add(green);
 
         //orange
-        W2Outside2 outside2 = new W2Outside2(2, getMapTile(41, 6).getLocation());
-        outside2.setInteractScript(new W2Outside2Script());
-        npcs.add(outside2);
+        W2Orange orange = new W2Orange(2, getMapTile(41, 6).getLocation());
+        orange.setInteractScript(new W2OrangeScript());
+        npcs.add(orange);
 
         //purple
-        W2Outside3 outside3 = new W2Outside3(3, getMapTile(34, 7).getLocation());
-        outside3.setInteractScript(new W2Outside3Script());
-        npcs.add(outside3);
+        W2Purple purple = new W2Purple(3, getMapTile(34, 7).getLocation());
+        purple.setInteractScript(new W2PurpleScript());
+        npcs.add(purple);
 
         //red
-        W2Outside4 outside4 = new W2Outside4(4, getMapTile(29, 6).getLocation());
-        outside4.setInteractScript(new W2Outside4Script());
-        npcs.add(outside4);
+        W2Red red = new W2Red(4, getMapTile(29, 6).getLocation());
+        red.setInteractScript(new W2RedScript());
+        npcs.add(red);
 
         //yellow
-        W2Outside5 outside5 = new W2Outside5(5, getMapTile(11, 6).getLocation());
-        outside5.setInteractScript(new W2Outside5Script());
-        npcs.add(outside5);
+        W2Yellow yellow = new W2Yellow(5, getMapTile(11, 6).getLocation());
+        yellow.setInteractScript(new W2YellowScript());
+        npcs.add(yellow);
 
         return npcs;
     }

@@ -1,4 +1,4 @@
-package Scripts.WorldThreeMap;
+package Scripts.WorldTwoMap;
 
 import Level.NPC;
 import Level.Script;
@@ -6,7 +6,7 @@ import Level.ScriptState;
 import Level.Textbox.Style;
 
 
-public class W3Outside extends Script<NPC> {
+public class W2OrangeScript extends Script<NPC> {
 
     @Override
     protected void setup() {
