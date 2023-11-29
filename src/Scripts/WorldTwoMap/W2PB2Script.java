@@ -12,35 +12,35 @@ public class W2PB2Script extends Script<NPC> {
     protected void setup() {
         lockPlayer();
 
-        setTextboxStyle(Style.WORLDONE);
-        setNPCName("");
+        setTextboxStyle(Style.WORLDTWO);
+        setNPCName("Felipe");
         showTextbox();
 
         
-       String[] selections = {"", ""};
-       String[] answers = {"", ""};
+       String[] selections = {"I think this is yours", "Did you buy a Pitbull Album"};
+       String[] answers = {"MY GLORIOUS VINLY", "Oh no way its finally here"};
 
         
-        if (isFlagSet("hasTalkedToDJ") && (!isFlagSet("gaveToPB"))){
+        if (isFlagSet("hasTalkedToDJ") && (!isFlagSet("gaveToPB2"))){
             entity.facePlayer(player);
-            addTextToTextboxQueue( "is that mine!?!");
-            addTextToTextboxQueue( "Thank you so much for finding this \n i dont know what I'd do without it");
+            addTextToTextboxQueue( "I cant wait to make my kids listen to this");
+            addTextToTextboxQueue( "Thank you for this \n dale");
             W2DJScript.removeSamples(1);
-            setFlag("gaveToBP1");
+            setFlag("gaveToPB2");
             
 
         }
 
-       else if ((!isFlagSet("hasTalkedToPB")) && (!isFlagSet("hasTalkedToDJ")))  {
+       else if ((!isFlagSet("hasTalkedToPB2")) && (!isFlagSet("hasTalkedToDJ")))  {
             entity.facePlayer(player);
-            addTextToTextboxQueue( "I can't believe they even threw in a shirt...");
+            addTextToTextboxQueue( "His music just resonates with me");
 
-            setFlag("hasTalkedToPB");
+            setFlag("hasTalkedToPB2");
         }
        
         else {
             entity.facePlayer(player);
-            addTextToTextboxQueue( "He's really been there and done that with me");
+            addTextToTextboxQueue( "I wish my head was that shiny...");
 
         }
         

@@ -1,4 +1,4 @@
-package Scripts.WorldTwoMap;
+package Scripts.WorldOneMap;
 
 import Scripts.BasicItemScript;
 import Game.SoundPlayer;
