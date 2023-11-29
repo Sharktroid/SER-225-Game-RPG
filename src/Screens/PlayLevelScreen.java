@@ -90,7 +90,7 @@ public class PlayLevelScreen extends Screen {
             // if level is "running" update player and map to keep game logic for the level
             // going
             case RUNNING:
-                if (Keyboard.isKeyDown(Key.E) && !KeyLocker.isKeyLocked(Key.E) && !map.getTextbox().isActive()) {
+                if (Keyboard.isKeyDown(Key.E) && !KeyLocker.isKeyLocked(Key.E) && player.getPlayerState() != PlayerState.INTERACTING) {
                     inventory.setActive(!inventory.isActive());
                     KeyLocker.lockKey(Key.E);
 

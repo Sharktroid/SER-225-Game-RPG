@@ -22,7 +22,7 @@ public class W1EngineerScript extends Script<NPC> {
         lockPlayer();
 
         setTextboxStyle(Style.WORLDONE);
-        String npcName = "Network Security Engineer";
+        String npcName = "Network Engineer";
         String playerName = "T";
         // setNPCName("Network Security Engineer");
         showTextbox();
@@ -33,7 +33,7 @@ public class W1EngineerScript extends Script<NPC> {
 
         if (!isFlagSet("hasFinishedOMJ")) {
             setNPCName(npcName);
-            addTextToTextboxQueue("Hang in there partner! ");
+            addTextToTextboxQueue("Hang in there partner! I'm this network's security engineer.");
         } else if (!isFlagSet("hasTalkedToNSE")) {
             if (sequence == 0) {
                 setNPCName(npcName);

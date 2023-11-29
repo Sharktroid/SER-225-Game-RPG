@@ -11,8 +11,6 @@ import Level.Player;
 
 import SpriteFont.SpriteFont;
 import Utils.Point;
-import java.awt.Color;
-
 import java.util.HashMap;
 
 // blue shirt

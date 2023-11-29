@@ -141,7 +141,7 @@ public abstract class Script<T extends MapEntity> {
 
     // returns the npc name
     protected SpriteFont getNPCName() {
-        return map.getTextbox().getNPCName();
+        return null;
     }
     // sets the npc name
     protected void setNPCName(String npcName) {

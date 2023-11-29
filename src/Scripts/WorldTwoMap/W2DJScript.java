@@ -1,12 +1,10 @@
 package Scripts.WorldTwoMap;
 
-import Items.Denture;
 import Items.Fragment;
 import Level.NPC;
 import Level.Script;
 import Level.ScriptState;
 import Level.Textbox.Style;
-import Scripts.BasicItemScript;
 
 
 
@@ -41,15 +39,15 @@ public class W2DJScript extends Script<NPC> {
             addTextToTextboxQueue("You really should meet Pitbull he loves to greet new fans");
             addTextToTextboxQueue("He should be around here in the store somewhere");
             addTextToTextboxQueue("Come back to me after and I \n can show you what we have in the store");
-             setFlag("hasTalkedToDJ");  
+             setFlag("hasTalkedToDJ");
         }
 
          else if ((isFlagSet("hasTalkedToDJ")) && (!isFlagSet("hasTalkedToPitbull"))) {
             entity.facePlayer(player);
-            addTextToTextboxQueue("Dale", selections, answers);             
+            addTextToTextboxQueue("Dale", selections, answers);
         }
 
-       
+
         else if ((isFlagSet("hasTalkedToDJ")) && (isFlagSet("hasTalkedToPitbull")) && (!isFlagSet("returnToDJ")) ) {
             entity.facePlayer(player);
             addTextToTextboxQueue( "So was meeting him amazing??", selections2, answers2);
@@ -79,10 +77,10 @@ public class W2DJScript extends Script<NPC> {
             entity.facePlayer(player);
             addTextToTextboxQueue( "Dale");
         }
-        
+
     }
 
-    
+
 
     static int currentSamples = -1;
 
@@ -91,10 +89,10 @@ public class W2DJScript extends Script<NPC> {
         unlockPlayer();
         hideTextbox();
 
-       
-        
+
+
     }
-   
+
     public static int setSamples(int samples) {
         currentSamples = (samples);
         return currentSamples;
