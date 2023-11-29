@@ -1,4 +1,4 @@
-package NPCs.World2;
+package NPCs.World3;
 
 import Builders.FrameBuilder;
 import Engine.GraphicsHandler;
@@ -13,12 +13,12 @@ import Utils.Point;
 
 import java.util.HashMap;
 
-public class W2Outside4 extends NPC {
+public class W3OutsideEmployee extends NPC {
     protected boolean isInteracting = false;
     protected SpriteFont playGame;
 
-    public W2Outside4(int id, Point location) {
-        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("safariNPC/Red.png"), 25, 25), "STAND_LEFT");
+    public W3OutsideEmployee(int id, Point location) {
+        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("googleNPC/Outside.png"), 25, 25), "STAND_LEFT");
     }
 
 

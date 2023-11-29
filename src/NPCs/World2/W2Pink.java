@@ -13,12 +13,12 @@ import Utils.Point;
 
 import java.util.HashMap;
 
-public class W2Outside5 extends NPC {
+public class W2Pink extends NPC {
     protected boolean isInteracting = false;
     protected SpriteFont playGame;
 
-    public W2Outside5(int id, Point location) {
-        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("safariNPC/Yellow.png"), 25, 25), "STAND_LEFT");
+    public W2Pink(int id, Point location) {
+        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("safariNPC/Pink.png"), 25, 25), "STAND_LEFT");
     }
 
 

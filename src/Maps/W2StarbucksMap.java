@@ -7,7 +7,9 @@ import Game.SoundPlayer.MusicTracks;
 import Level.Map;
 import Level.NPC;
 import Level.Textbox.Style;
-import NPCs.World2.W2SBCustomer1;
+import NPCs.World2.W2Green;
+import NPCs.World2.W2Red;
+import NPCs.World2.W2Pink;
 import NPCs.World2.W2StarbucksEmployee;
 import Scripts.WorldTwoMap.W2SBCustomer1Script;
 import Scripts.WorldTwoMap.W2SBCustomer2Script;
@@ -36,15 +38,15 @@ public class W2StarbucksMap extends Map {
         starEm.setInteractScript(new W2StarbucksEmployeeScript());
         npcs.add(starEm);
 
-        W2SBCustomer1 customer1 = new W2SBCustomer1(2, getMapTile(5, 4).getLocation());
+        W2Green customer1 = new W2Green(2, getMapTile(5, 4).getLocation());
         customer1.setInteractScript(new W2SBCustomer1Script());
         npcs.add(customer1);
 
-        W2SBCustomer1 customer2 = new W2SBCustomer1(3, getMapTile(7, 4).getLocation());
+        W2Red customer2 = new W2Red(3, getMapTile(7, 4).getLocation());
         customer2.setInteractScript(new W2SBCustomer2Script());
         npcs.add(customer2);
 
-        W2SBCustomer1 customer3 = new W2SBCustomer1(4, getMapTile(9, 4).getLocation());
+        W2Pink customer3 = new W2Pink(4, getMapTile(9, 4).getLocation());
         customer3.setInteractScript(new W2SBCustomer3Script());
         npcs.add(customer3);
 
