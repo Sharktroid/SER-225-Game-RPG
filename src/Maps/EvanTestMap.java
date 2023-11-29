@@ -56,9 +56,7 @@ public class EvanTestMap extends Map {
         ArrayList<NPC> npcs = new ArrayList<>();
         // remember to import NPC and Scripts for new NPC
 
-        Testfox testfox = new Testfox(1, getMapTile(11, 6).getLocation().subtractY(40));
-        testfox.setInteractScript(new TestfoxScript());
-        npcs.add(testfox);
+        
 
         W2DJ W2DJ = new W2DJ(2, getMapTile(9, 3).getLocation().subtractY(40));
         W2DJ.setInteractScript(new W2DJScript());
