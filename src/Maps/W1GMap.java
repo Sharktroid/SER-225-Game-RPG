@@ -93,7 +93,6 @@ public class W1GMap extends Map {
         npcs.add(engineer);
 
         W1EngineerPartner engineerPartner = new W1EngineerPartner(3, getMapTile(36, 24).getLocation());
-        engineerPartner.setInteractScript(new W1EngineerScript());
         npcs.add(engineerPartner);
 
         W1Librarian librarian = new W1Librarian(4, getMapTile(36, 9).getLocation());
