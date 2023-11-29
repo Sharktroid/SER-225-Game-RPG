@@ -29,6 +29,7 @@ public class Firefox extends NPC {
     public void update(Player player) {
         super.update();
 
+
         //if player can talk to npc, textbox pops up
         if (intersects(player.getInteractionRange()))
         {

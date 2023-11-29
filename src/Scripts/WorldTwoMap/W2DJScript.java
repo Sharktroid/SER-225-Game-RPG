@@ -7,14 +7,14 @@ import Level.ScriptState;
 import Level.Textbox.Style;
 
 
-// script for talking to sloth npc
+
 public class W2DJScript extends Script<NPC> {
 
     @Override
     protected void setup() {
         lockPlayer();
 
-        setTextboxStyle(Style.WORLDONE);
+        setTextboxStyle(Style.WORLDTWO);
         setNPCName("Mr Worldwide");
         showTextbox();
 
@@ -64,14 +64,13 @@ public class W2DJScript extends Script<NPC> {
             addTextToTextboxQueue("You seem to only have " + currentSamples + " vinlys left, I believe in you!");
 
         }
-        else if ((isFlagSet("returnToDJ")) && (currentSamples == 0) ){
+        else if ((isFlagSet("returnToDJ")) && (currentSamples == 0) && (!isFlagSet("w2FoundFrag3")) ){
             addTextToTextboxQueue( "Oh it's you again", selections3, answers3);
             addTextToTextboxQueue( "Here, I got you something");
             addTextToTextboxQueue( "It's a chain with a new stone that just flew into our town");
             addTextToTextboxQueue( "take it as a gift for helping me");
             addTextToTextboxQueue( "Dale");
-
-            setFlag("gaveSamples");
+            setFlag("w2FoundFrag3");
 
         }
         else {

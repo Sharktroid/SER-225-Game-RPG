@@ -12,7 +12,7 @@ public class W2PB1Script extends Script<NPC> {
     protected void setup() {
         lockPlayer();
 
-        setTextboxStyle(Style.WORLDONE);
+        setTextboxStyle(Style.WORLDTWO);
         setNPCName("Dustin");
         showTextbox();
 

@@ -12,7 +12,7 @@ public class W2PitbullScript extends Script<NPC> {
     protected void setup() {
         lockPlayer();
 
-        setTextboxStyle(Style.WORLDONE);
+        setTextboxStyle(Style.WORLDTWO);
         setNPCName("Mr Worldwide");
         showTextbox();
 
