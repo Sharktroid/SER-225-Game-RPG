@@ -13,7 +13,7 @@ import Tilesets.SafariTileset;
 public class W2StarbucksMap extends Map {
     public W2StarbucksMap() {
         super("w2_starbucks_map.txt", new SafariTileset(), 3);
-        this.playerStartPosition = getMapTile(7, 10).getLocation();
+        this.playerStartPosition = getMapTile(7, 10).getLocation().adjustXY(12, -12);
         textbox.setStyle(Style.WORLDTWO);
     }
 

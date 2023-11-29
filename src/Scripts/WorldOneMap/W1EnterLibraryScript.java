@@ -31,6 +31,8 @@ public class W1EnterLibraryScript extends Script {
             player.moveY(-2);
         }else{
             setFlag("enterLibrary");
+            setFlag("wentIntoLibrary");
+            unsetFlag("wentOutOfLibrary");
         }
         
     }
