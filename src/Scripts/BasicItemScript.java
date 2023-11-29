@@ -7,7 +7,7 @@ import Level.EnhancedMapTile;
 import Level.Script;
 import Level.ScriptState;
 
-// script for talking to redpanda npc
+
 
 public class BasicItemScript extends Script<EnhancedMapTile> {
     protected Item item;
