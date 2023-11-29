@@ -8,8 +8,6 @@ import Level.Textbox.Style;
 
 public class W2Outside3Script extends Script<NPC> {
 
-    public static boolean setRedPandaFlagState = false;
-
     @Override
     protected void setup() {
         lockPlayer();
@@ -38,7 +36,6 @@ public class W2Outside3Script extends Script<NPC> {
         unlockPlayer();
         hideTextbox();
         setFlag("hasTalkedToBeaver");
-        setRedPandaFlagState = isFlagSet("hasTalkedToBeaver");
     }
 
 

@@ -1,4 +1,4 @@
-package NPCs;
+package NPCs.World2;
 
 import Builders.FrameBuilder;
 import Engine.GraphicsHandler;
@@ -13,13 +13,12 @@ import Utils.Point;
 
 import java.util.HashMap;
 
-// This class is for the beaver NPC
-public class Finder1 extends NPC {
+public class W2Apple extends NPC {
     protected boolean isInteracting = false;
     protected SpriteFont playGame;
 
-    public Finder1(int id, Point location) {
-        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("finder1.png"), 25, 25), "STAND_LEFT");
+    public W2Apple(int id, Point location) {
+        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("safariNPC/FrontDesk.png"), 25, 25), "STAND_LEFT");
     }
 
 

@@ -8,8 +8,6 @@ import Level.Textbox.Style;
 
 public class W2FrontDeskScript extends Script<NPC> {
 
-    public static boolean setRedPandaFlagState = false;
-
     @Override
     protected void setup() {
         lockPlayer();
@@ -38,7 +36,6 @@ public class W2FrontDeskScript extends Script<NPC> {
         unlockPlayer();
         hideTextbox();
         setFlag("hasTalkedToBeaver");
-        setRedPandaFlagState = isFlagSet("hasTalkedToBeaver");
     }
 
 
@@ -46,11 +43,8 @@ public class W2FrontDeskScript extends Script<NPC> {
     public ScriptState execute() {
         if (!isFlagSet("hasTalkedToBeaver")){
             start();
-
-
             if (!isTextboxQueueEmpty()) {
                 return ScriptState.RUNNING;
-
             }
             end();
             return ScriptState.COMPLETED;
