@@ -34,7 +34,8 @@ public class PlayLevelScreen extends Screen {
 
     public void initialize() {
         // **temp: remove this if statement once other menu items are removed**
-        if (worldNum == -1) worldNum = Screens.MenuScreen.worldNumber;
+        if (worldNum == -1)
+            worldNum = Screens.MenuScreen.worldNumber;
 
         flagSaves.loadFlags(flagManager);
         this.map = newMap();
@@ -98,8 +99,7 @@ public class PlayLevelScreen extends Screen {
                 }
                 if (inventory.isActive()) {
                     inventory.update();
-                }
-                else {
+                } else {
                     player.update();
                 }
 
@@ -157,15 +157,32 @@ public class PlayLevelScreen extends Screen {
         }
         // to world 2 overworld (Safari)
         if ((flagManager.isFlagSet("portalTwoActivated"))
+                || flagManager.isFlagSet("exitBuilding1") || flagManager.isFlagSet("exitBuilding2")
+                || flagManager.isFlagSet("exitBuilding3") || flagManager.isFlagSet("exitBuilding4")
                 || (Keyboard.isKeyDown(Key.TWO) && !KeyLocker.isKeyLocked(Key.TWO))) {
             worldNum = 2;
             initialize();
         }
         // to amazon
+        if (flagManager.isFlagSet("enterBuilding1")) {
+            worldNum = 21;
+            initialize();
+        }
         // to apple
-        // to spotify
+        if (flagManager.isFlagSet("enterBuilding2")) {
+            worldNum = 22;
+            initialize();
+        }
         // to starbucks
-
+        if (flagManager.isFlagSet("enterBuilding3")) {
+            worldNum = 23;
+            initialize();
+        }
+        // to spotify
+        if (flagManager.isFlagSet("enterBuilding4")) {
+            worldNum = 24;
+            initialize();
+        }
         // to world 3 ground (Chrome)
         if (flagManager.isFlagSet("portalThreeActivated")
                 || (map.getSubmapNum() == 1 && flagManager.isFlagSet("goDownLevel"))
@@ -244,6 +261,14 @@ public class PlayLevelScreen extends Screen {
             newMap = new W1GMap();
         else if (worldNum == 2)
             newMap = new W2GMap();
+        else if (worldNum == 21)
+            newMap = new W2AmazonMap();
+        else if (worldNum == 22)
+            newMap = new W2AppleMap();
+        else if (worldNum == 23)
+            newMap = new W2SpotifyMap();
+        else if (worldNum == 24)
+            newMap = new W2StarbucksMap();
         else if (worldNum == 3)
             newMap = new W3GMap();
         else if (worldNum == 31)
@@ -304,41 +329,41 @@ public class PlayLevelScreen extends Screen {
         screenCoordinator.setGameState(GameState.MENU);
     }
 
-    public void flagDebugger(){
+    public void flagDebugger() {
         if (worldNum == 1) {
-                System.out.println("\nOMJ");
-                flagManager.debugFlag("hasTalkedToOMJ");
-                flagManager.debugFlag("hasFoundDentures");
-                flagManager.debugFlag("hasFinishedOMJ");
-                System.out.println("\nNSE");
-                flagManager.debugFlag("hasTalkedToNSE");
-                flagManager.debugFlag("w1CuredNPC1");
-                flagManager.debugFlag("w1CuredNPC2");
-                flagManager.debugFlag("w1CuredNPC3");
-                flagManager.debugFlag("w1CuredNPC4");
-                flagManager.debugFlag("w1CuredNPC5");
-                flagManager.debugFlag("w1Btl1");
-                flagManager.debugFlag("w1Btl2");
-                flagManager.debugFlag("w1Btl3");
-                flagManager.debugFlag("w1Btl4");
-                flagManager.debugFlag("w1Btl5");
-                flagManager.debugFlag("w1CuredAllNPCS");
-                flagManager.debugFlag("hasFinishedNSE");
-                System.out.println("\nLIB");
-                flagManager.debugFlag("hasTalkedToNSE");
-                flagManager.debugFlag("scannedLibrarian");
-                flagManager.debugFlag("hasFinishedNSE");
-                flagManager.debugFlag("hasTalkedToLibrarian");
-                flagManager.debugFlag("w1FoundFrag3");
-                flagManager.debugFlag("hasFinishedLib");
-                System.out.println();
-            }else if (worldNum == 3 || worldNum == 31 || worldNum == 32 || worldNum == 33 || worldNum == 34){
-                flagManager.debugFlag("goUpLevel");
-                flagManager.debugFlag("goDownLevel");
-                flagManager.debugFlag("wentUpLevel");
-                flagManager.debugFlag("wentDownLevel");
-                System.out.println();
-            }
+            System.out.println("\nOMJ");
+            flagManager.debugFlag("hasTalkedToOMJ");
+            flagManager.debugFlag("hasFoundDentures");
+            flagManager.debugFlag("hasFinishedOMJ");
+            System.out.println("\nNSE");
+            flagManager.debugFlag("hasTalkedToNSE");
+            flagManager.debugFlag("w1CuredNPC1");
+            flagManager.debugFlag("w1CuredNPC2");
+            flagManager.debugFlag("w1CuredNPC3");
+            flagManager.debugFlag("w1CuredNPC4");
+            flagManager.debugFlag("w1CuredNPC5");
+            flagManager.debugFlag("w1Btl1");
+            flagManager.debugFlag("w1Btl2");
+            flagManager.debugFlag("w1Btl3");
+            flagManager.debugFlag("w1Btl4");
+            flagManager.debugFlag("w1Btl5");
+            flagManager.debugFlag("w1CuredAllNPCS");
+            flagManager.debugFlag("hasFinishedNSE");
+            System.out.println("\nLIB");
+            flagManager.debugFlag("hasTalkedToNSE");
+            flagManager.debugFlag("scannedLibrarian");
+            flagManager.debugFlag("hasFinishedNSE");
+            flagManager.debugFlag("hasTalkedToLibrarian");
+            flagManager.debugFlag("w1FoundFrag3");
+            flagManager.debugFlag("hasFinishedLib");
+            System.out.println();
+        } else if (worldNum == 3 || worldNum == 31 || worldNum == 32 || worldNum == 33 || worldNum == 34) {
+            flagManager.debugFlag("goUpLevel");
+            flagManager.debugFlag("goDownLevel");
+            flagManager.debugFlag("wentUpLevel");
+            flagManager.debugFlag("wentDownLevel");
+            System.out.println();
+        }
     }
 
     // This enum represents the different states this screen can be in
