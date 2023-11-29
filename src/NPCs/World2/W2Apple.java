@@ -18,7 +18,7 @@ public class W2Apple extends NPC {
     protected SpriteFont playGame;
 
     public W2Apple(int id, Point location) {
-        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("safariNPC/FrontDesk.png"), 25, 25), "STAND_LEFT");
+        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("safariNPC/Apple.png"), 25, 25), "STAND_LEFT");
     }
 
 
