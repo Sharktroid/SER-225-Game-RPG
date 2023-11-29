@@ -4,7 +4,7 @@ import Game.SoundPlayer;
 import Game.SoundPlayer.SoundEffects;
 import Items.Fragment;
 
-// script for talking to redpanda npc
+
 
 public class BasicFragmentScript extends BasicItemScript {
 
