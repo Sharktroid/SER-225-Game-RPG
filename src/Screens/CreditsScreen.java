@@ -26,9 +26,10 @@ public class CreditsScreen extends Screen {
         // setup graphics on screen (background map, spritefont text)
         background = new TitleScreenMap();
         background.setAdjustCamera(false);
-        creditsLabel = new SpriteFont("Credits", 15, 7, "Times New Roman", 30, Color.white);
-        createdByLabel = new SpriteFont("Created by Alex Thimineur", 130, 121, "Times New Roman", 20, Color.white);
-        returnInstructionsLabel = new SpriteFont("Press Space to return to the menu", 20, 532, "Times New Roman", 30, Color.white);
+        creditsLabel = new SpriteFont("Credits", 350, 7, "Times New Roman", 30, Color.white);
+        createdByLabel = new SpriteFont("Created by: Arron, Shannon, Juliet, Calvin, Evan", 120, 151, "Times New Roman", 30, Color.white);
+        createdByLabel.setOutlineColor(Color.black);
+        returnInstructionsLabel = new SpriteFont("Press Space to return to the menu", 200, 532, "Times New Roman", 30, Color.white);
         KeyLocker.lockKey(Key.ENTER);
     }
 
