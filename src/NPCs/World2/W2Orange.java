@@ -57,17 +57,6 @@ public class W2Orange extends NPC {
     @Override
     public void draw(GraphicsHandler graphicsHandler) {
         super.draw(graphicsHandler);
-
-        if (isInteracting == true)
-        {
-            graphicsHandler.drawFilledRectangle(getCalibratedXLocation()+10, getCalibratedYLocation()-22,54,19, java.awt.Color.black);
-            playGame = new SpriteFont("...", getCalibratedXLocation()+27, getCalibratedYLocation()-30, "Comic Sans", 20, java.awt.Color.black);
-
-
-            //textbox.draw(graphicsHandler);
-            graphicsHandler.drawFilledRectangle(getCalibratedXLocation()+12, getCalibratedYLocation()-20,50,15, java.awt.Color.white);
-            playGame.draw(graphicsHandler);
-        }
     }
 }
 

@@ -90,7 +90,9 @@ public class FlagSaves {
         // world two flags
 
         //Fragment Flags
+        //starbucks
         flagManager.addFlag("w2FoundFrag1", false, true);
+        //amazon
         flagManager.addFlag("w2FoundFrag2", false, true);
         //Spotify Quest Frag
         flagManager.addFlag("w2FoundFrag3", false, true);
@@ -100,6 +102,8 @@ public class FlagSaves {
         flagManager.addFlag("exitBuilding1", false, false);
         flagManager.addFlag("wentIntoBuilding1", false, true);
         flagManager.addFlag("wentOutOfBuilding1", false, true);
+        flagManager.addFlag("w2TalkedToFrontDesk", false, true);
+        flagManager.addFlag("w2TalkedToWarehouse", false, true);
 
         // Apple
         flagManager.addFlag("enterBuilding2", false, false);

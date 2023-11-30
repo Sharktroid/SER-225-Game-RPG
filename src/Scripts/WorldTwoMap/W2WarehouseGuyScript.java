@@ -41,41 +41,37 @@ public class W2WarehouseGuyScript extends Script<NPC> {
         hideTextbox();
         if (!isFlagSet("w2TalkedToWarehouse")) {
             if (sequence == 0) {
-                setNPCName("T");
-                addTextToTextboxQueue("Do you know which way the lost and found bin is?");
+                sequence++;
             } else if (sequence == 1) {
-                setNPCName("Employee");
-                addTextToTextboxQueue("I don't know... I've been stuck here for 10 days...");
-                addTextToTextboxQueue("I got lost when trying to find the bathroom...");
-                addTextToTextboxQueue("I've been searching nonstop ever since... I can't help you... Good luck...");
+                setFlag("w2TalkedToWarehouse");
+                sequence++;
             }
-        } else {
-            setNPCName("Employee");
-            addTextToTextboxQueue("Don't worry about me... I'll find my way out soon...");
-        }
+        } 
     }
 
 
     @Override
     public ScriptState execute() {
-        if (!isFlagSet("hasTalkedToBeaver")){
+        if (!isFlagSet("w2TalkedToWarehouse")) {
+            if (sequence == 0) {
+                start();
+                if (isTextboxQueueEmpty()) {
+                    end();
+                }
+            } else {
+                start();
+                if (isTextboxQueueEmpty()) {
+                    end();
+                    return ScriptState.COMPLETED;
+                }
+            }
+            return ScriptState.RUNNING;
+        } else {
             start();
-
-
             if (!isTextboxQueueEmpty()) {
                 return ScriptState.RUNNING;
-
             }
             end();
-            return ScriptState.COMPLETED;
-
-        }else if (isFlagSet("hasTalkedToBeaver")){
-            start();
-            if (!isTextboxQueueEmpty()){
-                return ScriptState.RUNNING;
-            }
-            end();
-            return ScriptState.COMPLETED;
         }
         return ScriptState.COMPLETED;
     }
