@@ -5,7 +5,6 @@ import Level.Script;
 import Level.ScriptState;
 import Level.Textbox.Style;
 
-
 public class W3CEOScript extends Script<NPC> {
 
     @Override
@@ -16,18 +15,16 @@ public class W3CEOScript extends Script<NPC> {
         setNPCName("Finder");
         showTextbox();
 
-        //entity.facePlayer(player);
+        // entity.facePlayer(player);
 
-        if (!isFlagSet("hasTalkedToBeaver")) {
+        if (!isFlagSet("hasTalkedToCEO")) {
 
-            addTextToTextboxQueue("Hi Cat!");
-            addTextToTextboxQueue("I found some glowing orb today");
-            addTextToTextboxQueue("I can show you it another time soon");
+            addTextToTextboxQueue("You Win!");
         }
 
-        if (isFlagSet("hasTalkedToBeaver")){
+        if (isFlagSet("hasTalkedToCEO")) {
 
-            addTextToTextboxQueue("Hello again.");
+            addTextToTextboxQueue("Go back through the portal");
         }
     }
 
@@ -35,33 +32,23 @@ public class W3CEOScript extends Script<NPC> {
     protected void cleanup() {
         unlockPlayer();
         hideTextbox();
-        setFlag("hasTalkedToBeaver");
-    }
+        setFlag("hasTalkedToCEO");
+        setFlag("worldThreeComplete");
 
+    }
 
     @Override
     public ScriptState execute() {
-        if (!isFlagSet("hasTalkedToBeaver")){
-            start();
 
+        start();
 
-            if (!isTextboxQueueEmpty()) {
-                return ScriptState.RUNNING;
+        if (!isTextboxQueueEmpty()) {
+            return ScriptState.RUNNING;
 
-            }
-            end();
-            return ScriptState.COMPLETED;
-
-        }else if (isFlagSet("hasTalkedToBeaver")){
-            start();
-            if (!isTextboxQueueEmpty()){
-                return ScriptState.RUNNING;
-            }
-            end();
-            return ScriptState.COMPLETED;
         }
+        end();
         return ScriptState.COMPLETED;
+
     }
 
 }
-

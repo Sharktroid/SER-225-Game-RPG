@@ -125,9 +125,9 @@ public class FlagSaves {
         // world three flags
 
         //
-        flagManager.addFlag("level1Complete", true, true);
-        flagManager.addFlag("level2Complete", true, true);
-        flagManager.addFlag("level3Complete", true, true);
+        flagManager.addFlag("level1Complete", false, true);
+        flagManager.addFlag("level2Complete", false, true);
+        flagManager.addFlag("level3Complete", false, true);
 
         // used to go up and down levels
         flagManager.addFlag("goUpLevel", false, false); 
@@ -157,9 +157,8 @@ public class FlagSaves {
         flagManager.addFlag("w3f3CuredNPC4", false, true);
         flagManager.addFlag("w3f3Btl4", false, false);
 
-        // test flags. **remove**
-        flagManager.addFlag("hasTalkedToRedPanda", false, true);
-        flagManager.addFlag("hasTalkedToDino", false, true);
+        flagManager.addFlag("hasTalkedToCEO", false, true);
+        flagManager.addFlag("hasTalkedToOutsideGuy", false, true);
 
 
 

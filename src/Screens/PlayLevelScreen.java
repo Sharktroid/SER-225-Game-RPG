@@ -153,6 +153,11 @@ public class PlayLevelScreen extends Screen {
                 flagManager.setFlag("level3Complete");
             }
         }
+        if (worldNum == 34){
+            if (flagManager.isFlagSet("hasTalkedToCEO") && flagManager.isFlagSet("level1Complete") && flagManager.isFlagSet("level2Complete") && flagManager.isFlagSet("level3Complete")){
+                flagManager.setFlag("worldThreeComplete");
+            }
+        }
 
         // **OLD TEST MAP CODE**
         if (flagManager.isFlagSet("hasFoundBall")) {
