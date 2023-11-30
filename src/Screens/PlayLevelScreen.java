@@ -137,6 +137,11 @@ public class PlayLevelScreen extends Screen {
             }
         }
 
+        if (worldNum == 2){
+            if (flagManager.isFlagSet("hasFinishedAmazon") && flagManager.isFlagSet("hasFinishedApple") && flagManager.isFlagSet("hasFinishedSpotify") && flagManager.isFlagSet("hasFinishedStarbucks")){
+                flagManager.setFlag("worldTwoComplete");
+            }
+        }
         
         if (worldNum == 31){
             if (flagManager.isFlagSet("w3f1CuredNPC1") && flagManager.isFlagSet("w3f1CuredNPC2")){
@@ -159,9 +164,11 @@ public class PlayLevelScreen extends Screen {
             }
         }
 
+        
         // **OLD TEST MAP CODE**
-        if (flagManager.isFlagSet("hasFoundBall")) {
+        if (flagManager.isFlagSet("gameComplete")) {
             playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
+            
         }
     }
     // changes map if certain conditions are met
