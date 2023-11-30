@@ -2,8 +2,6 @@ package Maps;
 
 import java.util.ArrayList;
 
-import Game.Game;
-import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
 import Level.Textbox.Style;
@@ -39,7 +37,7 @@ public class W31Map extends Map {
     @Override
     public ArrayList<NPC> loadNPCs() {
         ArrayList<NPC> npcs = new ArrayList<>();
-      
+
         W3BlueTie blueTie = new W3BlueTie(1, getMapTile(2, 10).getLocation());
         blueTie.setInteractScript(new W3F1BlueTieScript());
         npcs.add(blueTie);

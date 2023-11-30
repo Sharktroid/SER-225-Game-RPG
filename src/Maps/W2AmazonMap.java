@@ -26,7 +26,7 @@ public class W2AmazonMap extends Map {
     @Override
     public void setupMap() {
         super.setupMap();
-        SoundPlayer.playMusic(MusicTracks.SHOP);
+        SoundPlayer.playMusic(MusicTracks.MAZE);
     }
 
     @Override

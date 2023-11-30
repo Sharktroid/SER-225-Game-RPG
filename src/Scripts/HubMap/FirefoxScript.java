@@ -18,18 +18,14 @@ public class FirefoxScript extends Script<NPC> {
         setTextboxStyle(Style.HUBWORLD);
         setNPCName("Firefox");
         showTextbox();
+        SoundPlayer.playMusic(MusicTracks.FIREFOXDIALOGUE);
 
         if (!isFlagSet("hasTalkedToFirefox0")) {
             if (sequence == 0) {
-            SoundPlayer.playMusic(MusicTracks.FIREFOXDIALOGUE);
                 setNPCName("Firefox");
                 addTextToTextboxQueue("My orb! Where did it go?");
                 addTextToTextboxQueue("You! Do you know where my orb went?");
             } else if (sequence == 1) {
-                setNPCName("T");
-                addTextToTextboxQueue("Is this... the Firefox?");
-                addTextToTextboxQueue("I thought it was only a myth. What is it doing here?");
-                addTextToTextboxQueue("No, I have no idea where your orb went.");
             }
         } else if (!isFlagSet("hasTalkedToFirefox1")) {
             if (!isFlagSet("worldOneComplete")) {
@@ -102,10 +98,13 @@ public class FirefoxScript extends Script<NPC> {
             if (sequence == 0) {
                 start();
                 if (isTextboxQueueEmpty()) {
-                    end();
+                    setNPCName("T");
+                    addTextToTextboxQueue("Is this... the Firefox?");
+                    addTextToTextboxQueue("I thought it was only a myth. What is it doing here?");
+                    addTextToTextboxQueue("No, I have no idea where your orb went.");
+                    sequence++;
                 }
             } else if (sequence == 1) {
-                start();
                 if (isTextboxQueueEmpty()) {
                     end();
                 }

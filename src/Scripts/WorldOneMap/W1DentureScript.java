@@ -14,7 +14,7 @@ public class W1DentureScript extends BasicItemScript {
 
     @Override
     protected void onPickup() {
-        SoundPlayer.playSoundEffect(SoundEffects.FRAGMENTGET);
+        SoundPlayer.playSoundEffect(SoundEffects.ITEMGET);
         addTextToTextboxQueue(String.format("You found a %s!", item.getName()));
         setFlag("hasFoundDentures");
     }

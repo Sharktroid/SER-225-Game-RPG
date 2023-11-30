@@ -53,51 +53,50 @@ public class SoundPlayer {
         LIBRARY,
         WORLDTWO,
         WORLDTHREE,
-        SHOP;
+        SHOP,
+        MAZE;
 
         @Override
         public String toString() {
-            switch (getInternalName()) {
-                case "BATTLE":
+            switch (this) {
+                case BATTLE:
                     return "Battle 1";
-                case "WORLDONE":
+                case WORLDONE:
                     return "Onett Theme";
-                case "TITLE":
+                case TITLE:
                     return "AM2R Title";
-                case "INTRO":
+                case INTRO:
                     return "Theme of Super Metroid";
-                case "HUBMAP":
+                case HUBMAP:
                     return "Item Room";
-                case "FIREFOXDIALOGUE":
+                case FIREFOXDIALOGUE:
                     return "Prologue ~ Mina's Theme";
-                case "DIALOGUE":
+                case DIALOGUE:
                     return "Decision 1";
-                case "LIBRARY":
+                case LIBRARY:
                     return "Save the Miners!";
-                case "WORLDTWO":
+                case WORLDTWO:
                     return "Castelia City";
-                case "SHOP":
+                case SHOP:
                     return "Buy Somethin' Will Ya!";
-                case "WORLDTHREE":
-                    return "Ascent";
+                case MAZE:
+                    return "Forlorn Descent";
+                case WORLDTHREE:
+                    return "Bad Situation";
                 default:
                     return null;
             }
         }
 
         public Boolean hasIntro() {
-            switch (getInternalName()) {
-                case "BATTLE":
-                case "INTRO":
-                case "WORLDTHREE":
+            switch (this) {
+                case BATTLE:
+                case INTRO:
+                case WORLDTHREE:
                     return true;
                 default:
                     return false;
             }
-        }
-
-        private String getInternalName() {
-            return super.toString();
         }
     }
 
