@@ -6,11 +6,7 @@ import Level.NPC;
 import Level.Script;
 import Level.ScriptState;
 import Level.Textbox.Style;
-// import Builders.FrameBuilder;
-// import Builders.MapTileBuilder;
-// import GameObject.Frame;
 import Utils.Direction;
-// import Utils.Point;
 
 // old man
 public class W1OldManJenksScript extends Script<NPC> {
@@ -26,161 +22,240 @@ public class W1OldManJenksScript extends Script<NPC> {
 
         setTextboxStyle(Style.WORLDONE);
         setNPCName("Old Man Jenkins");
-        showTextbox();
+        // showTextbox();
 
-        String[] selections = { "Where am I?", "Have you seen a purple\norb around here?" };
-        String[] answersBefore = { "A can til yo if yo can fin ma den-ers", "A can til yo if yo can fin ma den-ers" };
-        String[] answers = { "This is Bliss.", "Purple orb?" };
+        String[] selections = {"Where am I?", "Have you seen a purple\norb around here?"};
+        String[] answersBefore = {"A can til yo if yo can fin ma den-ers","A can til yo if yo can fin ma den-ers"};
+        String[] answers = {"This is Bliss. Well, it was bliss before a huge earthquake hit and this portal opened up.", "Purple orb?"};
 
         entity.facePlayer(player);
-
         if (!isFlagSet("hasTalkedToOMJ") && !isFlagSet("hasFoundDentures")) {
-            addTextToTextboxQueue("Hewlo?", selections, answersBefore);
-        } else if (isFlagSet("hasFoundDentures")) {
-            addTextToTextboxQueue("You found them! Thank you!", selections, answers);
-        } else {
+            showTextbox();
+            if (sequence == 0) {
+                addTextToTextboxQueue("Hewlo?", selections, answersBefore);
+            } else if (sequence == 1) {
+               setNPCName("T");
+               addTextToTextboxQueue("Dentures? Find your dentures?");
+            } else if (sequence == 2) {
+                setNPCName("Old Man Jenkins");
+                addTextToTextboxQueue("Yeh! Den-ers!");
+            }
+        }else if (isFlagSet("hasTalkedToOMJ") && !isFlagSet("hasFoundDentures")){
+            showTextbox(); 
             addTextToTextboxQueue("Yo hav-nt fin em yet? Go!");
+        } else if (isFlagSet("hasFoundDentures")) {
+            if (sequence == 0) {
+                showTextbox();
+                addTextToTextboxQueue("You found them! Thank you!", selections, answers);
+            } else if (sequence == 1) {
+                showTextbox();
+                if (responseNum == 0) {
+                    if (miniSequence == 0) {
+                        addTextToTextboxQueue("Well, it was bliss before a huge earthquake hit and this\nportal opened up.");
+                        addTextToTextboxQueue("What's your purpose for coming here?");
+                    } else if (miniSequence == 1) {
+                        setNPCName("T");
+                        addTextToTextboxQueue("I'm trying to find a purple orb. Have you seen it?");
+                    } else if (miniSequence == 2) {
+                        setNPCName("Old Man Jenkins");
+                        addTextToTextboxQueue(answers[1]);
+                    }
+                }
+                addTextToTextboxQueue("It might not be an orb, but I did find this purple shard on\nthe ground.");
+                addTextToTextboxQueue("It was right near the portal you came out of.");
+                addTextToTextboxQueue("Since you were so kind to find me my dentures, I can\ngive it to you.");
+            } else if (sequence == 2) {
+                showTextbox();
+                setNPCName("T");
+                addTextToTextboxQueue("Thank you, sir!");
+            } else if (sequence == 3) {
+                showTextbox();
+                SoundPlayer.playMusic(MusicTracks.DIALOGUE);
+                setNPCName("Old Man Jenkins");
+                addTextToTextboxQueue("Now... before you venture off, just beware that people\nare starting to act weird around here...");
+            } else if (sequence == 4) {
+                showTextbox();
+                setNPCName("T");
+                addTextToTextboxQueue("Strange? What do you mean?");
+            } else if (sequence == 5) {
+                showTextbox();
+                setNPCName("Old Man Jenkins");
+                addTextToTextboxQueue("I have to head inside before they get me too...");
+            } else if (sequence == 6) {
+                entity.stand(Direction.LEFT);
+                amountMoved = 0;
+            } else if (sequence == 7) {
+                amountMoved = 0;
+            } else if (sequence == 8) {
+                amountMoved = 0;
+            } else if (sequence == 9) {
+                amountMoved = 0;
+            } else if (sequence == 10) {
+                amountMoved = 0;
+                SoundPlayer.playMusic(MusicTracks.WORLDONE);
+            }
+            
         }
-
+        
     }
+
+
+
 
     @Override
     protected void cleanup() {
         unlockPlayer();
         hideTextbox();
-        if (!isFlagSet("hasTalkedToOMJ") && !isFlagSet("hasFoundDentures")) {
-            setFlag("hasTalkedToOMJ");
-            setFlag("hasFoundDentures"); // get rid later
-            sequence = 0;
-        } else if (isFlagSet("hasFoundDentures")) {
-            entity.setIsHidden(true);
-            setFlag("hasFinishedOMJ");
-            SoundPlayer.playMusic(MusicTracks.WORLDONE);
-        }
 
+        if ((!isFlagSet("hasTalkedToOMJ") && !isFlagSet("hasFoundDentures"))) {
+            if (sequence == 0) {
+                sequence++;
+            } else if (sequence == 1) {
+                sequence++;
+            } else if (sequence == 2) {
+                setFlag("hasTalkedToOMJ");
+                sequence=0;
+            }
+        }
+        else if(isFlagSet("hasTalkedToOMJ") && !isFlagSet("hasFoundDentures")){
+            
+        //nothing
+        } else if (isFlagSet("hasFoundDentures")) {
+            if (sequence == 0) {
+                responseNum = getChoice();
+                sequence++;
+            } else if (sequence == 1) {
+                if (miniSequence == 0) {
+                    miniSequence++;
+                } else if (miniSequence == 1) {
+                    miniSequence++;
+                } else if (miniSequence == 2) {
+                    miniSequence++;
+                }
+                sequence++;
+            } else if (sequence == 2) {
+                sequence++;
+            } else if (sequence == 3) {
+                sequence++;
+            } else if (sequence == 4) {
+                sequence++;
+            } else if (sequence == 5) {
+                hideTextbox();
+                sequence++;
+            } else if (sequence == 6) {
+                sequence++;
+            } else if (sequence == 7) {
+                sequence++;
+            } else if (sequence == 8) {
+                sequence++;
+            } else if (sequence == 9) {
+                sequence++;
+            } else if (sequence == 10) {
+                entity.setIsHidden(true);
+                setFlag("hasFinishedOMJ");
+                sequence++;
+            }
+        }
+    
     }
 
     @Override
     public ScriptState execute() {
-        start();
         if (!isFlagSet("hasTalkedToOMJ")) {
             if (sequence == 0) {
+                start();
                 if (isTextboxQueueEmpty()) {
-                    setNPCName("T");
-                    addTextToTextboxQueue("Dentures? Find your dentures?");
-                    sequence++;
+                    end();
                 }
             } else if (sequence == 1) {
+                start();
                 if (isTextboxQueueEmpty()) {
-                    setNPCName("Old Man Jenkins");
-                    addTextToTextboxQueue("Yeh! Den-ers!");
-                    sequence++;
+                    end();
                 }
             } else if (sequence == 2) {
+                start();
                 if (isTextboxQueueEmpty()) {
                     end();
                     return ScriptState.COMPLETED;
                 }
             }
+            return ScriptState.RUNNING;
+        }else if (isFlagSet("hasTalkedToOMJ") && !isFlagSet("hasFoundDentures")) {
+            start();
+            if (!isTextboxQueueEmpty()) {
+                return ScriptState.RUNNING;
+            }
+            end();
+            return ScriptState.COMPLETED;
         } else if (isFlagSet("hasFoundDentures")) {
             if (sequence == 0) {
+                start();
                 if (isTextboxQueueEmpty()) {
-                    miniSequence = getChoice();
-                    sequence++;
-                    SoundPlayer.playMusic(MusicTracks.DIALOGUE);
-                    if (miniSequence == 0) {
-                        setNPCName("Old Man Jenkins");
-                        addTextToTextboxQueue(
-                                "Well, it was bliss before a huge earthquake hit and this\nportal opened up.");
-                        addTextToTextboxQueue("What's your purpose for coming here?");
-                        miniSequence++;
-                    }
+                    end();
                 }
             } else if (sequence == 1) {
+                start();
                 if (isTextboxQueueEmpty()) {
-                    if (miniSequence == 1) {
-                        setNPCName("T");
-                        addTextToTextboxQueue("I'm trying to find a purple orb. Have you seen it?");
-                        miniSequence++;
-                    } else if (miniSequence == 2) {
-                        setNPCName("Old Man Jenkins");
-                        addTextToTextboxQueue(
-                                "It might not be an orb, but I did find this purple shard on\nthe ground.");
-                        addTextToTextboxQueue("It was right near the portal you came out of.");
-                        addTextToTextboxQueue("Since you were so kind to find me my dentures, I can\ngive it to you.");
-                        miniSequence++;
-                    } else {
-                        setNPCName("T");
-                        addTextToTextboxQueue("Thank you, sir!");
-                        sequence++;
-                    }
+                    end();
                 }
             } else if (sequence == 2) {
                 start();
                 if (isTextboxQueueEmpty()) {
-                    setNPCName("T");
-                    addTextToTextboxQueue("Strange? What do you mean?");
-                    sequence++;
+                    end();
                 }
             } else if (sequence == 3) {
                 start();
                 if (isTextboxQueueEmpty()) {
-                    setNPCName("Old Man Jenkins");
-                    addTextToTextboxQueue(
-                            "Now... before you venture off, just beware that people\nare starting to act weird around here...");
-                    sequence++;
+                    end();
                 }
             } else if (sequence == 4) {
                 start();
                 if (isTextboxQueueEmpty()) {
-                    setNPCName("Old Man Jenkins");
-                    addTextToTextboxQueue("I have to head inside before they get me too...");
-                    sequence++;
+                    end();
                 }
             } else if (sequence == 5) {
                 start();
                 if (isTextboxQueueEmpty()) {
-                    hideTextbox();
-                    sequence++;
-                    entity.stand(Direction.LEFT);
+                    end();
                 }
             } else if (sequence == 6) {
-                entity.walk(Direction.DOWN, 2);
+                start();
+                entity.walk(Direction.DOWN,2);
                 amountMoved += 2;
                 if (amountMoved == 40) {
-                    amountMoved = 0;
-                    sequence++;
+                    end();
                 }
             } else if (sequence == 7) {
-                entity.walk(Direction.LEFT, 2);
+                start();
+                entity.walk(Direction.LEFT,2);
                 amountMoved += 2;
                 if (amountMoved == 140) {
-                    amountMoved = 0;
-                    sequence++;
+                    end();
                 }
             } else if (sequence == 8) {
-                entity.walk(Direction.DOWN, 2);
+                start();
+                entity.walk(Direction.DOWN,2);
                 amountMoved += 2;
                 if (amountMoved == 120) {
-                    amountMoved = 0;
-                    sequence++;
+                    end();
                 }
             } else if (sequence == 9) {
-                entity.walk(Direction.LEFT, 2);
+                start();
+                entity.walk(Direction.LEFT,2);
                 amountMoved += 2;
                 if (amountMoved == 206) {
-                    amountMoved = 0;
-                    sequence++;
+                    end();
                 }
             } else if (sequence == 10) {
-                entity.walk(Direction.UP, 2);
+                start();
+                entity.walk(Direction.UP,2);
                 amountMoved += 2;
                 if (amountMoved == 100) {
                     end();
-                    return ScriptState.COMPLETED;
                 }
             }
+            return ScriptState.RUNNING;
         }
-        return ScriptState.RUNNING;
+        return ScriptState.COMPLETED;
     }
 }

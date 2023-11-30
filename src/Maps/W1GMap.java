@@ -6,6 +6,7 @@ import EnhancedMapTiles.ItemMapObject;
 import Game.SoundPlayer;
 import Game.SoundPlayer.MusicTracks;
 import Items.CatFood;
+import Items.Denture;
 import Items.Fragment;
 import Items.Medkit;
 import Level.EnhancedMapTile;
@@ -74,6 +75,11 @@ public class W1GMap extends Map {
         ItemMapObject fragment2 = new ItemMapObject(getMapTile(6, 3).getLocation(), new Fragment(null));
         fragment2.setInteractScript(new BasicFragmentScript());
         enhancedMapTiles.add(fragment2);
+
+        ItemMapObject denture = new ItemMapObject(getMapTile(6, 33).getLocation(), new Denture(null));
+        denture.setInteractScript(new W1DentureScript());
+        enhancedMapTiles.add(denture);
+        
 
         return enhancedMapTiles;
     }

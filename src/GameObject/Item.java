@@ -16,8 +16,8 @@ public abstract class Item {
     protected Boolean consumable = true;
     public Player player;
     protected BufferedImage sprite;
-    protected int spriteWidth = 16;
-    protected int spriteHeight = 16;
+    protected int spriteWidth = 24;
+    protected int spriteHeight = 24;
 
     public Item(Player player) {
         this.player = player;
