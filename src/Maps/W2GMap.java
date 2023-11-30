@@ -17,10 +17,12 @@ import Scripts.WorldTwoMap.W2OrangeScript;
 import Scripts.WorldTwoMap.W2PurpleScript;
 import Scripts.WorldTwoMap.W2RedScript;
 import Scripts.WorldTwoMap.W2YellowScript;
+import Scripts.WorldTwoMap.WorldTwoClearScript;
 import Level.Trigger;
 import NPCs.W2PB4;
 import NPCs.W2PB5;
 import Screens.PlayLevelScreen;
+import Scripts.WorldThreeMap.WorldThreeClearScript;
 import Scripts.WorldTwoMap.EnterBuildingScript;
 import Scripts.WorldTwoMap.W2PB4Script;
 import Scripts.WorldTwoMap.W2PB5Script;
@@ -32,7 +34,7 @@ public class W2GMap extends Map {
         if (PlayLevelScreen.getFlagManager() == null) {
             this.playerStartPosition = getMapTile(0, 0).getLocation();
         }else if (!PlayLevelScreen.getFlagManager().isFlagSet("wentOutOfBuilding1") && !PlayLevelScreen.getFlagManager().isFlagSet("wentOutOfBuilding2") && !PlayLevelScreen.getFlagManager().isFlagSet("wentOutOfBuilding3") && !PlayLevelScreen.getFlagManager().isFlagSet("wentOutOfBuilding4")) {
-            this.playerStartPosition = getMapTile(0, 7).getLocation();
+            this.playerStartPosition = getMapTile(1, 7).getLocation();
         } else if (PlayLevelScreen.getFlagManager().isFlagSet("wentOutOfBuilding1")) {
             this.playerStartPosition = getMapTile(8, 7).getLocation().adjustXY(-12, -12);
         } else if (PlayLevelScreen.getFlagManager().isFlagSet("wentOutOfBuilding2")) {
@@ -100,6 +102,7 @@ public class W2GMap extends Map {
         triggers.add(new Trigger(1248, 288, 96, 36, new EnterBuildingScript(2)));
         triggers.add(new Trigger(2640, 288, 96, 36, new EnterBuildingScript(3)));
         triggers.add(new Trigger(2112, 288, 96, 36, new EnterBuildingScript(4)));
+        triggers.add(new Trigger(0, 336, 48, 48, new WorldTwoClearScript()));
 
         return triggers;
     }

@@ -13,6 +13,7 @@ import Scripts.WorldTwoMap.W2FrontDeskScript;
 import Scripts.WorldTwoMap.W2WarehouseGuyScript;
 import Level.Trigger;
 import Scripts.WorldTwoMap.ExitBuildingScript;
+import Scripts.WorldTwoMap.W2UnlockAmznMazeScript;
 import Tilesets.SafariTileset;
 
 public class W2AmazonMap extends Map {
@@ -47,6 +48,7 @@ public class W2AmazonMap extends Map {
     public ArrayList<Trigger> loadTriggers() {
         ArrayList<Trigger> triggers = new ArrayList<>();
         triggers.add(new Trigger(912, 2376, 96, 24, new ExitBuildingScript(1)));
+        triggers.add(new Trigger(1248, 1788, 96, 24, new W2UnlockAmznMazeScript()));
 
         return triggers;
     }

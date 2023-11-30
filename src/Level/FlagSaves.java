@@ -161,6 +161,9 @@ public class FlagSaves {
         flagManager.addFlag("hasTalkedToOutsideGuy", false, true);
 
 
+        //other
+        flagManager.addFlag("gameComplete", true, true);
+
 
         // test world flags
 

@@ -12,7 +12,7 @@ public class W3CEOScript extends Script<NPC> {
         lockPlayer();
 
         setTextboxStyle(Style.WORLDTHREE);
-        setNPCName("Finder");
+        setNPCName("Employee");
         showTextbox();
 
         // entity.facePlayer(player);

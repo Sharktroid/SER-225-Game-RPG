@@ -448,7 +448,7 @@ public class SafariTileset extends Tileset{
             };
     
             MapTileBuilder portalTile = new MapTileBuilder(portalFrames)
-                    .withTileType(TileType.NOT_PASSABLE);
+                    .withTileType(TileType.PASSABLE);
     
             mapTiles.add(portalTile);
 
