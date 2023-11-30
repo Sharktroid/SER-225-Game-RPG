@@ -38,14 +38,14 @@ public class W1Infected5 extends NPC {
             put("STAND_LEFT", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(4, 0))
                             .withScale(3)
-                            .withBounds(7, 0, 11, 20)
+                            .withBounds(1, 0, 22, 20)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                             .build()
             });
             put("STAND_RIGHT", new Frame[] {
                    new FrameBuilder(spriteSheet.getSprite(4, 0))
                            .withScale(3)
-                           .withBounds(7, 0, 11, 20)
+                           .withBounds(1, 0, 22, 20)
                            .build()
            });
         }};

@@ -8,7 +8,6 @@ import GameObject.ImageEffect;
 import GameObject.SpriteSheet;
 import Level.NPC;
 import Level.Player;
-import Screens.PlayLevelScreen;
 import SpriteFont.SpriteFont;
 import Utils.Point;
 import Utils.Direction;
@@ -62,27 +61,27 @@ public class W1Infected1 extends NPC {
             put("STAND_LEFT", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(0, 0))
                             .withScale(3)
-                            .withBounds(7, 0, 11, 20)
+                            .withBounds(6, 0, 13, 20)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                             .build()
             });
             put("STAND_RIGHT", new Frame[] {
                    new FrameBuilder(spriteSheet.getSprite(0, 0))
                            .withScale(3)
-                           .withBounds(7, 0, 11, 20)
+                           .withBounds(6, 0, 13, 20)
                            .build()
            });
            put("INFECTED_STAND_LEFT", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(0, 1))
                             .withScale(3)
-                            .withBounds(7, 0, 11, 20)
+                            .withBounds(6, 0, 13, 20)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                             .build()
             });
             put("INFECTED_STAND_RIGHT", new Frame[] {
                    new FrameBuilder(spriteSheet.getSprite(0, 1))
                            .withScale(3)
-                           .withBounds(7, 0, 11, 20)
+                           .withBounds(6, 0, 12, 20)
                            .build()
            });
         }};
