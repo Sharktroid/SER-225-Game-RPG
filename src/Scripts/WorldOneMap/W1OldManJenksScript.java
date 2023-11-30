@@ -50,7 +50,7 @@ public class W1OldManJenksScript extends Script<NPC> {
         hideTextbox();
         if (!isFlagSet("hasTalkedToOMJ") && !isFlagSet("hasFoundDentures")) {
             setFlag("hasTalkedToOMJ");
-            setFlag("hasFoundDentures"); // get rid later
+            // setFlag("hasFoundDentures"); // get rid later
             sequence = 0;
         } else if (isFlagSet("hasFoundDentures")) {
             entity.setIsHidden(true);
