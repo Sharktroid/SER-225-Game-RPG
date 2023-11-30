@@ -51,6 +51,29 @@ public class W2StarbucksEmployee extends NPC {
                            .withBounds(4, 0, 17, 20)
                            .build()
            });
+
+           put("WALK_LEFT", new Frame[] {
+                    new FrameBuilder(spriteSheet.getSprite(0, 0),14)
+                            .withScale(3)
+                            .withBounds(4, 0, 17, 20)
+                            .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                            .build(),
+                    new FrameBuilder(spriteSheet.getSprite(0, 0),14)
+                            .withScale(3)
+                            .withBounds(4, 0, 17, 20)
+                            .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                            .build()
+            });
+            put("WALK_RIGHT", new Frame[] {
+                   new FrameBuilder(spriteSheet.getSprite(0, 0),14)
+                           .withScale(3)
+                           .withBounds(4, 0, 17, 20)
+                           .build(),
+                    new FrameBuilder(spriteSheet.getSprite(0, 0),14)
+                           .withScale(3)
+                           .withBounds(4, 0, 17, 20)
+                           .build()
+           });
         }};
     }
 

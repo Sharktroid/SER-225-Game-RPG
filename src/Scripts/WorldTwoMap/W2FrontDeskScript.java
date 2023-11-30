@@ -51,7 +51,14 @@ public class W2FrontDeskScript extends Script<NPC> {
     protected void cleanup() {
         unlockPlayer();
         hideTextbox();
-        //NEED TO DO
+        if (!isFlagSet("w2TalkedToFrontDesk") && !isFlagSet("w2FoundFrag2")) {
+            if (sequence < 3) {
+                sequence++;
+            } else if (sequence == 3) {
+                setFlag("w2TalkedToFrontDesk");
+                sequence++;
+            }
+        }
     }
 
 

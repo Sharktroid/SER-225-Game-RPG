@@ -13,12 +13,12 @@ import Utils.Point;
 
 import java.util.HashMap;
 
-public class W2Red extends NPC {
+public class W2GreenSB extends NPC {
     protected boolean isInteracting = false;
     protected SpriteFont playGame;
 
-    public W2Red(int id, Point location) {
-        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("safariNPC/Red.png"), 25, 25), "STAND_LEFT");
+    public W2GreenSB(int id, Point location) {
+        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("safariNPC/Green.png"), 25, 25), "STAND_LEFT");
     }
 
 
@@ -58,6 +58,16 @@ public class W2Red extends NPC {
     public void draw(GraphicsHandler graphicsHandler) {
         super.draw(graphicsHandler);
 
+        // if (isInteracting == true)
+        // {
+        //     graphicsHandler.drawFilledRectangle(getCalibratedXLocation()+10, getCalibratedYLocation()-22,54,19, java.awt.Color.black);
+        //     playGame = new SpriteFont("...", getCalibratedXLocation()+27, getCalibratedYLocation()-30, "Comic Sans", 20, java.awt.Color.black);
+
+
+        //     //textbox.draw(graphicsHandler);
+        //     graphicsHandler.drawFilledRectangle(getCalibratedXLocation()+12, getCalibratedYLocation()-20,50,15, java.awt.Color.white);
+        //     playGame.draw(graphicsHandler);
+        // }
     }
 }
 
