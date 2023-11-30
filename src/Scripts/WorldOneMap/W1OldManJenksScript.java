@@ -41,13 +41,14 @@ public class W1OldManJenksScript extends Script<NPC> {
                 addTextToTextboxQueue("Yeh! Den-ers!");
             }
         }else if (isFlagSet("hasTalkedToOMJ") && !isFlagSet("hasFoundDentures")){
-            showTextbox(); 
+            showTextbox();
             addTextToTextboxQueue("Yo hav-nt fin em yet? Go!");
         } else if (isFlagSet("hasFoundDentures")) {
             if (sequence == 0) {
                 showTextbox();
                 addTextToTextboxQueue("You found them! Thank you!", selections, answers);
             } else if (sequence == 1) {
+                SoundPlayer.playMusic(MusicTracks.DIALOGUE);
                 showTextbox();
                 if (responseNum == 0) {
                     if (miniSequence == 0) {
@@ -70,7 +71,6 @@ public class W1OldManJenksScript extends Script<NPC> {
                 addTextToTextboxQueue("Thank you, sir!");
             } else if (sequence == 3) {
                 showTextbox();
-                SoundPlayer.playMusic(MusicTracks.DIALOGUE);
                 setNPCName("Old Man Jenkins");
                 addTextToTextboxQueue("Now... before you venture off, just beware that people\nare starting to act weird around here...");
             } else if (sequence == 4) {
@@ -92,11 +92,10 @@ public class W1OldManJenksScript extends Script<NPC> {
                 amountMoved = 0;
             } else if (sequence == 10) {
                 amountMoved = 0;
-                SoundPlayer.playMusic(MusicTracks.WORLDONE);
             }
-            
+
         }
-        
+
     }
 
 
@@ -152,9 +151,10 @@ public class W1OldManJenksScript extends Script<NPC> {
                 entity.setIsHidden(true);
                 setFlag("hasFinishedOMJ");
                 sequence++;
+                SoundPlayer.playMusic(MusicTracks.WORLDONE);
             }
         }
-    
+
     }
 
     @Override
