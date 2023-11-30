@@ -122,6 +122,7 @@ public class FlagSaves {
         flagManager.addFlag("exitBuilding4", false, false);
         flagManager.addFlag("wentIntoBuilding4", false, true);
         flagManager.addFlag("wentOutOfBuilding4", false, true);
+        flagManager.addFlag("w2TalkedToSBEmployee", false, true);
 
         // test flags. **remove**
         flagManager.addFlag("hasTalkedToBeaver", false);
