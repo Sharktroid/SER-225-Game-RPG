@@ -37,7 +37,7 @@ public class W3GMap extends Map {
     @Override
     public void setupMap() {
         super.setupMap();
-        // SoundPlayer.playMusic(MusicTracks.WORLDTHREE);
+        SoundPlayer.playMusic(MusicTracks.WORLDTHREE);
     }
 
     @Override
