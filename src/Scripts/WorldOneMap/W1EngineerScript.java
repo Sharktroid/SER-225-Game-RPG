@@ -28,8 +28,7 @@ public class W1EngineerScript extends Script<NPC> {
         showTextbox();
 
         String[] selections = { "Sure!", "No way!" };
-        String[] answers = { "Thank you so much. I would do it but I have to tend to\nmy partner here...",
-                "Guess you aren't getting your orb piece..." };
+        String[] answers = { "Thank you so much. I would do it but I have to tend to\nmy partner here...","Guess you aren't getting your orb piece..." };
 
         if (!isFlagSet("hasFinishedOMJ")) {
             setNPCName(npcName);
@@ -46,12 +45,9 @@ public class W1EngineerScript extends Script<NPC> {
                 setNPCName(npcName);
                 addTextToTextboxQueue("Purple orb? I think I found a part of that.");
                 addTextToTextboxQueue("I could give it to you right now but I'm a little occupied...");
-                addTextToTextboxQueue(
-                        "There seems to be an infection that got in through our\nnetwork. They got my partner...");
+                addTextToTextboxQueue("There seems to be an infection that got in through our\nnetwork. They got my partner...");
             } else if (sequence == 3) {
-                addTextToTextboxQueue("I know you're not network security, but could you help\nus out?",
-                        selections,
-                        answers);
+                addTextToTextboxQueue("I know you're not network security, but could you help\nus out?",selections,answers);
             } else if (sequence == 4) {
                 if (this.getChoice() == 1) {
                     setNPCName(playerName);
@@ -59,8 +55,7 @@ public class W1EngineerScript extends Script<NPC> {
                 }
                 setNPCName(npcName);
                 addTextToTextboxQueue("Here's the file I've made on the security breach so far.");
-                addTextToTextboxQueue(
-                        "The viruses aren't apparent at first, so you'll have to\nuse this file to check if someone is infected.");
+                addTextToTextboxQueue("The viruses aren't apparent at first, so you'll have to\nuse this file to check if someone is infected.");
                 addTextToTextboxQueue("Also, here's some security tools to fight against the\nvirus.");
                 addTextToTextboxQueue("Come back to me once you've saved everyone.");
             }
@@ -71,12 +66,10 @@ public class W1EngineerScript extends Script<NPC> {
             setNPCName(npcName);
             addTextToTextboxQueue("You removed the virus from everyone? You saved our world.");
             addTextToTextboxQueue("Here is the shard you needed.");
-            addTextToTextboxQueue(
-                    "I've heard around that another shard crashed through the\nroof of the library when that earthquake happened.");
+            addTextToTextboxQueue("I've heard around that another shard crashed through the\nroof of the library when that earthquake happened.");
             addTextToTextboxQueue("Maybe go speak to the librarian about it.");
         } else {
-            addTextToTextboxQueue(
-                    "I've heard around that another shard crashed through the\nroof of the library when that earthquake happened.");
+            addTextToTextboxQueue("I've heard around that another shard crashed through the\nroof of the library when that earthquake happened.");
             addTextToTextboxQueue("Maybe go speak to the librarian about it.");
             addTextToTextboxQueue("Thank you again for saving our world.");
         }

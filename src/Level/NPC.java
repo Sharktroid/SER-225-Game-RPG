@@ -51,6 +51,17 @@ public class NPC extends MapEntity{
         }
     }
 
+    public Direction getFacingDirection(Player player){
+        if (Math.round(getBoundsX2()) - (getBounds().getWidth() / 2) < Math.round(player.getBoundsX2())) {
+            return Direction.RIGHT;
+        }
+        else if (Math.round(getBoundsX1()) + (getBounds().getWidth() / 2) > Math.round(player.getBoundsX1())) {
+            return Direction.LEFT;
+        }
+
+        return Direction.NONE; 
+    }
+
     public void stand(Direction direction) {
         if (direction == Direction.RIGHT) {
             this.currentAnimationName = "STAND_RIGHT";
