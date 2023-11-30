@@ -51,7 +51,7 @@ public class FlagSaves {
         flagManager.addFlag("hasFinishedOMJ", true, true);///FALSE
 
         // Virus quest
-        flagManager.addFlag("hasTalkedToNSE", true, true);///FALSE
+        flagManager.addFlag("hasTalkedToNSE", false, true);///FALSE
         flagManager.addFlag("hasFinishedNSE",false, true);
         flagManager.addFlag("hasScanner", false, true);
         flagManager.addFlag("hasRanVirusScanNPC1", false, true);
@@ -67,14 +67,11 @@ public class FlagSaves {
         flagManager.addFlag("w1Btl4",false, false);
         flagManager.addFlag("w1CuredNPC5", false, true);
         flagManager.addFlag("w1Btl5",false, false);
-        flagManager.addFlag("w1CuredAllNPCs", false, true);
-
-        flagManager.addFlag("initBtl", false, false);
+        flagManager.addFlag("w1CuredAllNPCs", true, true);
 
         // Library quest
-        flagManager.addFlag("hasTalkedToLibrarian", false, true);
-        flagManager.addFlag("scannedLibrarian", false, true);
-        //flagManager.addFlag("unlockedLibWindow", false, true);
+        flagManager.addFlag("hasTalkedToLibrarian", false, true);///FALSE
+        flagManager.addFlag("scannedLibrarian", false, true);///FALSE
         flagManager.addFlag("hasFinishedLib",false,true);
 
 
