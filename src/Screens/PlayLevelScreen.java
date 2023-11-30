@@ -10,6 +10,7 @@ import Game.ScreenCoordinator;
 import Level.*;
 import Maps.*;
 import Menus.InventoryMenu;
+import NPCs.W1Infected1;
 import Players.Cat;
 import Utils.Point;
 
@@ -90,7 +91,7 @@ public class PlayLevelScreen extends Screen {
             // if level is "running" update player and map to keep game logic for the level
             // going
             case RUNNING:
-                if (Keyboard.isKeyDown(Key.E) && !KeyLocker.isKeyLocked(Key.E) && !map.getTextbox().isActive()) {
+                if (Keyboard.isKeyDown(Key.E) && !KeyLocker.isKeyLocked(Key.E) && player.getPlayerState() != PlayerState.INTERACTING) {
                     inventory.setActive(!inventory.isActive());
                     KeyLocker.lockKey(Key.E);
 
@@ -141,7 +142,6 @@ public class PlayLevelScreen extends Screen {
             playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
         }
     }
-
     // changes map if certain conditions are met
     public void checkForTraversal() {
         // to world 1 overworld (internet explorer)

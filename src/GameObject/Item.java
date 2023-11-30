@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 
 public abstract class Item {
     protected String name;
-    protected String description = "What the hey is this?";
+    protected String description = "What the heck is this?";
     protected String useText = null; // If null item cannot be used
 
     protected Boolean battleUsable = false;

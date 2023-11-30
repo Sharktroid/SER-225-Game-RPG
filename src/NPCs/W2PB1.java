@@ -49,15 +49,15 @@ public class W2PB1 extends NPC {
         return new HashMap<String, Frame[]>() {{
             put("STAND_LEFT", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(0, 0))
-                            .withScale((float) 1)
-                            .withBounds(2, 0, 20, 20)
+                            .withScale((float) 1.5)
+                            .withBounds(2, 0, 30, 60)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                             .build()
             });
             put("STAND_RIGHT", new Frame[] {
                    new FrameBuilder(spriteSheet.getSprite(0, 0))
-                           .withScale((float) 1)
-                           .withBounds(2, 0, 20, 20)
+                           .withScale((float) 1.5)
+                           .withBounds(2, 0, 30, 60)
                            .build()
            });
         }};
@@ -70,8 +70,12 @@ public class W2PB1 extends NPC {
 
         if (isInteracting == true)
         {
-            playGame = new SpriteFont("ENTER", getCalibratedXLocation()+2, getCalibratedYLocation()-12, "Comic Sans", 15, Color.black);
-            graphicsHandler.drawFilledRectangle(getCalibratedXLocation(), getCalibratedYLocation()-10,50,15, java.awt.Color.white);
+            graphicsHandler.drawFilledRectangle(getCalibratedXLocation()-2, getCalibratedYLocation()-22,54,19, java.awt.Color.black);
+            playGame = new SpriteFont("...", getCalibratedXLocation()+15, getCalibratedYLocation()-30, "Comic Sans", 20, java.awt.Color.black);
+
+
+            //textbox.draw(graphicsHandler);
+            graphicsHandler.drawFilledRectangle(getCalibratedXLocation(), getCalibratedYLocation()-20,50,15, java.awt.Color.white);
             playGame.draw(graphicsHandler);
         }
 
