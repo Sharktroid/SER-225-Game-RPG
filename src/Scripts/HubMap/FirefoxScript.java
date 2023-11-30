@@ -87,11 +87,10 @@ public class FirefoxScript extends Script<NPC> {
                 setFlag("portalThreeUnlocked");
             }
 
-        } else if (!isFlagSet("hasTalkedToFirefox3") && isFlagSet("worldOneComplete")
-                && isFlagSet("worldTwoComplete") && isFlagSet("worldThreeComplete")) {
-            setFlag("hasTalkedToFirefox3");
-            
-
+        } else if (!isFlagSet("hasTalkedToFirefox3")) {
+            if (isFlagSet("woldThreeComplete")){
+                setFlag("hasTalkedToFirefox3");
+            }
         }else if (isFlagSet("hasTalkedToFirefox3")) {
             setFlag("gameComplete");
         }
