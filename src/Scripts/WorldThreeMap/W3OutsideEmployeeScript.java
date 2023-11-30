@@ -12,19 +12,21 @@ public class W3OutsideEmployeeScript extends Script<NPC> {
         lockPlayer();
 
         setTextboxStyle(Style.WORLDTHREE);
-        setNPCName("Employee");
         showTextbox();
 
         entity.facePlayer(player);
 
         if (!isFlagSet("hasTalkedToOutsideGuy")) {
-
-            addTextToTextboxQueue("welcome msg");
-        }
-
-        if (isFlagSet("hasTalkedToOutsideGuy")) {
-
-            addTextToTextboxQueue("go inside");
+            setNPCName("Employee");
+            addTextToTextboxQueue("PLEASE HELP! EVERYONE'S ACTING WEIRD INSIDE!!");
+            addTextToTextboxQueue("LIKE THEY'RE INFECTED OR SOMETHING!!");
+        } else if (isFlagSet("hasTalkedToOutsideGuy") ) {
+            setNPCName("Employee");
+            addTextToTextboxQueue("I'M SO SCARED!!!");
+        } else if (isFlagSet("hasTalkedToOutsideGuy") && isFlagSet("hasTalkedToCEO")) {
+            setNPCName("Employee");
+            addTextToTextboxQueue("You cured everyone? You're amazing!");
+            addTextToTextboxQueue("Thank you, stranger.");
         }
     }
 
@@ -32,7 +34,9 @@ public class W3OutsideEmployeeScript extends Script<NPC> {
     protected void cleanup() {
         unlockPlayer();
         hideTextbox();
-        setFlag("hasTalkedToOutsideGuy");
+        if (!isFlagSet("hasTalkedToOutsideGuy")) {
+            setFlag("hasTalkedToOutsideGuy");
+        }
     }
 
     @Override
