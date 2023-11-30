@@ -90,8 +90,10 @@ public class FirefoxScript extends Script<NPC> {
         } else if (!isFlagSet("hasTalkedToFirefox3") && isFlagSet("worldOneComplete")
                 && isFlagSet("worldTwoComplete") && isFlagSet("worldThreeComplete")) {
             setFlag("hasTalkedToFirefox3");
-            // WIN FLAG HERE
+            
 
+        }else if (isFlagSet("hasTalkedToFirefox3")) {
+            setFlag("gameComplete");
         }
     }
 
