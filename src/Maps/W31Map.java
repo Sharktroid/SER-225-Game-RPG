@@ -3,11 +3,16 @@ package Maps;
 import java.util.ArrayList;
 
 import Level.Map;
+import Level.NPC;
 import Level.Textbox.Style;
+import NPCs.World3.W3BlueTie;
+import NPCs.World3.W3DarkBlue;
 import Level.Trigger;
 import Screens.PlayLevelScreen;
 import Scripts.WorldThreeMap.DownLevelScript;
 import Scripts.WorldThreeMap.UpLevelScript;
+import Scripts.WorldThreeMap.W3F1BlueTieScript;
+import Scripts.WorldThreeMap.W3F1DarkBlueScript;
 import Tilesets.ChromeTileset;
 
 public class W31Map extends Map {
@@ -24,6 +29,21 @@ public class W31Map extends Map {
         }
 
         textbox.setStyle(Style.WORLDTHREE);
+    }
+
+    @Override
+    public ArrayList<NPC> loadNPCs() {
+        ArrayList<NPC> npcs = new ArrayList<>();
+      
+        W3BlueTie blueTie = new W3BlueTie(1, getMapTile(2, 10).getLocation());
+        blueTie.setInteractScript(new W3F1BlueTieScript());
+        npcs.add(blueTie);
+
+        W3DarkBlue darkBlue = new W3DarkBlue(2, getMapTile(10, 5).getLocation());
+        darkBlue.setInteractScript(new W3F1DarkBlueScript());
+        npcs.add(darkBlue);
+
+        return npcs;
     }
 
     @Override

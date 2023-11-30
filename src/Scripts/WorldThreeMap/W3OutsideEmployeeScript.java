@@ -6,17 +6,17 @@ import Level.ScriptState;
 import Level.Textbox.Style;
 
 
-public class W3CEOScript extends Script<NPC> {
+public class W3OutsideEmployeeScript extends Script<NPC> {
 
     @Override
     protected void setup() {
         lockPlayer();
 
         setTextboxStyle(Style.WORLDTHREE);
-        setNPCName("Finder");
+        setNPCName("Employee");
         showTextbox();
 
-        //entity.facePlayer(player);
+        entity.facePlayer(player);
 
         if (!isFlagSet("hasTalkedToBeaver")) {
 
