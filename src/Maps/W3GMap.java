@@ -5,9 +5,12 @@ import java.util.ArrayList;
 import Game.SoundPlayer;
 import Game.SoundPlayer.MusicTracks;
 import Level.Map;
+import Level.NPC;
 import Level.Textbox.Style;
+import NPCs.World3.W3OutsideEmployee;
 import Level.Trigger;
 import Scripts.WorldThreeMap.UpLevelScript;
+import Scripts.WorldThreeMap.W3OutsideEmployeeScript;
 import Tilesets.ChromeTileset;
 import Screens.PlayLevelScreen;
 
@@ -34,7 +37,18 @@ public class W3GMap extends Map {
     @Override
     public void setupMap() {
         super.setupMap();
-        SoundPlayer.playMusic(MusicTracks.WORLDTHREE);
+        // SoundPlayer.playMusic(MusicTracks.WORLDTHREE);
+    }
+
+    @Override
+    public ArrayList<NPC> loadNPCs() {
+        ArrayList<NPC> npcs = new ArrayList<>();
+      
+        W3OutsideEmployee outside = new W3OutsideEmployee(1, getMapTile(7, 8).getLocation());
+        outside.setInteractScript(new W3OutsideEmployeeScript());
+        npcs.add(outside);
+
+        return npcs;
     }
 
     @Override

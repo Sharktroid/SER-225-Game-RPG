@@ -8,6 +8,7 @@ import Game.SoundPlayer.MusicTracks;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
+import Level.Textbox.Style;
 import Level.Trigger;
 import Scripts.WorldOneMap.W1ExitLibraryScript;
 import Scripts.WorldOneMap.w1Frag3Script;
@@ -20,6 +21,7 @@ public class W1LibraryMap extends Map {
     public W1LibraryMap() {
         super("w1_library_map.txt", new InternetExplorerTileset(), 1);
         this.playerStartPosition = getMapTile(6, 1).getLocation().addX(20);
+        textbox.setStyle(Style.WORLDONE);
     }
 
     @Override

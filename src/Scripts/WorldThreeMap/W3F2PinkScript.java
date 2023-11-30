@@ -6,14 +6,14 @@ import Level.ScriptState;
 import Level.Textbox.Style;
 
 
-public class W3OutsideEmployee extends Script<NPC> {
+public class W3F2PinkScript extends Script<NPC> {
 
     @Override
     protected void setup() {
         lockPlayer();
 
-        setTextboxStyle(Style.WORLDTWO);
-        setNPCName("Finder");
+        setTextboxStyle(Style.WORLDTHREE);
+        setNPCName("Employee");
         showTextbox();
 
         //entity.facePlayer(player);

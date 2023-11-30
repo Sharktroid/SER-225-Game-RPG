@@ -18,16 +18,12 @@ import Scripts.WorldTwoMap.W2PurpleScript;
 import Scripts.WorldTwoMap.W2RedScript;
 import Scripts.WorldTwoMap.W2YellowScript;
 import Level.Trigger;
-//import NPCs.Finder1;
 import NPCs.W2PB4;
 import NPCs.W2PB5;
 import Screens.PlayLevelScreen;
 import Scripts.WorldTwoMap.EnterBuildingScript;
-//import Scripts.WorldTwoMap.Finder1Script;
 import Scripts.WorldTwoMap.W2PB4Script;
 import Scripts.WorldTwoMap.W2PB5Script;
-import Screens.PlayLevelScreen;
-import Scripts.WorldTwoMap.EnterBuildingScript;
 import Tilesets.SafariTileset;
 
 public class W2GMap extends Map {
@@ -60,10 +56,6 @@ public class W2GMap extends Map {
     @Override
     public ArrayList<NPC> loadNPCs() {
         ArrayList<NPC> npcs = new ArrayList<>();
-/* 
-        Finder1 finder1 = new Finder1(1, getMapTile(4, 4).getLocation().subtractY(40));
-        finder1.setInteractScript(new Finder1Script());
-        npcs.add(finder1); */
       
         //green
         W2Green green = new W2Green(1, getMapTile(20, 7).getLocation());

@@ -3,10 +3,13 @@ package Maps;
 import java.util.ArrayList;
 
 import Level.Map;
+import Level.NPC;
 import Level.Textbox.Style;
 import Level.Trigger;
+import NPCs.World3.W3CEO;
 import Screens.PlayLevelScreen;
 import Scripts.WorldThreeMap.DownLevelScript;
+import Scripts.WorldThreeMap.W3CEOScript;
 import Tilesets.ChromeTileset;
 
 public class W34Map extends Map {
@@ -21,6 +24,17 @@ public class W34Map extends Map {
         }
 
         textbox.setStyle(Style.WORLDTHREE);
+    }
+
+    @Override
+    public ArrayList<NPC> loadNPCs() {
+        ArrayList<NPC> npcs = new ArrayList<>();
+      
+        W3CEO ceo = new W3CEO(1, getMapTile(5, 4).getLocation());
+        ceo.setInteractScript(new W3CEOScript());
+        npcs.add(ceo);
+
+        return npcs;
     }
 
     @Override
