@@ -30,32 +30,42 @@ public class Firefox extends NPC {
 
     public void update(Player player) {
         super.update();
-        directionFacing = getFacingDirection(player);
+        // directionFacing = getFacingDirection(player);
+
+        // if (!PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox1") && !PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox2") && !PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox3")) {
+        //     if (directionFacing == Direction.RIGHT) {
+        //         this.currentAnimationName = "NO_ORB_RIGHT";
+        //     } else if (directionFacing == Direction.LEFT) {
+        //         this.currentAnimationName = "NO_ORB_LEFT";
+        //     }
+        // } else if (PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox1") && !PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox2") && !PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox3")) {
+        //     if (directionFacing == Direction.RIGHT) {
+        //         this.currentAnimationName = "LITTLE_ORB_RIGHT";
+        //     } else if (directionFacing == Direction.LEFT) {
+        //         this.currentAnimationName = "LITTLE_ORB_LEFT";
+        //     }
+        // } else if (PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox1") && PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox2") && !PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox3")) {
+        //     if (directionFacing == Direction.RIGHT) {
+        //         this.currentAnimationName = "MOST_ORB_RIGHT";
+        //     } else if (directionFacing == Direction.LEFT) {
+        //         this.currentAnimationName = "MOST_ORB_LEFT";
+        //     }
+        // } else if (PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox1") && PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox2") && PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox3")) {
+        //     if (directionFacing == Direction.RIGHT) {
+        //         this.currentAnimationName = "FULL_ORB_RIGHT";
+        //     } else if (directionFacing == Direction.LEFT) {
+        //         this.currentAnimationName = "FULL_ORB_LEFT";
+        //     }
+        // }
 
         if (!PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox1") && !PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox2") && !PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox3")) {
-            if (directionFacing == Direction.RIGHT) {
-                this.currentAnimationName = "NO_ORB_RIGHT";
-            } else if (directionFacing == Direction.LEFT) {
-                this.currentAnimationName = "NO_ORB_LEFT";
-            }
+            currentAnimationName = "NO_ORB_RIGHT";
         } else if (PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox1") && !PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox2") && !PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox3")) {
-            if (directionFacing == Direction.RIGHT) {
-                this.currentAnimationName = "LITTLE_ORB_RIGHT";
-            } else if (directionFacing == Direction.LEFT) {
-                this.currentAnimationName = "LITTLE_ORB_LEFT";
-            }
+            this.currentAnimationName = "LITTLE_ORB_RIGHT";
         } else if (PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox1") && PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox2") && !PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox3")) {
-            if (directionFacing == Direction.RIGHT) {
-                this.currentAnimationName = "MOST_ORB_RIGHT";
-            } else if (directionFacing == Direction.LEFT) {
-                this.currentAnimationName = "MOST_ORB_LEFT";
-            }
+            currentAnimationName = "MOST_ORB_RIGHT";
         } else if (PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox1") && PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox2") && PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox3")) {
-            if (directionFacing == Direction.RIGHT) {
-                this.currentAnimationName = "FULL_ORB_RIGHT";
-            } else if (directionFacing == Direction.LEFT) {
-                this.currentAnimationName = "FULL_ORB_LEFT";
-            }
+            currentAnimationName = "FULL_ORB_RIGHT";
         }
 
         //if player can talk to npc, textbox pops up
@@ -69,23 +79,37 @@ public class Firefox extends NPC {
 
     }
 
-    // public void facePlayer(Player player) {
-    //     if (map.getFlagManager().isFlagSet("hasTalkedToFirefox1")) {
-    //         if (Math.round(getBoundsX2()) - (getBounds().getWidth() / 2) < Math.round(player.getBoundsX2())) {
-    //             this.currentAnimationName = "LITTLE_ORB_RIGHT";
-    //         }
-    //         else if (Math.round(getBoundsX1()) + (getBounds().getWidth() / 2) > Math.round(player.getBoundsX1())) {
-    //             this.currentAnimationName = "LITTLE_ORB_LEFT";
-    //         }
-    //     } else {
-    //         if (Math.round(getBoundsX2()) - (getBounds().getWidth() / 2) < Math.round(player.getBoundsX2())) {
-    //             this.currentAnimationName = "NO_ORB_RIGHT";
-    //         }
-    //         else if (Math.round(getBoundsX1()) + (getBounds().getWidth() / 2) > Math.round(player.getBoundsX1())) {
-    //             this.currentAnimationName = "NO_ORB_LEFT";
-    //         }
-    //     }
-    // }
+    public void facePlayer(Player player) {
+        if (!PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox1") && !PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox2") && !PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox3")) {
+            if (Math.round(getBoundsX2()) - (getBounds().getWidth() / 2) < Math.round(player.getBoundsX2())) {
+                this.currentAnimationName = "NO_ORB_RIGHT";
+            }
+            else if (Math.round(getBoundsX1()) + (getBounds().getWidth() / 2) > Math.round(player.getBoundsX1())) {
+                this.currentAnimationName = "NO_ORB_LEFT";
+            }
+        } else if (PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox1") && !PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox2") && !PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox3")){
+            if (Math.round(getBoundsX2()) - (getBounds().getWidth() / 2) < Math.round(player.getBoundsX2())) {
+                this.currentAnimationName = "LITTLE_ORB_RIGHT";
+            }
+            else if (Math.round(getBoundsX1()) + (getBounds().getWidth() / 2) > Math.round(player.getBoundsX1())) {
+                this.currentAnimationName = "LITTLE_ORB_LEFT";
+            }
+        } else if (PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox1") && PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox2") && !PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox3")) {
+            if (Math.round(getBoundsX2()) - (getBounds().getWidth() / 2) < Math.round(player.getBoundsX2())) {
+                this.currentAnimationName = "MOST_ORB_RIGHT";
+            }
+            else if (Math.round(getBoundsX1()) + (getBounds().getWidth() / 2) > Math.round(player.getBoundsX1())) {
+                this.currentAnimationName = "MOST_ORB_LEFT";
+            }
+        } else if (PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox1") && PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox2") && PlayLevelScreen.getFlagManager().isFlagSet("hasTalkedToFirefox3")) {
+            if (Math.round(getBoundsX2()) - (getBounds().getWidth() / 2) < Math.round(player.getBoundsX2())) {
+                this.currentAnimationName = "FULL_ORB_RIGHT";
+            }
+            else if (Math.round(getBoundsX1()) + (getBounds().getWidth() / 2) > Math.round(player.getBoundsX1())) {
+                this.currentAnimationName = "FULL_ORB_LEFT";
+            }
+        }
+    }
 
     @Override
     public HashMap<String, Frame[]> loadAnimations(SpriteSheet spriteSheet) {

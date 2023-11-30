@@ -48,7 +48,7 @@ public class FlagSaves {
         // Dentures quest
         flagManager.addFlag("hasTalkedToOMJ", false, true);
         flagManager.addFlag("hasFoundDentures", false, true);
-        flagManager.addFlag("hasFinishedOMJ", true, true);///FALSE
+        flagManager.addFlag("hasFinishedOMJ", false, true);///FALSE
 
         // Virus quest
         flagManager.addFlag("hasTalkedToNSE", false, true);///FALSE
@@ -67,7 +67,7 @@ public class FlagSaves {
         flagManager.addFlag("w1Btl4",false, false);
         flagManager.addFlag("w1CuredNPC5", false, true);
         flagManager.addFlag("w1Btl5",false, false);
-        flagManager.addFlag("w1CuredAllNPCs", true, true);
+        flagManager.addFlag("w1CuredAllNPCs", false, true);
 
         // Library quest
         flagManager.addFlag("hasTalkedToLibrarian", false, true);///FALSE

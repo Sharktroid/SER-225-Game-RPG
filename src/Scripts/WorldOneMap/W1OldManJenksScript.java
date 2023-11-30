@@ -26,7 +26,7 @@ public class W1OldManJenksScript extends Script<NPC> {
 
         String[] selections = {"Where am I?", "Have you seen a purple\norb around here?"};
         String[] answersBefore = {"A can til yo if yo can fin ma den-ers","A can til yo if yo can fin ma den-ers"};
-        String[] answers = {"This is Bliss. Well, it was bliss before a huge earthquake hit and this portal opened up.", "Purple orb?"};
+        String[] answers = {"This is Bliss.", "Purple orb?"};
 
         entity.facePlayer(player);
         if (!isFlagSet("hasTalkedToOMJ") && !isFlagSet("hasFoundDentures")) {

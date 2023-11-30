@@ -56,7 +56,7 @@ public class FirefoxScript extends Script<NPC> {
         } else {
             addTextToTextboxQueue("Please help me find my orb!");
         }
-        entity.facePlayer(player);
+        // entity.facePlayer(player);
     }
 
     @Override
