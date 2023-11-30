@@ -15,7 +15,7 @@ public class HubMap extends Map {
 
     public HubMap() {
         super("hub_map.txt", new HubTileset(), 0);
-        this.playerStartPosition = getMapTile(8, 10).getLocation();
+        this.playerStartPosition = getMapTile(8, 9).getLocation();
     }
 
     @Override
@@ -42,7 +42,7 @@ public class HubMap extends Map {
         triggers.add(new Trigger(204, 108, 24, 24, new portalOneScript()));
         triggers.add(new Trigger(396, 108, 24, 24, new portalTwoScript()));
         triggers.add(new Trigger(588, 108, 24, 24, new portalThreeScript()));
-        //triggers.add(new Trigger(384, 336, 48, 48, new hubMsgScript(),"sawHubMsg"));
+        triggers.add(new Trigger(336, 504, 144, 48, new endGameScript()));
 
         return triggers;
     }

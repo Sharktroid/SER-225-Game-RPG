@@ -45,9 +45,10 @@ public class FirefoxScript extends Script<NPC> {
 
         } else if (!isFlagSet("hasTalkedToFirefox3")) {
             if (!isFlagSet("worldThreeComplete")) {
-                addTextToTextboxQueue("You've found the last of it! Thank you so much!");
+                addTextToTextboxQueue("Keep looking, theres only one more piece left.");
             }else{
-                addTextToTextboxQueue("kjfnksjfd");
+                addTextToTextboxQueue("You've found the last piece of my orb! Thank you so much!");
+                addTextToTextboxQueue("I will send you back to the real world since you've helped me so much!");
             }
         } else {
             addTextToTextboxQueue("Please help me find my orb!");
@@ -80,15 +81,14 @@ public class FirefoxScript extends Script<NPC> {
         } else if (!isFlagSet("hasTalkedToFirefox2")) {
             if(isFlagSet("worldTwoComplete")){
                 setFlag("hasTalkedToFirefox2");
-                setFlag("portalThreeUnlocked");
+                setFlag("unlockedPortal3");
             }
 
         } else if (!isFlagSet("hasTalkedToFirefox3")) {
-            if (isFlagSet("woldThreeComplete")){
+            if (isFlagSet("worldThreeComplete")){
                 setFlag("hasTalkedToFirefox3");
+                setFlag("gameComplete");
             }
-        }else if (isFlagSet("hasTalkedToFirefox3")) {
-            setFlag("gameComplete");
         }
     }
 

@@ -36,7 +36,7 @@ public class FlagSaves {
         // persistent: used to unlock portals in hub
         flagManager.addFlag("unlockedPortal1", false, true);
         flagManager.addFlag("unlockedPortal2", false, true);
-        flagManager.addFlag("unlockedPortal2", false, true);
+        flagManager.addFlag("unlockedPortal3", false, true);
 
         // persistent: used to tell if each world hasa been completed
         flagManager.addFlag("worldOneComplete", false, true);

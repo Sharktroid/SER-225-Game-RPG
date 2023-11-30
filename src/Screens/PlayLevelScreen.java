@@ -131,14 +131,14 @@ public class PlayLevelScreen extends Screen {
                 flagManager.setFlag("w1CuredAllNPCs");
             }
             if (flagManager.isFlagSet("hasFinishedOMJ") && flagManager.isFlagSet("hasFinishedNSE")
-                    && flagManager.isFlagSet("hasFinishedLib")
+                    && flagManager.isFlagSet("w1FoundFrag3")
                     && !flagManager.isFlagSet("worldOneComlete")) {
                 flagManager.setFlag("worldOneComplete");
             }
         }
 
         if (worldNum == 2){
-            if (flagManager.isFlagSet("hasFinishedAmazon") && flagManager.isFlagSet("hasFinishedApple") && flagManager.isFlagSet("hasFinishedSpotify") && flagManager.isFlagSet("hasFinishedStarbucks")){
+            if (flagManager.isFlagSet("w2FoundFrag1") && flagManager.isFlagSet("w2FoundFrag2") && flagManager.isFlagSet("w2FoundFrag3")){
                 flagManager.setFlag("worldTwoComplete");
             }
         }
@@ -165,10 +165,9 @@ public class PlayLevelScreen extends Screen {
         }
 
         
-        // **OLD TEST MAP CODE**
+        // game complete
         if (flagManager.isFlagSet("gameComplete")) {
-            playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
-            
+            this.playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
         }
     }
     // changes map if certain conditions are met
@@ -392,6 +391,8 @@ public class PlayLevelScreen extends Screen {
             flagManager.debugFlag("wentUpLevel");
             flagManager.debugFlag("wentDownLevel");
             System.out.println();
+        }else if (worldNum == 4){
+            flagManager.setFlag("gameComplete");
         }
     }
 

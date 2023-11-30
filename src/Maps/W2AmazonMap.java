@@ -2,8 +2,11 @@ package Maps;
 
 import java.util.ArrayList;
 
+import EnhancedMapTiles.ItemMapObject;
 import Game.SoundPlayer;
 import Game.SoundPlayer.MusicTracks;
+import Items.Fragment;
+import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
 import Level.Textbox.Style;
@@ -12,7 +15,9 @@ import NPCs.World2.W2WarehouseGuy;
 import Scripts.WorldTwoMap.W2FrontDeskScript;
 import Scripts.WorldTwoMap.W2WarehouseGuyScript;
 import Level.Trigger;
+import Scripts.WorldOneMap.w1Frag3Script;
 import Scripts.WorldTwoMap.ExitBuildingScript;
+import Scripts.WorldTwoMap.W2AmznFragScript;
 import Scripts.WorldTwoMap.W2UnlockAmznMazeScript;
 import Tilesets.SafariTileset;
 
@@ -27,6 +32,17 @@ public class W2AmazonMap extends Map {
     public void setupMap() {
         super.setupMap();
         SoundPlayer.playMusic(MusicTracks.MAZE);
+    }
+
+    @Override
+    public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
+        ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
+
+        ItemMapObject amznFragment = new ItemMapObject(getMapTile(7, 36).getLocation(), new Fragment(null));
+        amznFragment.setInteractScript(new W2AmznFragScript());
+        enhancedMapTiles.add(amznFragment);
+
+        return enhancedMapTiles;
     }
 
     @Override
