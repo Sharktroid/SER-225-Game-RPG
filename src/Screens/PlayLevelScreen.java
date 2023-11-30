@@ -10,6 +10,7 @@ import Game.ScreenCoordinator;
 import Level.*;
 import Maps.*;
 import Menus.InventoryMenu;
+import NPCs.W1Infected1;
 import Players.Cat;
 import Utils.Point;
 
@@ -141,7 +142,6 @@ public class PlayLevelScreen extends Screen {
             playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
         }
     }
-
     // changes map if certain conditions are met
     public void checkForTraversal() {
         // to world 1 overworld (internet explorer)

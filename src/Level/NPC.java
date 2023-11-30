@@ -43,12 +43,25 @@ public class NPC extends MapEntity{
     public int getId() { return id; }
 
     public void facePlayer(Player player) {
+
         if (Math.round(getBoundsX2()) - (getBounds().getWidth() / 2) < Math.round(player.getBoundsX2())) {
             this.currentAnimationName = "STAND_RIGHT";
         }
         else if (Math.round(getBoundsX1()) + (getBounds().getWidth() / 2) > Math.round(player.getBoundsX1())) {
             this.currentAnimationName = "STAND_LEFT";
         }
+    }
+
+    public Direction getFacingDirection(Player player){
+
+        if (Math.round(getBoundsX2()) - (getBounds().getWidth() / 2) < Math.round(player.getBoundsX2())) {
+            return Direction.RIGHT;
+        }
+        else if (Math.round(getBoundsX1()) + (getBounds().getWidth() / 2) > Math.round(player.getBoundsX1())) {
+            return Direction.LEFT;
+        }
+
+        return Direction.NONE; 
     }
 
     public void stand(Direction direction) {
@@ -88,6 +101,9 @@ public class NPC extends MapEntity{
             moveX(speed);
         }
     }
+
+    public void setAnimation(Direction direction, int frameNum) {};
+    
 
     public void update(Player player) {
         super.update();
