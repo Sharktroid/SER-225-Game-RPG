@@ -70,8 +70,12 @@ public class W2DJ extends NPC {
 
         if (isInteracting == true)
         {
-            playGame = new SpriteFont("ENTER", getCalibratedXLocation()+2, getCalibratedYLocation()-12, "Comic Sans", 15, Color.black);
-            graphicsHandler.drawFilledRectangle(getCalibratedXLocation(), getCalibratedYLocation()-10,50,15, java.awt.Color.white);
+            graphicsHandler.drawFilledRectangle(getCalibratedXLocation()-6, getCalibratedYLocation()-22,54,19, java.awt.Color.black);
+            playGame = new SpriteFont("...", getCalibratedXLocation()+9, getCalibratedYLocation()-30, "Comic Sans", 20, java.awt.Color.black);
+
+
+            //textbox.draw(graphicsHandler);
+            graphicsHandler.drawFilledRectangle(getCalibratedXLocation()-4, getCalibratedYLocation()-20,50,15, java.awt.Color.white);
             playGame.draw(graphicsHandler);
         }
 

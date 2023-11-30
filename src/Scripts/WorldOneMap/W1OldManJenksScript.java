@@ -106,7 +106,6 @@ public class W1OldManJenksScript extends Script<NPC> {
     protected void cleanup() {
         unlockPlayer();
         hideTextbox();
-
         if ((!isFlagSet("hasTalkedToOMJ") && !isFlagSet("hasFoundDentures"))) {
             if (sequence == 0) {
                 sequence++;
@@ -118,7 +117,6 @@ public class W1OldManJenksScript extends Script<NPC> {
             }
         }
         else if(isFlagSet("hasTalkedToOMJ") && !isFlagSet("hasFoundDentures")){
-            
         //nothing
         } else if (isFlagSet("hasFoundDentures")) {
             if (sequence == 0) {
