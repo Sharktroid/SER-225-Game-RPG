@@ -46,25 +46,25 @@ public class W1OldManJenks extends NPC {
             put("STAND_LEFT", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(0, 0))
                             .withScale(3)
-                            .withBounds(7, 0, 11, 20)
+                            .withBounds(6, 0, 13, 20)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                             .build()
             });
             put("STAND_RIGHT", new Frame[] {
                    new FrameBuilder(spriteSheet.getSprite(0, 0))
                            .withScale(3)
-                           .withBounds(7, 0, 11, 20)
+                           .withBounds(6, 0, 13, 20)
                            .build()
            });
 
             put("WALK_LEFT", new Frame[]{
                     new FrameBuilder(spriteSheet.getSprite(0, 0), 14)
                             .withScale(3)
-                            .withBounds(7, 0, 11, 20)
+                            .withBounds(6, 0, 13, 20)
                             .build(),
                     new FrameBuilder(spriteSheet.getSprite(0, 0), 14)
                             .withScale(3)
-                            .withBounds(7, 0, 11, 20)
+                            .withBounds(6, 0, 13, 20)
                             .build()
             });
 
@@ -72,12 +72,12 @@ public class W1OldManJenks extends NPC {
                     new FrameBuilder(spriteSheet.getSprite(0, 0), 14)
                             .withScale(3)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                            .withBounds(7, 0, 11, 20)
+                            .withBounds(6, 0, 13, 20)
                             .build(),
                     new FrameBuilder(spriteSheet.getSprite(0, 0), 14)
                             .withScale(3)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                            .withBounds(7, 0, 11, 20)
+                            .withBounds(6, 0, 13, 20)
                             .build()
             });
         }};

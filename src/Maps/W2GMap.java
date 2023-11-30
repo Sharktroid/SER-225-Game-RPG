@@ -84,7 +84,7 @@ public class W2GMap extends Map {
         yellow.setInteractScript(new W2YellowScript());
         npcs.add(yellow);
 
-         W2PB4 W2PB4 = new W2PB4(2, getMapTile(0, 0).getLocation().subtractY(40));
+        W2PB4 W2PB4 = new W2PB4(2, getMapTile(0, 0).getLocation().subtractY(40));
         W2PB4.setInteractScript(new W2PB4Script());
         npcs.add(W2PB4);
 

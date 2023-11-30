@@ -46,14 +46,14 @@ public class W1EngineerPartner extends NPC {
             put("STAND_LEFT", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(5, 1))
                             .withScale(3)
-                            .withBounds(7, 0, 11, 20)
+                            .withBounds(6, 0, 13, 20)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                             .build()
             });
             put("STAND_RIGHT", new Frame[] {
                    new FrameBuilder(spriteSheet.getSprite(5, 1))
                            .withScale(3)
-                           .withBounds(7, 0, 11, 20)
+                           .withBounds(6, 0, 13, 20)
                            .build()
            });
         }};
