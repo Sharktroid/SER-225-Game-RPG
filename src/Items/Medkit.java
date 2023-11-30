@@ -16,6 +16,8 @@ public class Medkit extends Item {
         useText = String.format("%d health restored", healingAmount);
         battleUsable = true;
         sprite = ImageLoader.load("Apple.png");
+        spriteWidth = 45;
+        spriteHeight = 43;
     }
 
 

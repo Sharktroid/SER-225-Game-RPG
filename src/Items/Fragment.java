@@ -10,5 +10,7 @@ public class Fragment extends Item {
         super(player);
         name = "Fragment";
         sprite = ImageLoader.load("Fragment.png");
+        spriteWidth = 36;
+        spriteHeight = 36;
     }
 }

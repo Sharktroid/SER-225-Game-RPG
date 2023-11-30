@@ -16,6 +16,8 @@ public class CatFood extends Item {
         useText = String.format("Speed increased by %.0f%% for %.0f seconds", speedModifier * 100,
                 (Float) ((float) speedModifierDuration) / 60);
         sprite = ImageLoader.load("CatFood.png");
+        spriteWidth = 25;
+        spriteHeight = 25;
     }
 
     @Override
