@@ -42,7 +42,6 @@ public class HubMap extends Map {
         triggers.add(new Trigger(204, 108, 24, 24, new portalOneScript()));
         triggers.add(new Trigger(396, 108, 24, 24, new portalTwoScript()));
         triggers.add(new Trigger(588, 108, 24, 24, new portalThreeScript()));
-        triggers.add(new Trigger(336, 504, 144, 48, new endGameScript()));
 
         return triggers;
     }
