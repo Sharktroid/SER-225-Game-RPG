@@ -12,10 +12,17 @@ public class portalThreeScript extends Script {
         setTextboxStyle(Style.HUBWORLD);
         showTextbox();
 
-        if (!isFlagSet("portalThreeUnlocked")) {
-            addTextToTextboxQueue("Talk to the Firefox (**trigger*)");
-        } else {
-            addTextToTextboxQueue("Teleporting to world 3");
+        if (!isFlagSet("unlockedPortal3") && !isFlagSet("worldOneComplete") && !isFlagSet("worldTwoComplete")) {
+            addTextToTextboxQueue("clear world one and two then talk to firefox");
+        } else if (!isFlagSet("unlockedPortal3") && isFlagSet("worldOneComplete") && !isFlagSet("worldTwoComplete")) {
+            addTextToTextboxQueue("world one complete. complete world two then talk to the firefox)");
+        }else if (!isFlagSet("unlockedPortal3") && isFlagSet("worldOneComplete") && isFlagSet("worldTwoComplete")) {
+            addTextToTextboxQueue("world one and two complete. talk to the firefox");  
+        }else if (isFlagSet("unlockedPortal3") && isFlagSet("worldOneComplete") && isFlagSet("worldTwoComplete")) {
+            addTextToTextboxQueue("world one and two complete and firefox talked to");
+            addTextToTextboxQueue("teleporting to world 3");
+        }else{
+            addTextToTextboxQueue("teleport flag error: portalThreeScript");
         }
     }
 
@@ -24,10 +31,16 @@ public class portalThreeScript extends Script {
         hideTextbox();
         unlockPlayer();
 
-        if (!isFlagSet("portalThreeUnlocked")) {
+        if (!isFlagSet("unlockedPortal3") && !isFlagSet("worldOneComplete") && !isFlagSet("worldTwoComplete")) {
             player.moveY(10);
-        } else {
+        } else if(!isFlagSet("unlockedPortal3") && isFlagSet("worldOneComplete") && !isFlagSet("worldTwoComplete")){
+            player.moveY(10);
+        } else if(!isFlagSet("unlockedPortal3") && isFlagSet("worldOneComplete") && isFlagSet("worldTwoComplete")){
+            player.moveY(10);
+        }else if(isFlagSet("unlockedPortal3") && isFlagSet("worldOneComplete") && isFlagSet("worldTwoComplete")){
             setFlag("portalThreeActivated");
+        }else {
+            System.out.println("huhhhhhhhh");
         }
     }
 

@@ -2,8 +2,11 @@ package Maps;
 
 import java.util.ArrayList;
 
+import EnhancedMapTiles.ItemMapObject;
 import Game.SoundPlayer;
 import Game.SoundPlayer.MusicTracks;
+import Items.Fragment;
+import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
 import Level.Textbox.Style;
@@ -12,6 +15,7 @@ import NPCs.W2DJ;
 import NPCs.W2PB1;
 import NPCs.W2Pitbull;
 import Scripts.WorldTwoMap.ExitBuildingScript;
+import Scripts.WorldTwoMap.W2SpotifyFragScript;
 import Scripts.WorldTwoMap.W2DJScript;
 import Scripts.WorldTwoMap.W2PB1Script;
 import Scripts.WorldTwoMap.W2PitbullScript;
@@ -28,6 +32,17 @@ public class W2SpotifyMap extends Map {
     public void setupMap() {
         super.setupMap();
         SoundPlayer.playMusic(MusicTracks.SHOP);
+    }
+
+    @Override
+    public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
+        ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
+
+        ItemMapObject spotifyFragment = new ItemMapObject(getMapTile(1, 10).getLocation(), new Fragment(null));
+        spotifyFragment.setInteractScript(new W2SpotifyFragScript());
+        enhancedMapTiles.add(spotifyFragment);
+
+        return enhancedMapTiles;
     }
 
     @Override
