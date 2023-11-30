@@ -2,17 +2,21 @@ package Maps;
 
 import java.util.ArrayList;
 
+import Game.Game;
+import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
 import Level.Textbox.Style;
 import NPCs.World3.W3BlueTie;
 import NPCs.World3.W3DarkBlue;
+import NPCs.World3.W3Ad1;
 import Level.Trigger;
 import Screens.PlayLevelScreen;
 import Scripts.WorldThreeMap.DownLevelScript;
 import Scripts.WorldThreeMap.UpLevelScript;
 import Scripts.WorldThreeMap.W3F1BlueTieScript;
 import Scripts.WorldThreeMap.W3F1DarkBlueScript;
+import Scripts.WorldThreeMap.W3Ad1Script;
 import Tilesets.ChromeTileset;
 
 public class W31Map extends Map {
@@ -31,6 +35,7 @@ public class W31Map extends Map {
         textbox.setStyle(Style.WORLDTHREE);
     }
 
+
     @Override
     public ArrayList<NPC> loadNPCs() {
         ArrayList<NPC> npcs = new ArrayList<>();
@@ -43,6 +48,10 @@ public class W31Map extends Map {
         darkBlue.setInteractScript(new W3F1DarkBlueScript());
         npcs.add(darkBlue);
 
+        W3Ad1 ad1 = new W3Ad1(3, getMapTile(12, 14).getLocation());
+        ad1.setInteractScript(new W3Ad1Script());
+        ad1.setExistenceFlag("level1Complete");
+        npcs.add(ad1);
         return npcs;
     }
 
@@ -54,4 +63,5 @@ public class W31Map extends Map {
 
         return triggers;
     }
+
 }

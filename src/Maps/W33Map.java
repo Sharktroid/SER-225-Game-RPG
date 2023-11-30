@@ -6,6 +6,7 @@ import Level.Map;
 import Level.NPC;
 import Level.Textbox.Style;
 import Level.Trigger;
+import NPCs.World3.W3Ad3;
 import NPCs.World3.W3BlueTie;
 import NPCs.World3.W3Pink;
 import NPCs.World3.W3RedTie;
@@ -13,6 +14,7 @@ import NPCs.World3.W3WhiteTie;
 import Screens.PlayLevelScreen;
 import Scripts.WorldThreeMap.DownLevelScript;
 import Scripts.WorldThreeMap.UpLevelScript;
+import Scripts.WorldThreeMap.W3Ad3Script;
 import Scripts.WorldThreeMap.W3F3RedTieScript;
 import Scripts.WorldThreeMap.W3F3BlueTieScript;
 import Scripts.WorldThreeMap.W3F3PinkScript;
@@ -54,6 +56,11 @@ public class W33Map extends Map {
         W3BlueTie blueTie = new W3BlueTie(4, getMapTile(14, 6).getLocation());
         blueTie.setInteractScript(new W3F3BlueTieScript());
         npcs.add(blueTie);
+
+        W3Ad3 ad3 = new W3Ad3(3, getMapTile(12, 14).getLocation());
+        ad3.setInteractScript(new W3Ad3Script());
+        ad3.setExistenceFlag("level3Complete");
+        npcs.add(ad3);
 
         return npcs;
     }

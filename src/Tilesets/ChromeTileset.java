@@ -250,7 +250,7 @@ public class ChromeTileset extends Tileset {
         };
 
         MapTileBuilder topWaterTile = new MapTileBuilder(topWaterFrames)
-                .withTileType(TileType.NOT_PASSABLE);
+                .withTileType(TileType.PASSABLE);
 
         mapTiles.add(topWaterTile);
 

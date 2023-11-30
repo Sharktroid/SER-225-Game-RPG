@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import Level.Map;
 import Level.NPC;
 import Level.Textbox.Style;
+import NPCs.World3.W3Ad2;
 import NPCs.World3.W3LightBlue;
 import NPCs.World3.W3Pink;
 import NPCs.World3.W3RedTie;
@@ -12,6 +13,7 @@ import Level.Trigger;
 import Screens.PlayLevelScreen;
 import Scripts.WorldThreeMap.DownLevelScript;
 import Scripts.WorldThreeMap.UpLevelScript;
+import Scripts.WorldThreeMap.W3Ad2Script;
 import Scripts.WorldThreeMap.W3F2LightBlueScript;
 import Scripts.WorldThreeMap.W3F2PinkScript;
 import Scripts.WorldThreeMap.W3F2RedTieScript;
@@ -48,6 +50,11 @@ public class W32Map extends Map {
         W3RedTie redTie = new W3RedTie(3, getMapTile(14, 5).getLocation());
         redTie.setInteractScript(new W3F2RedTieScript());
         npcs.add(redTie);
+
+        W3Ad2 ad2 = new W3Ad2(3, getMapTile(12, 14).getLocation());
+        ad2.setInteractScript(new W3Ad2Script());
+        ad2.setExistenceFlag("level2Complete");
+        npcs.add(ad2);
 
         return npcs;
     }

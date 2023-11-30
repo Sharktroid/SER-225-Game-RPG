@@ -125,9 +125,9 @@ public class FlagSaves {
         // world three flags
 
         //
-        flagManager.addFlag("level1Complete", false, true);
-        flagManager.addFlag("level2Complete", false, true);
-        flagManager.addFlag("level3Complete", false, true);
+        flagManager.addFlag("level1Complete", true, true);
+        flagManager.addFlag("level2Complete", true, true);
+        flagManager.addFlag("level3Complete", true, true);
 
         // used to go up and down levels
         flagManager.addFlag("goUpLevel", false, false); 
