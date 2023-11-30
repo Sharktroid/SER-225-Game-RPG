@@ -1,17 +1,22 @@
 package Scripts.WorldOneMap;
 
 import Combatants.W1Combatant1;
+import Combatants.W1Combatant2;
 import Game.SoundPlayer;
 import Game.SoundPlayer.MusicTracks;
 import Level.NPC;
+import NPCs.W1Infected1;
 import Level.Script;
 import Level.ScriptState;
 import Level.Textbox.Style;
+import Utils.Direction;
+import GameObject.AnimatedSprite;
 
 //infected npc 1 script
 public class W1Infected1Script extends Script<NPC> {
 
     private String npcName = "User 1";
+    public Direction facing;
 
     @Override
     protected void setup() {
@@ -53,6 +58,7 @@ public class W1Infected1Script extends Script<NPC> {
             if (!isFlagSet("w1CuredNPC1") && !isFlagSet("w1Btl1")) {
                 if (this.getChoice() == 0) {
                     setFlag("w1Btl1");
+                    setFlag("changeSprite");
                 } else {
                     hideTextbox();
                     unlockPlayer();
@@ -60,6 +66,7 @@ public class W1Infected1Script extends Script<NPC> {
             } else if (!isFlagSet("w1CuredNPC1") && (isFlagSet("w1Btl1"))) {
                 setFlag("w1CuredNPC1");
                 unsetFlag("w1Btl1");
+                unsetFlag("changeSprite");
             } else if (isFlagSet("w1CuredNPC1") && isFlagSet("w1Btl1")) {
                 unsetFlag("w1Btl1");
                 hideTextbox();

@@ -22,7 +22,7 @@ public class W1EngineerPartner extends NPC {
 
 
     public W1EngineerPartner(int id, Point location) {
-        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("Noface1.png"), 25, 25), "STAND_LEFT");
+        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("w1Sprites.png"), 25, 25), "STAND_LEFT");
 
     }
 
@@ -44,14 +44,14 @@ public class W1EngineerPartner extends NPC {
     public HashMap<String, Frame[]> loadAnimations(SpriteSheet spriteSheet) {
         return new HashMap<String, Frame[]>() {{
             put("STAND_LEFT", new Frame[] {
-                    new FrameBuilder(spriteSheet.getSprite(0, 0))
+                    new FrameBuilder(spriteSheet.getSprite(5, 1))
                             .withScale(3)
                             .withBounds(7, 0, 11, 20)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                             .build()
             });
             put("STAND_RIGHT", new Frame[] {
-                   new FrameBuilder(spriteSheet.getSprite(0, 0))
+                   new FrameBuilder(spriteSheet.getSprite(5, 1))
                            .withScale(3)
                            .withBounds(7, 0, 11, 20)
                            .build()
