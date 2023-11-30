@@ -26,7 +26,7 @@ public class FlagSaves {
         flagManager.addFlag("hasTalkedToFirefox0", false, true);// before entering world one
         flagManager.addFlag("hasTalkedToFirefox1", false, true);// after world one and before world two
         flagManager.addFlag("hasTalkedToFirefox2", false, true);// after world two and before world three
-        flagManager.addFlag("hasTalkedToFirefox3", false, true);// after world three and before game clear
+        flagManager.addFlag("hasTalkedToFirefox3", true, true);// after world three and before game clear
 
         // temp: flags for teleportation using the portals in hub
         flagManager.addFlag("portalOneActivated", false, false);// world one portal
@@ -39,9 +39,9 @@ public class FlagSaves {
         flagManager.addFlag("unlockedPortal2", false, true);
 
         // persistent: used to tell if each world hasa been completed
-        flagManager.addFlag("worldOneComplete", false, true);
-        flagManager.addFlag("worldTwoComplete", false, true);
-        flagManager.addFlag("worldThreeComplete", false, true);
+        flagManager.addFlag("worldOneComplete", true, true);
+        flagManager.addFlag("worldTwoComplete", true, true);
+        flagManager.addFlag("worldThreeComplete", true, true);
 
         // world one flags
 
@@ -162,7 +162,7 @@ public class FlagSaves {
 
 
         //other
-        flagManager.addFlag("gameComplete", true, true);
+        flagManager.addFlag("gameComplete", false, true);
 
 
         // test world flags
