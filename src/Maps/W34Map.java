@@ -9,6 +9,7 @@ import Level.Trigger;
 import NPCs.World3.W3CEO;
 import Screens.PlayLevelScreen;
 import Scripts.WorldThreeMap.DownLevelScript;
+import Scripts.WorldThreeMap.WorldThreeClearScript;
 import Scripts.WorldThreeMap.W3CEOScript;
 import Tilesets.ChromeTileset;
 
@@ -41,7 +42,8 @@ public class W34Map extends Map {
     public ArrayList<Trigger> loadTriggers() {
         ArrayList<Trigger> triggers = new ArrayList<>();
         triggers.add(new Trigger(144, 624, 24, 144, new DownLevelScript()));
-
+        triggers.add(new Trigger(48, 144, 48, 48, new WorldThreeClearScript()));
+        
         return triggers;
     }
 }

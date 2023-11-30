@@ -8,16 +8,22 @@ public class UpLevelScript extends Script {
 
     @Override
     protected void setup() {
-        lockPlayer();
+        if (isFlagSet("hasTalkedToOutsideGuy")) {
+            lockPlayer();
+        }
+
     }
 
     @Override
     protected void cleanup() {
-        unlockPlayer();
-        setFlag("goUpLevel");
-        unsetFlag("wentDownLevel");
-        setFlag("wentUpLevel");
-        
+
+        if (isFlagSet("hasTalkedToOutsideGuy")) {
+            unlockPlayer();
+            setFlag("goUpLevel");
+            unsetFlag("wentDownLevel");
+            setFlag("wentUpLevel");
+        }
+
     }
 
     @Override

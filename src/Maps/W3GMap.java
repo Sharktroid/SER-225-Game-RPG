@@ -11,6 +11,7 @@ import NPCs.World3.W3OutsideEmployee;
 import Level.Trigger;
 import Scripts.WorldThreeMap.UpLevelScript;
 import Scripts.WorldThreeMap.W3OutsideEmployeeScript;
+import Scripts.WorldThreeMap.WorldThreeClearScript;
 import Tilesets.ChromeTileset;
 import Screens.PlayLevelScreen;
 

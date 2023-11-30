@@ -32,7 +32,7 @@ public class W3F1BlueTieScript extends Script<NPC> {
             SoundPlayer.playMusic(MusicTracks.BATTLE);
             map.initiateCombat(player, new W3Combatant(entity, map));
         } else if (isFlagSet("w3f1CuredNPC1") && isFlagSet("w3f1Btl1")) {
-            SoundPlayer.playMusic(MusicTracks.WORLDTHREE);
+            //SoundPlayer.playMusic(MusicTracks.WORLDTHREE);
             setNPCName(npcName);
             addTextToTextboxQueue("virus clear msg");
         } else if (isFlagSet("w3f1CuredNPC1") && !isFlagSet("w3f1Btl1")) {
