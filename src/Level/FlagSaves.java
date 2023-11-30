@@ -124,11 +124,38 @@ public class FlagSaves {
 
         // world three flags
 
+        //
+        flagManager.addFlag("level1Complete", false, true);
+        flagManager.addFlag("level2Complete", false, true);
+        flagManager.addFlag("level3Complete", false, true);
+
         // used to go up and down levels
         flagManager.addFlag("goUpLevel", false, false); 
         flagManager.addFlag("goDownLevel", false, false);
         flagManager.addFlag("wentUpLevel", false, true);
         flagManager.addFlag("wentDownLevel", false, true);
+
+        // used for infected npcs
+        flagManager.addFlag("w3f1CuredNPC1", false, true);
+        flagManager.addFlag("w3f1Btl1", false, false);
+        flagManager.addFlag("w3f1CuredNPC2", false, true);
+        flagManager.addFlag("w3f1Btl2", false, false);
+
+        flagManager.addFlag("w3f2CuredNPC1", false, true);
+        flagManager.addFlag("w3f2Btl1", false, false);
+        flagManager.addFlag("w3f2CuredNPC2", false, true);
+        flagManager.addFlag("w3f2Btl2", false, false);
+        flagManager.addFlag("w3f2CuredNPC3", false, true);
+        flagManager.addFlag("w3f2Btl3", false, false);
+
+        flagManager.addFlag("w3f3CuredNPC1", false, true);
+        flagManager.addFlag("w3f3Btl1", false, false);
+        flagManager.addFlag("w3f3CuredNPC2", false, true);
+        flagManager.addFlag("w3f3Btl2", false, false);
+        flagManager.addFlag("w3f3CuredNPC3", false, true);
+        flagManager.addFlag("w3f3Btl3", false, false);
+        flagManager.addFlag("w3f3CuredNPC4", false, true);
+        flagManager.addFlag("w3f3Btl4", false, false);
 
         // test flags. **remove**
         flagManager.addFlag("hasTalkedToRedPanda", false, true);

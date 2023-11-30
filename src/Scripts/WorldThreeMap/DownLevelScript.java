@@ -17,6 +17,7 @@ public class DownLevelScript extends Script {
         setFlag("goDownLevel");
         unsetFlag("wentUpLevel");
         setFlag("wentDownLevel");
+        
     }
 
     @Override

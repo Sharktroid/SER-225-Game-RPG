@@ -137,6 +137,23 @@ public class PlayLevelScreen extends Screen {
             }
         }
 
+        
+        if (worldNum == 31){
+            if (flagManager.isFlagSet("w3f1CuredNPC1") && flagManager.isFlagSet("w3f1CuredNPC2")){
+                flagManager.setFlag("level1Complete");
+            }
+        }
+        if (worldNum == 32){
+            if (flagManager.isFlagSet("w3f2CuredNPC1") && flagManager.isFlagSet("w3f2CuredNPC2") && flagManager.isFlagSet("w3f2CuredNPC3")){
+                flagManager.setFlag("level2Complete");
+            }
+        }
+        if (worldNum == 33){
+            if (flagManager.isFlagSet("w3f3CuredNPC1") && flagManager.isFlagSet("w3f3CuredNPC2") && flagManager.isFlagSet("w3f3CuredNPC3") && flagManager.isFlagSet("w3f3CuredNPC4")){
+                flagManager.setFlag("level3Complete");
+            }
+        }
+
         // **OLD TEST MAP CODE**
         if (flagManager.isFlagSet("hasFoundBall")) {
             playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
