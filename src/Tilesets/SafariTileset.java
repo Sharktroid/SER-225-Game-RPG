@@ -505,8 +505,8 @@ public class SafariTileset extends Tileset{
 
        // lost and found
        Frame lostAndFoundFrame = new FrameBuilder(getSubImage(7, 4))
-       .withScale(tileScale)
-       .build();
+                .withScale(tileScale)
+                .build();
 
         MapTileBuilder lostAndFoundTile = new MapTileBuilder(lostAndFoundFrame)
                 .withTileType(TileType.NOT_PASSABLE);
