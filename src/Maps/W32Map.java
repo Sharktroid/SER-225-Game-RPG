@@ -12,7 +12,7 @@ import Level.Trigger;
 import Screens.PlayLevelScreen;
 import Scripts.WorldThreeMap.DownLevelScript;
 import Scripts.WorldThreeMap.UpLevelScript;
-import Scripts.WorldThreeMap.W3F1DarkBlueScript;
+import Scripts.WorldThreeMap.W3F2LightBlueScript;
 import Scripts.WorldThreeMap.W3F2PinkScript;
 import Scripts.WorldThreeMap.W3F2RedTieScript;
 import Tilesets.ChromeTileset;
@@ -38,7 +38,7 @@ public class W32Map extends Map {
         ArrayList<NPC> npcs = new ArrayList<>();
       
         W3LightBlue lightBlue = new W3LightBlue(1, getMapTile(2, 6).getLocation());
-        lightBlue.setInteractScript(new W3F1DarkBlueScript());
+        lightBlue.setInteractScript(new W3F2LightBlueScript());
         npcs.add(lightBlue);
 
         W3Pink pink = new W3Pink(2, getMapTile(8, 4).getLocation());

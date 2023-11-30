@@ -13,7 +13,7 @@ import NPCs.World3.W3WhiteTie;
 import Screens.PlayLevelScreen;
 import Scripts.WorldThreeMap.DownLevelScript;
 import Scripts.WorldThreeMap.UpLevelScript;
-import Scripts.WorldThreeMap.W3F2RedTieScript;
+import Scripts.WorldThreeMap.W3F3RedTieScript;
 import Scripts.WorldThreeMap.W3F3BlueTieScript;
 import Scripts.WorldThreeMap.W3F3PinkScript;
 import Scripts.WorldThreeMap.W3F3WhiteTieScript;
@@ -44,7 +44,7 @@ public class W33Map extends Map {
         npcs.add(whiteTie);
 
         W3RedTie redTie = new W3RedTie(2, getMapTile(5, 4).getLocation());
-        redTie.setInteractScript(new W3F2RedTieScript());
+        redTie.setInteractScript(new W3F3RedTieScript());
         npcs.add(redTie);
 
         W3Pink pink = new W3Pink(3, getMapTile(10, 3).getLocation());
