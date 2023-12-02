@@ -30,9 +30,9 @@ public class W2FrontDeskScript extends Script<NPC> {
                 setNPCName("Receptionist");
                 addTextToTextboxQueue("Oh, yes! I did!");
                 addTextToTextboxQueue("It was mixed in with the pile of boxes that our delivery truck brought in.");
-                addTextToTextboxQueue("We sent it to the lost and found bin since it didn't have a send or return address written anywhere.");
+                addTextToTextboxQueue("We sent it to the lost and found bin since it didn't have a send or return address written\nanywhere.");
                 addTextToTextboxQueue("...I can't really give you any more direction, since I've never been there myself.");
-                addTextToTextboxQueue("Only one of our employees goes there, but he had to leave unexpectedly, so you're going to have to find it yourself unfortunately.");
+                addTextToTextboxQueue("Only one of our employees goes there, but he had to leave unexpectedly, so you're going\nto have to find it yourself unfortunately.");
                 addTextToTextboxQueue("But! If you just follow the hallways, you should be able to find it... at some point...");
             } else if (sequence == 3) {
                 setNPCName("T");
@@ -43,7 +43,7 @@ public class W2FrontDeskScript extends Script<NPC> {
             addTextToTextboxQueue("Good luck finding your purple thing!...");
         } else if (isFlagSet("w2TalkedToFrontDesk") && isFlagSet("w2FoundFrag2")) {
             setNPCName("Receptionist");
-            addTextToTextboxQueue("You actually found the lost and found bin? That's amazing! You should work here, haha!...");
+            addTextToTextboxQueue("You actually found the lost and found bin? That's amazing! You should work here,\nhaha!...");
         }
     }
 

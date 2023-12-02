@@ -15,6 +15,7 @@ public class W2SpotifyFragScript extends BasicItemScript {
     @Override
     protected void onPickup() {
         setTextboxStyle(Style.WORLDTWO);
+        setNPCName("");
         SoundPlayer.playSoundEffect(SoundEffects.FRAGMENTGET);
         addTextToTextboxQueue(String.format("You found a %s!", item.getName()));
         setFlag("w2FoundFrag3");

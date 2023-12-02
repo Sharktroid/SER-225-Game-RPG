@@ -21,11 +21,11 @@ public class W3F1DarkBlueScript extends Script<NPC> {
         showTextbox();
         entity.facePlayer(player);
         String[] selections = { "RUN VIRUS SCAN", "LEAVE" };
-        String[] answers = { "fight start msg", "leave without fighting msg" };
+        String[] answers = { "Leave me alone!", "..." };
 
         if (!isFlagSet("w3f1CuredNPC2") && !isFlagSet("w3f1Btl2")) {
             setNPCName(npcName);
-            addTextToTextboxQueue("battle query", selections, answers);
+            addTextToTextboxQueue("I'm trying to have an 8 hour break right now...", selections, answers);
         } else if (!isFlagSet("w3f1CuredNPC2") && isFlagSet("w3f1Btl2")) {
             setNPCName("SYSTEM");
             addTextToTextboxQueue("VIRUS DETECTED!");
@@ -34,10 +34,11 @@ public class W3F1DarkBlueScript extends Script<NPC> {
         } else if (isFlagSet("w3f1CuredNPC2") && isFlagSet("w3f1Btl2")) {
             SoundPlayer.playMusic(MusicTracks.WORLDTHREE);
             setNPCName(npcName);
-            addTextToTextboxQueue("virus clear msg");
+            addTextToTextboxQueue("What just happened?");
+            addTextToTextboxQueue("Oh no! My break was over 3 hours ago! I gotta get back to work!");
         } else if (isFlagSet("w3f1CuredNPC2") && !isFlagSet("w3f1Btl2")) {
             setNPCName(npcName);
-            addTextToTextboxQueue("virus cleareded msg");
+            addTextToTextboxQueue("Sorry, I'm busy. Thanks for helping me.");
         }
     }
 

@@ -52,12 +52,15 @@ public class W1OldManJenksScript extends Script<NPC> {
                 showTextbox();
                 if (responseNum == 0) {
                     if (miniSequence == 0) {
+                        showTextbox();
                         addTextToTextboxQueue("Well, it was bliss before a huge earthquake hit and this\nportal opened up.");
                         addTextToTextboxQueue("What's your purpose for coming here?");
                     } else if (miniSequence == 1) {
+                        showTextbox();
                         setNPCName("T");
                         addTextToTextboxQueue("I'm trying to find a purple orb. Have you seen it?");
                     } else if (miniSequence == 2) {
+                        showTextbox();
                         setNPCName("Old Man Jenkins");
                         addTextToTextboxQueue(answers[1]);
                     }
@@ -120,14 +123,18 @@ public class W1OldManJenksScript extends Script<NPC> {
         } else if (isFlagSet("hasFoundDentures")) {
             if (sequence == 0) {
                 responseNum = getChoice();
+                System.out.println(responseNum);
                 sequence++;
             } else if (sequence == 1) {
                 if (miniSequence == 0) {
                     miniSequence++;
+                    System.out.println("mini 0");
                 } else if (miniSequence == 1) {
                     miniSequence++;
+                    System.out.println("mini 1");
                 } else if (miniSequence == 2) {
                     miniSequence++;
+                    System.out.println("mini 2");
                 }
                 sequence++;
             } else if (sequence == 2) {
@@ -192,6 +199,22 @@ public class W1OldManJenksScript extends Script<NPC> {
                     end();
                 }
             } else if (sequence == 1) {
+                if (miniSequence == 0) {
+                    start();
+                    if (isTextboxQueueEmpty()) {
+                        end();
+                    }
+                } else if (miniSequence == 1) {
+                    start();
+                    if (isTextboxQueueEmpty()) {
+                        end();
+                    }
+                } else if (miniSequence == 2) {
+                    start();
+                    if (isTextboxQueueEmpty()) {
+                        end();
+                    }
+                }
                 start();
                 if (isTextboxQueueEmpty()) {
                     end();

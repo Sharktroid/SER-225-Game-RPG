@@ -47,7 +47,7 @@ public class W1EngineerScript extends Script<NPC> {
                 addTextToTextboxQueue("I could give it to you right now but I'm a little occupied...");
                 addTextToTextboxQueue("There seems to be an infection that got in through our\nnetwork. They got my partner...");
             } else if (sequence == 3) {
-                addTextToTextboxQueue("I know you're not network security, but could you help\nus out?",selections,answers);
+                addTextToTextboxQueue("I know you're not network security, but could you\nhelp us out?",selections,answers);
             } else if (sequence == 4) {
                 if (this.getChoice() == 1) {
                     setNPCName(playerName);

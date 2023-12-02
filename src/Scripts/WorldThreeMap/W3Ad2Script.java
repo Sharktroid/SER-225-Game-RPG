@@ -12,11 +12,11 @@ public class W3Ad2Script extends Script<NPC> {
         lockPlayer();
 
         setTextboxStyle(Style.WORLDTHREE);
-        setNPCName("Ad");
+        setNPCName("T");
         showTextbox();
 
         if (!isFlagSet("level2Complete")) {
-            addTextToTextboxQueue("Clear the viruses to remove this ad.");
+            addTextToTextboxQueue("I think I need to clear all the infections to clear this ad...");
         }else if (isFlagSet("level2Complete")){
             addTextToTextboxQueue("Removing Ad!");
         }

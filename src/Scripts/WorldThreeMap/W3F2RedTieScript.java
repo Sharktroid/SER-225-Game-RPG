@@ -21,11 +21,11 @@ public class W3F2RedTieScript extends Script<NPC> {
         showTextbox();
         entity.facePlayer(player);
         String[] selections = { "RUN VIRUS SCAN", "LEAVE" };
-        String[] answers = { "fight start msg", "leave without fighting msg" };
+        String[] answers = { "I'm trying to get work done right now!", "..." };
 
         if (!isFlagSet("w3f2CuredNPC3") && !isFlagSet("w3f2Btl3")) {
             setNPCName(npcName);
-            addTextToTextboxQueue("battle query", selections, answers);
+            addTextToTextboxQueue("Don't bother me.", selections, answers);
         } else if (!isFlagSet("w3f2CuredNPC3") && isFlagSet("w3f2Btl3")) {
             setNPCName("SYSTEM");
             addTextToTextboxQueue("VIRUS DETECTED!");
@@ -34,10 +34,10 @@ public class W3F2RedTieScript extends Script<NPC> {
         } else if (isFlagSet("w3f2CuredNPC3") && isFlagSet("w3f2Btl3")) {
             SoundPlayer.playMusic(MusicTracks.WORLDTHREE);
             setNPCName(npcName);
-            addTextToTextboxQueue("virus clear msg");
+            addTextToTextboxQueue("Was I just being mind controlled?");
         } else if (isFlagSet("w3f2CuredNPC3") && !isFlagSet("w3f2Btl3")) {
             setNPCName(npcName);
-            addTextToTextboxQueue("virus cleareded msg");
+            addTextToTextboxQueue("Thanks for helping.");
         }
     }
 
