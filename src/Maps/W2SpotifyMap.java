@@ -35,17 +35,6 @@ public class W2SpotifyMap extends Map {
     }
 
     @Override
-    public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
-        ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
-
-        ItemMapObject spotifyFragment = new ItemMapObject(getMapTile(1, 10).getLocation(), new Fragment(null));
-        spotifyFragment.setInteractScript(new W2SpotifyFragScript());
-        enhancedMapTiles.add(spotifyFragment);
-
-        return enhancedMapTiles;
-    }
-
-    @Override
     public ArrayList<Trigger> loadTriggers() {
         ArrayList<Trigger> triggers = new ArrayList<>();
         triggers.add(new Trigger(336, 552, 96, 24, new ExitBuildingScript(4)));

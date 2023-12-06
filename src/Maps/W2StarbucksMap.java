@@ -7,6 +7,7 @@ import Game.SoundPlayer.MusicTracks;
 import Level.Map;
 import Level.NPC;
 import Level.Textbox.Style;
+import NPCs.W2PB3;
 import NPCs.World2.W2GreenSB;
 import NPCs.World2.W2RedSB;
 import NPCs.World2.W2PinkSB;
@@ -17,6 +18,7 @@ import NPCs.World2.W2StarbucksEmployee;
 import Scripts.WorldTwoMap.W2StarbucksEmployeeScript;
 import Level.Trigger;
 import Scripts.WorldTwoMap.ExitBuildingScript;
+import Scripts.WorldTwoMap.W2PB3Script;
 import Tilesets.SafariTileset;
 
 public class W2StarbucksMap extends Map {
@@ -51,6 +53,10 @@ public class W2StarbucksMap extends Map {
         W2PinkSB customer3 = new W2PinkSB(4, getMapTile(3, 8).getLocation());
         // customer3.setInteractScript(new W2SBCustomer3Script());
         npcs.add(customer3);
+
+        W2PB3 W2PB3 = new W2PB3(3, getMapTile(10, 4).getLocation().subtractY(40));
+        W2PB3.setInteractScript(new W2PB3Script());
+        npcs.add(W2PB3); 
 
         return npcs;
 

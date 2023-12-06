@@ -26,7 +26,7 @@ public class W2PB5Script extends Script<NPC> {
             addTextToTextboxQueue( "Oh that must be my vinly you have there ");
             addTextToTextboxQueue( "I can't wait to listen to this");
             addTextToTextboxQueue( "Pitbull made me the man I am today ");
-            W2DJScript.removeSamples(1);
+            //W2DJScript.removeSamples(1);
             setFlag("gaveToPB5");
             
 

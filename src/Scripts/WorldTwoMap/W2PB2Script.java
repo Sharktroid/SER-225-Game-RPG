@@ -25,7 +25,7 @@ public class W2PB2Script extends Script<NPC> {
             entity.facePlayer(player);
             addTextToTextboxQueue( "I cant wait to make my kids listen to this");
             addTextToTextboxQueue( "Thank you for this \n dale");
-            W2DJScript.removeSamples(1);
+            //W2DJScript.removeSamples(1);
             setFlag("gaveToPB2");
             
 

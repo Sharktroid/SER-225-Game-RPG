@@ -137,6 +137,15 @@ public class PlayLevelScreen extends Screen {
             }
         }
 
+        if (worldNum == 2 || worldNum == 21 || worldNum == 22 || worldNum == 23 || worldNum == 24) {
+            if (flagManager.isFlagSet("gaveToPB1") && flagManager.isFlagSet("gaveToPB2")
+                    && flagManager.isFlagSet("gaveToPB3")
+                    && flagManager.isFlagSet("gaveToPB4")
+                    && flagManager.isFlagSet("gaveToPB5")) {
+                flagManager.setFlag("gaveAllVinyls");
+            }
+        }
+
         if (worldNum == 2){
             if (flagManager.isFlagSet("w2FoundFrag1") && flagManager.isFlagSet("w2FoundFrag2") && flagManager.isFlagSet("w2FoundFrag3")){
                 flagManager.setFlag("worldTwoComplete");
@@ -384,6 +393,23 @@ public class PlayLevelScreen extends Screen {
             flagManager.debugFlag("hasTalkedToLibrarian");
             flagManager.debugFlag("w1FoundFrag3");
             flagManager.debugFlag("hasFinishedLib");
+            System.out.println();
+        } else if (worldNum == 2 || worldNum == 21 || worldNum == 22 || worldNum == 23 || worldNum == 24) {
+            System.out.println("\nPB");
+            flagManager.debugFlag("hasTalkedToDJ");
+            flagManager.debugFlag("hasTalkedToPitbull");
+            flagManager.debugFlag("returnToDJ");
+            flagManager.debugFlag("gaveToPB1");
+            flagManager.debugFlag("gaveToPB2");
+            flagManager.debugFlag("gaveToPB3");
+            flagManager.debugFlag("gaveToPB4");
+            flagManager.debugFlag("gaveToPB5");
+            flagManager.debugFlag("gaveAllVinyls");
+            System.out.println("\nW2");
+            flagManager.debugFlag("w2FoundFrag1");
+            flagManager.debugFlag("w2FoundFrag2");
+            flagManager.debugFlag("w2FoundFrag3");
+            flagManager.debugFlag("worldTwoComplete");
             System.out.println();
         } else if (worldNum == 3 || worldNum == 31 || worldNum == 32 || worldNum == 33 || worldNum == 34) {
             flagManager.debugFlag("goUpLevel");
