@@ -42,21 +42,6 @@ public class MenuScreen extends Screen {
         credits = new SpriteFont("CREDITS", 200, 219, "Comic Sans", 30, new Color(49, 207, 240));
         credits.setOutlineColor(Color.black);
         credits.setOutlineThickness(3);
-        worldZero = new SpriteFont("WORLD ZERO", 200, 319, "Comic Sans", 30, new Color(49, 207, 240));
-        worldZero.setOutlineColor(Color.black);
-        worldZero.setOutlineThickness(3);
-        worldOne = new SpriteFont("WORLD ONE", 200, 369, "Comic Sans", 30, new Color(49, 207, 240));
-        worldOne.setOutlineColor(Color.black);
-        worldOne.setOutlineThickness(3);
-        worldTwo = new SpriteFont("WORLD TWO", 200, 419, "Comic Sans", 30, new Color(49, 207, 240));
-        worldTwo.setOutlineColor(Color.black);
-        worldTwo.setOutlineThickness(3);
-        worldThree = new SpriteFont("WORLD THREE", 200, 469, "Comic Sans", 30, new Color(49, 207, 240));
-        worldThree.setOutlineColor(Color.black);
-        worldThree.setOutlineThickness(3);
-        hubWorld = new SpriteFont("HUB WORLD", 200, 519, "Comic Sans", 30, new Color(49, 207, 240));
-        hubWorld.setOutlineColor(Color.black);
-        hubWorld.setOutlineThickness(3);
         background = new TitleScreenMap();
         background.setAdjustCamera(false);
         keyPressTimer = 0;
@@ -85,10 +70,10 @@ public class MenuScreen extends Screen {
 
         // if down is pressed on last menu item or up is pressed on first menu item,
         // "loop" the selection back around to the beginning/end
-        if (currentMenuItemHovered > 6) {
+        if (currentMenuItemHovered > 1) {
             currentMenuItemHovered = 0;
         } else if (currentMenuItemHovered < 0) {
-            currentMenuItemHovered = 6;
+            currentMenuItemHovered = 1;
         }
 
         // sets location for blue square in front of text (pointerLocation) and also
@@ -96,73 +81,13 @@ public class MenuScreen extends Screen {
         if (currentMenuItemHovered == 0) {
             playGame.setColor(new Color(255, 215, 0));
             credits.setColor(new Color(49, 207, 240));
-            worldZero.setColor(new Color(49, 207, 240));
-            worldOne.setColor(new Color(49, 207, 240));
-            worldTwo.setColor(new Color(49, 207, 240));
-            worldThree.setColor(new Color(49, 207, 240));
-            hubWorld.setColor(new Color(49, 207, 240));
             pointerLocationX = 170;
             pointerLocationY = 130;
         } else if (currentMenuItemHovered == 1) {
             playGame.setColor(new Color(49, 207, 240));
             credits.setColor(new Color(255, 215, 0));
-            worldZero.setColor(new Color(49, 207, 240));
-            worldOne.setColor(new Color(49, 207, 240));
-            worldTwo.setColor(new Color(49, 207, 240));
-            worldThree.setColor(new Color(49, 207, 240));
-            hubWorld.setColor(new Color(49, 207, 240));
             pointerLocationX = 170;
             pointerLocationY = 230;
-        } else if (currentMenuItemHovered == 2) {
-            playGame.setColor(new Color(49,207,240));
-            credits.setColor(new Color(49,207,240));
-            worldZero.setColor(new Color(255,215,0));
-            worldOne.setColor(new Color(49,207,240));
-            worldTwo.setColor(new Color(49,207,240));
-            worldThree.setColor(new Color(49,207,240));
-            hubWorld.setColor(new Color(49, 207, 240));
-            pointerLocationX = 170;
-            pointerLocationY = 330;
-        } else if (currentMenuItemHovered == 3) {
-            playGame.setColor(new Color(49, 207, 240));
-            credits.setColor(new Color(49, 207, 240));
-            worldZero.setColor(new Color(49, 207, 240));
-            worldOne.setColor(new Color(255, 215, 0));
-            worldTwo.setColor(new Color(49, 207, 240));
-            worldThree.setColor(new Color(49, 207, 240));
-            hubWorld.setColor(new Color(49, 207, 240));
-            pointerLocationX = 170;
-            pointerLocationY = 380;
-        } else if (currentMenuItemHovered == 4) {
-            playGame.setColor(new Color(49, 207, 240));
-            credits.setColor(new Color(49, 207, 240));
-            worldZero.setColor(new Color(49, 207, 240));
-            worldOne.setColor(new Color(49, 207, 240));
-            worldTwo.setColor(new Color(255, 215, 0));
-            worldThree.setColor(new Color(49, 207, 240));
-            hubWorld.setColor(new Color(49, 207, 240));
-            pointerLocationX = 170;
-            pointerLocationY = 430;
-        } else if (currentMenuItemHovered == 5) {
-            playGame.setColor(new Color(49, 207, 240));
-            credits.setColor(new Color(49, 207, 240));
-            worldZero.setColor(new Color(49, 207, 240));
-            worldOne.setColor(new Color(49, 207, 240));
-            worldTwo.setColor(new Color(49, 207, 240));
-            worldThree.setColor(new Color(255, 215, 0));
-            hubWorld.setColor(new Color(49, 207, 240));
-            pointerLocationX = 170;
-            pointerLocationY = 480;
-        } else if (currentMenuItemHovered == 6) {
-            playGame.setColor(new Color(49, 207, 240));
-            credits.setColor(new Color(49, 207, 240));
-            worldZero.setColor(new Color(49, 207, 240));
-            worldOne.setColor(new Color(49, 207, 240));
-            worldTwo.setColor(new Color(49, 207, 240));
-            worldThree.setColor(new Color(49, 207, 240));
-            hubWorld.setColor(new Color(255, 215, 0));
-            pointerLocationX = 170;
-            pointerLocationY = 530;
         }
 
         // if space is pressed on menu item, change to appropriate screen based on which
@@ -177,22 +102,6 @@ public class MenuScreen extends Screen {
                 screenCoordinator.setGameState(GameState.SLIDESHOW);
             } else if (menuItemSelected == 1) {
                 screenCoordinator.setGameState(GameState.CREDITS);
-            } else if (menuItemSelected == 2) {
-                worldNumber = 0;
-                screenCoordinator.setGameState(GameState.LEVEL);
-            } else if (menuItemSelected == 3) {
-                worldNumber = 1;
-                screenCoordinator.setGameState(GameState.LEVEL);
-            } else if (menuItemSelected == 4){
-                worldNumber = 2;
-                screenCoordinator.setGameState(GameState.LEVEL);
-            } else if (menuItemSelected == 5){
-                worldNumber = 3;
-                screenCoordinator.setGameState(GameState.LEVEL);
-            }
-            else if (menuItemSelected == 6){
-                worldNumber = 4;
-                screenCoordinator.setGameState(GameState.LEVEL);
             }
         }
     }
@@ -201,11 +110,6 @@ public class MenuScreen extends Screen {
         background.draw(graphicsHandler);
         playGame.draw(graphicsHandler);
         credits.draw(graphicsHandler);
-        worldZero.draw(graphicsHandler);
-        worldOne.draw(graphicsHandler);
-        worldTwo.draw(graphicsHandler);
-        worldThree.draw(graphicsHandler);
-        hubWorld.draw(graphicsHandler);
         graphicsHandler.drawFilledRectangleWithBorder(pointerLocationX, pointerLocationY, 20, 20,
                 new Color(49, 207, 240), Color.black, 2);
     }

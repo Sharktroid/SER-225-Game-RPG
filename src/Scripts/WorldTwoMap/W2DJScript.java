@@ -57,14 +57,14 @@ public class W2DJScript extends Script<NPC> {
             addTextToTextboxQueue("I saw the customers in here today \n they all had on Pitbulls iconic sunglasses");
             addTextToTextboxQueue("Please go find them!");
             setFlag("returnToDJ");
-            setSamples(5); //also add code to give player record item in inventory
+            //setSamples(5); //also add code to give player record item in inventory
         }
-        else if ((isFlagSet("returnToDJ")) && (currentSamples != 0) ){
-            addTextToTextboxQueue( "Thanks again for jumping in \nand being so willing to offer help");
-            addTextToTextboxQueue("You seem to only have " + currentSamples + " vinlys left, I believe in you!");
+        else if ((isFlagSet("returnToDJ")) && (!isFlagSet("gaveAllVinyls"))){
+            addTextToTextboxQueue( "Thanks again for jumping in \nand being so willing to offer help!");
+            //addTextToTextboxQueue("You seem to only have " + currentSamples + " vinlys left, I believe in you!");
 
         }
-        else if ((isFlagSet("returnToDJ")) && (currentSamples == 0) && (!isFlagSet("w2FoundFrag3")) ){
+        else if ((isFlagSet("returnToDJ"))  && (isFlagSet("gaveAllVinyls")) ){
             addTextToTextboxQueue( "Oh it's you again", selections3, answers3);
             addTextToTextboxQueue( "Here, I got you something");
             addTextToTextboxQueue( "It's a chain with a new stone that just flew into our town");
@@ -82,7 +82,7 @@ public class W2DJScript extends Script<NPC> {
 
 
 
-    static int currentSamples = -1;
+    //static int currentSamples = -1;
 
     @Override
     protected void cleanup() {
@@ -92,7 +92,7 @@ public class W2DJScript extends Script<NPC> {
 
 
     }
-
+    /*
     public static int setSamples(int samples) {
         currentSamples = (samples);
         return currentSamples;
@@ -102,7 +102,7 @@ public class W2DJScript extends Script<NPC> {
         currentSamples = (currentSamples - 1);
         return currentSamples;
     }
-
+    */
     @Override
     public ScriptState execute() {
         // setTextboxStyle(Textbox.Style.WORLDTWO);

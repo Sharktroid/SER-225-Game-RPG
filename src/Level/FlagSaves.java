@@ -97,6 +97,15 @@ public class FlagSaves {
         //Spotify Quest Frag
         flagManager.addFlag("w2FoundFrag3", false, true);
 
+        flagManager.addFlag("gaveToPB1", false, true);
+        flagManager.addFlag("gaveToPB2", false, true);
+        flagManager.addFlag("gaveToPB3", false, true);
+        flagManager.addFlag("gaveToPB4", false, true);
+        flagManager.addFlag("gaveToPB5", false, true);
+        flagManager.addFlag("gaveAllVinyls", false, true);
+        
+
+
         // Amazon
         flagManager.addFlag("enterBuilding1", false, false);
         flagManager.addFlag("exitBuilding1", false, false);
@@ -116,6 +125,10 @@ public class FlagSaves {
         flagManager.addFlag("exitBuilding3", false, false);
         flagManager.addFlag("wentIntoBuilding3", false, true);
         flagManager.addFlag("wentOutOfBuilding3", false, true);
+        flagManager.addFlag("hasTalkedToDJ", false, true);
+        flagManager.addFlag("hasTalkedToPitbull", false, true);
+        flagManager.addFlag("returnToDJ", false, true);
+
 
         //Starbucks
         flagManager.addFlag("enterBuilding4", false, false);

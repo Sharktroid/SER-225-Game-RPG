@@ -7,13 +7,16 @@ import Game.SoundPlayer.MusicTracks;
 import Level.Map;
 import Level.NPC;
 import Level.Textbox.Style;
+import NPCs.W2PB1;
 import NPCs.World2.W2Apple;
 import NPCs.World2.W2Green;
 import NPCs.World2.W2Orange;
 import NPCs.World2.W2Purple;
 import NPCs.World2.W2Yellow;
+import NPCs.W2PB2;
 import Level.Trigger;
 import Scripts.WorldTwoMap.ExitBuildingScript;
+import Scripts.WorldTwoMap.W2PB2Script;
 import Tilesets.SafariTileset;
 
 public class W2AppleMap extends Map {
@@ -52,6 +55,10 @@ public class W2AppleMap extends Map {
         //yellow
         W2Yellow customer4 = new W2Yellow(5, getMapTile(13, 6).getLocation());
         npcs.add(customer4);
+
+        W2PB2 W2PB2 = new W2PB2(3, getMapTile(2, 2).getLocation().subtractY(40));
+        W2PB2.setInteractScript(new W2PB2Script());
+        npcs.add(W2PB2); 
 
         return npcs;
     }

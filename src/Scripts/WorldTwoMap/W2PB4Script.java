@@ -26,7 +26,7 @@ public class W2PB4Script extends Script<NPC> {
             addTextToTextboxQueue( "oh you have my Spotify order?");
             addTextToTextboxQueue( "I've been waiting for this, thanks");
             addTextToTextboxQueue( "I hope my life-sized cutout comes soon too");
-            W2DJScript.removeSamples(1);
+            //W2DJScript.removeSamples(1);
             setFlag("gaveToPB4");
             
 

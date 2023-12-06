@@ -12,7 +12,7 @@ public class W2PB3Script extends Script<NPC> {
     protected void setup() {
         lockPlayer();
 
-        setTextboxStyle(Style.WORLDONE);
+        setTextboxStyle(Style.WORLDTWO);
         setNPCName("Sir Gallard IV");
         showTextbox();
 
@@ -25,7 +25,7 @@ public class W2PB3Script extends Script<NPC> {
             entity.facePlayer(player);
             addTextToTextboxQueue( "oh sweet it's the vinly i ordered?");
             addTextToTextboxQueue( "Pitbull saved my life, \n buying this was the least I could do");
-            W2DJScript.removeSamples(1);
+            //W2DJScript.removeSamples(1);
             setFlag("gaveToPB3");
             
 
