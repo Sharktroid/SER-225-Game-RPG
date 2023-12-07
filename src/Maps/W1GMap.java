@@ -68,14 +68,6 @@ public class W1GMap extends Map {
         ItemMapObject catFood = new ItemMapObject(getMapTile(5, 10).getLocation(), new CatFood(null));
         enhancedMapTiles.add(catFood);
 
-        ItemMapObject fragment = new ItemMapObject(getMapTile(6, 3).getLocation(), new Fragment(null));
-        fragment.setInteractScript(new BasicFragmentScript());
-        enhancedMapTiles.add(fragment);
-
-        ItemMapObject fragment2 = new ItemMapObject(getMapTile(6, 3).getLocation(), new Fragment(null));
-        fragment2.setInteractScript(new BasicFragmentScript());
-        enhancedMapTiles.add(fragment2);
-
         ItemMapObject denture = new ItemMapObject(getMapTile(6, 33).getLocation(), new Denture(null));
         denture.setInteractScript(new W1DentureScript());
         enhancedMapTiles.add(denture);
